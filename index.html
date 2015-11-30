@@ -85,6 +85,8 @@
 				        
 							<li><a href="/archives">所有文章</a></li>
 				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -103,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -114,7 +116,7 @@
 				
 				<section class="switch-part switch-part3">
 				
-					<div id="js-aboutme">我是崔佛,我再写代码.</div>
+					<div id="js-aboutme">我是崔佛,我在写代码.</div>
 				</section>
 				
 			</div>
@@ -144,6 +146,8 @@
 		        
 					<li><a href="/archives">所有文章</a></li>
 		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
 		        <div class="clearfix"></div>
 				</ul>
 			</nav>
@@ -163,11 +167,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-request" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-suibi" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/30/request/" class="article-date">
-  	<time datetime="2015-11-30T07:03:53.000Z" itemprop="datePublished">2015-11-30</time>
+      <a href="/2015/11/30/suibi/" class="article-date">
+  	<time datetime="2015-11-30T11:27:57.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     </div>
   
@@ -180,7 +184,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/request/">拦截请求</a>
+      <a class="article-title" href="/2015/11/30/suibi/">随笔</a>
     </h1>
   
 
@@ -189,7 +193,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="拦截请求的一个重要代理方法,_可以截取出请求中想要的字符段">拦截请求的一个重要代理方法, 可以截取出请求中想要的字符段</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 拦截请求 ****重要方法****</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.取得请求路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *urlStr = request<span class="variable">.URL</span><span class="variable">.absoluteString</span>;</span><br><span class="line">    <span class="comment">// 2.找到code=这个关键字的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [urlStr rangeOfString:<span class="string">@"code="</span>];</span><br><span class="line">    <span class="keyword">if</span> (range<span class="variable">.length</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 3.截取code</span></span><br><span class="line">        <span class="built_in">NSUInteger</span> fromIndex = range<span class="variable">.location</span> + range<span class="variable">.length</span>;</span><br><span class="line">        <span class="comment">// code相当于换取令牌的口令 access_token相当于令牌</span></span><br><span class="line">        <span class="built_in">NSString</span> *code = [urlStr substringFromIndex:fromIndex];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 4.创建一个AFHTTPRequestOperation管理者</span></span><br><span class="line">        <span class="comment">// POST请求参数</span></span><br><span class="line">        <span class="built_in">NSMutableDictionary</span> *param = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">        param[<span class="string">@"client_id"</span>] = client_id;</span><br><span class="line">        param[<span class="string">@"client_secret"</span>] = client_secret;</span><br><span class="line">        param[<span class="string">@"grant_type"</span>] = <span class="string">@"authorization_code"</span>;</span><br><span class="line">        param[<span class="string">@"code"</span>] = code;</span><br><span class="line">        param[<span class="string">@"redirect_uri"</span>] = redirect_uri;</span><br><span class="line">        <span class="comment">// 5.发送一个POST请求</span></span><br><span class="line">        [HTTPTool POST:<span class="string">@"https://api.weibo.com/oauth2/access_token"</span> parameters:param success:^(<span class="keyword">id</span> JSON) &#123;</span><br><span class="line">            <span class="comment">// 3.将responseObject返回信息转成模型存进自定义对象归档，方便提取成员属性</span></span><br><span class="line">            <span class="comment">// 3.1 responseObject转成模型</span></span><br><span class="line">            AccountData *account = [AccountData accountDataWithDict:JSON];</span><br><span class="line">            <span class="comment">// 3.2 存储模型到沙盒</span></span><br><span class="line">            [AccountTool accountSave:account];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 切换根控制器</span></span><br><span class="line">            <span class="built_in">UIWindow</span> *window = [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span>;</span><br><span class="line">            [window switchRootViewController];</span><br><span class="line"></span><br><span class="line">        &#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">            XWLog(<span class="string">@"%@"</span>, error);</span><br><span class="line">        &#125;];</span><br><span class="line">        <span class="comment">// 禁止加载回调地址</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>这是一篇随笔</p>
+
       
     </div>
     
@@ -197,7 +202,69 @@
       
       
       
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	</div>
 
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-request" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/29/request/" class="article-date">
+  	<time datetime="2015-11-29T13:30:57.000Z" itemprop="datePublished">2015-11-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/29/request/">拦截请求</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="拦截请求的一个重要代理方法">拦截请求的一个重要代理方法</h4><p>可以截取出请求中想要的字符段</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/29/request/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -216,8 +283,8 @@
     <article id="post-Singleton" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/30/Singleton/" class="article-date">
-  	<time datetime="2015-11-30T06:55:34.000Z" itemprop="datePublished">2015-11-30</time>
+      <a href="/2015/11/29/Singleton/" class="article-date">
+  	<time datetime="2015-11-29T13:27:57.000Z" itemprop="datePublished">2015-11-29</time>
 </a>
     </div>
   
@@ -230,7 +297,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/Singleton/">单例设计模式</a>
+      <a class="article-title" href="/2015/11/29/Singleton/">单例设计模式</a>
     </h1>
   
 
@@ -267,8 +334,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#define interfaceSingleton(name)  +(instancetype)share##name</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#if __has_feature(objc_arc)</span></span><br><span class="line"><span class="comment">// ARC</span></span><br><span class="line"><span class="preprocessor">#define implementationSingleton(name)  \</span></span><br><span class="line">+ (instancetype)share<span class="preprocessor">##name \</span></span><br><span class="line">&#123; \</span><br><span class="line">name *instance = [[<span class="keyword">self</span> alloc] init]; \</span><br><span class="line"><span class="keyword">return</span> instance; \</span><br><span class="line">&#125; \</span><br><span class="line"><span class="keyword">static</span> name *_instance = <span class="literal">nil</span>; \</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123; \</span><br><span class="line">_instance = [[<span class="keyword">super</span> allocWithZone:zone] init]; \</span><br><span class="line">&#125;); \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="comment">// MRC</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define implementationSingleton(name)  \</span></span><br><span class="line">+ (instancetype)share<span class="preprocessor">##name \</span></span><br><span class="line">&#123; \</span><br><span class="line">name *instance = [[<span class="keyword">self</span> alloc] init]; \</span><br><span class="line"><span class="keyword">return</span> instance; \</span><br><span class="line">&#125; \</span><br><span class="line"><span class="keyword">static</span> name *_instance = <span class="literal">nil</span>; \</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123; \</span><br><span class="line">_instance = [[<span class="keyword">super</span> allocWithZone:zone] init]; \</span><br><span class="line">&#125;); \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">oneway</span> <span class="keyword">void</span>)release \</span><br><span class="line">&#123; \</span><br><span class="line">&#125; \</span><br><span class="line">- (instancetype)retain \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span>  MAXFLOAT; \</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2>
       
     </div>
     
@@ -277,6 +343,10 @@
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/29/Singleton/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -319,13 +389,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       

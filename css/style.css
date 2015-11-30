@@ -1532,8 +1532,8 @@ a {
   text-shadow: none;
 }
 .article-entry .highlight .line {
-  font-size: 15px;
-  height: 15px;
+  font-size: 12px;
+  height: 12px;
 }
 .article-entry .gist {
   margin: 0 -20px;

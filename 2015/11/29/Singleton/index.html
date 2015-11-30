@@ -22,7 +22,7 @@
 2、这个唯一的实例只能通过子类化进行扩展,而且扩展的对象不会破坏客户">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单例设计模式">
-<meta property="og:url" content="http://yoursite.com/2015/11/30/Singleton/index.html">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/Singleton/index.html">
 <meta property="og:site_name" content="Trevor Coding">
 <meta property="og:description" content="本小节知识点:
 【理解】单例模式概念
@@ -39,7 +39,7 @@
 
 1、类只能有一个实例,而且必须从一个为人熟知的访问点对其进行访问,比如工厂方 法。
 2、这个唯一的实例只能通过子类化进行扩展,而且扩展的对象不会破坏客户">
-<meta property="og:updated_time" content="2015-11-30T06:55:34.000Z">
+<meta property="og:updated_time" content="2015-11-30T12:11:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例设计模式">
 <meta name="twitter:description" content="本小节知识点:
@@ -128,6 +128,8 @@
 				        
 							<li><a href="/archives">所有文章</a></li>
 				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -146,7 +148,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -157,7 +159,7 @@
 				
 				<section class="switch-part switch-part3">
 				
-					<div id="js-aboutme">我是崔佛,我再写代码.</div>
+					<div id="js-aboutme">我是崔佛,我在写代码.</div>
 				</section>
 				
 			</div>
@@ -187,6 +189,8 @@
 		        
 					<li><a href="/archives">所有文章</a></li>
 		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
 		        <div class="clearfix"></div>
 				</ul>
 			</nav>
@@ -207,8 +211,8 @@
       <div class="body-wrap"><article id="post-Singleton" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/30/Singleton/" class="article-date">
-  	<time datetime="2015-11-30T06:55:34.000Z" itemprop="datePublished">2015-11-30</time>
+      <a href="/2015/11/29/Singleton/" class="article-date">
+  	<time datetime="2015-11-29T13:27:57.000Z" itemprop="datePublished">2015-11-29</time>
 </a>
     </div>
   
@@ -265,7 +269,8 @@
 </li>
 </ul>
 <hr>
-<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#define interfaceSingleton(name)  +(instancetype)share##name</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#if __has_feature(objc_arc)</span></span><br><span class="line"><span class="comment">// ARC</span></span><br><span class="line"><span class="preprocessor">#define implementationSingleton(name)  \</span></span><br><span class="line">+ (instancetype)share<span class="preprocessor">##name \</span></span><br><span class="line">&#123; \</span><br><span class="line">name *instance = [[<span class="keyword">self</span> alloc] init]; \</span><br><span class="line"><span class="keyword">return</span> instance; \</span><br><span class="line">&#125; \</span><br><span class="line"><span class="keyword">static</span> name *_instance = <span class="literal">nil</span>; \</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123; \</span><br><span class="line">_instance = [[<span class="keyword">super</span> allocWithZone:zone] init]; \</span><br><span class="line">&#125;); \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="comment">// MRC</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define implementationSingleton(name)  \</span></span><br><span class="line">+ (instancetype)share<span class="preprocessor">##name \</span></span><br><span class="line">&#123; \</span><br><span class="line">name *instance = [[<span class="keyword">self</span> alloc] init]; \</span><br><span class="line"><span class="keyword">return</span> instance; \</span><br><span class="line">&#125; \</span><br><span class="line"><span class="keyword">static</span> name *_instance = <span class="literal">nil</span>; \</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123; \</span><br><span class="line">_instance = [[<span class="keyword">super</span> allocWithZone:zone] init]; \</span><br><span class="line">&#125;); \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">oneway</span> <span class="keyword">void</span>)release \</span><br><span class="line">&#123; \</span><br><span class="line">&#125; \</span><br><span class="line">- (instancetype)retain \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span>  MAXFLOAT; \</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2><a id="more"></a>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#define interfaceSingleton(name)  +(instancetype)share##name</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#if __has_feature(objc_arc)</span></span><br><span class="line"><span class="comment">// ARC</span></span><br><span class="line"><span class="preprocessor">#define implementationSingleton(name)  \</span></span><br><span class="line">+ (instancetype)share<span class="preprocessor">##name \</span></span><br><span class="line">&#123; \</span><br><span class="line">name *instance = [[<span class="keyword">self</span> alloc] init]; \</span><br><span class="line"><span class="keyword">return</span> instance; \</span><br><span class="line">&#125; \</span><br><span class="line"><span class="keyword">static</span> name *_instance = <span class="literal">nil</span>; \</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123; \</span><br><span class="line">_instance = [[<span class="keyword">super</span> allocWithZone:zone] init]; \</span><br><span class="line">&#125;); \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="comment">// MRC</span></span><br><span class="line"><span class="preprocessor">#define implementationSingleton(name)  \</span></span><br><span class="line">+ (instancetype)share<span class="preprocessor">##name \</span></span><br><span class="line">&#123; \</span><br><span class="line">name *instance = [[<span class="keyword">self</span> alloc] init]; \</span><br><span class="line"><span class="keyword">return</span> instance; \</span><br><span class="line">&#125; \</span><br><span class="line"><span class="keyword">static</span> name *_instance = <span class="literal">nil</span>; \</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123; \</span><br><span class="line">_instance = [[<span class="keyword">super</span> allocWithZone:zone] init]; \</span><br><span class="line">&#125;); \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="keyword">oneway</span> <span class="keyword">void</span>)release \</span><br><span class="line">&#123; \</span><br><span class="line">&#125; \</span><br><span class="line">- (instancetype)retain \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span> _instance; \</span><br><span class="line">&#125; \</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount \</span><br><span class="line">&#123; \</span><br><span class="line"><span class="keyword">return</span>  MAXFLOAT; \</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -275,7 +280,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/11/30/request/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/29/request/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -296,30 +301,15 @@
 </article>
 
 
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
 
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Singleton" data-title="单例设计模式" data-url="http://yoursite.com/2015/11/30/Singleton/"></div>
+	<div class="ds-thread" data-thread-key="Singleton" data-title="单例设计模式" data-url="http://yoursite.com/2015/11/29/Singleton/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"Trevor Coding"};
+	var duoshuoQuery = {short_name:"xionv"};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;

@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Trevor Coding</title>
+  <title>拦截请求 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="拦截请求的一个重要代理方法可以截取出请求中想要的字符段">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2015/11/29/hello-world/index.html">
+<meta property="og:title" content="拦截请求">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/request/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-11-29T09:27:25.000Z">
+<meta property="og:description" content="拦截请求的一个重要代理方法可以截取出请求中想要的字符段">
+<meta property="og:updated_time" content="2015-11-30T12:11:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="拦截请求">
+<meta name="twitter:description" content="拦截请求的一个重要代理方法可以截取出请求中想要的字符段">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -169,11 +166,11 @@ Quick">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-request" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/29/hello-world/" class="article-date">
-  	<time datetime="2015-11-29T09:27:25.000Z" itemprop="datePublished">2015-11-29</time>
+      <a href="/2015/11/29/request/" class="article-date">
+  	<time datetime="2015-11-29T13:30:57.000Z" itemprop="datePublished">2015-11-29</time>
 </a>
     </div>
   
@@ -186,7 +183,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      拦截请求
     </h1>
   
 
@@ -194,6 +191,10 @@ Quick">
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -202,16 +203,9 @@ Quick">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+        <h4 id="拦截请求的一个重要代理方法">拦截请求的一个重要代理方法</h4><p>可以截取出请求中想要的字符段</p>
+<a id="more"></a>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 拦截请求 ****重要方法****</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.取得请求路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *urlStr = request<span class="variable">.URL</span><span class="variable">.absoluteString</span>;</span><br><span class="line">    <span class="comment">// 2.找到code=这个关键字的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [urlStr rangeOfString:<span class="string">@"code="</span>];</span><br><span class="line">    <span class="keyword">if</span> (range<span class="variable">.length</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 3.截取code</span></span><br><span class="line">        <span class="built_in">NSUInteger</span> fromIndex = range<span class="variable">.location</span> + range<span class="variable">.length</span>;</span><br><span class="line">        <span class="comment">// code相当于换取令牌的口令 access_token相当于令牌</span></span><br><span class="line">        <span class="built_in">NSString</span> *code = [urlStr substringFromIndex:fromIndex];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 4.创建一个AFHTTPRequestOperation管理者</span></span><br><span class="line">        <span class="comment">// POST请求参数</span></span><br><span class="line">        <span class="built_in">NSMutableDictionary</span> *param = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">        param[<span class="string">@"client_id"</span>] = client_id;</span><br><span class="line">        param[<span class="string">@"client_secret"</span>] = client_secret;</span><br><span class="line">        param[<span class="string">@"grant_type"</span>] = <span class="string">@"authorization_code"</span>;</span><br><span class="line">        param[<span class="string">@"code"</span>] = code;</span><br><span class="line">        param[<span class="string">@"redirect_uri"</span>] = redirect_uri;</span><br><span class="line">        <span class="comment">// 5.发送一个POST请求</span></span><br><span class="line">        [HTTPTool POST:<span class="string">@"https://api.weibo.com/oauth2/access_token"</span> parameters:param success:^(<span class="keyword">id</span> JSON) &#123;</span><br><span class="line">            <span class="comment">// 3.将responseObject返回信息转成模型存进自定义对象归档，方便提取成员属性</span></span><br><span class="line">            <span class="comment">// 3.1 responseObject转成模型</span></span><br><span class="line">            AccountData *account = [AccountData accountDataWithDict:JSON];</span><br><span class="line">            <span class="comment">// 3.2 存储模型到沙盒</span></span><br><span class="line">            [AccountTool accountSave:account];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 切换根控制器</span></span><br><span class="line">            <span class="built_in">UIWindow</span> *window = [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span>;</span><br><span class="line">            [window switchRootViewController];</span><br><span class="line"></span><br><span class="line">        &#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">            XWLog(<span class="string">@"%@"</span>, error);</span><br><span class="line">        &#125;];</span><br><span class="line">        <span class="comment">// 禁止加载回调地址</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -220,15 +214,20 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2015/11/29/Singleton/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/30/suibi/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          单例设计模式
+          随笔
         
       </div>
     </a>
   
+  
+    <a href="/2015/11/29/Singleton/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">单例设计模式</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -240,7 +239,7 @@ Quick">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="http://yoursite.com/2015/11/29/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="request" data-title="拦截请求" data-url="http://yoursite.com/2015/11/29/request/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
