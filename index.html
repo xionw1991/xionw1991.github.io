@@ -171,11 +171,206 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/NSFileManager的一些使用/" class="article-date">
+  	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/NSFileManager的一些使用/">NSFileManager的一些使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>判断一个文件或者文件夹是否存在<ul>
+<li>BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>判断一个文件是否存在, 并且判断它是否是一个文件夹<ul>
+<li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
+<li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
+<li>BOOL dir = NO;</li>
+<li>BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt” isDirectory:&amp;dir];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>获取文件或文件夹的属性<ul>
+<li>NSDictionary *info = [manager attributesOfItemAtPath:@”/Users/apple/Desktop/abc.txt” error:nil];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>获取文件夹中所有的文件<ul>
+<li>注意:contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
+<li>NSArray *res = [manager contentsOfDirectoryAtPath:@”/Users/apple/Desktop/video” error:nil];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>创建文件夹<ul>
+<li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
+<li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
+<li>attributes: 指定创建出来的文件夹的属性</li>
+<li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
+<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
+<li>BOOL flag = [manager createDirectoryAtPath:@”/Users/apple/Desktop/abc” withIntermediateDirectories:YES attributes:nil error:nil];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>创建文件<ul>
+<li>createFileAtPath: 指定文件创建出来的位置</li>
+<li>contents : 文件中的内容</li>
+<li>attributes: 创建出来的文件的属性</li>
+<li>NSData : 二进制数据</li>
+<li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
+<li>NSString *str = @“我叫野原新之助”;</li>
+<li>NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];</li>
+<li>[manager createFileAtPath:@”/Users/apple/Desktop/abc.txt” contents:data attributes:nil];</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-KVC&amp;KVO" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/KVC&KVO/" class="article-date">
+  	<time datetime="2015-12-04T11:36:57.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/KVC&KVO/">KVC &amp; KVO简单应用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="KVC">KVC</h2><ul>
+<li>全称：Key Value Coding（键值编码）</li>
+<li>赋值</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能修改私有成员变量</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span> *)keyedValues;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取值</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能取得私有成员变量的值</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span> *)keys;</span><br></pre></td></tr></table></figure>
+<h2 id="KVO">KVO</h2><ul>
+<li>全称：Key Value Observing（键值监听）</li>
+<li>作用：监听模型的属性值改变</li>
+<li><p>步骤</p>
+<ul>
+<li><p>添加监听器</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 利用b对象来监听a对象name属性的改变</span></span><br><span class="line">[a addObserver:b forKeyPath:<span class="string">@"name"</span> options:<span class="built_in">NSKeyValueObservingOptionOld</span> | <span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="string">@"test"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在监听器中实现监听方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change     context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@ %@ %@ %@"</span>, object, keyPath, change, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>举例:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line">- (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-首尾式动画" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/12/04/首尾式动画/" class="article-date">
-  	<time datetime="2015-12-03T20:27:57.000Z" itemprop="datePublished">2015-12-04</time>
+  	<time datetime="2015-12-04T08:27:57.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
     </div>
   

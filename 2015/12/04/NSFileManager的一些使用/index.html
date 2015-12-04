@@ -3,17 +3,45 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: iOS初步 | Trevor Coding</title>
+  <title>NSFileManager的一些使用 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Trevor Coding | iOS">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Trevor Coding">
-<meta property="og:url" content="http://xionv.com/tags/iOS初步/index.html">
+  <meta name="description" content="判断一个文件或者文件夹是否存在
+BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
+
+
+
+
+
+判断一个文件是否存在, 并且判断它是否是一个文件夹
+注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
+第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSFileManager的一些使用">
+<meta property="og:url" content="http://xionv.com/2015/12/04/NSFileManager的一些使用/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="Trevor Coding | iOS">
+<meta property="og:description" content="判断一个文件或者文件夹是否存在
+BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
+
+
+
+
+
+判断一个文件是否存在, 并且判断它是否是一个文件夹
+注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
+第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO">
+<meta property="og:updated_time" content="2015-12-04T12:30:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Trevor Coding">
-<meta name="twitter:description" content="Trevor Coding | iOS">
+<meta name="twitter:title" content="NSFileManager的一些使用">
+<meta name="twitter:description" content="判断一个文件或者文件夹是否存在
+BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
+
+
+
+
+
+判断一个文件是否存在, 并且判断它是否是一个文件夹
+注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
+第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -169,177 +197,144 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2015/12/04/NSFileManager的一些使用/" class="article-date">
+  	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NSFileManager的一些使用
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/04/NSFileManager的一些使用/" class="archive-article-date">
-  	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">Dec 4</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/NSFileManager的一些使用/">NSFileManager的一些使用</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>判断一个文件或者文件夹是否存在<ul>
+<li>BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>判断一个文件是否存在, 并且判断它是否是一个文件夹<ul>
+<li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
+<li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
+<li>BOOL dir = NO;</li>
+<li>BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt” isDirectory:&amp;dir];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>获取文件或文件夹的属性<ul>
+<li>NSDictionary *info = [manager attributesOfItemAtPath:@”/Users/apple/Desktop/abc.txt” error:nil];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>获取文件夹中所有的文件<ul>
+<li>注意:contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
+<li>NSArray *res = [manager contentsOfDirectoryAtPath:@”/Users/apple/Desktop/video” error:nil];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>创建文件夹<ul>
+<li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
+<li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
+<li>attributes: 指定创建出来的文件夹的属性</li>
+<li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
+<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
+<li>BOOL flag = [manager createDirectoryAtPath:@”/Users/apple/Desktop/abc” withIntermediateDirectories:YES attributes:nil error:nil];</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>创建文件<ul>
+<li>createFileAtPath: 指定文件创建出来的位置</li>
+<li>contents : 文件中的内容</li>
+<li>attributes: 创建出来的文件的属性</li>
+<li>NSData : 二进制数据</li>
+<li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
+<li>NSString *str = @“我叫野原新之助”;</li>
+<li>NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];</li>
+<li>[manager createFileAtPath:@”/Users/apple/Desktop/abc.txt” contents:data attributes:nil];</li>
+</ul>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/04/KVC&KVO/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">KVC &amp; KVO简单应用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/04/KVC&KVO/" class="archive-article-date">
-  	<time datetime="2015-12-04T11:36:57.000Z" itemprop="datePublished">Dec 4</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/KVC&KVO/">KVC &amp; KVO简单应用</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/04/首尾式动画/" class="archive-article-date">
-  	<time datetime="2015-12-04T08:27:57.000Z" itemprop="datePublished">Dec 4</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/04/首尾式动画/">简单的首尾式动画</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="NSFileManager的一些使用" data-title="NSFileManager的一些使用" data-url="http://xionv.com/2015/12/04/NSFileManager的一些使用/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/03/字典转模型/" class="archive-article-date">
-  	<time datetime="2015-12-03T15:27:57.000Z" itemprop="datePublished">Dec 3</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/03/字典转模型/">字典转模型</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/11/29/Singleton/" class="archive-article-date">
-  	<time datetime="2015-11-29T13:27:57.000Z" itemprop="datePublished">Nov 29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/29/Singleton/">单例设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 </div>
       <footer id="footer">
@@ -365,9 +360,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
