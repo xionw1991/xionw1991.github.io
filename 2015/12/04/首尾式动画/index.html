@@ -25,7 +25,7 @@
 - (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
 
 在方法中添加一个UIView, 当然UIImageView,UILabel">
-<meta property="og:updated_time" content="2015-12-04T09:06:51.000Z">
+<meta property="og:updated_time" content="2015-12-04T09:47:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的首尾式动画">
 <meta name="twitter:description" content="在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.
@@ -195,7 +195,7 @@
   
     <div class="article-meta">
       <a href="/2015/12/04/首尾式动画/" class="article-date">
-  	<time datetime="2015-12-04T09:06:51.000Z" itemprop="datePublished">2015-12-04</time>
+  	<time datetime="2015-12-03T20:27:57.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
     </div>
   
@@ -231,7 +231,7 @@
         <blockquote>
 <p>在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.</p>
 </blockquote>
-<h3 id="1-_实现渐变动画">1. 实现渐变动画</h3><ul>
+<h2 id="1-_实现渐变动画">1. 实现渐变动画</h2><ul>
 <li>在控制器中新建一个监听手势点击的方法.</li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;&#125;</span><br></pre></td></tr></table></figure>
@@ -248,7 +248,7 @@
 <li>用block来是实现动画效果</li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; </span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<h3 id="2-_实现首尾式动画">2. 实现首尾式动画</h3><ul>
+<h2 id="2-_实现首尾式动画">2. 实现首尾式动画</h2><ul>
 <li>实现提示框(hub)那种类型的首尾式动画效果 (显示后立即消失). </li>
 <li>block嵌套实现首尾式动画</li>
 <li>将上面实现动画的代码替换成下面的代码:</li>
@@ -271,7 +271,7 @@
 <nav id="article-nav">
   
   
-    <a href="/2015/12/04/字典转模型/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/12/03/字典转模型/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">字典转模型</div>
       <strong class="article-nav-caption">></strong>
     </a>

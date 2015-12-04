@@ -175,7 +175,7 @@
   
     <div class="article-meta">
       <a href="/2015/12/04/首尾式动画/" class="article-date">
-  	<time datetime="2015-12-04T09:06:51.000Z" itemprop="datePublished">2015-12-04</time>
+  	<time datetime="2015-12-03T20:27:57.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
     </div>
   
@@ -200,7 +200,7 @@
         <blockquote>
 <p>在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.</p>
 </blockquote>
-<h3 id="1-_实现渐变动画">1. 实现渐变动画</h3><ul>
+<h2 id="1-_实现渐变动画">1. 实现渐变动画</h2><ul>
 <li>在控制器中新建一个监听手势点击的方法.</li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;&#125;</span><br></pre></td></tr></table></figure>
@@ -217,7 +217,7 @@
 <li>用block来是实现动画效果</li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; </span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<h3 id="2-_实现首尾式动画">2. 实现首尾式动画</h3><ul>
+<h2 id="2-_实现首尾式动画">2. 实现首尾式动画</h2><ul>
 <li>实现提示框(hub)那种类型的首尾式动画效果 (显示后立即消失). </li>
 <li>block嵌套实现首尾式动画</li>
 <li>将上面实现动画的代码替换成下面的代码:</li>
@@ -261,8 +261,8 @@
     <article id="post-字典转模型" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/04/字典转模型/" class="article-date">
-  	<time datetime="2015-12-03T17:28:42.000Z" itemprop="datePublished">2015-12-04</time>
+      <a href="/2015/12/03/字典转模型/" class="article-date">
+  	<time datetime="2015-12-03T15:27:57.000Z" itemprop="datePublished">2015-12-03</time>
 </a>
     </div>
   
@@ -275,7 +275,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/字典转模型/">字典转模型</a>
+      <a class="article-title" href="/2015/12/03/字典转模型/">字典转模型</a>
     </h1>
   
 
@@ -289,12 +289,11 @@
 <li>字典 : 通过字符串类型的key取值.编写这些key时,编译器不会有任何友善提示,需要手动敲写.手动敲写字符串key,容易写错,而且如果写错,编译器不会有任何警告和报错,容易造成设错数据或者取错数据,增加bug几率.</li>
 <li>模型类 : 即用来存放数据的类,继承自NSObject.所谓模型,其实就是数据模型,专门用来存放数据的对象.模型设置数据和取出数据都是通过它的属性,属性名如果写错,编译器会马上报错,因此保证了数据的正确性,而且这种方式更加的贴近面向对象的思想,更加符合苹果官方推荐的MVC编程模式.</li>
 </ul>
-<hr>
 <h2 id="2-_字典转模型的两种常用赋值方法">2. 字典转模型的两种常用赋值方法</h2><ul>
 <li>如果是要自己快速创建一个模型最好先提供一个方便创建模型的类工厂方法,当然也可以只提供一个类工厂方法,然后定义这个模型对外的成员属性接口用于外部对象访问这个模型存储的数据.</li>
 </ul>
 <h4 id="第一种_:_直接取出字典键值赋值给模型成员属性">第一种 : 直接取出字典键值赋值给模型成员属性</h4><ul>
-<li>如果成员属性较少,或者这个模型将要接收不止一个字典则建议使用这种方法</li>
+<li>如果成员属性较少,或者这个模型将要接收不止一个字典,或者自定义对象有成员属性嵌套,则建议使用这种方法</li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传入一个字典将字典中的所有的键值取出来赋给模型的成员属性</span></span><br><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这里的属性名称和字典的key可以不同名</span></span><br><span class="line">    <span class="comment">// 注意:在这里假如这个字典中没有"icon"这个key也没有关系,当有对象访问这个模型数据时不会报错.</span></span><br><span class="line">    Model *model = [[ShopsData alloc] init];</span><br><span class="line">    model<span class="variable">.name</span> = dict[<span class="string">@"name"</span>];</span><br><span class="line">    model<span class="variable">.icon</span> = dict[<span class="string">@"icon"</span>];</span><br><span class="line">    <span class="keyword">return</span> model;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="第二种_:_利用KVC(KeyValueCoding)赋值">第二种 : 利用KVC(KeyValueCoding)赋值</h4><ul>
@@ -304,7 +303,6 @@
 <ul>
 <li>KVC赋值有一个注意点:<strong>那就是模型的属性名必须跟字典的key名一样,否则在取值的时候会报找不到这个键值的错.</strong></li>
 </ul>
-<hr>
 <h2 id="3-_字典转模型的写法">3. 字典转模型的写法</h2><ul>
 <li>除了上面写法外,还可以进行重写构造方法来实现</li>
 </ul>
@@ -326,6 +324,61 @@
 	</div>
 
       
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-suibi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/30/suibi/" class="article-date">
+  	<time datetime="2015-11-30T11:27:57.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/suibi/">随笔</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一篇随笔</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	</div>
+
 
       
       <div class="clearfix"></div>
@@ -426,12 +479,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="本小节知识点:">本小节知识点:</h2><ol>
-<li>【理解】单例模式概念</li>
-<li>【理解】简单的单例模式实现</li>
-</ol>
-<hr>
-<h2 id="1-单例模式概念">1.单例模式概念</h2><ul>
+        <h2 id="1-单例模式概念">1.单例模式概念</h2><ul>
 <li><p>什么是单例模式:(Singleton)</p>
 <ul>
 <li>单例模式的意图是是的类的对象成为系统中唯一的实例,􏰀供一个访问点,供客户类 共享资源。</li>
@@ -461,6 +509,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
       
 
       

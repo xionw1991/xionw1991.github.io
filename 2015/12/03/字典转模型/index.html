@@ -11,13 +11,13 @@
 模型类 : 即用来存放数据的类,继承自NSObject.所谓模型,其实就是数据模型,专门用来存放数据的对象.模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字典转模型">
-<meta property="og:url" content="http://xionv.com/2015/12/04/字典转模型/index.html">
+<meta property="og:url" content="http://xionv.com/2015/12/03/字典转模型/index.html">
 <meta property="og:site_name" content="Trevor Coding">
 <meta property="og:description" content="1. 为什么要将字典转成模型?
 字典和模型都是用来存储数据的 .  
 字典 : 通过字符串类型的key取值.编写这些key时,编译器不会有任何友善提示,需要手动敲写.手动敲写字符串key,容易写错,而且如果写错,编译器不会有任何警告和报错,容易造成设错数据或者取错数据,增加bug几率.
 模型类 : 即用来存放数据的类,继承自NSObject.所谓模型,其实就是数据模型,专门用来存放数据的对象.模型">
-<meta property="og:updated_time" content="2015-12-03T17:28:42.000Z">
+<meta property="og:updated_time" content="2015-12-04T09:57:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字典转模型">
 <meta name="twitter:description" content="1. 为什么要将字典转成模型?
@@ -182,8 +182,8 @@
       <div class="body-wrap"><article id="post-字典转模型" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/04/字典转模型/" class="article-date">
-  	<time datetime="2015-12-03T17:28:42.000Z" itemprop="datePublished">2015-12-04</time>
+      <a href="/2015/12/03/字典转模型/" class="article-date">
+  	<time datetime="2015-12-03T15:27:57.000Z" itemprop="datePublished">2015-12-03</time>
 </a>
     </div>
   
@@ -221,12 +221,11 @@
 <li>字典 : 通过字符串类型的key取值.编写这些key时,编译器不会有任何友善提示,需要手动敲写.手动敲写字符串key,容易写错,而且如果写错,编译器不会有任何警告和报错,容易造成设错数据或者取错数据,增加bug几率.</li>
 <li>模型类 : 即用来存放数据的类,继承自NSObject.所谓模型,其实就是数据模型,专门用来存放数据的对象.模型设置数据和取出数据都是通过它的属性,属性名如果写错,编译器会马上报错,因此保证了数据的正确性,而且这种方式更加的贴近面向对象的思想,更加符合苹果官方推荐的MVC编程模式.</li>
 </ul>
-<hr>
 <h2 id="2-_字典转模型的两种常用赋值方法">2. 字典转模型的两种常用赋值方法</h2><ul>
 <li>如果是要自己快速创建一个模型最好先提供一个方便创建模型的类工厂方法,当然也可以只提供一个类工厂方法,然后定义这个模型对外的成员属性接口用于外部对象访问这个模型存储的数据.</li>
 </ul>
 <h4 id="第一种_:_直接取出字典键值赋值给模型成员属性">第一种 : 直接取出字典键值赋值给模型成员属性</h4><ul>
-<li>如果成员属性较少,或者这个模型将要接收不止一个字典则建议使用这种方法</li>
+<li>如果成员属性较少,或者这个模型将要接收不止一个字典,或者自定义对象有成员属性嵌套,则建议使用这种方法</li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传入一个字典将字典中的所有的键值取出来赋给模型的成员属性</span></span><br><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这里的属性名称和字典的key可以不同名</span></span><br><span class="line">    <span class="comment">// 注意:在这里假如这个字典中没有"icon"这个key也没有关系,当有对象访问这个模型数据时不会报错.</span></span><br><span class="line">    Model *model = [[ShopsData alloc] init];</span><br><span class="line">    model<span class="variable">.name</span> = dict[<span class="string">@"name"</span>];</span><br><span class="line">    model<span class="variable">.icon</span> = dict[<span class="string">@"icon"</span>];</span><br><span class="line">    <span class="keyword">return</span> model;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="第二种_:_利用KVC(KeyValueCoding)赋值">第二种 : 利用KVC(KeyValueCoding)赋值</h4><ul>
@@ -236,7 +235,6 @@
 <ul>
 <li>KVC赋值有一个注意点:<strong>那就是模型的属性名必须跟字典的key名一样,否则在取值的时候会报找不到这个键值的错.</strong></li>
 </ul>
-<hr>
 <h2 id="3-_字典转模型的写法">3. 字典转模型的写法</h2><ul>
 <li>除了上面写法外,还可以进行重写构造方法来实现</li>
 </ul>
@@ -265,8 +263,8 @@
     </a>
   
   
-    <a href="/2015/11/29/request/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">拦截请求</div>
+    <a href="/2015/11/30/suibi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">随笔</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -280,7 +278,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="字典转模型" data-title="字典转模型" data-url="http://xionv.com/2015/12/04/字典转模型/"></div>
+	<div class="ds-thread" data-thread-key="字典转模型" data-title="字典转模型" data-url="http://xionv.com/2015/12/03/字典转模型/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
