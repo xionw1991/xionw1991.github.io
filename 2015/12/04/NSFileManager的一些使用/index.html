@@ -6,10 +6,8 @@
   <title>NSFileManager的一些使用 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="判断一个文件或者文件夹是否存在
-BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
 
-
-
+- BOOL flag = [manager fileExistsAtPath:@&quot;/Users/apple/Desktop/abc.txt&quot;];
 
 
 判断一个文件是否存在, 并且判断它是否是一个文件夹
@@ -20,23 +18,19 @@ BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
 <meta property="og:url" content="http://xionv.com/2015/12/04/NSFileManager的一些使用/index.html">
 <meta property="og:site_name" content="Trevor Coding">
 <meta property="og:description" content="判断一个文件或者文件夹是否存在
-BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
 
-
-
+- BOOL flag = [manager fileExistsAtPath:@&quot;/Users/apple/Desktop/abc.txt&quot;];
 
 
 判断一个文件是否存在, 并且判断它是否是一个文件夹
 注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
 第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO">
-<meta property="og:updated_time" content="2015-12-04T12:30:01.000Z">
+<meta property="og:updated_time" content="2015-12-04T16:25:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSFileManager的一些使用">
 <meta name="twitter:description" content="判断一个文件或者文件夹是否存在
-BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
 
-
-
+- BOOL flag = [manager fileExistsAtPath:@&quot;/Users/apple/Desktop/abc.txt&quot;];
 
 
 判断一个文件是否存在, 并且判断它是否是一个文件夹
@@ -235,36 +229,32 @@ BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>判断一个文件或者文件夹是否存在<ul>
-<li>BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];</li>
+<li>判断一个文件或者文件夹是否存在</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span>];</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>判断一个文件是否存在, 并且判断它是否是一个文件夹<ul>
 <li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
 <li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
 <li>BOOL dir = NO;</li>
-<li>BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt” isDirectory:&amp;dir];</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> isDirectory:&amp;dir];</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
-<li>获取文件或文件夹的属性<ul>
-<li>NSDictionary *info = [manager attributesOfItemAtPath:@”/Users/apple/Desktop/abc.txt” error:nil];</li>
+<li>获取文件或文件夹的属性</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>获取文件夹中所有的文件<ul>
 <li>注意:contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
-<li>NSArray *res = [manager contentsOfDirectoryAtPath:@”/Users/apple/Desktop/video” error:nil];</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager contentsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>创建文件夹<ul>
@@ -273,10 +263,10 @@ BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
 <li>attributes: 指定创建出来的文件夹的属性</li>
 <li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
 <li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
-<li>BOOL flag = [manager createDirectoryAtPath:@”/Users/apple/Desktop/abc” withIntermediateDirectories:YES attributes:nil error:nil];</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager createDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/abc"</span> withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>创建文件<ul>
@@ -286,12 +276,10 @@ BOOL flag = [manager fileExistsAtPath:@”/Users/apple/Desktop/abc.txt”];
 <li>NSData : 二进制数据</li>
 <li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
 <li>NSString *str = @“我叫野原新之助”;</li>
-<li>NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];</li>
-<li>[manager createFileAtPath:@”/Users/apple/Desktop/abc.txt” contents:data attributes:nil];</li>
 </ul>
 </li>
 </ul>
-
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">-  [manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
       
     </div>
     
