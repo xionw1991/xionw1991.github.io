@@ -206,9 +206,10 @@
 </li>
 <li><p>新建一个模型类, 并导入头文件</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;sqlite3.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>在实现方法中定义一个全局的静态变量<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line"><span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在实现方法中定义一个全局的静态变量</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line"><span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</ol>
 </li>
 </ol>
 <ol>
