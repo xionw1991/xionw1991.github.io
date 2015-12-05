@@ -13,7 +13,11 @@ SQLite是一款轻型的嵌入式数据库, 它属于关系数据库
 在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.如图:
 
 新建一个模型类, 并导入头文件
-   #import &amp;lt;sqlite3.h&amp;gt;```  3. 在实现方法中定">
+#import &amp;lt;sqlite3.h&amp;gt;
+
+
+
+在实现方法中定义一个全局的静">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQLite在iOS中的使用">
 <meta property="og:url" content="http://xionv.com/2015/12/05/在iOS中使用SQLite/index.html">
@@ -26,9 +30,13 @@ SQLite是一款轻型的嵌入式数据库, 它属于关系数据库
 在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.如图:
 
 新建一个模型类, 并导入头文件
-   #import &amp;lt;sqlite3.h&amp;gt;```  3. 在实现方法中定">
+#import &amp;lt;sqlite3.h&amp;gt;
+
+
+
+在实现方法中定义一个全局的静">
 <meta property="og:image" content="http://r6.loli.io/j2mIvy.png">
-<meta property="og:updated_time" content="2015-12-05T14:11:30.000Z">
+<meta property="og:updated_time" content="2015-12-05T14:13:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQLite在iOS中的使用">
 <meta name="twitter:description" content="1. 什么是SQLite
@@ -39,7 +47,11 @@ SQLite是一款轻型的嵌入式数据库, 它属于关系数据库
 在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.如图:
 
 新建一个模型类, 并导入头文件
-   #import &amp;lt;sqlite3.h&amp;gt;```  3. 在实现方法中定">
+#import &amp;lt;sqlite3.h&amp;gt;
+
+
+
+在实现方法中定义一个全局的静">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -240,8 +252,15 @@ SQLite是一款轻型的嵌入式数据库, 它属于关系数据库
 <li><p>在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.<br>如图:<br><img src="http://r6.loli.io/j2mIvy.png" alt=""></p>
 </li>
 <li><p>新建一个模型类, 并导入头文件</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="preprocessor">#import <span class="title">&lt;sqlite3.h&gt;</span></span></span><br><span class="line">```  </span><br><span class="line"><span class="number">3.</span> 在实现方法中定义一个全局的静态变量</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line">   <span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line">   <span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line">   <span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line">   <span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;sqlite3.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<ol>
+<li><p>在实现方法中定义一个全局的静态变量</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line"><span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
 <li><p>链接数据库, 创建表.</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首次调用这个类的时候链接数据库</span></span><br><span class="line">+ (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1&gt; 获取沙盒路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"computer.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 2&gt; 根据路径打开数据库(相当于执行connection),传入数据库对象的地址,如果打开成功创建表.</span></span><br><span class="line">    <span class="keyword">int</span> result = sqlite3_open(path<span class="variable">.UTF8String</span>, &amp;_db); </span><br><span class="line">    <span class="keyword">if</span> (result != SQLITE_OK) &#123; <span class="comment">// 打开数据库失败</span></span><br><span class="line">        <span class="comment">// 关闭数据库</span></span><br><span class="line">        sqlite3_close(_db);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"打开数据库失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 打开数据库成功</span></span><br><span class="line">        <span class="keyword">char</span> *err; <span class="comment">// 创表失败的错误信息</span></span><br><span class="line">        <span class="comment">// 定义sql语句</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *sql = <span class="string">"CREATE TABLE IF NOT EXISTS t_computer (ID INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>; </span><br><span class="line">        <span class="comment">// 3&gt; 执行sql语句,在数据库(_db)中建表</span></span><br><span class="line">        <span class="keyword">if</span> (sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;err) != SQLITE_OK) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表失败---%s"</span>, err); <span class="comment">// 打印错误信息</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表成功"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
