@@ -29,7 +29,7 @@
 
 注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
 第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为">
-<meta property="og:updated_time" content="2015-12-06T07:53:43.000Z">
+<meta property="og:updated_time" content="2015-12-07T14:11:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSFileManager的一些使用">
 <meta name="twitter:description" content="判断一个文件或者文件夹是否存在
@@ -235,13 +235,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><p>判断一个文件或者文件夹是否存在</p>
+<li><p><strong>判断一个文件或者文件夹是否存在</strong></p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
 <ul>
-<li><p>判断一个文件是否存在, 并且判断它是否是一个文件夹</p>
+<li><p><strong>判断一个文件是否存在, 并且判断它是否是一个文件夹</strong></p>
 <ul>
 <li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
 <li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
@@ -252,13 +252,13 @@
 </ul>
 <hr>
 <ul>
-<li><p>获取文件或文件夹的属性</p>
+<li><p><strong>获取文件或文件夹的属性</strong></p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
 <ul>
-<li><p>获取文件夹中所有的文件</p>
+<li><p><strong>获取文件夹中所有的文件</strong></p>
 <ul>
 <li>contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
 <li>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</li>
@@ -269,7 +269,7 @@
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
-<li><p>创建文件夹</p>
+<li><p><strong>创建文件夹</strong></p>
 <ul>
 <li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
 <li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
@@ -282,7 +282,7 @@
 </ul>
 <hr>
 <ul>
-<li><p>创建文件</p>
+<li><p><strong>创建文件</strong></p>
 <ul>
 <li>createFileAtPath: 指定文件创建出来的位置</li>
 <li>contents : 文件中的内容</li>
