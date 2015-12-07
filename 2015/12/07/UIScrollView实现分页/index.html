@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UIScrollView实现定时滚动分页 | Trevor Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过使用UIScrollView控件来实现定时滚动分页#import &quot;ViewController.h&quot;// 图片个数#define imageViewCount 5@interface ViewController () &amp;lt;UIScrollViewDelegate&amp;gt;@property (weak, nonatomic) IBOutlet UIScrollView *scrollVi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIScrollView实现定时滚动分页">
+<meta property="og:url" content="http://xionv.com/2015/12/07/UIScrollView实现分页/index.html">
+<meta property="og:site_name" content="Trevor Coding">
+<meta property="og:description" content="通过使用UIScrollView控件来实现定时滚动分页#import &quot;ViewController.h&quot;// 图片个数#define imageViewCount 5@interface ViewController () &amp;lt;UIScrollViewDelegate&amp;gt;@property (weak, nonatomic) IBOutlet UIScrollView *scrollVi">
+<meta property="og:updated_time" content="2015-12-07T13:28:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIScrollView实现定时滚动分页">
+<meta name="twitter:description" content="通过使用UIScrollView控件来实现定时滚动分页#import &quot;ViewController.h&quot;// 图片个数#define imageViewCount 5@interface ViewController () &amp;lt;UIScrollViewDelegate&amp;gt;@property (weak, nonatomic) IBOutlet UIScrollView *scrollVi">
+  
+    <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS中级/" style="font-size: 10px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-UIScrollView实现分页" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/07/UIScrollView实现分页/" class="article-date">
+  	<time datetime="2015-12-07T12:50:57.000Z" itemprop="datePublished">2015-12-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UIScrollView实现定时滚动分页
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="通过使用UIScrollView控件来实现定时滚动分页">通过使用UIScrollView控件来实现定时滚动分页</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 图片个数</span></span><br><span class="line"><span class="preprocessor">#define imageViewCount 5</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> () &lt;<span class="title">UIScrollViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIScrollView</span> *scrollView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIPageControl</span> *pageContorl;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSTimer</span> *timer;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">// 设置scrollView的一些属性</span></span><br><span class="line">    <span class="comment">// scrollView的滚动范围</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.contentSize</span> = <span class="built_in">CGSizeMake</span>(<span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> * imageViewCount, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 禁用水平和垂直滑块</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.showsHorizontalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.showsVerticalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="comment">// 禁用弹簧效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounces</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="comment">// 初始化图片分页</span></span><br><span class="line">    [<span class="keyword">self</span> setupPageView];</span><br><span class="line">    <span class="comment">// 初始化分页指示器</span></span><br><span class="line">    [<span class="keyword">self</span> setupPageControl];</span><br><span class="line">    <span class="comment">// 开始计时器</span></span><br><span class="line">    [<span class="keyword">self</span> startTiming];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置分页</span></span><br><span class="line">- (<span class="keyword">void</span>)setupPageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGSize</span> scrollViewSize = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span>;</span><br><span class="line">    <span class="comment">// 在scrollView中添加子控件</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; imageViewCount; i++) &#123;</span><br><span class="line">        <span class="built_in">NSString</span> *imageName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"img_%02d"</span>, i + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">        imageView<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:imageName];</span><br><span class="line">        <span class="built_in">CGFloat</span> imageViewX = scrollViewSize<span class="variable">.width</span> * i;</span><br><span class="line">        <span class="built_in">CGFloat</span> imageViewY = <span class="number">0</span>;</span><br><span class="line">        imageView<span class="variable">.frame</span> = (<span class="built_in">CGRect</span>)&#123;&#123;imageViewX, imageViewY&#125;, scrollViewSize&#125;;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.scrollView</span> addSubview:imageView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置分页指示器</span></span><br><span class="line">- (<span class="keyword">void</span>)setupPageControl</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIPageControl</span> *pageContorl = [[<span class="built_in">UIPageControl</span> alloc] init];</span><br><span class="line">    <span class="comment">// 单页的时候隐藏</span></span><br><span class="line">    pageContorl<span class="variable">.hidesForSinglePage</span> = <span class="literal">YES</span>;</span><br><span class="line">    pageContorl<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    <span class="comment">// 注意: 在Xcode6以后 _currentPageImage 和 _pageImage这两个私有属性已经不可见了</span></span><br><span class="line">    <span class="comment">// 通过KVC设置指示器图片</span></span><br><span class="line">    [pageContorl setValue:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"current"</span>] forKeyPath:<span class="string">@"_currentPageImage"</span>];</span><br><span class="line">    [pageContorl setValue:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"other"</span>] forKeyPath:<span class="string">@"_pageImage"</span>];</span><br><span class="line">    <span class="comment">// 设置页码个数</span></span><br><span class="line">    pageContorl<span class="variable">.numberOfPages</span> = imageViewCount;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:pageContorl];</span><br><span class="line">    _pageContorl = pageContorl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始计时器</span></span><br><span class="line">- (<span class="keyword">void</span>)startTiming</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 初始化定时器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.timer</span> = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(pageChanged:) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</span><br><span class="line">    <span class="comment">// 将计时添加进事件循环</span></span><br><span class="line">    [[<span class="built_in">NSRunLoop</span> mainRunLoop] addTimer:<span class="keyword">self</span><span class="variable">.timer</span> forMode:<span class="built_in">NSRunLoopCommonModes</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止计时器</span></span><br><span class="line">- (<span class="keyword">void</span>)endTiming</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.timer</span> invalidate];</span><br><span class="line"><span class="comment">//    self.timer = nil; // 清空指针 - 这句可以不用写</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - 监听方法</span></span><br><span class="line"><span class="comment">// 定时器滚动页面</span></span><br><span class="line">- (<span class="keyword">void</span>)pageChanged:(<span class="built_in">NSTimer</span> *)timer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 根据当前页码数乘上scrollView的宽度来算出偏移量</span></span><br><span class="line">    <span class="built_in">CGFloat</span> x = ((<span class="keyword">self</span><span class="variable">.pageContorl</span><span class="variable">.currentPage</span> + <span class="number">1</span>) % imageViewCount) * <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// 这句是定时滚动页面的核心 ***</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.scrollView</span> setContentOffset:(<span class="built_in">CGPoint</span>)&#123;x,<span class="number">0</span>&#125; animated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UIScrollViewDelegate</span></span><br><span class="line"><span class="comment">// 监听scrollView的滚动</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// scrollView内偏移量 / scrollView的宽 = 当前页面 --- 四舍五入</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageContorl</span><span class="variable">.currentPage</span> = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.contentOffset</span><span class="variable">.x</span> / <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> + <span class="number">0.5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当拖拽scrollView时停止计时</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewWillBeginDragging:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> endTiming];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当停止拖拽时开始计时</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidEndDecelerating:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> startTiming];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/05/在iOS中使用SQLite(上)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQLite在iOS中的使用(上)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="UIScrollView实现分页" data-title="UIScrollView实现定时滚动分页" data-url="http://xionv.com/2015/12/07/UIScrollView实现分页/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
