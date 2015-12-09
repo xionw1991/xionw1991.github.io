@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SQLite在iOS中的使用(下) | Trevor Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用数据库存储任意对象
+使用FMDB框架来操作数据库
+
+
+新建一个模型类,有name和price两个属性, 并导入FMDB头文件 
+#import &quot;Shop.h&quot;#import &quot;FMDB.h&quot;
+
+在加载类的时候创建数据库
+  // 初始化一个FMDatabase类的对象  static FMDatabase *_db;  // 第一次使用类时  + (void)initialize&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLite在iOS中的使用(下)">
+<meta property="og:url" content="http://xionv.com/2015/12/09/SQLite在iOS中的使用(下)/index.html">
+<meta property="og:site_name" content="Trevor Coding">
+<meta property="og:description" content="使用数据库存储任意对象
+使用FMDB框架来操作数据库
+
+
+新建一个模型类,有name和price两个属性, 并导入FMDB头文件 
+#import &quot;Shop.h&quot;#import &quot;FMDB.h&quot;
+
+在加载类的时候创建数据库
+  // 初始化一个FMDatabase类的对象  static FMDatabase *_db;  // 第一次使用类时  + (void)initialize&amp;#123;">
+<meta property="og:updated_time" content="2015-12-09T13:01:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLite在iOS中的使用(下)">
+<meta name="twitter:description" content="使用数据库存储任意对象
+使用FMDB框架来操作数据库
+
+
+新建一个模型类,有name和price两个属性, 并导入FMDB头文件 
+#import &quot;Shop.h&quot;#import &quot;FMDB.h&quot;
+
+在加载类的时候创建数据库
+  // 初始化一个FMDatabase类的对象  static FMDatabase *_db;  // 第一次使用类时  + (void)initialize&amp;#123;">
+  
+    <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS中级/" style="font-size: 15px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-SQLite在iOS中的使用(下)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/09/SQLite在iOS中的使用(下)/" class="article-date">
+  	<time datetime="2015-12-09T11:08:57.000Z" itemprop="datePublished">2015-12-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQLite在iOS中的使用(下)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用数据库存储任意对象">使用数据库存储任意对象</h2><blockquote>
+<p>使用FMDB框架来操作数据库</p>
+</blockquote>
+<ol>
+<li><p>新建一个模型类,有name和price两个属性, 并导入FMDB头文件 </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"Shop.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"FMDB.h"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在加载类的时候创建数据库</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 初始化一个FMDatabase类的对象</span></span><br><span class="line">  <span class="keyword">static</span> FMDatabase *_db;</span><br><span class="line">  <span class="comment">// 第一次使用类时</span></span><br><span class="line">  + (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// 1.数据库路径</span></span><br><span class="line">     <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>,</span><br><span class="line">                                                          <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span></span><br><span class="line">                      stringByAppendingPathComponent:<span class="string">@"shop.sqlite"</span>];</span><br><span class="line">     <span class="comment">// 2.链接数据库</span></span><br><span class="line">     _db = [FMDatabase databaseWithPath:path];</span><br><span class="line">     <span class="comment">// 3.打开数据库</span></span><br><span class="line">     [_db open];</span><br><span class="line">     <span class="comment">// 4.建表</span></span><br><span class="line">     [_db executeUpdate:<span class="string">@"CREATE TABLE IF NOT EXISTS t_shop (id integer PRIMARY KEY, shop blob NOT NULL)"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加增/删/查方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入数据, 直接传入shop对象</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertObject:(<span class="keyword">id</span>)object</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// 将对象转成NSData数据</span></span><br><span class="line">     <span class="built_in">NSData</span> *data = [<span class="built_in">NSKeyedArchiver</span> archivedDataWithRootObject:shop];</span><br><span class="line">     <span class="comment">// 将data存进数据库</span></span><br><span class="line">     [_db executeUpdateWithFormat:<span class="string">@"INSERT INTO t_shop (shop) VALUES (%@);"</span>, data];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除所有数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)deleteAll</span><br><span class="line">&#123;</span><br><span class="line">     [_db executeUpdateWithFormat:<span class="string">@"DELETE FROM t_shop;"</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取出数据</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)shops</span><br><span class="line">&#123;</span><br><span class="line">     <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">     FMResultSet *set = [_db executeQuery:<span class="string">@"SELECT * FROM t_shop;"</span>];</span><br><span class="line">     <span class="keyword">while</span> (set<span class="variable">.next</span>) &#123;</span><br><span class="line">        <span class="comment">// 取出二进制数据</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [set dataForColumn:<span class="string">@"shop"</span>];</span><br><span class="line">        <span class="comment">// 将二进制数据还原成对象</span></span><br><span class="line">        Shop *shop = [<span class="built_in">NSKeyedUnarchiver</span> unarchiveObjectWithData:data];</span><br><span class="line">        <span class="comment">// 将还原出来的对象存进数组</span></span><br><span class="line">        [array addObject:shop];</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在shop.h中遵守 &lt; NSCoding &gt; 协议,并在shop.m中实现 encodeWithCoder: 和 initWithCoder:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder</span><br><span class="line">&#123;</span><br><span class="line">     [aCoder encodeObject:<span class="keyword">self</span><span class="variable">.name</span> forKey:<span class="string">@"name"</span>];</span><br><span class="line">     [aCoder encodeFloat:<span class="keyword">self</span><span class="variable">.price</span> forKey:<span class="string">@"price"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (instancetype)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder</span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">self</span><span class="variable">.name</span> = [aDecoder decodeObjectForKey:<span class="string">@"name"</span>];</span><br><span class="line">     <span class="keyword">self</span><span class="variable">.price</span> = [aDecoder decodeFloatForKey:<span class="string">@"price"</span>];</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中直接调用模型方法就可以从数据库中得到数据了</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 存入对象</span></span><br><span class="line">- (<span class="keyword">void</span>)save</span><br><span class="line">&#123;</span><br><span class="line">     Shop *shop = [[Shop alloc] init];</span><br><span class="line">     shop<span class="variable">.name</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"电脑"</span>];</span><br><span class="line">     shop<span class="variable">.price</span> = <span class="number">1999.9</span>;</span><br><span class="line">     <span class="comment">// 存入数据</span></span><br><span class="line">     [Shop insertObject:shop];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取</span></span><br><span class="line">- (<span class="keyword">void</span>)read</span><br><span class="line">&#123;</span><br><span class="line">     <span class="built_in">NSArray</span> *array = [Shop shops];</span><br><span class="line">     <span class="keyword">for</span> (Shop *shop <span class="keyword">in</span> array) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, shop);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删</span></span><br><span class="line">- (<span class="keyword">void</span>)delete</span><br><span class="line">&#123;</span><br><span class="line">     [Shop deleteAll];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/08/AutoLayout的简单使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AutoLayout的简单使用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="SQLite在iOS中的使用(下)" data-title="SQLite在iOS中的使用(下)" data-url="http://xionv.com/2015/12/09/SQLite在iOS中的使用(下)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
