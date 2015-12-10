@@ -270,7 +270,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="AutoLayout">AutoLayout</h2><ul>
+        <h2 id="AutoResizing">AutoResizing</h2><ul>
+<li>AutoResizing可以用作屏幕适配,但只能设置自身与父控件之间的相对关系,局限性很大.</li>
+<li>AutoResizing是UIView的一个成员属性.</li>
+<li>AutoResizing可用于控件关系简单的轻量的屏幕适配.</li>
+<li>AutoResizing与AutoLayout是互斥的.<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// scrollView的宽高可伸缩, 意思就是scrollView的宽高与父控件宽高始终一致</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.autoresizingMask</span> = <span class="built_in">UIViewAutoresizingFlexibleWidth</span> | <span class="built_in">UIViewAutoresizingFlexibleHeight</span>;</span><br><span class="line"><span class="comment">// pageController的顶部间隙与宽高可伸缩, 意思就是把控件固定在父控件底部, 宽度随父控件的宽度而变化</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.pageController</span><span class="variable">.autoresizingMask</span> = <span class="built_in">UIViewAutoresizingFlexibleTopMargin</span> | <span class="built_in">UIViewAutoresizingFlexibleWidth</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="AutoLayout">AutoLayout</h2><ul>
 <li><p>Autolayout是一种“自动布局”技术，专门用来布局UI界面.</p>
 </li>
 <li><p>Autolayout的2个核心概念</p>
@@ -287,9 +294,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="storyBorad_中实现AutoLayout">storyBorad 中实现AutoLayout</h2><ul>
+<h2 id="StoryBorad_中实现AutoLayout">StoryBorad 中实现AutoLayout</h2><ul>
 <li>添加新的约束<br><img src="http://r6.loli.io/2qYZZ3.png" alt=""></li>
-<li>设置对齐<br><img src="http://r6.loli.io/uuE3qi.png" alt=""></li>
+<li>设置对齐<br><img src="http://r6.loli.io/YBJjEj.png" alt=""></li>
 <li>更新frame和约束<br><img src="http://r5.loli.io/6Zjaa2.png" alt=""></li>
 <li><p>修改单个约束属性<br><img src="http://r.loli.io/VZnymq.png" alt=""></p>
 </li>
