@@ -171,6 +171,88 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-字典转模型" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/03/字典转模型/" class="article-date">
+  	<time datetime="2015-12-03T15:27:57.000Z" itemprop="datePublished">2015-12-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/03/字典转模型/">字典转模型</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-_为什么要将字典转成模型?">1. 为什么要将字典转成模型?</h2><ul>
+<li>字典和模型都是用来存储数据的 .  </li>
+<li>字典 : 通过字符串类型的key取值.编写这些key时,编译器不会有任何友善提示,需要手动敲写.手动敲写字符串key,容易写错,而且如果写错,编译器不会有任何警告和报错,容易造成设错数据或者取错数据,增加bug几率.</li>
+<li>模型类 : 即用来存放数据的类,继承自NSObject.所谓模型,其实就是数据模型,专门用来存放数据的对象.模型设置数据和取出数据都是通过它的属性,属性名如果写错,编译器会马上报错,因此保证了数据的正确性,而且这种方式更加的贴近面向对象的思想,更加符合苹果官方推荐的MVC编程模式.</li>
+</ul>
+<h2 id="2-_字典转模型的两种常用赋值方法">2. 字典转模型的两种常用赋值方法</h2><ul>
+<li>如果是要自己快速创建一个模型最好先提供一个方便创建模型的类工厂方法,当然也可以只提供一个类工厂方法,然后定义这个模型对外的成员属性接口用于外部对象访问这个模型存储的数据.</li>
+</ul>
+<h4 id="第一种_:_直接取出字典键值赋值给模型成员属性">第一种 : 直接取出字典键值赋值给模型成员属性</h4><ul>
+<li>如果成员属性较少,或者这个模型将要接收不止一个字典,或者自定义对象有成员属性嵌套,则建议使用这种方法</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传入一个字典将字典中的所有的键值取出来赋给模型的成员属性</span></span><br><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这里的属性名称和字典的key可以不同名</span></span><br><span class="line">    <span class="comment">// 注意:在这里假如这个字典中没有"icon"这个key也没有关系,当有对象访问这个模型数据时不会报错.</span></span><br><span class="line">    Model *model = [[ShopsData alloc] init];</span><br><span class="line">    model<span class="variable">.name</span> = dict[<span class="string">@"name"</span>];</span><br><span class="line">    model<span class="variable">.icon</span> = dict[<span class="string">@"icon"</span>];</span><br><span class="line">    <span class="keyword">return</span> model;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="第二种_:_利用KVC(KeyValueCoding)赋值">第二种 : 利用KVC(KeyValueCoding)赋值</h4><ul>
+<li>如果字典有很多个key怎么破,当然我们可以像上面一样一个属性一个属性的赋值,只不过累一点嘛.那有没有捷径呢?有! 利用KVC来给属性赋值.</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    Model *model = [[ShopsData alloc] init];</span><br><span class="line">    <span class="comment">// 这种写法与上面代码的意思一样.只不过是通过KVC来实现赋值</span></span><br><span class="line">    [data setValue:dict[<span class="string">@"name"</span>]forKeyPath:<span class="string">@"name"</span>];</span><br><span class="line">    [data setValue:dict[<span class="string">@"icon"</span>]forKeyPath:<span class="string">@"icon"</span>];</span><br><span class="line">    <span class="comment">// 或用这个方法一次性给模型所有的属性赋值</span></span><br><span class="line">    [data setValuesForKeysWithDictionary:dict];</span><br><span class="line">    <span class="keyword">return</span> model;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>KVC赋值有一个注意点:<strong>那就是模型的属性名必须跟字典的key名一样,否则在取值的时候会报找不到这个键值的错.</strong></li>
+</ul>
+<h2 id="3-_字典转模型的写法">3. 字典转模型的写法</h2><ul>
+<li>除了上面写法外,还可以进行重写构造方法来实现</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重写构造方法进行赋值</span></span><br><span class="line">- (instancetype)initWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        _name = dict[<span class="string">@"name"</span>];</span><br><span class="line">        _icon = dict[<span class="string">@"icon"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 提供工厂方法快速创建对象</span></span><br><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="keyword">self</span> alloc] initWithDict:dict];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果模型对外界的取值是固定的,那么我们还可以更进一步封装,直接在模型内部把外界的数据转好,调给其他对象使用.</li>
+<li>比如说我们要调用一个plist文件中的数据</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将模型对象存进数组传出去</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)models</span><br><span class="line">&#123;   <span class="comment">// 获取plist文件路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *file = [[<span class="built_in">NSBundle</span> mainBundle]pathForResource:<span class="string">@"model.plist"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">    <span class="comment">// 将plist文件里面的字典存进数组</span></span><br><span class="line">    <span class="built_in">NSArray</span> *array = [<span class="built_in">NSArray</span> arrayWithContentsOfFile:file];</span><br><span class="line">    <span class="comment">// 创建一个临时数组用来存放模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 遍历数组,将数组里面的字典转成模型对象存进临时数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dict <span class="keyword">in</span> array) &#123;</span><br><span class="line">        [arrayM addObject:[<span class="keyword">self</span> modelWithDict:dict]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回模型数组</span></span><br><span class="line">    <span class="keyword">return</span> arrayM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-request" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

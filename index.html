@@ -171,6 +171,93 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-UITableViewCell自定义自动布局子控件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/12/UITableViewCell自定义自动布局子控件/" class="article-date">
+  	<time datetime="2015-12-12T13:31:57.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/12/UITableViewCell自定义自动布局子控件/">UITableViewCell自定义自动布局子控件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.</p>
+</blockquote>
+<h2 id="Frame实现自定义cell布局">Frame实现自定义cell布局</h2><p>  <strong>两个重要的setter方法:</strong></p>
+<ul>
+<li><p>在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)setStatusesFrame:(XVStatusesFrame *)statusesFrame</span><br><span class="line">&#123;</span><br><span class="line">    _statusesFrame = statusesFrame;</span><br><span class="line">    XVStatuses *status = statusesFrame<span class="variable">.status</span>;</span><br><span class="line">    <span class="comment">// 给子控件赋值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.picture</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.isVip</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置子控件位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.nameLabelF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.text_LabelF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.iconViewF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.pictureViewF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.vipViewF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在StatusesFrame模型中重写Status的setter方法,根据传进来的数据来算出各个子控件的frame,并返回给控制器来设置每个cell的高度</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据文字来计算UILabel的rect</span></span><br><span class="line">    <span class="built_in">CGSize</span> (^fontSize)(<span class="built_in">NSString</span>*, <span class="built_in">CGFloat</span>, <span class="built_in">CGFloat</span>) = ^(<span class="built_in">NSString</span> *text, <span class="built_in">CGFloat</span> fontSize, <span class="built_in">CGFloat</span> maxWidth)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> [text boundingRectWithSize:<span class="built_in">CGSizeMake</span>(maxWidth, MAXFLOAT)</span><br><span class="line">                                  options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                               attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:fontSize]&#125;</span><br><span class="line">                                  context:<span class="literal">nil</span>]<span class="variable">.size</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// icon的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewW = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewH = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconViewF</span> = <span class="built_in">CGRectMake</span>(iconViewX, iconViewY, iconViewW, iconViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// name的位置</span></span><br><span class="line">    <span class="built_in">CGSize</span> nameSize = fontSize(status<span class="variable">.name</span>, nameFontSize, MAXFLOAT);</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelW = nameSize<span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelH = nameSize<span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span><span class="variable">.iconViewF</span>) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabelF</span> = <span class="built_in">CGRectMake</span>(nameLabelX, nameLabelY, nameLabelW, nameLabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// vip的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewW = <span class="number">14</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewH = nameLabelH;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span><span class="variable">.nameLabelF</span>) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipViewF</span> = <span class="built_in">CGRectMake</span>(vipViewX, vipViewY, vipViewW, vipViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// text位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelW = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> - <span class="number">2</span> * margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelH = fontSize(status<span class="variable">.text</span>, textFontSize, text_LabelW)<span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.iconViewF</span>) + margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_LabelF</span> = <span class="built_in">CGRectMake</span>(text_LabelX, text_LabelY, text_LabelW, text_LabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.status</span><span class="variable">.picture</span><span class="variable">.length</span>) &#123;</span><br><span class="line">        <span class="comment">// picture位置</span></span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieW = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieH = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieX = margin;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.text_LabelF</span>) + margin;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureViewF</span> = <span class="built_in">CGRectMake</span>(pictureVieX, pictureVieY, pictureVieW, pictureVieH);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span><span class="variable">.statusHeight</span> = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.pictureViewF</span>) + margin;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.statusHeight</span> = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.text_LabelF</span>) + margin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Storyboard实现自定义cell的布局">Storyboard实现自定义cell的布局</h2><ul>
+<li>首先在使用storyboard布局单元格前先了解一下苹果在iOS8推出的<code>Self Sizing Cells</code>功能.<ul>
+<li><code>Self Sizing Cells</code>是为了解放程序员以往苦逼的计算不等高cell尺寸而推出的新功能, 它可以动态的计算tableView每一行cell的高度.</li>
+<li><code>Self Sizing Cells</code>依赖于<code>Auto Layout</code>.</li>
+</ul>
+</li>
+<li><p>举一个例子来展示如何使用:</p>
+<ol>
+<li>在storyboard中拖一个UITableView, 采用系统默认的设置, prototype cell数量设为1.<br><img src="http://r5.loli.io/7vAJj2.png" alt=""></li>
+<li>为cell中的每一个控件摆好位置并设置束缚<br><img src="http://r5.loli.io/3EvQvm.png" alt=""></li>
+<li><p><strong>设置tableView的<code>rowHeight</code>属性为<code>UITableViewAutomaticDimension</code></strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 设置自动计算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.rowHeight</span> = <span class="built_in">UITableViewAutomaticDimension</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置tableView的<code>estimatedRowHeight</code>估计高度为<code>44</code>(这个值可以根据自己需要修改)</strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 估算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.estimatedRowHeight</span> = <span class="number">44</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后给cell中的每一个子控件赋值就能显示出来了, 不用做任何计算.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-iOS面试题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -946,88 +1033,6 @@
 <blockquote>
 <p>ps: 首尾式动画是显示动画.<br>pps: 能够实现动画的属性基本都是实型,像BOOL类型的属性就不能用来显示动画效果.<br>ppps: 每个UIView都是由图层来显示图像的, 也就是说每个UIView中都有一个CALayer成员变量,来显示图像, 而且这个成员变量是不可交互的, 改变自定义图层的属性, 可以触发隐式动画.</p>
 </blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-字典转模型" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/03/字典转模型/" class="article-date">
-  	<time datetime="2015-12-03T15:27:57.000Z" itemprop="datePublished">2015-12-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/03/字典转模型/">字典转模型</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-_为什么要将字典转成模型?">1. 为什么要将字典转成模型?</h2><ul>
-<li>字典和模型都是用来存储数据的 .  </li>
-<li>字典 : 通过字符串类型的key取值.编写这些key时,编译器不会有任何友善提示,需要手动敲写.手动敲写字符串key,容易写错,而且如果写错,编译器不会有任何警告和报错,容易造成设错数据或者取错数据,增加bug几率.</li>
-<li>模型类 : 即用来存放数据的类,继承自NSObject.所谓模型,其实就是数据模型,专门用来存放数据的对象.模型设置数据和取出数据都是通过它的属性,属性名如果写错,编译器会马上报错,因此保证了数据的正确性,而且这种方式更加的贴近面向对象的思想,更加符合苹果官方推荐的MVC编程模式.</li>
-</ul>
-<h2 id="2-_字典转模型的两种常用赋值方法">2. 字典转模型的两种常用赋值方法</h2><ul>
-<li>如果是要自己快速创建一个模型最好先提供一个方便创建模型的类工厂方法,当然也可以只提供一个类工厂方法,然后定义这个模型对外的成员属性接口用于外部对象访问这个模型存储的数据.</li>
-</ul>
-<h4 id="第一种_:_直接取出字典键值赋值给模型成员属性">第一种 : 直接取出字典键值赋值给模型成员属性</h4><ul>
-<li>如果成员属性较少,或者这个模型将要接收不止一个字典,或者自定义对象有成员属性嵌套,则建议使用这种方法</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传入一个字典将字典中的所有的键值取出来赋给模型的成员属性</span></span><br><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这里的属性名称和字典的key可以不同名</span></span><br><span class="line">    <span class="comment">// 注意:在这里假如这个字典中没有"icon"这个key也没有关系,当有对象访问这个模型数据时不会报错.</span></span><br><span class="line">    Model *model = [[ShopsData alloc] init];</span><br><span class="line">    model<span class="variable">.name</span> = dict[<span class="string">@"name"</span>];</span><br><span class="line">    model<span class="variable">.icon</span> = dict[<span class="string">@"icon"</span>];</span><br><span class="line">    <span class="keyword">return</span> model;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="第二种_:_利用KVC(KeyValueCoding)赋值">第二种 : 利用KVC(KeyValueCoding)赋值</h4><ul>
-<li>如果字典有很多个key怎么破,当然我们可以像上面一样一个属性一个属性的赋值,只不过累一点嘛.那有没有捷径呢?有! 利用KVC来给属性赋值.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    Model *model = [[ShopsData alloc] init];</span><br><span class="line">    <span class="comment">// 这种写法与上面代码的意思一样.只不过是通过KVC来实现赋值</span></span><br><span class="line">    [data setValue:dict[<span class="string">@"name"</span>]forKeyPath:<span class="string">@"name"</span>];</span><br><span class="line">    [data setValue:dict[<span class="string">@"icon"</span>]forKeyPath:<span class="string">@"icon"</span>];</span><br><span class="line">    <span class="comment">// 或用这个方法一次性给模型所有的属性赋值</span></span><br><span class="line">    [data setValuesForKeysWithDictionary:dict];</span><br><span class="line">    <span class="keyword">return</span> model;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>KVC赋值有一个注意点:<strong>那就是模型的属性名必须跟字典的key名一样,否则在取值的时候会报找不到这个键值的错.</strong></li>
-</ul>
-<h2 id="3-_字典转模型的写法">3. 字典转模型的写法</h2><ul>
-<li>除了上面写法外,还可以进行重写构造方法来实现</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重写构造方法进行赋值</span></span><br><span class="line">- (instancetype)initWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        _name = dict[<span class="string">@"name"</span>];</span><br><span class="line">        _icon = dict[<span class="string">@"icon"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 提供工厂方法快速创建对象</span></span><br><span class="line">+ (instancetype)modelWithDict:(<span class="built_in">NSDictionary</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="keyword">self</span> alloc] initWithDict:dict];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>如果模型对外界的取值是固定的,那么我们还可以更进一步封装,直接在模型内部把外界的数据转好,调给其他对象使用.</li>
-<li>比如说我们要调用一个plist文件中的数据</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将模型对象存进数组传出去</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)models</span><br><span class="line">&#123;   <span class="comment">// 获取plist文件路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *file = [[<span class="built_in">NSBundle</span> mainBundle]pathForResource:<span class="string">@"model.plist"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">    <span class="comment">// 将plist文件里面的字典存进数组</span></span><br><span class="line">    <span class="built_in">NSArray</span> *array = [<span class="built_in">NSArray</span> arrayWithContentsOfFile:file];</span><br><span class="line">    <span class="comment">// 创建一个临时数组用来存放模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 遍历数组,将数组里面的字典转成模型对象存进临时数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dict <span class="keyword">in</span> array) &#123;</span><br><span class="line">        [arrayM addObject:[<span class="keyword">self</span> modelWithDict:dict]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回模型数组</span></span><br><span class="line">    <span class="keyword">return</span> arrayM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
