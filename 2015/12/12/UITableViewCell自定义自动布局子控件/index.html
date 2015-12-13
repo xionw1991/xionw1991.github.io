@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>UITableViewCell自定义自动布局子控件 | Trevor Coding</title>
+  <title>UITableViewCell自定义布局子控件 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.
 
@@ -12,7 +12,7 @@ Frame实现自定义cell布局  两个重要的setter方法:
 在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值
   - (void)setStatusesFrame:(XVStatusesFram">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UITableViewCell自定义自动布局子控件">
+<meta property="og:title" content="UITableViewCell自定义布局子控件">
 <meta property="og:url" content="http://xionv.com/2015/12/12/UITableViewCell自定义自动布局子控件/index.html">
 <meta property="og:site_name" content="Trevor Coding">
 <meta property="og:description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.
@@ -23,9 +23,9 @@ Frame实现自定义cell布局  两个重要的setter方法:
   - (void)setStatusesFrame:(XVStatusesFram">
 <meta property="og:image" content="http://r5.loli.io/7vAJj2.png">
 <meta property="og:image" content="http://r5.loli.io/3EvQvm.png">
-<meta property="og:updated_time" content="2015-12-12T15:12:50.000Z">
+<meta property="og:updated_time" content="2015-12-13T03:25:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UITableViewCell自定义自动布局子控件">
+<meta name="twitter:title" content="UITableViewCell自定义布局子控件">
 <meta name="twitter:description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.
 
 Frame实现自定义cell布局  两个重要的setter方法:
@@ -204,7 +204,7 @@ Frame实现自定义cell布局  两个重要的setter方法:
         
   
     <h1 class="article-title" itemprop="name">
-      UITableViewCell自定义自动布局子控件
+      UITableViewCell自定义布局子控件
     </h1>
   
 
@@ -245,6 +245,8 @@ Frame实现自定义cell布局  两个重要的setter方法:
 <li><code>Self Sizing Cells</code>依赖于<code>Auto Layout</code>.</li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><p>举一个例子来展示如何使用:</p>
 <ol>
 <li>在storyboard中拖一个UITableView, 采用系统默认的设置, prototype cell数量设为1.<br><img src="http://r5.loli.io/7vAJj2.png" alt=""></li>
@@ -255,8 +257,9 @@ Frame实现自定义cell布局  两个重要的setter方法:
 <li><p><strong>设置tableView的<code>estimatedRowHeight</code>估计高度为<code>44</code>(这个值可以根据自己需要修改)</strong></p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 估算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.estimatedRowHeight</span> = <span class="number">44</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>然后给cell中的每一个子控件赋值就能显示出来了, 不用做任何计算.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ol>
+<li>然后给cell中的每一个子控件赋值就能显示出来了, 不用做任何计算.<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
@@ -285,7 +288,7 @@ Frame实现自定义cell布局  两个重要的setter方法:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="UITableViewCell自定义自动布局子控件" data-title="UITableViewCell自定义自动布局子控件" data-url="http://xionv.com/2015/12/12/UITableViewCell自定义自动布局子控件/"></div>
+	<div class="ds-thread" data-thread-key="UITableViewCell自定义自动布局子控件" data-title="UITableViewCell自定义布局子控件" data-url="http://xionv.com/2015/12/12/UITableViewCell自定义自动布局子控件/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
