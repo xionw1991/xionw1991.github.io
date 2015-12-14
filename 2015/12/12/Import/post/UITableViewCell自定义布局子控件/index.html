@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UITableViewCell自定义布局子控件 | Trevor Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.
+
+Frame实现自定义cell布局  两个重要的setter方法:
+
+在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值
+  - (void)setStatusesFrame:(XVStatusesFram">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UITableViewCell自定义布局子控件">
+<meta property="og:url" content="http://xionv.com/2015/12/12/Import/post/UITableViewCell自定义布局子控件/index.html">
+<meta property="og:site_name" content="Trevor Coding">
+<meta property="og:description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.
+
+Frame实现自定义cell布局  两个重要的setter方法:
+
+在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值
+  - (void)setStatusesFrame:(XVStatusesFram">
+<meta property="og:image" content="http://r5.loli.io/7vAJj2.png">
+<meta property="og:image" content="http://r5.loli.io/3EvQvm.png">
+<meta property="og:updated_time" content="2015-12-14T01:11:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UITableViewCell自定义布局子控件">
+<meta name="twitter:description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.
+
+Frame实现自定义cell布局  两个重要的setter方法:
+
+在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值
+  - (void)setStatusesFrame:(XVStatusesFram">
+  
+    <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS-Demo/" style="font-size: 10px;">iOS-Demo</a> <a href="/tags/iOS中级/" style="font-size: 15px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Import/post/UITableViewCell自定义布局子控件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/12/Import/post/UITableViewCell自定义布局子控件/" class="article-date">
+  	<time datetime="2015-12-12T13:31:57.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UITableViewCell自定义布局子控件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.</p>
+</blockquote>
+<h2 id="Frame实现自定义cell布局">Frame实现自定义cell布局</h2><p>  <strong>两个重要的setter方法:</strong></p>
+<ul>
+<li><p>在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)setStatusesFrame:(XVStatusesFrame *)statusesFrame</span><br><span class="line">&#123;</span><br><span class="line">    _statusesFrame = statusesFrame;</span><br><span class="line">    XVStatuses *status = statusesFrame<span class="variable">.status</span>;</span><br><span class="line">    <span class="comment">// 给子控件赋值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.picture</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.isVip</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置子控件位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.nameLabelF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.text_LabelF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.iconViewF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.pictureViewF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.vipViewF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在StatusesFrame模型中重写Status的setter方法,根据传进来的数据来算出各个子控件的frame,并返回给控制器来设置每个cell的高度</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据文字来计算UILabel的rect</span></span><br><span class="line">    <span class="built_in">CGSize</span> (^fontSize)(<span class="built_in">NSString</span>*, <span class="built_in">CGFloat</span>, <span class="built_in">CGFloat</span>) = ^(<span class="built_in">NSString</span> *text, <span class="built_in">CGFloat</span> fontSize, <span class="built_in">CGFloat</span> maxWidth)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> [text boundingRectWithSize:<span class="built_in">CGSizeMake</span>(maxWidth, MAXFLOAT)</span><br><span class="line">                                  options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                               attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:fontSize]&#125;</span><br><span class="line">                                  context:<span class="literal">nil</span>]<span class="variable">.size</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// icon的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewW = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewH = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconViewF</span> = <span class="built_in">CGRectMake</span>(iconViewX, iconViewY, iconViewW, iconViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// name的位置</span></span><br><span class="line">    <span class="built_in">CGSize</span> nameSize = fontSize(status<span class="variable">.name</span>, nameFontSize, MAXFLOAT);</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelW = nameSize<span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelH = nameSize<span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span><span class="variable">.iconViewF</span>) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabelF</span> = <span class="built_in">CGRectMake</span>(nameLabelX, nameLabelY, nameLabelW, nameLabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// vip的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewW = <span class="number">14</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewH = nameLabelH;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span><span class="variable">.nameLabelF</span>) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipViewF</span> = <span class="built_in">CGRectMake</span>(vipViewX, vipViewY, vipViewW, vipViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// text位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelW = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> - <span class="number">2</span> * margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelH = fontSize(status<span class="variable">.text</span>, textFontSize, text_LabelW)<span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.iconViewF</span>) + margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_LabelF</span> = <span class="built_in">CGRectMake</span>(text_LabelX, text_LabelY, text_LabelW, text_LabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.status</span><span class="variable">.picture</span><span class="variable">.length</span>) &#123;</span><br><span class="line">        <span class="comment">// picture位置</span></span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieW = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieH = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieX = margin;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.text_LabelF</span>) + margin;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureViewF</span> = <span class="built_in">CGRectMake</span>(pictureVieX, pictureVieY, pictureVieW, pictureVieH);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span><span class="variable">.statusHeight</span> = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.pictureViewF</span>) + margin;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.statusHeight</span> = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.text_LabelF</span>) + margin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在代理方法中返回当前每个cell的高度</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVStatusesFrame *frame = <span class="keyword">self</span><span class="variable">.statusFrame</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> frame<span class="variable">.statusHeight</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Storyboard实现自定义cell的布局">Storyboard实现自定义cell的布局</h2><ul>
+<li>首先在使用storyboard布局单元格前先了解一下苹果在iOS8推出的<code>Self Sizing Cells</code>功能.<ul>
+<li><code>Self Sizing Cells</code>是为了解放程序员以往苦逼的计算不等高cell尺寸而推出的新功能, 它可以动态的计算tableView每一行cell的高度.</li>
+<li><code>Self Sizing Cells</code>依赖于<code>Auto Layout</code>.</li>
+</ul>
+</li>
+<li><p>举一个例子来展示如何使用:</p>
+<ol>
+<li>在storyboard中拖一个UITableView, 采用系统默认的设置, prototype cell数量设为1.<br><img src="http://r5.loli.io/7vAJj2.png" alt=""></li>
+<li>为cell中的每一个控件摆好位置并设置束缚<br><img src="http://r5.loli.io/3EvQvm.png" alt=""></li>
+<li><p><strong>设置tableView的<code>rowHeight</code>属性为<code>UITableViewAutomaticDimension</code></strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 设置自动计算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.rowHeight</span> = <span class="built_in">UITableViewAutomaticDimension</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置tableView的<code>estimatedRowHeight</code>估计高度为<code>44</code>(这个值可以根据自己需要修改)</strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 估算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.estimatedRowHeight</span> = <span class="number">44</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后给cell中的每一个子控件赋值就能显示出来了, 不用做任何计算.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.picture</span><span class="variable">.length</span> ) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 根据控制束缚的值来控制控件的尺寸</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureHeight</span><span class="variable">.constant</span> = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureBottom</span><span class="variable">.constant</span> = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureHeight</span><span class="variable">.constant</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureBottom</span><span class="variable">.constant</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.vip</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>注意: cell的高度是通过改变约束的长度来控制的.这里利用约束的优先级特性不能达到要求, 因为即使pictureView隐藏了但它身上的约束仍然生效. 如果要让低优先级的约束生效,必须要移除高优先级的控件或其上面的约束,但是这样在显示下一个cell的时候又需要重新添加约束.</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          TableView顶部图片下拉放大demo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/10/Import/post/iOS面试题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS面试题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Import/post/UITableViewCell自定义布局子控件" data-title="UITableViewCell自定义布局子控件" data-url="http://xionv.com/2015/12/12/Import/post/UITableViewCell自定义布局子控件/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

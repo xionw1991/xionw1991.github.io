@@ -171,10 +171,64 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-TableView顶部图片下拉放大demo" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/为什么不用国内的代码托管网站" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/13/TableView顶部图片下拉放大demo/" class="article-date">
+      <a href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/" class="article-date">
+  	<time datetime="2015-12-14T05:01:57.000Z" itemprop="datePublished">2015-12-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/">为什么不用国内的代码托管网站</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/TableView顶部图片下拉放大demo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/" class="article-date">
   	<time datetime="2015-12-13T14:31:57.000Z" itemprop="datePublished">2015-12-13</time>
 </a>
     </div>
@@ -188,7 +242,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/13/TableView顶部图片下拉放大demo/">TableView顶部图片下拉放大demo</a>
+      <a class="article-title" href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/">TableView顶部图片下拉放大demo</a>
     </h1>
   
 
@@ -225,10 +279,10 @@
 
 
   
-    <article id="post-UITableViewCell自定义布局子控件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/UITableViewCell自定义布局子控件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/12/UITableViewCell自定义布局子控件/" class="article-date">
+      <a href="/2015/12/12/Import/post/UITableViewCell自定义布局子控件/" class="article-date">
   	<time datetime="2015-12-12T13:31:57.000Z" itemprop="datePublished">2015-12-12</time>
 </a>
     </div>
@@ -242,7 +296,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/12/UITableViewCell自定义布局子控件/">UITableViewCell自定义布局子控件</a>
+      <a class="article-title" href="/2015/12/12/Import/post/UITableViewCell自定义布局子控件/">UITableViewCell自定义布局子控件</a>
     </h1>
   
 
@@ -286,7 +340,8 @@
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.picture</span><span class="variable">.length</span> ) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 根据控制束缚的值来控制控件的尺寸</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureHeight</span><span class="variable">.constant</span> = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureBottom</span><span class="variable">.constant</span> = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureHeight</span><span class="variable">.constant</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureBottom</span><span class="variable">.constant</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.vip</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>注意: cell的高度是通过改变约束的长度来控制的.这里利用约束的优先级特性不能达到要求, 因为即使pictureView隐藏了但它身上的约束仍然生效. 如果要让低优先级的约束生效,必须要移除高优先级的控件或其上面的约束,但是这样在显示下一个cell的时候又需要重新添加约束.</p>
+</li>
+<li><p>注意: cell的高度是通过改变约束的长度来控制的.这里利用约束的优先级特性不能达到要求, 因为即使pictureView隐藏了但它身上的约束仍然生效. 如果要让低优先级的约束生效,必须要移除高优先级的控件或其上面的约束,但是这样在显示下一个cell的时候又需要重新添加约束.</p>
 </li>
 </ul>
 
@@ -317,10 +372,10 @@
 
 
   
-    <article id="post-iOS面试题" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/iOS面试题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/10/iOS面试题/" class="article-date">
+      <a href="/2015/12/10/Import/post/iOS面试题/" class="article-date">
   	<time datetime="2015-12-10T05:01:57.000Z" itemprop="datePublished">2015-12-10</time>
 </a>
     </div>
@@ -334,7 +389,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/10/iOS面试题/">iOS面试题</a>
+      <a class="article-title" href="/2015/12/10/Import/post/iOS面试题/">iOS面试题</a>
     </h1>
   
 
@@ -360,7 +415,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2015/12/10/iOS面试题/#more">more >></a>
+          <a  href="/2015/12/10/Import/post/iOS面试题/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -377,10 +432,10 @@
 
 
   
-    <article id="post-NSFileManager计算文件夹大小" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/NSFileManager计算文件夹大小" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/10/NSFileManager计算文件夹大小/" class="article-date">
+      <a href="/2015/12/10/Import/post/NSFileManager计算文件夹大小/" class="article-date">
   	<time datetime="2015-12-10T02:08:57.000Z" itemprop="datePublished">2015-12-10</time>
 </a>
     </div>
@@ -394,7 +449,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/10/NSFileManager计算文件夹大小/">NSFileManager计算文件夹大小</a>
+      <a class="article-title" href="/2015/12/10/Import/post/NSFileManager计算文件夹大小/">NSFileManager计算文件夹大小</a>
     </h1>
   
 
@@ -438,10 +493,10 @@
 
 
   
-    <article id="post-SQLite在iOS中的使用(下)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/SQLite在iOS中的使用(下)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/09/SQLite在iOS中的使用(下)/" class="article-date">
+      <a href="/2015/12/09/Import/post/SQLite在iOS中的使用(下)/" class="article-date">
   	<time datetime="2015-12-09T11:08:57.000Z" itemprop="datePublished">2015-12-09</time>
 </a>
     </div>
@@ -455,7 +510,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/09/SQLite在iOS中的使用(下)/">SQLite在iOS中的使用(下)</a>
+      <a class="article-title" href="/2015/12/09/Import/post/SQLite在iOS中的使用(下)/">SQLite在iOS中的使用(下)</a>
     </h1>
   
 
@@ -511,10 +566,10 @@
 
 
   
-    <article id="post-AutoLayout的简单使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/AutoLayout的简单使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/08/AutoLayout的简单使用/" class="article-date">
+      <a href="/2015/12/08/Import/post/AutoLayout的简单使用/" class="article-date">
   	<time datetime="2015-12-08T15:10:57.000Z" itemprop="datePublished">2015-12-08</time>
 </a>
     </div>
@@ -528,7 +583,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/08/AutoLayout的简单使用/">AutoLayout的简单使用</a>
+      <a class="article-title" href="/2015/12/08/Import/post/AutoLayout的简单使用/">AutoLayout的简单使用</a>
     </h1>
   
 
@@ -662,10 +717,10 @@
 
 
   
-    <article id="post-UIScrollView实现分页" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/UIScrollView实现分页" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/07/UIScrollView实现分页/" class="article-date">
+      <a href="/2015/12/07/Import/post/UIScrollView实现分页/" class="article-date">
   	<time datetime="2015-12-07T12:50:57.000Z" itemprop="datePublished">2015-12-07</time>
 </a>
     </div>
@@ -679,7 +734,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/07/UIScrollView实现分页/">UIScrollView实现定时滚动分页</a>
+      <a class="article-title" href="/2015/12/07/Import/post/UIScrollView实现分页/">UIScrollView实现定时滚动分页</a>
     </h1>
   
 
@@ -716,10 +771,10 @@
 
 
   
-    <article id="post-在iOS中使用SQLite(上)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/在iOS中使用SQLite(上)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/05/在iOS中使用SQLite(上)/" class="article-date">
+      <a href="/2015/12/05/Import/post/在iOS中使用SQLite(上)/" class="article-date">
   	<time datetime="2015-12-05T11:08:57.000Z" itemprop="datePublished">2015-12-05</time>
 </a>
     </div>
@@ -733,7 +788,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/05/在iOS中使用SQLite(上)/">SQLite在iOS中的使用(上)</a>
+      <a class="article-title" href="/2015/12/05/Import/post/在iOS中使用SQLite(上)/">SQLite在iOS中的使用(上)</a>
     </h1>
   
 
@@ -836,10 +891,10 @@
 
 
   
-    <article id="post-NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Import/post/NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/04/NSFileManager的一些使用/" class="article-date">
+      <a href="/2015/12/04/Import/post/NSFileManager的一些使用/" class="article-date">
   	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
     </div>
@@ -853,7 +908,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/NSFileManager的一些使用/">NSFileManager的一些使用</a>
+      <a class="article-title" href="/2015/12/04/Import/post/NSFileManager的一些使用/">NSFileManager的一些使用</a>
     </h1>
   
 
@@ -921,90 +976,6 @@
 </ul>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">- [manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
 </ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-KVC&amp;KVO" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/04/KVC&KVO/" class="article-date">
-  	<time datetime="2015-12-04T11:36:57.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/KVC&KVO/">KVC &amp; KVO简单应用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="KVC">KVC</h2><ul>
-<li>全称：Key Value Coding（键值编码）</li>
-<li>赋值</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能修改私有成员变量</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span> *)keyedValues;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>取值</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能取得私有成员变量的值</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span> *)keys;</span><br></pre></td></tr></table></figure>
-<h2 id="KVO">KVO</h2><ul>
-<li>全称：Key Value Observing（键值监听）</li>
-<li>作用：监听模型的属性值改变</li>
-<li><p>步骤</p>
-<ul>
-<li><p>添加监听器</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 利用b对象来监听a对象name属性的改变</span></span><br><span class="line">[a addObserver:b forKeyPath:<span class="string">@"name"</span> options:<span class="built_in">NSKeyValueObservingOptionOld</span> | <span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="string">@"test"</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在监听器中实现监听方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change     context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@ %@ %@ %@"</span>, object, keyPath, change, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>举例:</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line">- (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
