@@ -171,6 +171,119 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Import/post/NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/Import/post/NSFileManager的一些使用/" class="article-date">
+  	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/Import/post/NSFileManager的一些使用/">NSFileManager的一些使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p><strong>判断一个文件或者文件夹是否存在</strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>判断一个文件是否存在, 并且判断它是否是一个文件夹</strong></p>
+<ul>
+<li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
+<li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
+<li>BOOL dir = NO;</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> isDirectory:&amp;dir];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>获取文件或文件夹的属性</strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>获取文件夹中所有的文件</strong></p>
+<ul>
+<li>contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
+<li>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager contentsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><p><strong>创建文件夹</strong></p>
+<ul>
+<li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
+<li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
+<li>attributes: 指定创建出来的文件夹的属性</li>
+<li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
+<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager createDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/abc"</span> withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>创建文件</strong></p>
+<ul>
+<li>createFileAtPath: 指定文件创建出来的位置</li>
+<li>contents : 文件中的内容</li>
+<li>attributes: 创建出来的文件的属性</li>
+<li>NSData : 二进制数据</li>
+<li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
+<li>NSString *str = @“我叫野原新之助”;</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">- [manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Import/post/KVC&amp;KVO" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
