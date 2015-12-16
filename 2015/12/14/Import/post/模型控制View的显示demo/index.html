@@ -3,18 +3,58 @@
 <head>
   <meta charset="utf-8">
   
-  <title>数据模型控制tableView的显示demo | Trevor Coding</title>
+  <title>TableView中MVC模式的简单应用 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Trevor Coding | iOS">
+  <meta name="description" content="模型视图控制器之间:
+模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.
+模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.
+人机之间的交互由控制器完成
+视图和模型互不干扰.  
+作用: 便于代码的管理和阅读
+图解:by斯坦福大叔
+
+
+
+
+用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:
+
+自定义一个cell (">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据模型控制tableView的显示demo">
+<meta property="og:title" content="TableView中MVC模式的简单应用">
 <meta property="og:url" content="http://xionv.com/2015/12/14/Import/post/模型控制View的显示demo/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="Trevor Coding | iOS">
-<meta property="og:updated_time" content="2015-12-14T11:06:16.000Z">
+<meta property="og:description" content="模型视图控制器之间:
+模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.
+模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.
+人机之间的交互由控制器完成
+视图和模型互不干扰.  
+作用: 便于代码的管理和阅读
+图解:by斯坦福大叔
+
+
+
+
+用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:
+
+自定义一个cell (">
+<meta property="og:image" content="http://r5.loli.io/yIfmQ3.png">
+<meta property="og:updated_time" content="2015-12-16T09:31:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据模型控制tableView的显示demo">
-<meta name="twitter:description" content="Trevor Coding | iOS">
+<meta name="twitter:title" content="TableView中MVC模式的简单应用">
+<meta name="twitter:description" content="模型视图控制器之间:
+模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.
+模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.
+人机之间的交互由控制器完成
+视图和模型互不干扰.  
+作用: 便于代码的管理和阅读
+图解:by斯坦福大叔
+
+
+
+
+用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:
+
+自定义一个cell (">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -187,7 +227,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据模型控制tableView的显示demo
+      TableView中MVC模式的简单应用
     </h1>
   
 
@@ -196,7 +236,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步-demo/">iOS初步-demo</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
 	</div>
 
         
@@ -207,7 +247,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="模型视图控制器之间:">模型视图控制器之间:</h3><ul>
+<li>模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.</li>
+<li>模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.</li>
+<li>人机之间的交互由控制器完成</li>
+<li>视图和模型互不干扰.  </li>
+<li><p>作用: 便于代码的管理和阅读</p>
+<p>图解:by斯坦福大叔<br><img src="http://r5.loli.io/yIfmQ3.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:</p>
+<ol>
+<li><p>自定义一个cell (View)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重写构造方法</span></span><br><span class="line">- (instancetype)initWithStyle:(<span class="built_in">UITableViewCellStyle</span>)style reuseIdentifier:(<span class="built_in">NSString</span> *)reuseIdentifier</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithStyle:style reuseIdentifier:reuseIdentifier];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    <span class="built_in">UIImageView</span> *checkImg = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    checkImg<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"check"</span>];</span><br><span class="line">    checkImg<span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    [<span class="keyword">self</span> addSubview:checkImg];</span><br><span class="line">    _checkImg = checkImg;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 快速创建一个cell</span></span><br><span class="line">+ (instancetype)cellWithTable:(<span class="built_in">UITableView</span> *)tableView</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">XVWineCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];</span><br><span class="line">    <span class="keyword">if</span> (cell == <span class="literal">nil</span>) &#123;</span><br><span class="line">        cell = [[XVWineCell alloc] initWithStyle:<span class="built_in">UITableViewCellStyleSubtitle</span> reuseIdentifier:ID];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中实现数据源协议, 将自定义cell作为tableView的cell显示, 并将模型传递给cell (Controller)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVWineCell *cell = [XVWineCell cellWithTable:tableView];</span><br><span class="line">    cell<span class="variable">.wine</span> = <span class="keyword">self</span><span class="variable">.wine</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在自定义cell类中重写模型属性的setter方法,给cell中的子控件赋值 (Model)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)setWine:(XVWine *)wine</span><br><span class="line">&#123;</span><br><span class="line">    _wine = wine;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:wine<span class="variable">.image</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = wine<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"￥%@"</span>, wine<span class="variable">.money</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中修改模型数据刷新tableView, 这时会来到控制器的数据源方法将所有的cell重新赋予修改后的模型的值,cell的显示内容改变. (Controller)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 添加数据</span></span><br><span class="line">    - (<span class="keyword">void</span>)addWine</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 新建一个模型</span></span><br><span class="line">    XVWine *wine = [[XVWine alloc] init];</span><br><span class="line">    wine<span class="variable">.image</span> = <span class="string">@"newWine"</span>;</span><br><span class="line">    wine<span class="variable">.name</span> = <span class="string">@"新酒"</span>;</span><br><span class="line">    wine<span class="variable">.money</span> = <span class="string">@"999"</span>;</span><br><span class="line">    <span class="comment">// 将新模型添加进数组</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.wine</span> addObject:wine];</span><br><span class="line">    <span class="comment">// cell对应的模型数组的最后一位</span></span><br><span class="line">    <span class="built_in">NSIndexPath</span> *indexPath = [<span class="built_in">NSIndexPath</span> indexPathForRow:(<span class="keyword">self</span><span class="variable">.wine</span><span class="variable">.count</span> - <span class="number">1</span>) inSection:<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// 刷新表格</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> insertRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationAutomatic</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+
       
     </div>
     
@@ -216,9 +283,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2015/12/16/Import/post/TableView自定义header/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          TableView自定义header
+        
+      </div>
+    </a>
+  
   
     <a href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">github, gitcafe和 coding的Pages服务的简单对比</div>
+      <div class="article-nav-title">Github, Gitcafe和 Coding的Pages服务的简单对比</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -232,7 +308,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/模型控制View的显示demo" data-title="数据模型控制tableView的显示demo" data-url="http://xionv.com/2015/12/14/Import/post/模型控制View的显示demo/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/模型控制View的显示demo" data-title="TableView中MVC模式的简单应用" data-url="http://xionv.com/2015/12/14/Import/post/模型控制View的显示demo/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
