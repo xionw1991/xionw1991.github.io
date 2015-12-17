@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一个应用程序的启动流程 | Trevor Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="应用程序完整启动流程
+执行Main函数.
+在main函数中调用UIApplicationMain函数. 
+    int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDele">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个应用程序的启动流程">
+<meta property="og:url" content="http://xionv.com/2015/12/17/Import/post/一个应用程序的启动流程/index.html">
+<meta property="og:site_name" content="Trevor Coding">
+<meta property="og:description" content="应用程序完整启动流程
+执行Main函数.
+在main函数中调用UIApplicationMain函数. 
+    int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDele">
+<meta property="og:image" content="http://r.loli.io/fuUbqq.png">
+<meta property="og:image" content="http://r.loli.io/AzaUje.png">
+<meta property="og:updated_time" content="2015-12-17T13:36:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个应用程序的启动流程">
+<meta name="twitter:description" content="应用程序完整启动流程
+执行Main函数.
+在main函数中调用UIApplicationMain函数. 
+    int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDele">
+  
+    <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS中级/" style="font-size: 15px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-Demo/" style="font-size: 10px;">iOS初步-Demo</a> <a href="/tags/iOS初步-demo/" style="font-size: 10px;">iOS初步-demo</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Import/post/一个应用程序的启动流程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/17/Import/post/一个应用程序的启动流程/" class="article-date">
+  	<time datetime="2015-12-17T12:30:57.000Z" itemprop="datePublished">2015-12-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一个应用程序的启动流程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="应用程序完整启动流程">应用程序完整启动流程</h2><ol>
+<li>执行Main函数.</li>
+<li><p>在main函数中调用UIApplicationMain函数. </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([AppDelegate class]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建UIApplication对象,并设置UIApplicationMain对象的代理.</p>
+<ul>
+<li>UIApplicationMain的第三个参数就是UIApplication的名称,如果指定为nil,它会默认为UIApplication.(nil == @”UIApplication”);</li>
+<li>UIApplicationMain的第四个参数为UIApplication的代理.</li>
+</ul>
+</li>
+<li>开启一个主运行循环,保证应用程序不退出.  </li>
+<li>加载info.plist程序配置文件.判断info.plist文件当中的key:[Main storyboard file base name]<br>有没有指定storyboard文件,如果有就去加载info.plist文件,如果没有,那么应用程序加载完毕.</li>
+</ol>
+<h3 id="UIApplication的一些功能">UIApplication的一些功能</h3><ol>
+<li><p>设置应用的监听权限</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 获取当前iOS版本号</span></span><br><span class="line"><span class="keyword">float</span> sysVersion = [[<span class="built_in">UIDevice</span> currentDevice] systemVersion]<span class="variable">.floatValue</span>;</span><br><span class="line"><span class="comment">// iOS8以后必须要获取通知权限才能显示applicationIconBadgeNumber</span></span><br><span class="line"><span class="keyword">if</span> (sysVersion &gt;= <span class="number">8.0</span>) &#123;</span><br><span class="line">    <span class="built_in">UIUserNotificationType</span> type = <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeSound</span>;</span><br><span class="line">    <span class="built_in">UIUserNotificationSettings</span> *setting = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:type categories:<span class="literal">nil</span>];</span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:setting];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>网络提醒(连接网络提示)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">application<span class="variable">.networkActivityIndicatorVisible</span> = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置状态栏</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 隐藏状态栏</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarHidden:<span class="literal">YES</span> withAnimation:<span class="literal">YES</span>];</span><br><span class="line"><span class="comment">// 状态栏样式</span></span><br><span class="line">application<span class="variable">.statusBarStyle</span> = <span class="built_in">UIStatusBarStyleLightContent</span>;</span><br></pre></td></tr></table></figure>
+<p>应用程序的状态栏默认是控制器来管理, 但是通常在开发当中都设置为应用程序来统一管理状态栏. 在info.plist当中进行配置:<code>View controller-based status bar appearance : NO</code></p>
+</li>
+<li>跳转页面<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 打开网页</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];</span><br><span class="line"><span class="comment">// 跳转到打电话</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"tel://10000"</span>]];</span><br><span class="line"><span class="comment">// 跳转到发短信</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"sms://10000"</span>]];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="应用程序的生命周期">应用程序的生命周期</h3><ul>
+<li><p>应用程序启动完成</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"应用程序启动了"</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"UIApplication调用了我"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序即将失去焦点</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我退出了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序完全进入后台</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationDidEnterBackground:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"进入后台"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序即将进入前台</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationWillEnterForeground:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我回来了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序重新获得焦点</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationDidBecomeActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我刷新了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序即将关闭</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationWillTerminate:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我拜拜了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="应用程序显示流程">应用程序显示流程</h2><ol>
+<li>创建一个窗口 (UIWindow, 系统已经默认创建这个成员属性, 需要自己创建赋值)</li>
+<li>创建根控制器 (rootViewController)</li>
+<li>给窗口设置根控制器 (window.rootViewController)</li>
+<li><p>显示窗口(makeKeyAndVisible).<br>makeKeyAndVisible方法 : 把窗口设置为应用程序的主窗口. 窗口默认是隐藏的,当调用该方法后, 会设置窗口的hidden = no, 谈后把这个窗口设置为主窗口并显示.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="comment">// 1.创建UIWindow</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span> = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[[<span class="built_in">UIScreen</span> mainScreen] bounds]];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line">    <span class="comment">// 2.创建根控制器</span></span><br><span class="line">    ViewController *vc = [[ViewController alloc] init];</span><br><span class="line">    <span class="comment">// 3.设置根控制器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.rootViewController</span> = vc;</span><br><span class="line">    <span class="comment">// 4.把UIWindow 设为当前窗口</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.window</span> makeKeyAndVisible];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ps: window的显示与根控制器中view的显示互不影响. view在window的上面.</p>
+</li>
+</ol>
+<h3 id="控制器view的显示流程">控制器view的显示流程</h3><ol>
+<li><p>先判断控制器是不是从storyboard中加载. </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIStoryboard</span> storyboardWithName:<span class="string">@"Main"</span> bundle:<span class="literal">nil</span>] instantiateInitialViewController];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再判断是不是从xib中加载</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIViewController</span> alloc] initWithNibName:<span class="string">@"VC"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 1&gt; initWithNibName:如果指定了名称,那么它就会去加载指定名称的Xib.</span></span><br><span class="line"><span class="comment">//  MyViewController *vc =  [[MyViewController alloc] initWithNibName:@"VC" bundle:nil];</span></span><br><span class="line"><span class="comment">// 2&gt; 如果没有指定名称.指定为nil,那么它就会去先加载跟它相同名称的Xib.</span></span><br><span class="line"><span class="comment">//  MyViewController *vc =  [[MyViewController alloc] initWithNibName:nil bundle:nil];</span></span><br><span class="line"><span class="comment">// 3&gt; 如果没有跟它名称相同的Xib,那么它就会去加载去掉Controller后跟它名称相同的Xib</span></span><br></pre></td></tr></table></figure>
+<p>ps: 控制器的<code>init</code>方法默认会调用<code>initWithNibName:</code>方法.</p>
+<p><img src="http://r.loli.io/fuUbqq.png" alt=""></p>
+</li>
+<li><p>如果都不是, 控制器会调用loadView方法,创建一个空的UIView.<br>当控制器被使用的时候,控制器会调用loadView方法.loadView –&gt; viewDidLoad</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">     - (<span class="keyword">void</span>)loadView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span> = [[<span class="built_in">UIView</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>附:在Xcode6以后配置pch文件<br><img src="http://r.loli.io/AzaUje.png" alt=""></p>
+<p> 在pch文件中配置调试模式时运行XWLog(…)代码:<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#ifdef DEBUG</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...) NSLog(__VA_ARGS__)</span></span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...)</span></span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure></p>
+<p> ps: 在宏当中<code>...</code>表示可变参数.在函数中表示可变参数用:<code>__VA_ARGS__</code>.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/16/Import/post/监听事件的4种方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">监听事件的4种方式</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Import/post/一个应用程序的启动流程" data-title="一个应用程序的启动流程" data-url="http://xionv.com/2015/12/17/Import/post/一个应用程序的启动流程/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

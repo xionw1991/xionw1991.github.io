@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS面试题 | Trevor Coding</title>
+  <title>升级Xcode后插件失效的解决办法 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是从简书上拷贝下来题目,没事自己做做.">
+  <meta name="description" content="1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:    defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID
+ 2.然后输入如下命令(最后一项是获取到的DVTPlugInCompatibilityUUID):    find ~/Library/Applic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS面试题">
-<meta property="og:url" content="http://xionv.com/2015/12/10/Import/post/iOS面试题/index.html">
+<meta property="og:title" content="升级Xcode后插件失效的解决办法">
+<meta property="og:url" content="http://xionv.com/2015/12/10/Import/post/Xcode插件失效后解决办法/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="这是从简书上拷贝下来题目,没事自己做做.">
-<meta property="og:updated_time" content="2015-12-14T01:13:03.000Z">
+<meta property="og:description" content="1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:    defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID
+ 2.然后输入如下命令(最后一项是获取到的DVTPlugInCompatibilityUUID):    find ~/Library/Applic">
+<meta property="og:updated_time" content="2015-12-17T07:25:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS面试题">
-<meta name="twitter:description" content="这是从简书上拷贝下来题目,没事自己做做.">
+<meta name="twitter:title" content="升级Xcode后插件失效的解决办法">
+<meta name="twitter:description" content="1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:    defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID
+ 2.然后输入如下命令(最后一项是获取到的DVTPlugInCompatibilityUUID):    find ~/Library/Applic">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -170,11 +173,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/iOS面试题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Import/post/Xcode插件失效后解决办法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/10/Import/post/iOS面试题/" class="article-date">
-  	<time datetime="2015-12-10T05:01:57.000Z" itemprop="datePublished">2015-12-10</time>
+      <a href="/2015/12/10/Import/post/Xcode插件失效后解决办法/" class="article-date">
+  	<time datetime="2015-12-10T07:21:01.000Z" itemprop="datePublished">2015-12-10</time>
 </a>
     </div>
   
@@ -187,7 +190,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS面试题
+      升级Xcode后插件失效的解决办法
     </h1>
   
 
@@ -207,72 +210,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>这是从简书上拷贝下来题目,没事自己做做.</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="初级">初级</h2><ul>
-<li><strong>关于单方面技术</strong><ul>
-<li>ARC / MRC 简单叙述一下<br><code>OC中的内存管理机制是以引用计数的方式进行管理的,即当计数器的数值大于0的时候,对象存在, 如果计数器值等于0则,对象销毁. ARC的英文全称是Auto Reference Counting, 意思是自动引用计数, 表示由系统自动管理引用计数, 它有三种指针类型,strong(默认)\ weak\assign, strong和weak用于对象,assign用于基本数据类型. ARC的内存管理原则是:只有当有强指针指向对象时,对象才会存在,当没有强指针指向对象时,对象会被销毁. MRC的英文全称是Manual Reference Counting, 意思是手动引用计数, 即需要程序员手动来管理对象的引用计数.</code></li>
-<li>封装过什么控件, 简单叙述一下  </li>
-<li>属性readwrite，readonly，assign，retain，copy，nonatomic各是什么作用  </li>
-<li>Get Set方法  </li>
-<li>id 是什么  </li>
-<li>代理, Block, 循环引用  </li>
-<li>通知的使用  </li>
-</ul>
-</li>
-<li><strong>关于项目方面</strong><ul>
-<li>参与过什么项目, 负责什么</li>
-<li>项目中你参与的模块遇到过什么大的问题, 怎么解决的, 详细叙述</li>
-<li>Git/SVN</li>
-</ul>
-</li>
-</ul>
-<h2 id="中级">中级</h2><ul>
-<li><strong>在基础技术问题的基础上</strong><ul>
-<li>通知</li>
-<li>简单讲述SDWebImage实现原理</li>
-<li>数据库语句</li>
-<li>CoreData常用使用</li>
-<li>优化UITableView的方式, 方法</li>
-<li>深浅拷贝</li>
-<li>运行时你知道多少</li>
-<li>封装过什么</li>
-</ul>
-</li>
-<li><strong>关于项目方面</strong><ul>
-<li>熟练的使用Git</li>
-<li>如果让你设计一个缓存模块, 你会怎么设计,需要考虑到什么</li>
-<li>说说MVC MVVM MVP</li>
-<li>做过最失败的项目是什么, 为什么</li>
-<li>你觉得怎么划分模块会好一点</li>
-</ul>
-</li>
-</ul>
-<h2 id="高级">高级</h2><ul>
-<li><strong>基于前两个</strong><ul>
-<li>多线程详细说一下, 怎么封装一个适合自己项目的线程池,怎么处理会好一点。</li>
-<li>多线程CoreData, 这个基本所有的面试都会提到一下吧</li>
-<li>使用过什么开源的动画库, 这就是随便问问 比如pop, canvas等</li>
-<li>有自己的开源项目么？</li>
-<li>有全面的对网络库进行二次开发封装么, 怎么干的。</li>
-<li>讲一下运行时调换系统方法swizzle的原理</li>
-<li>自己尝试着模拟系统Block的实现</li>
-<li>怎么理解界面模板, 有做过相关开发么</li>
-<li>IM的东西随便问问，如果公司需要</li>
-<li>内存优化怎么搞一下</li>
-<li>自己写个tableView玩玩？</li>
-</ul>
-</li>
-<li><strong>项目方面</strong><ul>
-<li>参与过什么项目, 做过什么大型的项目, 负责哪些模块</li>
-<li>框架的设计有没有参与, 如果有的话, 参与了框架中哪一部分的工作, 怎么考虑你这部分未来的可扩展性的。</li>
-<li>在项目中严格按照产品,UIUE的思维去做,还是会把自己的想法提出来。</li>
-<li>怎么为一个项目写一套完整的网络库, 缓存库, 界面库。</li>
-</ul>
-</li>
-</ul>
+        <p> 1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:<br>    <code>defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID</code></p>
+<p> 2.然后输入如下命令(最后一项是获取到的DVTPlugInCompatibilityUUID):<br>    <code>find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add F41BD31E-2683-44B8-AE7F-5F09E919790E</code></p>
 
       
     </div>
@@ -282,18 +221,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/10/Import/post/Xcode插件失效后解决办法/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/12/Import/post/UITableViewCell自定义布局子控件/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          升级Xcode后插件失效的解决办法
+          UITableViewCell自定义布局子控件
         
       </div>
     </a>
   
   
-    <a href="/2015/12/10/Import/post/NSFileManager计算文件夹大小/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">NSFileManager计算文件夹大小</div>
+    <a href="/2015/12/10/Import/post/iOS面试题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS面试题</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -307,7 +246,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/iOS面试题" data-title="iOS面试题" data-url="http://xionv.com/2015/12/10/Import/post/iOS面试题/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/Xcode插件失效后解决办法" data-title="升级Xcode后插件失效的解决办法" data-url="http://xionv.com/2015/12/10/Import/post/Xcode插件失效后解决办法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
