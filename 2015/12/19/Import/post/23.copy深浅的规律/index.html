@@ -3,45 +3,67 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NSFileManager的一些使用 | Trevor Coding</title>
+  <title>copy深浅的规律 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="判断一个文件或者文件夹是否存在
-- BOOL flag = [manager fileExistsAtPath:@&quot;/Users/apple/Desktop/abc.txt&quot;];
+  <meta name="description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
+
+ 
+
+浅复制（浅拷贝，指针拷贝，shallow copy）
+源对象和副本对象是同一个对象
+源对象（副本对象）引用计数器+1,相当于做一次retain操作
+本质是：没有产生新的对象
+原对象引用计数器+1
+必须对原对象进行释放
 
 
 
 
-判断一个文件是否存在, 并且判断它是否是一个文件夹
-
-注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
-第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为">
+深复制（深拷贝，内容拷贝，deep copy）
+源对象和副本对象是不同的两个对象
+源对象引用计数器不变,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSFileManager的一些使用">
-<meta property="og:url" content="http://xionv.com/2015/12/04/Import/post/NSFileManager的一些使用/index.html">
+<meta property="og:title" content="copy深浅的规律">
+<meta property="og:url" content="http://xionv.com/2015/12/19/Import/post/23.copy深浅的规律/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="判断一个文件或者文件夹是否存在
-- BOOL flag = [manager fileExistsAtPath:@&quot;/Users/apple/Desktop/abc.txt&quot;];
+<meta property="og:description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
+
+ 
+
+浅复制（浅拷贝，指针拷贝，shallow copy）
+源对象和副本对象是同一个对象
+源对象（副本对象）引用计数器+1,相当于做一次retain操作
+本质是：没有产生新的对象
+原对象引用计数器+1
+必须对原对象进行释放
 
 
 
 
-判断一个文件是否存在, 并且判断它是否是一个文件夹
-
-注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
-第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为">
-<meta property="og:updated_time" content="2015-12-07T14:11:33.000Z">
+深复制（深拷贝，内容拷贝，deep copy）
+源对象和副本对象是不同的两个对象
+源对象引用计数器不变,">
+<meta property="og:image" content="http://r.loli.io/ee63aa.png">
+<meta property="og:updated_time" content="2015-12-19T07:49:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSFileManager的一些使用">
-<meta name="twitter:description" content="判断一个文件或者文件夹是否存在
-- BOOL flag = [manager fileExistsAtPath:@&quot;/Users/apple/Desktop/abc.txt&quot;];
+<meta name="twitter:title" content="copy深浅的规律">
+<meta name="twitter:description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
+
+ 
+
+浅复制（浅拷贝，指针拷贝，shallow copy）
+源对象和副本对象是同一个对象
+源对象（副本对象）引用计数器+1,相当于做一次retain操作
+本质是：没有产生新的对象
+原对象引用计数器+1
+必须对原对象进行释放
 
 
 
 
-判断一个文件是否存在, 并且判断它是否是一个文件夹
-
-注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在
-第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为">
+深复制（深拷贝，内容拷贝，deep copy）
+源对象和副本对象是不同的两个对象
+源对象引用计数器不变,">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -197,11 +219,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Import/post/23.copy深浅的规律" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/04/Import/post/NSFileManager的一些使用/" class="article-date">
-  	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">2015-12-04</time>
+      <a href="/2015/12/19/Import/post/23.copy深浅的规律/" class="article-date">
+  	<time datetime="2015-12-19T07:42:57.000Z" itemprop="datePublished">2015-12-19</time>
 </a>
     </div>
   
@@ -214,7 +236,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NSFileManager的一些使用
+      copy深浅的规律
     </h1>
   
 
@@ -223,7 +245,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS概念/">iOS概念</a></li></ul>
 	</div>
 
         
@@ -234,64 +256,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p><strong>判断一个文件或者文件夹是否存在</strong></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span>];</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
+</blockquote>
+<p> <img src="http://r.loli.io/ee63aa.png" alt=""></p>
+<ul>
+<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
+<li>源对象和副本对象是同一个对象</li>
+<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
+<li>本质是：没有产生新的对象</li>
+<li>原对象引用计数器+1</li>
+<li>必须对原对象进行释放</li>
+</ul>
 </li>
 </ul>
-<hr>
 <ul>
-<li><p><strong>判断一个文件是否存在, 并且判断它是否是一个文件夹</strong></p>
-<ul>
-<li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
-<li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
-<li>BOOL dir = NO;</li>
+<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
+<li>源对象和副本对象是不同的两个对象</li>
+<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
+<li>本质是：产生了新的对象</li>
+<li>必须释放新对象</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> isDirectory:&amp;dir];</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>获取文件或文件夹的属性</strong></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>获取文件夹中所有的文件</strong></p>
-<ul>
-<li>contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
-<li>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager contentsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<hr>
-<ul>
-<li><p><strong>创建文件夹</strong></p>
-<ul>
-<li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
-<li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
-<li>attributes: 指定创建出来的文件夹的属性</li>
-<li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
-<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager createDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/abc"</span> withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>创建文件</strong></p>
-<ul>
-<li>createFileAtPath: 指定文件创建出来的位置</li>
-<li>contents : 文件中的内容</li>
-<li>attributes: 创建出来的文件的属性</li>
-<li>NSData : 二进制数据</li>
-<li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
-<li>NSString *str = @“我叫野原新之助”;</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">- [manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -302,18 +288,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/05/Import/post/在iOS中使用SQLite(上)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          SQLite在iOS中的使用(上)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/04/Import/post/KVC&KVO/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">KVC &amp; KVO简单应用</div>
+    <a href="/2015/12/19/Import/post/利用NSValue来包装结构体/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用NSValue来包装结构体</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -327,7 +304,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/NSFileManager的一些使用" data-title="NSFileManager的一些使用" data-url="http://xionv.com/2015/12/04/Import/post/NSFileManager的一些使用/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/23.copy深浅的规律" data-title="copy深浅的规律" data-url="http://xionv.com/2015/12/19/Import/post/23.copy深浅的规律/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
