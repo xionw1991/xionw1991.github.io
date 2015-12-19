@@ -23,7 +23,7 @@ CGPoint point = NSMakePoint(100, 100);NSValue *value = [NSValue valueWithPoint:p
 CGPoint point = NSMakePoint(100, 100);NSValue *value = [NSValue valueWithPoint:point];NSArray *arr = @[value];
 
 利用NSValue包装">
-<meta property="og:updated_time" content="2015-12-19T07:16:43.000Z">
+<meta property="og:updated_time" content="2015-12-19T12:47:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用NSValue来包装结构体">
 <meta name="twitter:description" content="NSValue可以包装任意值,可以用NSValue将结构体包装后,加入NSArray\NSDictionary中.
@@ -233,7 +233,7 @@ CGPoint point = NSMakePoint(100, 100);NSValue *value = [NSValue valueWithPoint:p
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CGPoint</span> point = <span class="built_in">NSMakePoint</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">NSValue</span> *value = [<span class="built_in">NSValue</span> valueWithPoint:point];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[value];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>利用NSValue包装自定义结构体</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">    int age;</span><br><span class="line">    char *name;</span><br><span class="line">    doubel height;</span><br><span class="line">&#125;Person</span><br><span class="line"></span><br><span class="line">Person p = &#123;24, '小明', 183&#125;;</span><br><span class="line">// valueWithBytes: 接收一个指针, 传递需要包装的结构体的地址.</span><br><span class="line">// objCType: 需要包装的数据类型</span><br><span class="line">NSValue *pValue = [NSValue valueWithBytes:&amp;p objCType:@encode(Person)];</span><br><span class="line">NSArray *arr = @[pValue];</span><br><span class="line">// 从NSValue中取出自定义的结构体变量</span><br><span class="line">Person res;</span><br><span class="line">[pValue getValue:&amp;res];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">double</span> height;</span><br><span class="line">&#125;Person;</span><br><span class="line"></span><br><span class="line">Person p = &#123;<span class="number">24</span>, <span class="string">"XiaoMing"</span>, <span class="number">183</span>&#125;;</span><br><span class="line"><span class="comment">// valueWithBytes: 接收一个指针, 传递需要包装的结构体的地址.</span></span><br><span class="line"><span class="comment">// objCType: 需要包装的数据类型</span></span><br><span class="line"><span class="built_in">NSValue</span> *pValue = [<span class="built_in">NSValue</span> valueWithBytes:&amp;p objCType:@encode(Person)];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[pValue];</span><br><span class="line"><span class="comment">// 从NSValue中取出自定义的结构体变量</span></span><br><span class="line">Person res;</span><br><span class="line">[pValue getValue:&amp;res];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>常见的结构体包装方法</p>
 <ul>

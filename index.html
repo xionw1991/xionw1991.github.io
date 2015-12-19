@@ -200,7 +200,6 @@
         <blockquote>
 <p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
 </blockquote>
-<p> <img src="http://r.loli.io/ee63aa.png" alt=""></p>
 <ul>
 <li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
 <li>源对象和副本对象是同一个对象</li>
@@ -220,6 +219,7 @@
 </ul>
 </li>
 </ul>
+<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
 
       
     </div>
@@ -282,7 +282,7 @@
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CGPoint</span> point = <span class="built_in">NSMakePoint</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">NSValue</span> *value = [<span class="built_in">NSValue</span> valueWithPoint:point];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[value];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>利用NSValue包装自定义结构体</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">    int age;</span><br><span class="line">    char *name;</span><br><span class="line">    doubel height;</span><br><span class="line">&#125;Person</span><br><span class="line"></span><br><span class="line">Person p = &#123;24, '小明', 183&#125;;</span><br><span class="line">// valueWithBytes: 接收一个指针, 传递需要包装的结构体的地址.</span><br><span class="line">// objCType: 需要包装的数据类型</span><br><span class="line">NSValue *pValue = [NSValue valueWithBytes:&amp;p objCType:@encode(Person)];</span><br><span class="line">NSArray *arr = @[pValue];</span><br><span class="line">// 从NSValue中取出自定义的结构体变量</span><br><span class="line">Person res;</span><br><span class="line">[pValue getValue:&amp;res];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">double</span> height;</span><br><span class="line">&#125;Person;</span><br><span class="line"></span><br><span class="line">Person p = &#123;<span class="number">24</span>, <span class="string">"XiaoMing"</span>, <span class="number">183</span>&#125;;</span><br><span class="line"><span class="comment">// valueWithBytes: 接收一个指针, 传递需要包装的结构体的地址.</span></span><br><span class="line"><span class="comment">// objCType: 需要包装的数据类型</span></span><br><span class="line"><span class="built_in">NSValue</span> *pValue = [<span class="built_in">NSValue</span> valueWithBytes:&amp;p objCType:@encode(Person)];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[pValue];</span><br><span class="line"><span class="comment">// 从NSValue中取出自定义的结构体变量</span></span><br><span class="line">Person res;</span><br><span class="line">[pValue getValue:&amp;res];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>常见的结构体包装方法</p>
 <ul>
