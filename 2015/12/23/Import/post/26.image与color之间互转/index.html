@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Github, Gitcafe和 Coding的Pages服务对比 | Trevor Coding</title>
+  <title>image与color之间互转 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
+  <meta name="description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github, Gitcafe和 Coding的Pages服务对比">
-<meta property="og:url" content="http://xionv.com/2015/12/14/Import/post/为什么不用国内的代码托管网站/index.html">
+<meta property="og:title" content="image与color之间互转">
+<meta property="og:url" content="http://xionv.com/2015/12/23/Import/post/26.image与color之间互转/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
-<meta property="og:updated_time" content="2015-12-23T05:17:06.000Z">
+<meta property="og:description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
+<meta property="og:updated_time" content="2015-12-23T04:33:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github, Gitcafe和 Coding的Pages服务对比">
-<meta name="twitter:description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
+<meta name="twitter:title" content="image与color之间互转">
+<meta name="twitter:description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -170,11 +170,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/为什么不用国内的代码托管网站" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Import/post/26.image与color之间互转" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/" class="article-date">
-  	<time datetime="2015-12-14T04:01:57.000Z" itemprop="datePublished">2015-12-14</time>
+      <a href="/2015/12/23/Import/post/26.image与color之间互转/" class="article-date">
+  	<time datetime="2015-12-23T04:24:57.000Z" itemprop="datePublished">2015-12-23</time>
 </a>
     </div>
   
@@ -187,7 +187,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Github, Gitcafe和 Coding的Pages服务对比
+      image与color之间互转
     </h1>
   
 
@@ -195,11 +195,11 @@
       
       <div class="article-info article-info-post">
         
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
 	</div>
 
+        
 
         <div class="clearfix"></div>
       </div>
@@ -208,20 +208,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
+<li>颜色转图片, 集成到UIImage分类<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 描述矩形</span></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line">    <span class="comment">// 开启位图上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line">    <span class="comment">// 获取位图上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 使用color演示填充上下文</span></span><br><span class="line">    <span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line">    <span class="comment">// 渲染上下文</span></span><br><span class="line">    <span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line">    <span class="comment">// 从上下文中获取图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 结束上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>说说心得:</p>
-<ul>
-<li>github: 稳定,除了网络抽风push的时候有点慢和国内的搜索引擎可能爬不到,其他完美仍然是首选.</li>
-<li>gitcafe: 据说服务器在香港,相比github访问速度要快一些,但是最近很不稳定,比如昨天就宕机了很久,导致博客打不开,之后push上去的新内容不能及时更新.不知道是不是我昨天运气不好,等稳定了再说.</li>
-<li>coding: 速度快,而且界面友好,但是不支持免费自定义域名,需要花钱办会员,对于没有绑定域名需求的朋友还是很推荐的.</li>
 </ul>
-</li>
-<li><p>最后: 我还是推荐把github作为主站,然后把gitcafe作为镜像用于国内的搜索引擎去收入(使用dnspods把gitcafe.io解析为搜索引擎线路).coding作为备份网站,当前面两个网站打不开的时候救急.</p>
-<blockquote>
-<p>最后的最后, 生命止于折腾.</p>
-</blockquote>
-</li>
+<ul>
+<li>图片转颜色<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -232,18 +223,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/14/Import/post/模型控制View的显示demo/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          TableView中MVC模式的简单应用
+          NSArray和NSDictionary控制台中文打印
         
       </div>
     </a>
   
   
-    <a href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">TableView顶部图片下拉放大demo</div>
+    <a href="/2015/12/23/Import/post/24.UIAlertView在IOS9中的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIAlertView在IOS9中的使用demo</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -257,7 +248,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/为什么不用国内的代码托管网站" data-title="Github, Gitcafe和 Coding的Pages服务对比" data-url="http://xionv.com/2015/12/14/Import/post/为什么不用国内的代码托管网站/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/26.image与color之间互转" data-title="image与color之间互转" data-url="http://xionv.com/2015/12/23/Import/post/26.image与color之间互转/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

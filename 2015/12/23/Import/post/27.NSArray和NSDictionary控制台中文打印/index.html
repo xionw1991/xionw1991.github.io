@@ -3,18 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Github, Gitcafe和 Coding的Pages服务对比 | Trevor Coding</title>
+  <title>NSArray和NSDictionary控制台中文打印 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
+  <meta name="description" content="使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.
+
+#import &amp;lt;Foundation/Foundation.h&amp;gt;@implementation NSDictionary (Log)- (NSString *)descriptionWithLocale:(id)locale&amp;#123;    NSMutableString *str = [NSMutableString">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github, Gitcafe和 Coding的Pages服务对比">
-<meta property="og:url" content="http://xionv.com/2015/12/14/Import/post/为什么不用国内的代码托管网站/index.html">
+<meta property="og:title" content="NSArray和NSDictionary控制台中文打印">
+<meta property="og:url" content="http://xionv.com/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
-<meta property="og:updated_time" content="2015-12-23T05:17:06.000Z">
+<meta property="og:description" content="使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.
+
+#import &amp;lt;Foundation/Foundation.h&amp;gt;@implementation NSDictionary (Log)- (NSString *)descriptionWithLocale:(id)locale&amp;#123;    NSMutableString *str = [NSMutableString">
+<meta property="og:updated_time" content="2015-12-23T04:39:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github, Gitcafe和 Coding的Pages服务对比">
-<meta name="twitter:description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
+<meta name="twitter:title" content="NSArray和NSDictionary控制台中文打印">
+<meta name="twitter:description" content="使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.
+
+#import &amp;lt;Foundation/Foundation.h&amp;gt;@implementation NSDictionary (Log)- (NSString *)descriptionWithLocale:(id)locale&amp;#123;    NSMutableString *str = [NSMutableString">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -170,11 +176,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/为什么不用国内的代码托管网站" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Import/post/27.NSArray和NSDictionary控制台中文打印" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/" class="article-date">
-  	<time datetime="2015-12-14T04:01:57.000Z" itemprop="datePublished">2015-12-14</time>
+      <a href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/" class="article-date">
+  	<time datetime="2015-12-23T04:36:57.000Z" itemprop="datePublished">2015-12-23</time>
 </a>
     </div>
   
@@ -187,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Github, Gitcafe和 Coding的Pages服务对比
+      NSArray和NSDictionary控制台中文打印
     </h1>
   
 
@@ -195,11 +201,11 @@
       
       <div class="article-info article-info-post">
         
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
 	</div>
 
+        
 
         <div class="clearfix"></div>
       </div>
@@ -207,23 +213,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
-</li>
-<li><p>说说心得:</p>
-<ul>
-<li>github: 稳定,除了网络抽风push的时候有点慢和国内的搜索引擎可能爬不到,其他完美仍然是首选.</li>
-<li>gitcafe: 据说服务器在香港,相比github访问速度要快一些,但是最近很不稳定,比如昨天就宕机了很久,导致博客打不开,之后push上去的新内容不能及时更新.不知道是不是我昨天运气不好,等稳定了再说.</li>
-<li>coding: 速度快,而且界面友好,但是不支持免费自定义域名,需要花钱办会员,对于没有绑定域名需求的朋友还是很推荐的.</li>
-</ul>
-</li>
-<li><p>最后: 我还是推荐把github作为主站,然后把gitcafe作为镜像用于国内的搜索引擎去收入(使用dnspods把gitcafe.io解析为搜索引擎线路).coding作为备份网站,当前面两个网站打不开的时候救急.</p>
-<blockquote>
-<p>最后的最后, 生命止于折腾.</p>
+        <blockquote>
+<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
 </blockquote>
-</li>
-</ul>
-
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -232,18 +225,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/14/Import/post/模型控制View的显示demo/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/23/Import/post/28.直接修改对象frame结构体的成员属性/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          TableView中MVC模式的简单应用
+          直接修改对象frame结构体中的成员属性
         
       </div>
     </a>
   
   
-    <a href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">TableView顶部图片下拉放大demo</div>
+    <a href="/2015/12/23/Import/post/26.image与color之间互转/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">image与color之间互转</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -257,7 +250,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/为什么不用国内的代码托管网站" data-title="Github, Gitcafe和 Coding的Pages服务对比" data-url="http://xionv.com/2015/12/14/Import/post/为什么不用国内的代码托管网站/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/27.NSArray和NSDictionary控制台中文打印" data-title="NSArray和NSDictionary控制台中文打印" data-url="http://xionv.com/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

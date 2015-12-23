@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS中级/" style="font-size: 16.67px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 13.33px;">iOS初步-demo</a> <a href="/tags/iOS概念/" style="font-size: 10px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,358 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Import/post/TableView自定义header" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/Import/post/TableView自定义header/" class="article-date">
+  	<time datetime="2015-12-16T03:03:57.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/Import/post/TableView自定义header/">TableView自定义header</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自定义tableView的header,_利用转换坐标系来达到header的停留与跟随">自定义tableView的header, 利用转换坐标系来达到header的停留与跟随</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define toolbarH 44</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> () &lt;<span class="title">UITableViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UITableView</span> *tableView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIView</span> *toolbar;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建tableView</span></span><br><span class="line">    <span class="built_in">UITableView</span> *tableView = [[<span class="built_in">UITableView</span> alloc] init];</span><br><span class="line">    tableView<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置tableView的内边距的top位置为toolbar的高</span></span><br><span class="line">    tableView<span class="variable">.contentInset</span> = <span class="built_in">UIEdgeInsetsMake</span>(toolbarH, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    tableView<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:tableView];</span><br><span class="line">    _tableView = tableView;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建toolbar</span></span><br><span class="line">    <span class="built_in">CGFloat</span> toolbarW = <span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">UIView</span> *toolbar = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    toolbar<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, -toolbarH, toolbarW, toolbarH);</span><br><span class="line">    toolbar<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> addSubview:toolbar];</span><br><span class="line">    _toolbar = toolbar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UIScrollViewDelegate</span></span><br><span class="line"><span class="comment">// 模拟tableView plain模式的header停留</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 存放新Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> newY = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (toolbarH + scrollView<span class="variable">.contentOffset</span><span class="variable">.y</span> &gt; <span class="number">0</span>) &#123; <span class="comment">// 向上拖拽偏移量减少 - 转换坐标系</span></span><br><span class="line">        <span class="comment">// 转换坐标系</span></span><br><span class="line">        <span class="built_in">UIWindow</span> *window = [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.windows</span><span class="variable">.lastObject</span>;</span><br><span class="line">        [window addSubview:<span class="keyword">self</span><span class="variable">.toolbar</span>];</span><br><span class="line">        newY = [<span class="keyword">self</span><span class="variable">.tableView</span> convertRect:<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.bounds</span> toView:window]<span class="variable">.origin</span><span class="variable">.y</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 向下拖拽时偏移量增加 - toolBar跟随tableView</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.tableView</span> addSubview:<span class="keyword">self</span><span class="variable">.toolbar</span>];</span><br><span class="line">        newY = -toolbarH;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 更新frame</span></span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.toolbar</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.y</span> = newY;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.toolbar</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步-demo/">iOS初步-demo</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/模型控制View的显示demo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/14/Import/post/模型控制View的显示demo/" class="article-date">
+  	<time datetime="2015-12-14T12:31:57.000Z" itemprop="datePublished">2015-12-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/14/Import/post/模型控制View的显示demo/">TableView中MVC模式的简单应用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="模型视图控制器之间:">模型视图控制器之间:</h3><ul>
+<li>模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.</li>
+<li>模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.</li>
+<li>人机之间的交互由控制器完成</li>
+<li>视图和模型互不干扰.  </li>
+<li><p>作用: 便于代码的管理和阅读</p>
+<p>图解:by斯坦福大叔<br><img src="http://r5.loli.io/yIfmQ3.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:</p>
+<ol>
+<li><p>自定义一个cell (View)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重写构造方法</span></span><br><span class="line">- (instancetype)initWithStyle:(<span class="built_in">UITableViewCellStyle</span>)style reuseIdentifier:(<span class="built_in">NSString</span> *)reuseIdentifier</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithStyle:style reuseIdentifier:reuseIdentifier];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    <span class="built_in">UIImageView</span> *checkImg = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    checkImg<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"check"</span>];</span><br><span class="line">    checkImg<span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    [<span class="keyword">self</span> addSubview:checkImg];</span><br><span class="line">    _checkImg = checkImg;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 快速创建一个cell</span></span><br><span class="line">+ (instancetype)cellWithTable:(<span class="built_in">UITableView</span> *)tableView</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">XVWineCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];</span><br><span class="line">    <span class="keyword">if</span> (cell == <span class="literal">nil</span>) &#123;</span><br><span class="line">        cell = [[XVWineCell alloc] initWithStyle:<span class="built_in">UITableViewCellStyleSubtitle</span> reuseIdentifier:ID];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中实现数据源协议, 将自定义cell作为tableView的cell显示, 并将模型传递给cell (Controller)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVWineCell *cell = [XVWineCell cellWithTable:tableView];</span><br><span class="line">    cell<span class="variable">.wine</span> = <span class="keyword">self</span><span class="variable">.wine</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在自定义cell类中重写模型属性的setter方法,给cell中的子控件赋值 (Model)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)setWine:(XVWine *)wine</span><br><span class="line">&#123;</span><br><span class="line">    _wine = wine;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:wine<span class="variable">.image</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = wine<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"￥%@"</span>, wine<span class="variable">.money</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中修改模型数据刷新tableView, 这时会来到控制器的数据源方法将所有的cell重新赋予修改后的模型的值,cell的显示内容改变. (Controller)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 添加数据</span></span><br><span class="line">    - (<span class="keyword">void</span>)addWine</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 新建一个模型</span></span><br><span class="line">    XVWine *wine = [[XVWine alloc] init];</span><br><span class="line">    wine<span class="variable">.image</span> = <span class="string">@"newWine"</span>;</span><br><span class="line">    wine<span class="variable">.name</span> = <span class="string">@"新酒"</span>;</span><br><span class="line">    wine<span class="variable">.money</span> = <span class="string">@"999"</span>;</span><br><span class="line">    <span class="comment">// 将新模型添加进数组</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.wine</span> addObject:wine];</span><br><span class="line">    <span class="comment">// cell对应的模型数组的最后一位</span></span><br><span class="line">    <span class="built_in">NSIndexPath</span> *indexPath = [<span class="built_in">NSIndexPath</span> indexPathForRow:(<span class="keyword">self</span><span class="variable">.wine</span><span class="variable">.count</span> - <span class="number">1</span>) inSection:<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// 刷新表格</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> insertRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationAutomatic</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/为什么不用国内的代码托管网站" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/" class="article-date">
+  	<time datetime="2015-12-14T04:01:57.000Z" itemprop="datePublished">2015-12-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/">Github, Gitcafe和 Coding的Pages服务对比</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
+</li>
+<li><p>说说心得:</p>
+<ul>
+<li>github: 稳定,除了网络抽风push的时候有点慢和国内的搜索引擎可能爬不到,其他完美仍然是首选.</li>
+<li>gitcafe: 据说服务器在香港,相比github访问速度要快一些,但是最近很不稳定,比如昨天就宕机了很久,导致博客打不开,之后push上去的新内容不能及时更新.不知道是不是我昨天运气不好,等稳定了再说.</li>
+<li>coding: 速度快,而且界面友好,但是不支持免费自定义域名,需要花钱办会员,对于没有绑定域名需求的朋友还是很推荐的.</li>
+</ul>
+</li>
+<li><p>最后: 我还是推荐把github作为主站,然后把gitcafe作为镜像用于国内的搜索引擎去收入(使用dnspods把gitcafe.io解析为搜索引擎线路).coding作为备份网站,当前面两个网站打不开的时候救急.</p>
+<blockquote>
+<p>最后的最后, 生命止于折腾.</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/TableView顶部图片下拉放大demo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/" class="article-date">
+  	<time datetime="2015-12-13T14:31:57.000Z" itemprop="datePublished">2015-12-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/">TableView顶部图片下拉放大demo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="实现tableView顶部图片下拉放大功能">实现tableView顶部图片下拉放大功能</h2> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> () &lt;<span class="title">UITableViewDataSource</span>, <span class="title">UITableViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UITableView</span> *tableView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *photoView;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"><span class="built_in">CGFloat</span> photoViewWH;</span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">// 设定图片的宽高</span></span><br><span class="line">    photoViewWH = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// 设置tableView内边距</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.contentInset</span> = <span class="built_in">UIEdgeInsetsMake</span>(photoViewWH * <span class="number">0.5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">UIImageView</span> *photoView = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    <span class="comment">// 设置图片的位置,保证图片正好在tableView的上面不被覆盖</span></span><br><span class="line">    photoView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, -photoViewWH, photoViewWH, photoViewWH);</span><br><span class="line">    photoView<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"photo"</span>];</span><br><span class="line">    <span class="comment">// 设置图片在photoView中的填充样式,ScaleAspectFill样式可以在图片size变大时,对图片等比例进行拉伸</span></span><br><span class="line">    photoView<span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeScaleAspectFill</span>;</span><br><span class="line">    <span class="comment">// 将photoView插入到tableView的最底层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> insertSubview:photoView atIndex:<span class="number">0</span>];</span><br><span class="line">    _photoView = photoView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UITableViewDataSource</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">    <span class="built_in">UITableViewCell</span> *cell = [tableView dequeueReusableCellWithIdentifier:ID];</span><br><span class="line">    <span class="keyword">if</span> (cell == <span class="literal">nil</span>) &#123;</span><br><span class="line">        cell = [[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:<span class="built_in">UITableViewCellStyleDefault</span> reuseIdentifier:ID];</span><br><span class="line">    &#125;</span><br><span class="line">    cell<span class="variable">.textLabel</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"测试数据&gt;&gt;&gt;%ld"</span>, indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UIScrollViewDelegate</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当tableView的偏移量的y值小于photoView高度的一半时,则不改变photoView的frame.因为偏移量是负数所以这里用加号</span></span><br><span class="line">    <span class="keyword">if</span> (photoViewWH * <span class="number">0.5</span> + scrollView<span class="variable">.contentOffset</span><span class="variable">.y</span> &gt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 取出photoView的frame修改高度后重新赋值</span></span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.photoView</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.height</span> =  frame<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span> - scrollView<span class="variable">.contentOffset</span><span class="variable">.y</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.photoView</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步-demo/">iOS初步-demo</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/UITableViewCell自定义布局子控件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/12/Import/post/UITableViewCell自定义布局子控件/" class="article-date">
+  	<time datetime="2015-12-12T13:31:57.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/12/Import/post/UITableViewCell自定义布局子控件/">UITableViewCell自定义布局子控件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.</p>
+</blockquote>
+<h2 id="Frame实现自定义cell布局">Frame实现自定义cell布局</h2><p>  <strong>两个重要的setter方法:</strong></p>
+<ul>
+<li><p>在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)setStatusesFrame:(XVStatusesFrame *)statusesFrame</span><br><span class="line">&#123;</span><br><span class="line">    _statusesFrame = statusesFrame;</span><br><span class="line">    XVStatuses *status = statusesFrame<span class="variable">.status</span>;</span><br><span class="line">    <span class="comment">// 给子控件赋值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.picture</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.isVip</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置子控件位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.nameLabelF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.text_LabelF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.iconViewF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.pictureViewF</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.frame</span> = statusesFrame<span class="variable">.vipViewF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在StatusesFrame模型中重写Status的setter方法,根据传进来的数据来算出各个子控件的frame,并返回给控制器来设置每个cell的高度</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据文字来计算UILabel的rect</span></span><br><span class="line">    <span class="built_in">CGSize</span> (^fontSize)(<span class="built_in">NSString</span>*, <span class="built_in">CGFloat</span>, <span class="built_in">CGFloat</span>) = ^(<span class="built_in">NSString</span> *text, <span class="built_in">CGFloat</span> fontSize, <span class="built_in">CGFloat</span> maxWidth)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> [text boundingRectWithSize:<span class="built_in">CGSizeMake</span>(maxWidth, MAXFLOAT)</span><br><span class="line">                                  options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                               attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:fontSize]&#125;</span><br><span class="line">                                  context:<span class="literal">nil</span>]<span class="variable">.size</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// icon的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewW = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewH = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconViewF</span> = <span class="built_in">CGRectMake</span>(iconViewX, iconViewY, iconViewW, iconViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// name的位置</span></span><br><span class="line">    <span class="built_in">CGSize</span> nameSize = fontSize(status<span class="variable">.name</span>, nameFontSize, MAXFLOAT);</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelW = nameSize<span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelH = nameSize<span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span><span class="variable">.iconViewF</span>) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabelF</span> = <span class="built_in">CGRectMake</span>(nameLabelX, nameLabelY, nameLabelW, nameLabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// vip的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewW = <span class="number">14</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewH = nameLabelH;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span><span class="variable">.nameLabelF</span>) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewY = margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.vipViewF</span> = <span class="built_in">CGRectMake</span>(vipViewX, vipViewY, vipViewW, vipViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// text位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelW = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> - <span class="number">2</span> * margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelH = fontSize(status<span class="variable">.text</span>, textFontSize, text_LabelW)<span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.iconViewF</span>) + margin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_LabelF</span> = <span class="built_in">CGRectMake</span>(text_LabelX, text_LabelY, text_LabelW, text_LabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.status</span><span class="variable">.picture</span><span class="variable">.length</span>) &#123;</span><br><span class="line">        <span class="comment">// picture位置</span></span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieW = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieH = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieX = margin;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.text_LabelF</span>) + margin;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureViewF</span> = <span class="built_in">CGRectMake</span>(pictureVieX, pictureVieY, pictureVieW, pictureVieH);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span><span class="variable">.statusHeight</span> = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.pictureViewF</span>) + margin;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.statusHeight</span> = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span><span class="variable">.text_LabelF</span>) + margin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在代理方法中返回当前每个cell的高度</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVStatusesFrame *frame = <span class="keyword">self</span><span class="variable">.statusFrame</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> frame<span class="variable">.statusHeight</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Storyboard实现自定义cell的布局">Storyboard实现自定义cell的布局</h2><ul>
+<li>首先在使用storyboard布局单元格前先了解一下苹果在iOS8推出的<code>Self Sizing Cells</code>功能.<ul>
+<li><code>Self Sizing Cells</code>是为了解放程序员以往苦逼的计算不等高cell尺寸而推出的新功能, 它可以动态的计算tableView每一行cell的高度.</li>
+<li><code>Self Sizing Cells</code>依赖于<code>Auto Layout</code>.</li>
+</ul>
+</li>
+<li><p>举一个例子来展示如何使用:</p>
+<ol>
+<li>在storyboard中拖一个UITableView, 采用系统默认的设置, prototype cell数量设为1.<br><img src="http://r5.loli.io/7vAJj2.png" alt=""></li>
+<li>为cell中的每一个控件摆好位置并设置束缚<br><img src="http://r5.loli.io/3EvQvm.png" alt=""></li>
+<li><p><strong>设置tableView的<code>rowHeight</code>属性为<code>UITableViewAutomaticDimension</code></strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 设置自动计算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.rowHeight</span> = <span class="built_in">UITableViewAutomaticDimension</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置tableView的<code>estimatedRowHeight</code>估计高度为<code>44</code>(这个值可以根据自己需要修改)</strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 估算高度</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.estimatedRowHeight</span> = <span class="number">44</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后给cell中的每一个子控件赋值就能显示出来了, 不用做任何计算.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.text</span> = status<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.text_Label</span><span class="variable">.text</span> = status<span class="variable">.text</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.iconView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.icon</span>];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.picture</span><span class="variable">.length</span> ) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 根据控制束缚的值来控制控件的尺寸</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureHeight</span><span class="variable">.constant</span> = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureBottom</span><span class="variable">.constant</span> = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:status<span class="variable">.picture</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureHeight</span><span class="variable">.constant</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureBottom</span><span class="variable">.constant</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pictureView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status<span class="variable">.vip</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.vipView</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.nameLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>注意: cell的高度是通过改变约束的长度来控制的.这里利用约束的优先级特性不能达到要求, 因为即使pictureView隐藏了但它身上的约束仍然生效. 如果要让低优先级的约束生效,必须要移除高优先级的控件或其上面的约束,但是这样在显示下一个cell的时候又需要重新添加约束.</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Import/post/Xcode插件失效后解决办法" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -544,464 +896,6 @@
 <li>updateConstraintsIfNeeded: 告知立刻更新约束.</li>
 <li>updateConstraints:系统更新约束.</li>
 </ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/UIScrollView实现分页" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/07/Import/post/UIScrollView实现分页/" class="article-date">
-  	<time datetime="2015-12-07T12:50:57.000Z" itemprop="datePublished">2015-12-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/07/Import/post/UIScrollView实现分页/">UIScrollView实现定时滚动分页</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="通过使用UIScrollView控件来实现定时滚动分页">通过使用UIScrollView控件来实现定时滚动分页</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 图片个数</span></span><br><span class="line"><span class="preprocessor">#define imageViewCount 5</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> () &lt;<span class="title">UIScrollViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIScrollView</span> *scrollView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIPageControl</span> *pageContorl;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSTimer</span> *timer;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">// 设置scrollView的一些属性</span></span><br><span class="line">    <span class="comment">// scrollView的滚动范围</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.contentSize</span> = <span class="built_in">CGSizeMake</span>(<span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> * imageViewCount, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 禁用水平和垂直滑块</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.showsHorizontalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.showsVerticalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="comment">// 禁用弹簧效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounces</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="comment">// 初始化图片分页</span></span><br><span class="line">    [<span class="keyword">self</span> setupPageView];</span><br><span class="line">    <span class="comment">// 初始化分页指示器</span></span><br><span class="line">    [<span class="keyword">self</span> setupPageControl];</span><br><span class="line">    <span class="comment">// 开始计时器</span></span><br><span class="line">    [<span class="keyword">self</span> startTiming];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置分页</span></span><br><span class="line">- (<span class="keyword">void</span>)setupPageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGSize</span> scrollViewSize = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span>;</span><br><span class="line">    <span class="comment">// 在scrollView中添加子控件</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; imageViewCount; i++) &#123;</span><br><span class="line">        <span class="built_in">NSString</span> *imageName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"img_%02d"</span>, i + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">        imageView<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:imageName];</span><br><span class="line">        <span class="built_in">CGFloat</span> imageViewX = scrollViewSize<span class="variable">.width</span> * i;</span><br><span class="line">        <span class="built_in">CGFloat</span> imageViewY = <span class="number">0</span>;</span><br><span class="line">        imageView<span class="variable">.frame</span> = (<span class="built_in">CGRect</span>)&#123;&#123;imageViewX, imageViewY&#125;, scrollViewSize&#125;;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.scrollView</span> addSubview:imageView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置分页指示器</span></span><br><span class="line">- (<span class="keyword">void</span>)setupPageControl</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIPageControl</span> *pageContorl = [[<span class="built_in">UIPageControl</span> alloc] init];</span><br><span class="line">    <span class="comment">// 单页的时候隐藏</span></span><br><span class="line">    pageContorl<span class="variable">.hidesForSinglePage</span> = <span class="literal">YES</span>;</span><br><span class="line">    pageContorl<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    <span class="comment">// 注意: 在Xcode6以后 _currentPageImage 和 _pageImage这两个私有属性已经不可见了</span></span><br><span class="line">    <span class="comment">// 通过KVC设置指示器图片</span></span><br><span class="line">    [pageContorl setValue:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"current"</span>] forKeyPath:<span class="string">@"_currentPageImage"</span>];</span><br><span class="line">    [pageContorl setValue:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"other"</span>] forKeyPath:<span class="string">@"_pageImage"</span>];</span><br><span class="line">    <span class="comment">// 设置页码个数</span></span><br><span class="line">    pageContorl<span class="variable">.numberOfPages</span> = imageViewCount;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:pageContorl];</span><br><span class="line">    _pageContorl = pageContorl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始计时器</span></span><br><span class="line">- (<span class="keyword">void</span>)startTiming</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 初始化定时器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.timer</span> = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(pageChanged:) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</span><br><span class="line">    <span class="comment">// 将计时添加进事件循环</span></span><br><span class="line">    [[<span class="built_in">NSRunLoop</span> mainRunLoop] addTimer:<span class="keyword">self</span><span class="variable">.timer</span> forMode:<span class="built_in">NSRunLoopCommonModes</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止计时器</span></span><br><span class="line">- (<span class="keyword">void</span>)endTiming</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.timer</span> invalidate];</span><br><span class="line"><span class="comment">//    self.timer = nil; // 清空指针 - 这句可以不用写</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - 监听方法</span></span><br><span class="line"><span class="comment">// 定时器滚动页面</span></span><br><span class="line">- (<span class="keyword">void</span>)pageChanged:(<span class="built_in">NSTimer</span> *)timer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 根据当前页码数乘上scrollView的宽度来算出偏移量</span></span><br><span class="line">    <span class="built_in">CGFloat</span> x = ((<span class="keyword">self</span><span class="variable">.pageContorl</span><span class="variable">.currentPage</span> + <span class="number">1</span>) % imageViewCount) * <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// 这句是定时滚动页面的核心 ***</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.scrollView</span> setContentOffset:(<span class="built_in">CGPoint</span>)&#123;x,<span class="number">0</span>&#125; animated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UIScrollViewDelegate</span></span><br><span class="line"><span class="comment">// 监听scrollView的滚动</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// scrollView内偏移量 / scrollView的宽 = 当前页面 --- 四舍五入</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageContorl</span><span class="variable">.currentPage</span> = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.contentOffset</span><span class="variable">.x</span> / <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> + <span class="number">0.5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当拖拽scrollView时停止计时</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewWillBeginDragging:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> endTiming];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当停止拖拽时开始计时</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidEndDecelerating:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> startTiming];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步-demo/">iOS初步-demo</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/在iOS中使用SQLite(上)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/05/Import/post/在iOS中使用SQLite(上)/" class="article-date">
-  	<time datetime="2015-12-05T11:08:57.000Z" itemprop="datePublished">2015-12-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/05/Import/post/在iOS中使用SQLite(上)/">SQLite在iOS中的使用(上)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-_什么是SQLite">1. 什么是SQLite</h1><ul>
-<li>SQLite是一款轻型的嵌入式数据库, 它属于关系数据库</li>
-<li>它的处理速度非常快,它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了.</li>
-</ul>
-<h2 id="如何使用SQLite">如何使用SQLite</h2><ol>
-<li><p>在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.<br>如图:<br><img src="http://r6.loli.io/j2mIvy.png" alt=""></p>
-</li>
-<li><p>新建一个模型类, 并导入头文件</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;sqlite3.h&gt;</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在实现方法中定义一个全局的静态变量</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line"><span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>链接数据库, 创建表</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首次调用这个类的时候链接数据库</span></span><br><span class="line">+ (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1&gt; 获取沙盒路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"computer.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 2&gt; 根据路径打开数据库(相当于执行connection),传入数据库对象的地址,如果打开成功创建表.</span></span><br><span class="line">    <span class="keyword">int</span> result = sqlite3_open(path<span class="variable">.UTF8String</span>, &amp;_db); </span><br><span class="line">    <span class="keyword">if</span> (result != SQLITE_OK) &#123; <span class="comment">// 打开数据库失败</span></span><br><span class="line">        <span class="comment">// 关闭数据库</span></span><br><span class="line">        sqlite3_close(_db);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"打开数据库失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 打开数据库成功</span></span><br><span class="line">        <span class="keyword">char</span> *err; <span class="comment">// 创表失败的错误信息</span></span><br><span class="line">        <span class="comment">// 定义sql语句</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *sql = <span class="string">"CREATE TABLE IF NOT EXISTS t_computer (ID INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>; </span><br><span class="line">        <span class="comment">// 3&gt; 执行sql语句,在数据库(_db)中建表</span></span><br><span class="line">        <span class="keyword">if</span> (sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;err) != SQLITE_OK) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表失败---%s"</span>, err); <span class="comment">// 打印错误信息</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表成功"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定义类方法来快速实现数据库的增\删\改\查</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 增 - 传一个名字和价格增加一条记录</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertDataWithName:(<span class="built_in">NSString</span> *)name price:(<span class="keyword">float</span>)price</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 定义sql语句</span></span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"INSERT INTO t_computer (name, price) VALUES ('%@', '%f');"</span>, name, price];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str<span class="variable">.UTF8String</span>;</span><br><span class="line">    <span class="comment">// 执行sql语句</span></span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 删 - 传入名字删除对应名字的记录</span></span><br><span class="line">+ (<span class="keyword">void</span>)deletedDataWithName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"DELETE FROM t_computer WHERE name = '%@';"</span>, name];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str<span class="variable">.UTF8String</span>;</span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 改 - 修改对应名字的价格</span></span><br><span class="line">+ (<span class="keyword">void</span>)updatePrice:(<span class="keyword">float</span>)price forName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"UPDATE t_computer SET price = '%f' WHERE name = '%@';"</span>, price, name];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str<span class="variable">.UTF8String</span>;</span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查 - 取出数据库中所有的数据并将每一个字段转成模型的属性值存入数组返回出去</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)computers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个可变数组来接收模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 定义sql语句</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"SELECT * FROM t_computer;"</span>]<span class="variable">.UTF8String</span>;</span><br><span class="line">    <span class="comment">// 用来接收数据库查询的所有内容</span></span><br><span class="line">    sqlite3_stmt *stmt = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">// 如果查询到数据</span></span><br><span class="line">    <span class="keyword">if</span> (sqlite3_prepare_v2(_db, sql, -<span class="number">1</span>, &amp;stmt, <span class="literal">nil</span>) == SQLITE_OK) &#123;</span><br><span class="line">        <span class="comment">// 传入所有查询结果(stmt),逐步检索每一条记录,一直往下查找,直到SQLITE_ROW为null</span></span><br><span class="line">        <span class="keyword">while</span> (sqlite3_step(stmt) == SQLITE_ROW) &#123;</span><br><span class="line">            XVComputers *computer = [[XVComputers alloc] init];</span><br><span class="line">            <span class="comment">// 取出查找的值并赋给模型</span></span><br><span class="line">            computer<span class="variable">.name</span> = [<span class="built_in">NSString</span> stringWithUTF8String:(<span class="keyword">char</span> *)sqlite3_column_text(stmt, <span class="number">1</span>)];</span><br><span class="line">            computer<span class="variable">.price</span> = sqlite3_column_double(stmt, <span class="number">2</span>);</span><br><span class="line">            <span class="comment">// 将赋值后的对象放进数组</span></span><br><span class="line">            [arrayM addObject:computer];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrayM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="2-_FMDB">2. FMDB</h1><ul>
-<li>什么是FMDB<ul>
-<li>FMDB是iOS平台的SQLite数据库框架</li>
-<li>FMDB以OC的方式封装了SQLite的C语言API</li>
-</ul>
-</li>
-<li>FMDB的优点<ul>
-<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
-<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
-<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
-</ul>
-</li>
-<li>项目地址: <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">FMDB</a></li>
-</ul>
-<h2 id="如何使用FMDB">如何使用FMDB</h2><ol>
-<li><p>在Xcode中导入libsqlite3.dylib动态链接库</p>
-</li>
-<li><p>新建一个模型类导入框架的头文件</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"FMDB.h"</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在实现方法中定义一个全局的静态变量</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 创建一个FMDatabase对象</span></span><br><span class="line"><span class="keyword">static</span> FMDatabase *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>链接数据库,建表</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> + (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 文件路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"cmpt.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 链接数据库</span></span><br><span class="line">    _db = [FMDatabase databaseWithPath:path];</span><br><span class="line">    <span class="comment">// 打开数据库</span></span><br><span class="line">    [_db open];</span><br><span class="line">    <span class="comment">// 建表</span></span><br><span class="line">    [_db executeUpdate:<span class="string">@"CREATE TABLE IF NOT EXISTS t_cmpt (id INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现增\删\改\查  </p>
-<ul>
-<li><em>框架中的增删改都是用的 executeUpdate 方法</em></li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertName:(<span class="built_in">NSString</span> *)name price:(<span class="keyword">float</span>)price</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意在这个框架中sql语句中的字符串占位符不需要加单引号</span></span><br><span class="line">    [_db executeUpdateWithFormat:<span class="string">@"INSERT INTO t_cmpt (name, price) VALUES (%@, %f)"</span>, name, price];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 删除数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)deleteAll</span><br><span class="line">&#123;</span><br><span class="line">    [_db executeUpdateWithFormat:<span class="string">@"DELETE FROM t_cmpt"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><em>查询使用的是 executeQuery 方法</em></li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查询数据并返回模型数组</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)computers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 返回一个查询到的结果集</span></span><br><span class="line">    FMResultSet *set = [_db executeQuery:<span class="string">@"SELECT * FROM t_cmpt;"</span>];</span><br><span class="line">    <span class="comment">// 创建一个可变数组来存放模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 在集中往下查询每一条记录</span></span><br><span class="line">    <span class="keyword">while</span> ([set next]) &#123;</span><br><span class="line">        XVComputers *computer = [[XVComputers alloc] init];</span><br><span class="line">        computer<span class="variable">.name</span> = [set stringForColumn:<span class="string">@"name"</span>];</span><br><span class="line">        computer<span class="variable">.price</span> = [set stringForColumn:<span class="string">@"price"</span>]<span class="variable">.floatValue</span>;</span><br><span class="line">        [arrM addObject:computer];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="FMDatabaseQueue">FMDatabaseQueue</h3><ul>
-<li>FMDatabase这个类是线程不安全的，如果在多个线程中同时使用一个FMDatabase实例，会造成数据混乱等问题.</li>
-<li><p>为了保证线程安全，FMDB提供方便快捷的FMDatabaseQueue类.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个FMDatabaseQueue队列</span></span><br><span class="line"><span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"cmpt.sqlite"</span>];</span><br><span class="line">FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];</span><br><span class="line"><span class="comment">// 执行队列</span></span><br><span class="line">[queue inDatabase:^(FMDatabase *db) &#123;</span><br><span class="line">    <span class="comment">// 写数据</span></span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"惠普"</span>];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"戴尔"</span>];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"华硕"</span>];</span><br><span class="line">    <span class="comment">// 取数据</span></span><br><span class="line">    FMResultSet *set = [db executeQuery:<span class="string">@"select * from t_cpmt"</span>];</span><br><span class="line">    <span class="keyword">while</span> ([set next]) &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/NSFileManager的一些使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/04/Import/post/NSFileManager的一些使用/" class="article-date">
-  	<time datetime="2015-12-04T12:26:57.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/Import/post/NSFileManager的一些使用/">NSFileManager的一些使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p><strong>判断一个文件或者文件夹是否存在</strong></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>判断一个文件是否存在, 并且判断它是否是一个文件夹</strong></p>
-<ul>
-<li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
-<li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
-<li>BOOL dir = NO;</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> isDirectory:&amp;dir];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>获取文件或文件夹的属性</strong></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>获取文件夹中所有的文件</strong></p>
-<ul>
-<li>contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
-<li>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager contentsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<hr>
-<ul>
-<li><p><strong>创建文件夹</strong></p>
-<ul>
-<li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
-<li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
-<li>attributes: 指定创建出来的文件夹的属性</li>
-<li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
-<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">BOOL</span> flag = [manager createDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/abc"</span> withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>创建文件</strong></p>
-<ul>
-<li>createFileAtPath: 指定文件创建出来的位置</li>
-<li>contents : 文件中的内容</li>
-<li>attributes: 创建出来的文件的属性</li>
-<li>NSData : 二进制数据</li>
-<li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
-<li>NSString *str = @“我叫野原新之助”;</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- <span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">- [manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/KVC&amp;KVO" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/04/Import/post/KVC&KVO/" class="article-date">
-  	<time datetime="2015-12-04T11:36:57.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/Import/post/KVC&KVO/">KVC &amp; KVO简单应用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="KVC">KVC</h2><ul>
-<li>全称：Key Value Coding（键值编码）</li>
-<li>赋值</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能修改私有成员变量</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span> *)keyedValues;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>取值</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能取得私有成员变量的值</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span> *)keys;</span><br></pre></td></tr></table></figure>
-<h2 id="KVO">KVO</h2><ul>
-<li>全称：Key Value Observing（键值监听）</li>
-<li>作用：监听模型的属性值改变</li>
-<li><p>步骤</p>
-<ul>
-<li><p>添加监听器</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 利用b对象来监听a对象name属性的改变</span></span><br><span class="line">[a addObserver:b forKeyPath:<span class="string">@"name"</span> options:<span class="built_in">NSKeyValueObservingOptionOld</span> | <span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="string">@"test"</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在监听器中实现监听方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change     context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@ %@ %@ %@"</span>, object, keyPath, change, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>举例:</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line">- (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/首尾式动画" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/04/Import/post/首尾式动画/" class="article-date">
-  	<time datetime="2015-12-04T08:27:57.000Z" itemprop="datePublished">2015-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/04/Import/post/首尾式动画/">简单的首尾式动画</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.</p>
-</blockquote>
-<h2 id="1-_实现渐变动画">1. 实现渐变动画</h2><ul>
-<li>在控制器中新建一个监听手势点击的方法.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在方法中添加一个UIView, 当然UIImageView,UILabel都可以, 只要继承自UIView就OK.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 子控件的初始状态</span></span><br><span class="line"><span class="built_in">UIView</span> *animationView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>)];</span><br><span class="line">animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line"><span class="comment">// 初始化view的alpha为0.0,它是一个实型,可以理解成透明度,当控件alpha的为0时是全透明,不可见且不可交互.</span></span><br><span class="line"><span class="comment">// 使用alpha可以实现渐隐的动画效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">animationView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"><span class="comment">// 将控件添加进父控件</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:animationView];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现动画效果</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 开始动画</span></span><br><span class="line">[<span class="built_in">UIView</span> beginAnimations:<span class="literal">nil</span> context:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 2. 动画时长</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> time = <span class="number">2.0</span>;</span><br><span class="line">[<span class="built_in">UIView</span> setAnimationDuration:time];</span><br><span class="line"><span class="comment">// 3. 需要动画执行完毕后控件的状态</span></span><br><span class="line">animationView<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="comment">//    改变alpha值实现渐隐效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line"><span class="comment">// 4. 提交动画</span></span><br><span class="line">[<span class="built_in">UIView</span> commitAnimations];</span><br></pre></td></tr></table></figure>
-<p>这样我们新创建的控件会伴有动画效果显示出来并且一直待在父控件上.</p>
-<ul>
-<li>用block来是实现动画效果</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; </span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<h2 id="2-_实现首尾式动画">2. 实现首尾式动画</h2><ul>
-<li>实现提示框(hub)那种类型的首尾式动画效果 (显示后立即消失). </li>
-<li>block嵌套实现首尾式动画</li>
-<li>将上面实现动画的代码替换成下面的代码:</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// delay: 表示动画需要延时多少秒后执行</span></span><br><span class="line"><span class="comment">// options: 可以选择动画在执行过程中方式(比如先快后慢等等)</span></span><br><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> delay:<span class="number">0</span> options:<span class="built_in">UIViewAnimationOptionCurveEaseInOut</span> animations:^&#123;</span><br><span class="line">    <span class="comment">// 第一阶段动画执行完毕后的控件状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line">&#125; completion:^(<span class="built_in">BOOL</span> finished) &#123; <span class="comment">// 第一阶段动画执行完毕后</span></span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; <span class="comment">// 第二阶段动画并显示控件最终状态</span></span><br><span class="line">        animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">        animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">        animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这个子控件会在两秒钟内放大并显示,然后在两秒钟后缩小消失.</li>
-</ul>
-<hr>
-<blockquote>
-<p>ps: 首尾式动画是显示动画.<br>pps: 能够实现动画的属性基本都是实型,像BOOL类型的属性就不能用来显示动画效果.<br>ppps: 每个UIView都是由图层来显示图像的, 也就是说每个UIView中都有一个CALayer成员变量,来显示图像, 而且这个成员变量是不可交互的, 改变自定义图层的属性, 可以触发隐式动画.</p>
-</blockquote>
 
       
     </div>

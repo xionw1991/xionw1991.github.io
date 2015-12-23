@@ -3,17 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: iOS概念 | Trevor Coding</title>
+  <title>KVC的底层实现 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Trevor Coding | iOS">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Trevor Coding">
-<meta property="og:url" content="http://xionv.com/tags/iOS概念/index.html">
+  <meta name="description" content="KVC的本质就是调用成员属性的setter和getter方法.
+
+
+setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)  [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KVC的底层实现">
+<meta property="og:url" content="http://xionv.com/2015/12/22/Import/post/25.KVC的底层实现/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="Trevor Coding | iOS">
+<meta property="og:description" content="KVC的本质就是调用成员属性的setter和getter方法.
+
+
+setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)  [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnul">
+<meta property="og:updated_time" content="2015-12-23T03:45:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Trevor Coding">
-<meta name="twitter:description" content="Trevor Coding | iOS">
+<meta name="twitter:title" content="KVC的底层实现">
+<meta name="twitter:description" content="KVC的本质就是调用成员属性的setter和getter方法.
+
+
+setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)  [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnul">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -169,84 +179,113 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Import/post/25.KVC的底层实现" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/22/Import/post/25.KVC的底层实现/" class="archive-article-date">
-  	<time datetime="2015-12-22T11:37:57.000Z" itemprop="datePublished">Dec 22</time>
+    <div class="article-meta">
+      <a href="/2015/12/22/Import/post/25.KVC的底层实现/" class="article-date">
+  	<time datetime="2015-12-22T11:37:57.000Z" itemprop="datePublished">2015-12-22</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/22/Import/post/25.KVC的底层实现/">KVC的底层实现</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      KVC的底层实现
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS概念/">iOS概念</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>KVC的本质就是调用成员属性的setter和getter方法.</p>
+</blockquote>
+<ul>
+<li><code>setValuesForKeysWithDictionary:</code>方法的底层实现  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)</span></span><br><span class="line">  [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">      [item setValue:obj forKeyPath:key];</span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><code>setValue:forKeyPath:</code>的底层实现:<ol>
+<li>调用key对应成员属性名的setter方法;</li>
+<li>如果找不到,找带下划线(_)的成员属性名,然后给这个成员属性直接赋值.</li>
+<li>如果找不到,找与key名完全相同的成员属性名,然后直接赋值.</li>
+<li>如果都找不到,则程序崩溃,报错找不到对应的成员属性.</li>
+</ol>
+</li>
+</ul>
+<p>ps: 可以利用KVC的实现原理来重写赋值过程</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/23/Import/post/24.UIAlertView在IOS9中的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          UIAlertView在IOS9中的使用demo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/19/Import/post/23.copy深浅的规律/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">copy深浅的规律</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/19/Import/post/23.copy深浅的规律/" class="archive-article-date">
-  	<time datetime="2015-12-19T07:42:57.000Z" itemprop="datePublished">Dec 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/19/Import/post/23.copy深浅的规律/">copy深浅的规律</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS概念/">iOS概念</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Import/post/25.KVC的底层实现" data-title="KVC的底层实现" data-url="http://xionv.com/2015/12/22/Import/post/25.KVC的底层实现/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -272,9 +311,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
