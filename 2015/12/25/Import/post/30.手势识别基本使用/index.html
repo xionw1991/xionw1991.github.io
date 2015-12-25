@@ -3,24 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NSArray和NSDictionary控制台中文打印 | Trevor Coding</title>
+  <title>手势识别基本使用 | Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.
-
-#import &amp;lt;Foundation/Foundation.h&amp;gt;@implementation NSDictionary (Log)- (NSString *)descriptionWithLocale:(id)locale&amp;#123;    NSMutableString *str = [NSMutableString">
+  <meta name="description" content="UIGestureRecognizer手势识别
+UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.
+利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.
+手势有以下几种:
+UITapGestureRecognizer(敲击)
+UIPinchGestureRecognizer(捏合，用于缩放)
+UI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSArray和NSDictionary控制台中文打印">
-<meta property="og:url" content="http://xionv.com/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/index.html">
+<meta property="og:title" content="手势识别基本使用">
+<meta property="og:url" content="http://xionv.com/2015/12/25/Import/post/30.手势识别基本使用/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.
-
-#import &amp;lt;Foundation/Foundation.h&amp;gt;@implementation NSDictionary (Log)- (NSString *)descriptionWithLocale:(id)locale&amp;#123;    NSMutableString *str = [NSMutableString">
-<meta property="og:updated_time" content="2015-12-23T04:39:38.000Z">
+<meta property="og:description" content="UIGestureRecognizer手势识别
+UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.
+利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.
+手势有以下几种:
+UITapGestureRecognizer(敲击)
+UIPinchGestureRecognizer(捏合，用于缩放)
+UI">
+<meta property="og:updated_time" content="2015-12-25T11:44:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSArray和NSDictionary控制台中文打印">
-<meta name="twitter:description" content="使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.
-
-#import &amp;lt;Foundation/Foundation.h&amp;gt;@implementation NSDictionary (Log)- (NSString *)descriptionWithLocale:(id)locale&amp;#123;    NSMutableString *str = [NSMutableString">
+<meta name="twitter:title" content="手势识别基本使用">
+<meta name="twitter:description" content="UIGestureRecognizer手势识别
+UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.
+利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.
+手势有以下几种:
+UITapGestureRecognizer(敲击)
+UIPinchGestureRecognizer(捏合，用于缩放)
+UI">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -176,11 +188,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/27.NSArray和NSDictionary控制台中文打印" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Import/post/30.手势识别基本使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/" class="article-date">
-  	<time datetime="2015-12-23T04:36:57.000Z" itemprop="datePublished">2015-12-23</time>
+      <a href="/2015/12/25/Import/post/30.手势识别基本使用/" class="article-date">
+  	<time datetime="2015-12-25T01:31:57.000Z" itemprop="datePublished">2015-12-25</time>
 </a>
     </div>
   
@@ -193,7 +205,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NSArray和NSDictionary控制台中文打印
+      手势识别基本使用
     </h1>
   
 
@@ -202,7 +214,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
 	</div>
 
         
@@ -213,10 +225,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+        <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
+<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
+<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
+<li>手势有以下几种:<ul>
+<li>UITapGestureRecognizer(敲击)</li>
+<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
+<li>UIPanGestureRecognizer(拖拽)</li>
+<li>UISwipeGestureRecognizer(轻扫)</li>
+<li>UIRotationGestureRecognizer(旋转)</li>
+<li>UILongPressGestureRecognizer(长按)</li>
+</ul>
+</li>
+<li><p>手势使用方法:</p>
+<ol>
+<li><p>创建手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现手势方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>拖动的状态</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动状态复位</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手势常用的代理方法</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     
@@ -225,18 +268,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/24/Import/post/29.事件处理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          事件处理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/23/Import/post/28.直接修改对象frame结构体的成员属性/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">直接修改对象frame结构体中的成员属性</div>
+    <a href="/2015/12/24/Import/post/29.事件处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">事件处理</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -250,7 +284,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/27.NSArray和NSDictionary控制台中文打印" data-title="NSArray和NSDictionary控制台中文打印" data-url="http://xionv.com/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/30.手势识别基本使用" data-title="手势识别基本使用" data-url="http://xionv.com/2015/12/25/Import/post/30.手势识别基本使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

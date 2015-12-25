@@ -171,6 +171,94 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Import/post/30.手势识别基本使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/25/Import/post/30.手势识别基本使用/" class="article-date">
+  	<time datetime="2015-12-25T01:31:57.000Z" itemprop="datePublished">2015-12-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/25/Import/post/30.手势识别基本使用/">手势识别基本使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
+<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
+<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
+<li>手势有以下几种:<ul>
+<li>UITapGestureRecognizer(敲击)</li>
+<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
+<li>UIPanGestureRecognizer(拖拽)</li>
+<li>UISwipeGestureRecognizer(轻扫)</li>
+<li>UIRotationGestureRecognizer(旋转)</li>
+<li>UILongPressGestureRecognizer(长按)</li>
+</ul>
+</li>
+<li><p>手势使用方法:</p>
+<ol>
+<li><p>创建手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现手势方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>拖动的状态</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动状态复位</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手势常用的代理方法</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Import/post/29.事件处理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -204,13 +292,6 @@
 <li>远程控制事件</li>
 </ul>
 </li>
-<li>事件是怎么传递的?<ul>
-<li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
-<li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
-<li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
-<li><strong>触摸事件的传递是从父控件传递到子控件的, 如果一个父控件不能接收事件,那么它里面的了子控件也不能够接收事件.</strong></li>
-</ul>
-</li>
 <li><p>处理事件的常用方法:</p>
 <ul>
 <li><p>触摸事件:</p>
@@ -224,11 +305,18 @@
 </li>
 </ul>
 </li>
-<li><p>一个控件什么情况下不能够接收事件.</p>
+<li><p>事件是怎么传递的?</p>
 <ul>
+<li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
+<li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
+<li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
+<li><strong>触摸事件的传递是从父控件传递到子控件的, 如果一个父控件不能接收事件,那么它里面的了子控件也不能够接收事件.</strong></li>
+</ul>
+</li>
+<li>一个控件什么情况下不能够接收事件.<ul>
 <li>不能与用户交互的时候<code>userInteractionEnabled = NO</code>.(注意:UIImageView默认是不可交互的)</li>
 <li>隐藏的时候<code>Hidden = YES</code>.</li>
-<li>颜色为全透明的时候<code>alpha = 0</code>.<br><img src="http://r6.loli.io/j26faq.png" alt=""></li>
+<li>颜色为全透明的时候<code>alpha = 0</code>.</li>
 </ul>
 </li>
 </ul>
@@ -242,21 +330,27 @@
 </li>
 <li><p>响应者链的事件传递过程</p>
 <ol>
-<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图</li>
+<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图<ul>
+<li>如果当前的View是控制器的View,那么控制器就是上一个响应者.</li>
+<li>如果当前的View不是控制器的View,那么它的父控件就是上一个响应者.</li>
+</ul>
+</li>
 <li>在视图层次结构的最顶级视图，如果也不能处理收到的事件或消息，则其将事件或消息传递给window对象进行处理</li>
 <li>如果window对象也不处理，则其将事件或消息传递给UIApplication对象</li>
 <li>如果UIApplication也不能处理该事件或消息，则将其丢弃<br><img src="http://r5.loli.io/UR77V3.png" alt="响应者链条示意图"></li>
 </ol>
 </li>
-<li><p>如何去寻找上一个响应者</p>
-<ul>
-<li>如果当前的View是控制器的View,那么控制器就是上一个响应者.</li>
-<li>如果当前的View不是控制器的View,那么它的父控件就是上一个响应者.</li>
-</ul>
+<li><p>如何寻找最合适的view</p>
+<ol>
+<li>先判断自己是否能够接收触摸事件,如果能再继续往下判断,</li>
+<li>再判断触摸的当前点在不在自己的身上.</li>
+<li>如果在自己身上,它会从后往前遍历子控件,遍历出每一个子控件后,重复前面的两个步骤.</li>
+<li>如果没有符合条件的子控件,那么它自己就是最适合的View.<br><img src="http://r6.loli.io/j26faq.png" alt=""></li>
+</ol>
 </li>
 </ul>
-<h2 id="事件传递的完整过程以触摸事件为例">事件传递的完整过程以触摸事件为例</h2><ol>
-<li>先将事件对象由上往下传递(由父控件传递给子控件),找到最合适的控件来处理这个事件.</li>
+<h2 id="事件传递的完整过程">事件传递的完整过程</h2><ol>
+<li>以触摸事件为例,先将事件对象由上往下传递(由父控件传递给子控件),找到最合适的控件来处理这个事件.</li>
 <li>调用最合适控件的<code>touches…</code>方法.</li>
 <li>如果调用了<code>[super touches….]</code>就会将事件顺着响应者链条往上传递,传递给上一个响应者.</li>
 <li>接着就会调用上一个响应者的<code>touches…</code>方法.</li>
@@ -264,10 +358,10 @@
 <h3 id="hitTest方法与pointInside方法">hitTest方法与pointInside方法</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:寻找最适合的View.</span></span><br><span class="line"><span class="comment">// 参数:当前手指所在的点;产生的事件</span></span><br><span class="line"><span class="comment">// 返回值:返回谁, 谁就是最适合的View.</span></span><br><span class="line"><span class="comment">// 什么时候用调用:只要一个事件,传递给一个控件时,就会调用这个控件的hitTest方法</span></span><br><span class="line">-(<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:判断point在不在方法调用者上</span></span><br><span class="line"><span class="comment">// point:必须是方法调用者的坐标系</span></span><br><span class="line"><span class="comment">// 什么时候调用:hitTest方法底层会调用这个方法,判断点在不在控件上.</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)pointInside:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>模拟<code>hitTest:withEvent:</code>方法的底层实现<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>模拟<code>hitTest:withEvent:</code>方法的底层实现(寻找最合适view)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="监听UIView的触摸事件:">监听UIView的触摸事件:</h3><ul>
+<h3 id="监听UIView的触摸事件来实现拖拽:">监听UIView的触摸事件来实现拖拽:</h3><ul>
 <li>想要监听UIViiew的触摸事件,首先第一步要自定义UIView,因为只有实现了UIResponder的事件方法才能够监听事件.</li>
 <li><p>一次完整的触摸过程，会经历3个状态：</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 1. 触摸开始</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 2. 触摸移动</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 3. 触摸结束</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 触摸取消（可能会经历,比如突然来电,手机自动关机）</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
@@ -288,6 +382,63 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/27.NSArray和NSDictionary控制台中文打印" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/" class="article-date">
+  	<time datetime="2015-12-23T04:36:57.000Z" itemprop="datePublished">2015-12-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/">NSArray和NSDictionary控制台中文打印</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
 	</div>
 
       
@@ -344,63 +495,6 @@
 <li>实现文件(.m)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="preprocessor">#import <span class="title">"UIView+Extension.h"</span></span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">@implementation</span> <span class="title">UIView</span> (<span class="title">Extension</span>)</span></span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setX:(<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.x</span> = x;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setY:(<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.y</span> = y;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterX:(<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.x</span> = centerX;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterY:(<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.y</span> = centerY;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setWidth:(<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.width</span> = width;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setHeight:(<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.height</span> = height;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setSize:(<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span> = size;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setOrigin:(<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span> = origin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/27.NSArray和NSDictionary控制台中文打印" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/" class="article-date">
-  	<time datetime="2015-12-23T04:36:57.000Z" itemprop="datePublished">2015-12-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/">NSArray和NSDictionary控制台中文打印</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -819,133 +913,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/一个应用程序的启动流程" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/17/Import/post/一个应用程序的启动流程/" class="article-date">
-  	<time datetime="2015-12-17T12:30:57.000Z" itemprop="datePublished">2015-12-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/17/Import/post/一个应用程序的启动流程/">一个应用程序的启动流程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="应用程序完整启动流程">应用程序完整启动流程</h2><ol>
-<li>执行Main函数.</li>
-<li><p>在main函数中调用UIApplicationMain函数. </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([AppDelegate class]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建UIApplication对象,并设置UIApplicationMain对象的代理.</p>
-<ul>
-<li>UIApplicationMain的第三个参数就是UIApplication的名称,如果指定为nil,它会默认为UIApplication.(nil == @”UIApplication”);</li>
-<li>UIApplicationMain的第四个参数为UIApplication的代理.</li>
-</ul>
-</li>
-<li>开启一个主运行循环,保证应用程序不退出.  </li>
-<li>加载info.plist程序配置文件.判断info.plist文件当中的key:[Main storyboard file base name]<br>有没有指定storyboard文件,如果有就去加载info.plist文件,如果没有,那么应用程序加载完毕.</li>
-</ol>
-<h3 id="UIApplication的一些功能">UIApplication的一些功能</h3><ol>
-<li><p>设置应用的监听权限</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 获取当前iOS版本号</span></span><br><span class="line"><span class="keyword">float</span> sysVersion = [[<span class="built_in">UIDevice</span> currentDevice] systemVersion]<span class="variable">.floatValue</span>;</span><br><span class="line"><span class="comment">// iOS8以后必须要获取通知权限才能显示applicationIconBadgeNumber</span></span><br><span class="line"><span class="keyword">if</span> (sysVersion &gt;= <span class="number">8.0</span>) &#123;</span><br><span class="line">    <span class="built_in">UIUserNotificationType</span> type = <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeSound</span>;</span><br><span class="line">    <span class="built_in">UIUserNotificationSettings</span> *setting = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:type categories:<span class="literal">nil</span>];</span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:setting];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>网络提醒(连接网络提示)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">application<span class="variable">.networkActivityIndicatorVisible</span> = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置状态栏</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 隐藏状态栏</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarHidden:<span class="literal">YES</span> withAnimation:<span class="literal">YES</span>];</span><br><span class="line"><span class="comment">// 状态栏样式</span></span><br><span class="line">application<span class="variable">.statusBarStyle</span> = <span class="built_in">UIStatusBarStyleLightContent</span>;</span><br></pre></td></tr></table></figure>
-<p>应用程序的状态栏默认是控制器来管理, 但是通常在开发当中都设置为应用程序来统一管理状态栏. 在info.plist当中进行配置:<code>View controller-based status bar appearance : NO</code></p>
-</li>
-<li>跳转页面<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 打开网页</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];</span><br><span class="line"><span class="comment">// 跳转到打电话</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"tel://10000"</span>]];</span><br><span class="line"><span class="comment">// 跳转到发短信</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"sms://10000"</span>]];</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="应用程序的生命周期">应用程序的生命周期</h3><ul>
-<li><p>应用程序启动完成</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"应用程序启动了"</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"UIApplication调用了我"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序即将失去焦点</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我退出了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序完全进入后台</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationDidEnterBackground:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"进入后台"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序即将进入前台</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationWillEnterForeground:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我回来了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序重新获得焦点</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationDidBecomeActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我刷新了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序即将关闭</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)applicationWillTerminate:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我拜拜了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="应用程序显示流程">应用程序显示流程</h2><ol>
-<li>创建一个窗口 (UIWindow, 系统已经默认创建这个成员属性, 需要自己创建赋值)</li>
-<li>创建根控制器 (rootViewController)</li>
-<li>给窗口设置根控制器 (window.rootViewController)</li>
-<li><p>显示窗口(makeKeyAndVisible).<br>makeKeyAndVisible方法 : 把窗口设置为应用程序的主窗口. 窗口默认是隐藏的,当调用该方法后, 会设置窗口的hidden = no, 并把这个窗口设置为主窗口并显示.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="comment">// 1.创建UIWindow</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span> = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[[<span class="built_in">UIScreen</span> mainScreen] bounds]];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line">    <span class="comment">// 2.创建根控制器</span></span><br><span class="line">    ViewController *vc = [[ViewController alloc] init];</span><br><span class="line">    <span class="comment">// 3.设置根控制器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.rootViewController</span> = vc;</span><br><span class="line">    <span class="comment">// 4.把UIWindow 设为当前窗口</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.window</span> makeKeyAndVisible];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ps: window的显示与根控制器中view的显示互不影响. view在window的上面.</p>
-</li>
-</ol>
-<h3 id="控制器view的显示流程">控制器view的显示流程</h3><ol>
-<li><p>先判断控制器是不是从storyboard中加载. </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIStoryboard</span> storyboardWithName:<span class="string">@"Main"</span> bundle:<span class="literal">nil</span>] instantiateInitialViewController];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再判断是不是从xib中加载</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIViewController</span> alloc] initWithNibName:<span class="string">@"VC"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 1&gt; initWithNibName:如果指定了名称,那么它就会去加载指定名称的Xib.</span></span><br><span class="line"><span class="comment">//  MyViewController *vc =  [[MyViewController alloc] initWithNibName:@"VC" bundle:nil];</span></span><br><span class="line"><span class="comment">// 2&gt; 如果没有指定名称.指定为nil,那么它就会去先加载跟它相同名称的Xib.</span></span><br><span class="line"><span class="comment">//  MyViewController *vc =  [[MyViewController alloc] initWithNibName:nil bundle:nil];</span></span><br><span class="line"><span class="comment">// 3&gt; 如果没有跟它名称相同的Xib,那么它就会去加载去掉Controller后跟它名称相同的Xib</span></span><br></pre></td></tr></table></figure>
-<p>ps: 控制器的<code>init</code>方法默认会调用<code>initWithNibName:</code>方法.</p>
-<p><img src="http://r.loli.io/fuUbqq.png" alt=""></p>
-</li>
-<li><p>如果都不是, 控制器会调用loadView方法,创建一个空的UIView.<br>当控制器被使用的时候,控制器会调用loadView方法.loadView –&gt; viewDidLoad</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">     - (<span class="keyword">void</span>)loadView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span> = [[<span class="built_in">UIView</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>附:在Xcode6以后配置pch文件<br><img src="http://r.loli.io/AzaUje.png" alt=""></p>
-<p> 在pch文件中配置调试模式时运行XWLog(…)代码:<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#ifdef DEBUG</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...) NSLog(__VA_ARGS__)</span></span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...)</span></span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure></p>
-<p> ps: 在宏当中<code>...</code>表示可变参数.在函数中表示可变参数用:<code>__VA_ARGS__</code>.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
 	</div>
 
       

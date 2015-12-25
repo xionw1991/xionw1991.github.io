@@ -12,11 +12,10 @@ iOS当中常用的事件:
 远程控制事件
 
 
-事件是怎么传递的?
-比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.
-UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.
-主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.
-触摸事件的传递是从父控件传递到子控件的, 如果一个父">
+处理事件的常用方法:
+
+触摸事件:
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;- (void)tou">
 <meta property="og:type" content="article">
 <meta property="og:title" content="事件处理">
 <meta property="og:url" content="http://xionv.com/2015/12/24/Import/post/29.事件处理/index.html">
@@ -28,14 +27,13 @@ iOS当中常用的事件:
 远程控制事件
 
 
-事件是怎么传递的?
-比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.
-UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.
-主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.
-触摸事件的传递是从父控件传递到子控件的, 如果一个父">
-<meta property="og:image" content="http://r6.loli.io/j26faq.png">
+处理事件的常用方法:
+
+触摸事件:
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;- (void)tou">
 <meta property="og:image" content="http://r5.loli.io/UR77V3.png">
-<meta property="og:updated_time" content="2015-12-24T15:41:43.000Z">
+<meta property="og:image" content="http://r6.loli.io/j26faq.png">
+<meta property="og:updated_time" content="2015-12-25T01:20:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件处理">
 <meta name="twitter:description" content="事件的产生和传递
@@ -45,11 +43,10 @@ iOS当中常用的事件:
 远程控制事件
 
 
-事件是怎么传递的?
-比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.
-UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.
-主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.
-触摸事件的传递是从父控件传递到子控件的, 如果一个父">
+处理事件的常用方法:
+
+触摸事件:
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;- (void)tou">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -249,13 +246,6 @@ UIApplication会从事件队列中取出最前面的事件,并将事件分发下
 <li>远程控制事件</li>
 </ul>
 </li>
-<li>事件是怎么传递的?<ul>
-<li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
-<li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
-<li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
-<li><strong>触摸事件的传递是从父控件传递到子控件的, 如果一个父控件不能接收事件,那么它里面的了子控件也不能够接收事件.</strong></li>
-</ul>
-</li>
 <li><p>处理事件的常用方法:</p>
 <ul>
 <li><p>触摸事件:</p>
@@ -269,11 +259,18 @@ UIApplication会从事件队列中取出最前面的事件,并将事件分发下
 </li>
 </ul>
 </li>
-<li><p>一个控件什么情况下不能够接收事件.</p>
+<li><p>事件是怎么传递的?</p>
 <ul>
+<li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
+<li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
+<li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
+<li><strong>触摸事件的传递是从父控件传递到子控件的, 如果一个父控件不能接收事件,那么它里面的了子控件也不能够接收事件.</strong></li>
+</ul>
+</li>
+<li>一个控件什么情况下不能够接收事件.<ul>
 <li>不能与用户交互的时候<code>userInteractionEnabled = NO</code>.(注意:UIImageView默认是不可交互的)</li>
 <li>隐藏的时候<code>Hidden = YES</code>.</li>
-<li>颜色为全透明的时候<code>alpha = 0</code>.<br><img src="http://r6.loli.io/j26faq.png" alt=""></li>
+<li>颜色为全透明的时候<code>alpha = 0</code>.</li>
 </ul>
 </li>
 </ul>
@@ -287,21 +284,27 @@ UIApplication会从事件队列中取出最前面的事件,并将事件分发下
 </li>
 <li><p>响应者链的事件传递过程</p>
 <ol>
-<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图</li>
+<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图<ul>
+<li>如果当前的View是控制器的View,那么控制器就是上一个响应者.</li>
+<li>如果当前的View不是控制器的View,那么它的父控件就是上一个响应者.</li>
+</ul>
+</li>
 <li>在视图层次结构的最顶级视图，如果也不能处理收到的事件或消息，则其将事件或消息传递给window对象进行处理</li>
 <li>如果window对象也不处理，则其将事件或消息传递给UIApplication对象</li>
 <li>如果UIApplication也不能处理该事件或消息，则将其丢弃<br><img src="http://r5.loli.io/UR77V3.png" alt="响应者链条示意图"></li>
 </ol>
 </li>
-<li><p>如何去寻找上一个响应者</p>
-<ul>
-<li>如果当前的View是控制器的View,那么控制器就是上一个响应者.</li>
-<li>如果当前的View不是控制器的View,那么它的父控件就是上一个响应者.</li>
-</ul>
+<li><p>如何寻找最合适的view</p>
+<ol>
+<li>先判断自己是否能够接收触摸事件,如果能再继续往下判断,</li>
+<li>再判断触摸的当前点在不在自己的身上.</li>
+<li>如果在自己身上,它会从后往前遍历子控件,遍历出每一个子控件后,重复前面的两个步骤.</li>
+<li>如果没有符合条件的子控件,那么它自己就是最适合的View.<br><img src="http://r6.loli.io/j26faq.png" alt=""></li>
+</ol>
 </li>
 </ul>
-<h2 id="事件传递的完整过程以触摸事件为例">事件传递的完整过程以触摸事件为例</h2><ol>
-<li>先将事件对象由上往下传递(由父控件传递给子控件),找到最合适的控件来处理这个事件.</li>
+<h2 id="事件传递的完整过程">事件传递的完整过程</h2><ol>
+<li>以触摸事件为例,先将事件对象由上往下传递(由父控件传递给子控件),找到最合适的控件来处理这个事件.</li>
 <li>调用最合适控件的<code>touches…</code>方法.</li>
 <li>如果调用了<code>[super touches….]</code>就会将事件顺着响应者链条往上传递,传递给上一个响应者.</li>
 <li>接着就会调用上一个响应者的<code>touches…</code>方法.</li>
@@ -309,10 +312,10 @@ UIApplication会从事件队列中取出最前面的事件,并将事件分发下
 <h3 id="hitTest方法与pointInside方法">hitTest方法与pointInside方法</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:寻找最适合的View.</span></span><br><span class="line"><span class="comment">// 参数:当前手指所在的点;产生的事件</span></span><br><span class="line"><span class="comment">// 返回值:返回谁, 谁就是最适合的View.</span></span><br><span class="line"><span class="comment">// 什么时候用调用:只要一个事件,传递给一个控件时,就会调用这个控件的hitTest方法</span></span><br><span class="line">-(<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:判断point在不在方法调用者上</span></span><br><span class="line"><span class="comment">// point:必须是方法调用者的坐标系</span></span><br><span class="line"><span class="comment">// 什么时候调用:hitTest方法底层会调用这个方法,判断点在不在控件上.</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)pointInside:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>模拟<code>hitTest:withEvent:</code>方法的底层实现<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>模拟<code>hitTest:withEvent:</code>方法的底层实现(寻找最合适view)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="监听UIView的触摸事件:">监听UIView的触摸事件:</h3><ul>
+<h3 id="监听UIView的触摸事件来实现拖拽:">监听UIView的触摸事件来实现拖拽:</h3><ul>
 <li>想要监听UIViiew的触摸事件,首先第一步要自定义UIView,因为只有实现了UIResponder的事件方法才能够监听事件.</li>
 <li><p>一次完整的触摸过程，会经历3个状态：</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 1. 触摸开始</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 2. 触摸移动</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 3. 触摸结束</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 触摸取消（可能会经历,比如突然来电,手机自动关机）</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
@@ -333,9 +336,18 @@ UIApplication会从事件队列中取出最前面的事件,并将事件分发下
     
 <nav id="article-nav">
   
+    <a href="/2015/12/25/Import/post/30.手势识别基本使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          手势识别基本使用
+        
+      </div>
+    </a>
   
-    <a href="/2015/12/23/Import/post/28.直接修改对象frame结构体的成员属性/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">直接修改对象frame结构体中的成员属性</div>
+  
+    <a href="/2015/12/23/Import/post/27.NSArray和NSDictionary控制台中文打印/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NSArray和NSDictionary控制台中文打印</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
