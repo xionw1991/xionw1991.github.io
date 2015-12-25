@@ -210,7 +210,7 @@
 </ul>
 </li>
 <li><p>手势使用方法:</p>
-<ol>
+<ul>
 <li><p>创建手势</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
 </li>
@@ -220,7 +220,7 @@
 <li><p>实现手势方法</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 </li>
 <li><p>拖动的状态</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
