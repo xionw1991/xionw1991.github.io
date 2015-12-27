@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+						<a href="/tags/Quartz2D/" style="font-size: 10px;">Quartz2D</a> <a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,67 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Import/post/NSFileManager计算文件夹大小" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/10/Import/post/NSFileManager计算文件夹大小/" class="article-date">
+  	<time datetime="2015-12-10T02:08:57.000Z" itemprop="datePublished">2015-12-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/10/Import/post/NSFileManager计算文件夹大小/">NSFileManager计算文件夹大小</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="计算文件夹大小">计算文件夹大小</h2><ul>
+<li><p>给NSString添加一个计算文件夹大小的分类, 以字节输出</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">                <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                    fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将字节单位转化为兆  </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size)&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">    <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">    sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">    <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">        cacheSize /= <span class="number">1000</span>;</span><br><span class="line">        sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">        sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sizeStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Import/post/SQLite在iOS中的使用(下)" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -823,7 +884,7 @@
 </ul>
 <hr>
 <blockquote>
-<p>ps: 首尾式动画是显示动画.<br>pps: 能够实现动画的属性基本都是实型,像BOOL类型的属性就不能用来显示动画效果.<br>ppps: 每个UIView都是由图层来显示图像的, 也就是说每个UIView中都有一个CALayer成员变量,来显示图像, 而且这个成员变量是不可交互的, 改变自定义图层的属性, 可以触发隐式动画.</p>
+<p>ps: 首尾式动画是显式动画.<br>pps: 能够实现动画的属性基本都是实型,像BOOL类型的属性就不能用来显示动画效果.<br>ppps: 每个UIView都是由图层来显示图像的, 也就是说每个UIView中都有一个CALayer成员变量,来显示图像, 而且这个成员变量是不可交互的, 改变自定义图层的属性, 可以触发隐式动画.</p>
 </blockquote>
 
       
@@ -995,90 +1056,9 @@
 
 
   
-    <article id="post-Import/post/Singleton" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/29/Import/post/Singleton/" class="article-date">
-  	<time datetime="2015-11-29T13:27:57.000Z" itemprop="datePublished">2015-11-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/29/Import/post/Singleton/">单例设计模式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-单例模式概念">1.单例模式概念</h2><ul>
-<li><p>什么是单例模式:(Singleton)</p>
-<ul>
-<li>单例模式的意图是是的类的对象成为系统中唯一的实例,􏰀供一个访问点,供客户类 共享资源。</li>
-</ul>
-</li>
-<li><p>什么情况下使用单例?</p>
-<ul>
-<li>1、类只能有一个实例,而且必须从一个为人熟知的访问点对其进行访问,比如工厂方 法。</li>
-<li>2、这个唯一的实例只能通过子类化进行扩展,而且扩展的对象不会破坏客户端代码。</li>
-</ul>
-</li>
-<li><p>单例设计模式的要点:</p>
-<ul>
-<li>1) 某个类只能有一个实例。</li>
-<li>2)他必须自行创建这个对象</li>
-<li>3)必须自行向整个系统􏰀供这个实例;</li>
-<li>4)为了保证实例的唯一性,我们必须将</li>
-<li>5)这个方法必须是一个静态类</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/11/29/Import/post/Singleton/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

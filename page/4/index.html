@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Github, Gitcafe和 Coding的Pages服务对比 | Trevor Coding</title>
+  <title>Trevor Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Github, Gitcafe和 Coding的Pages服务对比">
-<meta property="og:url" content="http://xionv.com/2015/12/14/Import/post/为什么不用国内的代码托管网站/index.html">
+  <meta name="description" content="Trevor Coding | iOS">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Trevor Coding">
+<meta property="og:url" content="http://xionv.com/page/4/index.html">
 <meta property="og:site_name" content="Trevor Coding">
-<meta property="og:description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
-<meta property="og:updated_time" content="2015-12-23T05:17:06.000Z">
+<meta property="og:description" content="Trevor Coding | iOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github, Gitcafe和 Coding的Pages服务对比">
-<meta name="twitter:description" content="GitHub/GitCafe/Coding的Pages服务 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署. 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;">
+<meta name="twitter:title" content="Trevor Coding">
+<meta name="twitter:description" content="Trevor Coding | iOS">
   
     <link rel="alternative" href="/atom.xml" title="Trevor Coding" type="application/atom+xml">
   
@@ -170,11 +169,13 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/为什么不用国内的代码托管网站" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
+  
+    <article id="post-Import/post/Singleton" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/14/Import/post/为什么不用国内的代码托管网站/" class="article-date">
-  	<time datetime="2015-12-14T04:01:57.000Z" itemprop="datePublished">2015-12-14</time>
+      <a href="/2015/11/29/Import/post/Singleton/" class="article-date">
+  	<time datetime="2015-11-29T13:27:57.000Z" itemprop="datePublished">2015-11-29</time>
 </a>
     </div>
   
@@ -186,97 +187,76 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Github, Gitcafe和 Coding的Pages服务对比
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/29/Import/post/Singleton/">单例设计模式</a>
     </h1>
   
 
       </header>
       
-      <div class="article-info article-info-post">
-        
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/随笔/">随笔</a>
-	</div>
-
-
-        <div class="clearfix"></div>
-      </div>
-      
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
-</li>
-<li><p>说说心得:</p>
+        <h2 id="1-单例模式概念">1.单例模式概念</h2><ul>
+<li><p>什么是单例模式:(Singleton)</p>
 <ul>
-<li>github: 稳定,除了网络抽风push的时候有点慢和国内的搜索引擎可能爬不到,其他完美仍然是首选.</li>
-<li>gitcafe: 据说服务器在香港,相比github访问速度要快一些,但是最近很不稳定,比如昨天就宕机了很久,导致博客打不开,之后push上去的新内容不能及时更新.不知道是不是我昨天运气不好,等稳定了再说.</li>
-<li>coding: 速度快,而且界面友好,但是不支持免费自定义域名,需要花钱办会员,对于没有绑定域名需求的朋友还是很推荐的.</li>
+<li>单例模式的意图是是的类的对象成为系统中唯一的实例,􏰀供一个访问点,供客户类 共享资源。</li>
 </ul>
 </li>
-<li><p>最后: 我还是推荐把github作为主站,然后把gitcafe作为镜像用于国内的搜索引擎去收入(使用dnspods把gitcafe.io解析为搜索引擎线路).coding作为备份网站,当前面两个网站打不开的时候救急.</p>
-<blockquote>
-<p>最后的最后, 生命止于折腾.</p>
-</blockquote>
+<li><p>什么情况下使用单例?</p>
+<ul>
+<li>1、类只能有一个实例,而且必须从一个为人熟知的访问点对其进行访问,比如工厂方 法。</li>
+<li>2、这个唯一的实例只能通过子类化进行扩展,而且扩展的对象不会破坏客户端代码。</li>
+</ul>
+</li>
+<li><p>单例设计模式的要点:</p>
+<ul>
+<li>1) 某个类只能有一个实例。</li>
+<li>2)他必须自行创建这个对象</li>
+<li>3)必须自行向整个系统􏰀供这个实例;</li>
+<li>4)为了保证实例的唯一性,我们必须将</li>
+<li>5)这个方法必须是一个静态类</li>
+</ul>
 </li>
 </ul>
-
+<hr>
+<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2>
       
     </div>
     
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/12/14/Import/post/模型控制View的显示demo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          TableView中MVC模式的简单应用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/12/13/Import/post/TableView顶部图片下拉放大demo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">TableView顶部图片下拉放大demo</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
 
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/29/Import/post/Singleton/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
   
 </article>
 
 
 
 
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/为什么不用国内的代码托管网站" data-title="Github, Gitcafe和 Coding的Pages服务对比" data-url="http://xionv.com/2015/12/14/Import/post/为什么不用国内的代码托管网站/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"xionv"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
 
 
-
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -300,8 +280,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
