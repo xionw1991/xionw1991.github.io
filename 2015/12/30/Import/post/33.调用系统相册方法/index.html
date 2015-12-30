@@ -3,64 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>copy深浅的规律 | XionVV Coding</title>
+  <title>调用系统相册方法 | XionVV Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
+  <meta name="description" content="调用系统相册
 
-
-浅复制（浅拷贝，指针拷贝，shallow copy）
-源对象和副本对象是同一个对象
-源对象（副本对象）引用计数器+1,相当于做一次retain操作
-本质是：没有产生新的对象
-原对象引用计数器+1
-必须对原对象进行释放
-
-
-
-
-深复制（深拷贝，内容拷贝，deep copy）
-源对象和副本对象是不同的两个对象
-源对象引用计数器不变,副本">
+调用系统相册需要先实例化一个照片选择控制器
+// 1. 创建照片选择器UIImagePickerController *picker = [[UIImagePickerController alloc] init];// 2. 设置数据源类型(是相册还是照相机)picker.sourceType = UIImagePickerControllerSourceTypeSavedPho">
 <meta property="og:type" content="article">
-<meta property="og:title" content="copy深浅的规律">
-<meta property="og:url" content="http://xionv.com/2015/12/19/Import/post/23.copy深浅的规律/index.html">
+<meta property="og:title" content="调用系统相册方法">
+<meta property="og:url" content="http://xionv.com/2015/12/30/Import/post/33.调用系统相册方法/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
+<meta property="og:description" content="调用系统相册
 
-
-浅复制（浅拷贝，指针拷贝，shallow copy）
-源对象和副本对象是同一个对象
-源对象（副本对象）引用计数器+1,相当于做一次retain操作
-本质是：没有产生新的对象
-原对象引用计数器+1
-必须对原对象进行释放
-
-
-
-
-深复制（深拷贝，内容拷贝，deep copy）
-源对象和副本对象是不同的两个对象
-源对象引用计数器不变,副本">
-<meta property="og:image" content="http://r.loli.io/ee63aa.png">
-<meta property="og:updated_time" content="2015-12-19T12:47:57.000Z">
+调用系统相册需要先实例化一个照片选择控制器
+// 1. 创建照片选择器UIImagePickerController *picker = [[UIImagePickerController alloc] init];// 2. 设置数据源类型(是相册还是照相机)picker.sourceType = UIImagePickerControllerSourceTypeSavedPho">
+<meta property="og:updated_time" content="2015-12-30T08:22:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="copy深浅的规律">
-<meta name="twitter:description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
+<meta name="twitter:title" content="调用系统相册方法">
+<meta name="twitter:description" content="调用系统相册
 
-
-浅复制（浅拷贝，指针拷贝，shallow copy）
-源对象和副本对象是同一个对象
-源对象（副本对象）引用计数器+1,相当于做一次retain操作
-本质是：没有产生新的对象
-原对象引用计数器+1
-必须对原对象进行释放
-
-
-
-
-深复制（深拷贝，内容拷贝，deep copy）
-源对象和副本对象是不同的两个对象
-源对象引用计数器不变,副本">
+调用系统相册需要先实例化一个照片选择控制器
+// 1. 创建照片选择器UIImagePickerController *picker = [[UIImagePickerController alloc] init];// 2. 设置数据源类型(是相册还是照相机)picker.sourceType = UIImagePickerControllerSourceTypeSavedPho">
   
     <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
   
@@ -216,11 +179,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/23.copy深浅的规律" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Import/post/33.调用系统相册方法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/19/Import/post/23.copy深浅的规律/" class="article-date">
-  	<time datetime="2015-12-19T07:42:57.000Z" itemprop="datePublished">2015-12-19</time>
+      <a href="/2015/12/30/Import/post/33.调用系统相册方法/" class="article-date">
+  	<time datetime="2015-12-30T07:59:57.000Z" itemprop="datePublished">2015-12-30</time>
 </a>
     </div>
   
@@ -233,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      copy深浅的规律
+      调用系统相册方法
     </h1>
   
 
@@ -242,7 +205,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS概念/">iOS概念</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS备忘/">iOS备忘</a></li></ul>
 	</div>
 
         
@@ -253,29 +216,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
-</blockquote>
-<ul>
-<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
-<li>源对象和副本对象是同一个对象</li>
-<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
-<li>本质是：没有产生新的对象</li>
-<li>原对象引用计数器+1</li>
-<li>必须对原对象进行释放</li>
-</ul>
+        <ul>
+<li><p>调用系统相册</p>
+<ol>
+<li><p>调用系统相册需要先实例化一个照片选择控制器</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 创建照片选择器</span></span><br><span class="line"><span class="built_in">UIImagePickerController</span> *picker = [[<span class="built_in">UIImagePickerController</span> alloc] init];</span><br><span class="line"><span class="comment">// 2. 设置数据源类型(是相册还是照相机)</span></span><br><span class="line">picker<span class="variable">.sourceType</span> = <span class="built_in">UIImagePickerControllerSourceTypeSavedPhotosAlbum</span>;</span><br><span class="line"><span class="comment">// 3. 将调用改控制的对象设置为代理 - 这里必须要实现系统要求的两个协议</span></span><br><span class="line">picker<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line"><span class="comment">// 4. modal出照片选择控制器</span></span><br><span class="line">[<span class="keyword">self</span> presentViewController:picker animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用代理方法拿到照片</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// info这个字典参数是选中照片的一些信息,根据里面的key可以拿到选择的照片</span></span><br><span class="line">    - (<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 拿到图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *image = info[<span class="built_in">UIImagePickerControllerOriginalImage</span>];</span><br><span class="line">    <span class="comment">// 将照片选取器隐藏</span></span><br><span class="line">    [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>往相册里存入照片</p>
+<ol>
+<li><p>调用写入方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将图片保存到用户相册里面</span></span><br><span class="line"><span class="comment">// image: 将要保存的图片</span></span><br><span class="line"><span class="comment">// target: 方法监听者</span></span><br><span class="line"><span class="comment">// SEL: 保存图片完成时调用的方法(系统规定写法,用来监听保存状态)</span></span><br><span class="line"><span class="comment">// contextInfo: 上下文信息</span></span><br><span class="line"><span class="built_in">UIImageWriteToSavedPhotosAlbum</span>(image, <span class="keyword">self</span>, <span class="keyword">@selector</span>(image:didFinishSavingWithError:contextInfo:), <span class="literal">nil</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现监听方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 保存相册后回调的监听方法</span></span><br><span class="line">    - (<span class="keyword">void</span>)image:(<span class="built_in">UIImage</span> *)image didFinishSavingWithError:(<span class="built_in">NSError</span> *)error contextInfo:(<span class="keyword">void</span> *)contextInfo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 </li>
 </ul>
-<ul>
-<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
-<li>源对象和副本对象是不同的两个对象</li>
-<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
-<li>本质是：产生了新的对象</li>
-<li>必须释放新对象</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
 
       
     </div>
@@ -285,18 +246,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/12/22/Import/post/25.KVC的底层实现/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/30/Import/post/34.NSFileManager和NSFileHandle的常用方法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          KVC的底层实现
+          NSFileManager和NSFileHandle的常用方法
         
       </div>
     </a>
   
   
-    <a href="/2015/12/19/Import/post/利用NSValue来包装结构体/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">利用NSValue来包装结构体</div>
+    <a href="/2015/12/30/Import/post/32.核心动画与显示动画的区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">核心动画与UIView动画的对比</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -310,7 +271,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/23.copy深浅的规律" data-title="copy深浅的规律" data-url="http://xionv.com/2015/12/19/Import/post/23.copy深浅的规律/"></div>
+	<div class="ds-thread" data-thread-key="Import/post/33.调用系统相册方法" data-title="调用系统相册方法" data-url="http://xionv.com/2015/12/30/Import/post/33.调用系统相册方法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

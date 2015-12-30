@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>核心动画与UIView动画的对比 | XionVV Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CALayer
+CALayer简介
+CALayer我们又称它叫做层.
+在每个UIView内部都有一个layer这样一个属性.
+UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
+我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…
+
+
+设置CALayer属性
+     - (void)addCALayer&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="核心动画与UIView动画的对比">
+<meta property="og:url" content="http://xionv.com/2015/12/30/Import/post/32.核心动画与显示动画的区别/index.html">
+<meta property="og:site_name" content="XionVV Coding">
+<meta property="og:description" content="CALayer
+CALayer简介
+CALayer我们又称它叫做层.
+在每个UIView内部都有一个layer这样一个属性.
+UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
+我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…
+
+
+设置CALayer属性
+     - (void)addCALayer&amp;">
+<meta property="og:updated_time" content="2015-12-30T11:41:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="核心动画与UIView动画的对比">
+<meta name="twitter:description" content="CALayer
+CALayer简介
+CALayer我们又称它叫做层.
+在每个UIView内部都有一个layer这样一个属性.
+UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
+我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…
+
+
+设置CALayer属性
+     - (void)addCALayer&amp;">
+  
+    <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Import/post/32.核心动画与显示动画的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/30/Import/post/32.核心动画与显示动画的区别/" class="article-date">
+  	<time datetime="2015-12-30T07:45:57.000Z" itemprop="datePublished">2015-12-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      核心动画与UIView动画的对比
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CALayer">CALayer</h3><ul>
+<li>CALayer简介<ul>
+<li>CALayer我们又称它叫做层.</li>
+<li>在每个UIView内部都有一个layer这样一个属性.</li>
+<li>UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.</li>
+<li>我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…</li>
+</ul>
+</li>
+<li><p>设置CALayer属性</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br><br> <strong>PS</strong>: 为什么要使用CGImageRef、CGColorRef?<br>        为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.</p>
+</li>
+<li><p>CALayer的<code>CATransform3D</code>属性 (只有旋转的时候才可以看出3D的效果).</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// x,y,z 分别代表x,y,z轴.</span></span><br><span class="line"><span class="comment">// 旋转: </span></span><br><span class="line"><span class="built_in">CATransform3DMakeRotation</span>(M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 平移:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeTranslation</span>(x,y,z);</span><br><span class="line"><span class="comment">// 缩放:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeScale</span>(x,y,z);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="" alt="CATransform3D Key Paths"></p>
+<h3 id="隐式动画">隐式动画</h3><ul>
+<li>什么是隐式动画 <br><ul>
+<li>在了解隐式动画前先了解什么是根层和非根层:<ul>
+<li>根层: UIView内部自动关联着的那个layer我们称它是根层.</li>
+<li>非根层: 自己手动创建的层,称为非根层.</li>
+</ul>
+</li>
+<li>隐式动画就是当对非根层的部分属性进行修改时,它会自动的产生一些动画的效果.我们称这个默认产生的动画为隐式动画.</li>
+</ul>
+</li>
+<li>如何取消隐式动画<ul>
+<li>隐式动画的底层是包装成一个事务(<code>CATransaction</code>)来进行的.<ul>
+<li>事物: 很多操作绑定在一起,当这些操作执行完毕后,才去执行下一个操作.</li>
+</ul>
+</li>
+<li>手动在事物中关闭动画<code>[CATransaction setDisableActions:YES];</code><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UITouch</span> *touch = [touches anyObject];</span><br><span class="line">    <span class="built_in">CGPoint</span> point = [touch locationInView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1. 开启事务</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> begin];</span><br><span class="line">        <span class="comment">// 动画时长</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> setAnimationDuration:<span class="number">0.1</span>];</span><br><span class="line">        <span class="comment">// 取消隐式动画 (默认有)</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> setDisableActions:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 修改图层属性</span></span><br><span class="line">    <span class="built_in">CGFloat</span> r = arc4random_uniform(<span class="number">256</span>) / <span class="number">255.0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> g = arc4random_uniform(<span class="number">256</span>) / <span class="number">255.0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> b = arc4random_uniform(<span class="number">256</span>) / <span class="number">255.0</span>;</span><br><span class="line">    <span class="comment">// 修改背景颜色</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> colorWithRed:r green:g blue:b alpha:<span class="number">1</span>]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 修改圆角度数</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.cornerRadius</span> = arc4random_uniform(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">// 修改位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.position</span> = point;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 提交事务</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> commit];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="核心动画">核心动画</h3><p><img src="" alt="核心动画的继承结构"></p>
+<blockquote>
+<p>核心动画中所有类都遵守CAMediaTiming协议</p>
+</blockquote>
+<ul>
+<li><p><strong>核心动画的继承结构</strong></p>
+<ul>
+<li>CAAnaimation是个抽象类,不具备动画效果,必须用它的子类才有动画效果,其中:<ul>
+<li>CAAnimationGroup是个动画组,可以同时进行缩放,旋转;</li>
+<li>CATransition是转场动画,界面之间跳转都可以用转场动画;</li>
+</ul>
+</li>
+<li>CAPropertyAnimation也是个抽象类,本身不具备动画效果,只有调用其子类才有动画,其中:<ul>
+<li>CABasicAnimation基本动画，做一些简单效果;</li>
+<li>CAKeyframeAnimation帧动画，做一些连续的流畅的动画;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基础核心动画</strong></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建基本核心动画</span></span><br><span class="line"><span class="comment">// 旋转</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *rotation = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line"><span class="comment">// 直接通过KVC来更改键值</span></span><br><span class="line">rotation<span class="variable">.keyPath</span> = <span class="string">@"transform.rotation"</span>;</span><br><span class="line">rotation<span class="variable">.toValue</span> = @M_PI_2;</span><br><span class="line"><span class="comment">// 位移</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *position = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line">position<span class="variable">.keyPath</span> = <span class="string">@"position"</span>;</span><br><span class="line">position<span class="variable">.toValue</span> = [<span class="built_in">NSValue</span> valueWith<span class="built_in">CGPoint</span>:<span class="built_in">CGPointMake</span>(<span class="number">50</span>, <span class="number">200</span>)];</span><br><span class="line"><span class="comment">// 缩放</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *scale = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line">scale<span class="variable">.keyPath</span> = <span class="string">@"transform.scale"</span>;</span><br><span class="line">scale<span class="variable">.toValue</span> = @<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个动画组(组合动画)</span></span><br><span class="line"><span class="built_in">CAAnimationGroup</span> *group = [<span class="built_in">CAAnimationGroup</span> animation];</span><br><span class="line"><span class="comment">// 将动画添加到动画组</span></span><br><span class="line">group<span class="variable">.animations</span> = @[rotation, position, scale];</span><br><span class="line"><span class="comment">// 动画时间</span></span><br><span class="line">group<span class="variable">.duration</span> = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 取消反弹</span></span><br><span class="line">group<span class="variable">.removedOnCompletion</span> = <span class="literal">NO</span>;</span><br><span class="line"><span class="comment">// 保存动画最前面的效果</span></span><br><span class="line">group<span class="variable">.fillMode</span> = k<span class="built_in">CAFillModeForwards</span>;</span><br><span class="line"><span class="comment">// 给控件图层添加动画</span></span><br><span class="line">[image<span class="variable">.layer</span> addAnimation:group forKey:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<pre><code>使用动画组的好处:不需要每次都去添加动画,设置动画完成时的属性.
+只需要把要执行的动画,添加到动画组的animations数组当中即可.
+最后把组动画添加到层上面,就会自动执行数组当中的动画.
+动画完成时设置的属性也只需要设置一次.
+</code></pre></li>
+<li><p><strong>关键帧动画</strong></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1.创建关键帧动画对象</span></span><br><span class="line"><span class="built_in">CAKeyframeAnimation</span> *frameAnim = [<span class="built_in">CAKeyframeAnimation</span> animation];</span><br><span class="line"><span class="comment">// 2.绘制一个路径</span></span><br><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>)];</span><br><span class="line"><span class="comment">// 3.设置动画参数</span></span><br><span class="line">group<span class="variable">.duration</span> = <span class="number">1</span>;</span><br><span class="line">group<span class="variable">.removedOnCompletion</span> = <span class="literal">NO</span>;</span><br><span class="line">group<span class="variable">.fillMode</span> = k<span class="built_in">CAFillModeForwards</span>;</span><br><span class="line"><span class="comment">// 4.给控件添加动画</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.redView</span><span class="variable">.layer</span> addAnimation:frameAnim forKey:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>转场动画</strong></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 转场动画要和转场代码写在同一个方法当中才有动画效果.</span></span><br><span class="line">    <span class="comment">// 1.1 设定转场条件</span></span><br><span class="line">    _i++;</span><br><span class="line">    <span class="keyword">if</span> (_i &gt; <span class="number">3</span>) &#123;</span><br><span class="line">        _i = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 1.2 添加转场代码 - 替换图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>, _i]];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.1 添加一个转场动画</span></span><br><span class="line">    <span class="built_in">CATransition</span> *anim = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">    <span class="comment">// 2.2 设置转场样式</span></span><br><span class="line">    anim<span class="variable">.type</span> = <span class="string">@"cube"</span>;</span><br><span class="line">    <span class="comment">// 2.3 动画参数</span></span><br><span class="line">      <span class="comment">//设置动画的开始位置</span></span><br><span class="line">      anim<span class="variable">.startProgress</span> = <span class="number">0.5</span>;</span><br><span class="line">	  <span class="comment">//设置动画的结束位置</span></span><br><span class="line">      anim<span class="variable">.endProgress</span>  =<span class="number">0.8</span>;</span><br><span class="line">    <span class="comment">// 2.3 添加转场动画</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.layer</span> addAnimation:anim forKey:<span class="literal">nil</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="" alt="转场动画过渡效果"></p>
+<ul>
+<li><p>核心动画的代理方法 - 它所使用的是非正式协议(其实就是个分类)</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 动画开始</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStart:(<span class="built_in">CAAnimation</span> *)anim;</span><br><span class="line"><span class="comment">// 动画结束</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStop:(<span class="built_in">CAAnimation</span> *)anim finished:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>暂停动画和恢复动画</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 暂停动画</span></span><br><span class="line">-(<span class="keyword">void</span>)pauseLayer:(<span class="built_in">CALayer</span>*)layer</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">CFTimeInterval</span> pausedTime = [layer convertTime:<span class="built_in">CACurrentMediaTime</span>() fromLayer:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 让CALayer的时间停止走动</span></span><br><span class="line">  layer<span class="variable">.speed</span> = <span class="number">0.0</span>;</span><br><span class="line"><span class="comment">// 让CALayer的时间停留在pausedTime这个时刻</span></span><br><span class="line">layer<span class="variable">.timeOffset</span> = pausedTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恢复动画</span></span><br><span class="line">-(<span class="keyword">void</span>)resumeLayer:(<span class="built_in">CALayer</span>*)layer</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">CFTimeInterval</span> pausedTime = layer<span class="variable">.timeOffset</span>;</span><br><span class="line"><span class="comment">// 1. 让CALayer的时间继续行走</span></span><br><span class="line">  layer<span class="variable">.speed</span> = <span class="number">1.0</span>;</span><br><span class="line"><span class="comment">// 2. 取消上次记录的停留时刻</span></span><br><span class="line">  layer<span class="variable">.timeOffset</span> = <span class="number">0.0</span>;</span><br><span class="line"><span class="comment">// 3. 取消上次设置的时间</span></span><br><span class="line">  layer<span class="variable">.beginTime</span> = <span class="number">0.0</span>;    </span><br><span class="line"><span class="comment">// 4. 计算暂停的时间(这里也可以用CACurrentMediaTime()-pausedTime)</span></span><br><span class="line"><span class="built_in">CFTimeInterval</span> timeSincePause = [layer convertTime:<span class="built_in">CACurrentMediaTime</span>() fromLayer:<span class="literal">nil</span>] - pausedTime;</span><br><span class="line"><span class="comment">// 5. 设置相对于父坐标系的开始时间(往后退timeSincePause)</span></span><br><span class="line">  layer<span class="variable">.beginTime</span> = timeSincePause;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>补充两个控制动画的属性:</p>
+<pre><code><span class="header">fillMode属性值（要想fillMode有效，最好设置removedOnCompletion = NO）
+--------------</span>
+kCAFillModeRemoved: 这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态;
+kCAFillModeForwards: 当动画结束后,layer会一直保持着动画最后的状态;
+kCAFillModeBackwards: 在动画开始前,只需要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始;
+kCAFillModeBoth: 这个其实就是上面两个的合成.动画加入后开始之前,layer便处于动画初始状态,动画结束后layer保持动画最后的状态.
+
+<span class="header">速度控制函数(CAMediaTimingFunction) 
+--------------</span>
+kCAMediaTimingFunctionLinear(线性): 匀速,给你一个相对静态的感觉;
+kCAMediaTimingFunctionEaseIn(渐进): 动画缓慢进入,然后加速离开;
+kCAMediaTimingFunctionEaseOut(渐出): 动画全速进入,然后减速的到达目的地;
+kCAMediaTimingFunctionEaseInEaseOut(渐进渐出): 动画缓慢的进入,中间加速，然后减速的到达目的地。这个是默认的动画行为.
+</code></pre></li>
+</ul>
+<h2 id="UIView动画与核心动画对比?">UIView动画与核心动画对比?</h2><ul>
+<li>UIView动画和核心动画区别?<ul>
+<li>核心动画只能添加到CALayer(图层);</li>
+<li>核心动画一切都是假象,并不会改变真实的值;</li>
+</ul>
+</li>
+<li>什么时候使用UIView的动画?<ul>
+<li>如果需要与用户交互就使用UIView的动画;</li>
+<li>不需要与用户交互可以使用核心动画;</li>
+</ul>
+</li>
+<li>什么场景使用核心动画最多?<ul>
+<li>在转场动画中,核心动画的类型比较多;</li>
+<li>根据一个路径做动画,只能用核心动画（帧动画）;</li>
+<li>动画组: 同时做多个动画;</li>
+</ul>
+</li>
+<li>UIView和CALayer该怎样选择?<ul>
+<li>对比CALayer,UIView多了一个事件处理的功能.也就是说CALayer不能处理用户的触摸事件,而UIView可以,如果显示出来的东西需要跟用户进行交互的话,用UIView;如果不需要跟用户进行交互,用UIView或者CALayer都可以.CALayer的性能会高一些,因为它少了事件处理的功能,更加轻量级.</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用UIView动画函数实现转场动画">使用UIView动画函数实现转场动画</h3> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 单视图 */</span></span><br><span class="line">+ (<span class="keyword">void</span>)transitionWithView:(<span class="built_in">UIView</span> *)view duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</span><br><span class="line"><span class="comment">// 参数说明：</span></span><br><span class="line"><span class="comment">// duration：动画的持续时间</span></span><br><span class="line"><span class="comment">// view：需要进行转场动画的视图</span></span><br><span class="line"><span class="comment">// options：转场动画的类型</span></span><br><span class="line"><span class="comment">// animations：将改变视图属性的代码放在这个block中</span></span><br><span class="line"><span class="comment">// completion：动画结束后，会自动调用这个block</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 双视图 */</span></span><br><span class="line">+ (<span class="keyword">void</span>)transitionFromView:(<span class="built_in">UIView</span> *)fromView toView:(<span class="built_in">UIView</span> *)toView duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</span><br><span class="line"><span class="comment">// 参数说明：</span></span><br><span class="line"><span class="comment">// duration：动画的持续时间</span></span><br><span class="line"><span class="comment">// options：转场动画的类型</span></span><br><span class="line"><span class="comment">// animations：将改变视图属性的代码放在这个block中</span></span><br><span class="line"><span class="comment">// completion：动画结束后，会自动调用这个block</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/30/Import/post/33.调用系统相册方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          调用系统相册方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/26/Import/post/31.Quartz2D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Quartz2D</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Import/post/32.核心动画与显示动画的区别" data-title="核心动画与UIView动画的对比" data-url="http://xionv.com/2015/12/30/Import/post/32.核心动画与显示动画的区别/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

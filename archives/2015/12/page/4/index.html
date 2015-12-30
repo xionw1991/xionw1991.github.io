@@ -3,64 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>copy深浅的规律 | XionVV Coding</title>
+  <title>Archives: 2015/12 | XionVV Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
-
-
-浅复制（浅拷贝，指针拷贝，shallow copy）
-源对象和副本对象是同一个对象
-源对象（副本对象）引用计数器+1,相当于做一次retain操作
-本质是：没有产生新的对象
-原对象引用计数器+1
-必须对原对象进行释放
-
-
-
-
-深复制（深拷贝，内容拷贝，deep copy）
-源对象和副本对象是不同的两个对象
-源对象引用计数器不变,副本">
-<meta property="og:type" content="article">
-<meta property="og:title" content="copy深浅的规律">
-<meta property="og:url" content="http://xionv.com/2015/12/19/Import/post/23.copy深浅的规律/index.html">
+  <meta name="description" content="XionVV Coding | iOS">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XionVV Coding">
+<meta property="og:url" content="http://xionv.com/archives/2015/12/page/4/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
-
-
-浅复制（浅拷贝，指针拷贝，shallow copy）
-源对象和副本对象是同一个对象
-源对象（副本对象）引用计数器+1,相当于做一次retain操作
-本质是：没有产生新的对象
-原对象引用计数器+1
-必须对原对象进行释放
-
-
-
-
-深复制（深拷贝，内容拷贝，deep copy）
-源对象和副本对象是不同的两个对象
-源对象引用计数器不变,副本">
-<meta property="og:image" content="http://r.loli.io/ee63aa.png">
-<meta property="og:updated_time" content="2015-12-19T12:47:57.000Z">
+<meta property="og:description" content="XionVV Coding | iOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="copy深浅的规律">
-<meta name="twitter:description" content="只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.
-
-
-浅复制（浅拷贝，指针拷贝，shallow copy）
-源对象和副本对象是同一个对象
-源对象（副本对象）引用计数器+1,相当于做一次retain操作
-本质是：没有产生新的对象
-原对象引用计数器+1
-必须对原对象进行释放
-
-
-
-
-深复制（深拷贝，内容拷贝，deep copy）
-源对象和副本对象是不同的两个对象
-源对象引用计数器不变,副本">
+<meta name="twitter:title" content="XionVV Coding">
+<meta name="twitter:description" content="XionVV Coding | iOS">
   
     <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
   
@@ -216,119 +169,88 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/23.copy深浅的规律" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/12/19/Import/post/23.copy深浅的规律/" class="article-date">
-  	<time datetime="2015-12-19T07:42:57.000Z" itemprop="datePublished">2015-12-19</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/12/04/Import/post/首尾式动画/" class="archive-article-date">
+  	<time datetime="2015-12-04T08:27:57.000Z" itemprop="datePublished">Dec 4</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      copy深浅的规律
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/12/04/Import/post/首尾式动画/">简单的首尾式动画</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS概念/">iOS概念</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
-</blockquote>
-<ul>
-<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
-<li>源对象和副本对象是同一个对象</li>
-<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
-<li>本质是：没有产生新的对象</li>
-<li>原对象引用计数器+1</li>
-<li>必须对原对象进行释放</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
-<li>源对象和副本对象是不同的两个对象</li>
-<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
-<li>本质是：产生了新的对象</li>
-<li>必须释放新对象</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
-
-      
-    </div>
-    
+    </header>
   </div>
+</article>
   
     
-<nav id="article-nav">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/12/03/Import/post/字典转模型/" class="archive-article-date">
+  	<time datetime="2015-12-03T15:27:57.000Z" itemprop="datePublished">Dec 3</time>
+</a>
+        </div>
+    	 
   
-    <a href="/2015/12/22/Import/post/25.KVC的底层实现/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          KVC的底层实现
-        
-      </div>
-    </a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/12/03/Import/post/字典转模型/">字典转模型</a>
+    </h1>
   
-  
-    <a href="/2015/12/19/Import/post/利用NSValue来包装结构体/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">利用NSValue来包装结构体</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
 
-  
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
 </article>
+  
+  
+    </div></section>
+  
 
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/23.copy深浅的规律" data-title="copy深浅的规律" data-url="http://xionv.com/2015/12/19/Import/post/23.copy深浅的规律/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"xionv"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2015/12/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/2015/12/">1</a><a class="page-number" href="/archives/2015/12/page/2/">2</a><a class="page-number" href="/archives/2015/12/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
 
 </div>
       <footer id="footer">
@@ -354,8 +276,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
