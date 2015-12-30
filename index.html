@@ -350,7 +350,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="CALayer">CALayer</h3><ul>
+        <h2 id="CALayer">CALayer</h2><ul>
 <li>CALayer简介<ul>
 <li>CALayer我们又称它叫做层.</li>
 <li>在每个UIView内部都有一个layer这样一个属性.</li>
@@ -361,14 +361,14 @@
 </li>
 <li><p>设置CALayer属性</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br><br> <strong>PS</strong>: 为什么要使用CGImageRef、CGColorRef?<br>        为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.</p>
+<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br> <strong>PS</strong>: 为什么要使用CGImageRef、CGColorRef?         为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.</p>
 </li>
 <li><p>CALayer的<code>CATransform3D</code>属性 (只有旋转的时候才可以看出3D的效果).</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// x,y,z 分别代表x,y,z轴.</span></span><br><span class="line"><span class="comment">// 旋转: </span></span><br><span class="line"><span class="built_in">CATransform3DMakeRotation</span>(M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 平移:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeTranslation</span>(x,y,z);</span><br><span class="line"><span class="comment">// 缩放:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeScale</span>(x,y,z);</span><br></pre></td></tr></table></figure>
+<p> <strong>CATransform3D的键值</strong><br><img src="http://r6.loli.io/NNvIvy.png" alt="CATransform3D Key Paths"></p>
 </li>
 </ul>
-<p><img src="http://r6.loli.io/NNvIvy.png" alt="CATransform3D Key Paths"><br><strong>CATransform3D的键值</strong></p>
-<h3 id="隐式动画">隐式动画</h3><ul>
+<h2 id="隐式动画">隐式动画</h2><ul>
 <li>什么是隐式动画 <br><ul>
 <li>在了解隐式动画前先了解什么是根层和非根层:<ul>
 <li>根层: UIView内部自动关联着的那个layer我们称它是根层.</li>
@@ -388,7 +388,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="核心动画">核心动画</h3><p><img src="http://r5.loli.io/YryMbm.png" alt="核心动画的继承结构"></p>
+<h2 id="核心动画">核心动画</h2><p><img src="http://r5.loli.io/YryMbm.png" alt="核心动画的继承结构"></p>
 <blockquote>
 <p>核心动画中所有类都遵守CAMediaTiming协议</p>
 </blockquote>
