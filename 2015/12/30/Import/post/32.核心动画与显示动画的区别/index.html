@@ -11,10 +11,11 @@ CALayer我们又称它叫做层.
 在每个UIView内部都有一个layer这样一个属性.
 UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
 我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…
+所进行的核心动画在层里完成
 
 
 设置CALayer属性
-     - (void)addCALayer&amp;">
+ - (void)a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="核心动画与UIView动画的对比">
 <meta property="og:url" content="http://xionv.com/2015/12/30/Import/post/32.核心动画与显示动画的区别/index.html">
@@ -25,11 +26,15 @@ CALayer我们又称它叫做层.
 在每个UIView内部都有一个layer这样一个属性.
 UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
 我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…
+所进行的核心动画在层里完成
 
 
 设置CALayer属性
-     - (void)addCALayer&amp;">
-<meta property="og:updated_time" content="2015-12-30T11:41:18.000Z">
+ - (void)a">
+<meta property="og:image" content="http://r6.loli.io/NNvIvy.png">
+<meta property="og:image" content="http://r5.loli.io/YryMbm.png">
+<meta property="og:image" content="http://r5.loli.io/iyUn22.png">
+<meta property="og:updated_time" content="2015-12-30T12:53:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="核心动画与UIView动画的对比">
 <meta name="twitter:description" content="CALayer
@@ -38,10 +43,11 @@ CALayer我们又称它叫做层.
 在每个UIView内部都有一个layer这样一个属性.
 UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.
 我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…
+所进行的核心动画在层里完成
 
 
 设置CALayer属性
-     - (void)addCALayer&amp;">
+ - (void)a">
   
     <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
   
@@ -240,17 +246,18 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 <li>在每个UIView内部都有一个layer这样一个属性.</li>
 <li>UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.</li>
 <li>我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…</li>
+<li>所进行的核心动画在层里完成</li>
 </ul>
 </li>
 <li><p>设置CALayer属性</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br><br> <strong>PS</strong>: 为什么要使用CGImageRef、CGColorRef?<br>        为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.</p>
 </li>
 <li><p>CALayer的<code>CATransform3D</code>属性 (只有旋转的时候才可以看出3D的效果).</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// x,y,z 分别代表x,y,z轴.</span></span><br><span class="line"><span class="comment">// 旋转: </span></span><br><span class="line"><span class="built_in">CATransform3DMakeRotation</span>(M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 平移:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeTranslation</span>(x,y,z);</span><br><span class="line"><span class="comment">// 缩放:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeScale</span>(x,y,z);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="" alt="CATransform3D Key Paths"></p>
+<p><img src="http://r6.loli.io/NNvIvy.png" alt="CATransform3D Key Paths"><br><strong>CATransform3D的键值</strong></p>
 <h3 id="隐式动画">隐式动画</h3><ul>
 <li>什么是隐式动画 <br><ul>
 <li>在了解隐式动画前先了解什么是根层和非根层:<ul>
@@ -271,7 +278,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </ul>
 </li>
 </ul>
-<h3 id="核心动画">核心动画</h3><p><img src="" alt="核心动画的继承结构"></p>
+<h3 id="核心动画">核心动画</h3><p><img src="http://r5.loli.io/YryMbm.png" alt="核心动画的继承结构"></p>
 <blockquote>
 <p>核心动画中所有类都遵守CAMediaTiming协议</p>
 </blockquote>
@@ -292,11 +299,8 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </li>
 <li><p><strong>基础核心动画</strong></p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建基本核心动画</span></span><br><span class="line"><span class="comment">// 旋转</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *rotation = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line"><span class="comment">// 直接通过KVC来更改键值</span></span><br><span class="line">rotation<span class="variable">.keyPath</span> = <span class="string">@"transform.rotation"</span>;</span><br><span class="line">rotation<span class="variable">.toValue</span> = @M_PI_2;</span><br><span class="line"><span class="comment">// 位移</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *position = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line">position<span class="variable">.keyPath</span> = <span class="string">@"position"</span>;</span><br><span class="line">position<span class="variable">.toValue</span> = [<span class="built_in">NSValue</span> valueWith<span class="built_in">CGPoint</span>:<span class="built_in">CGPointMake</span>(<span class="number">50</span>, <span class="number">200</span>)];</span><br><span class="line"><span class="comment">// 缩放</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *scale = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line">scale<span class="variable">.keyPath</span> = <span class="string">@"transform.scale"</span>;</span><br><span class="line">scale<span class="variable">.toValue</span> = @<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个动画组(组合动画)</span></span><br><span class="line"><span class="built_in">CAAnimationGroup</span> *group = [<span class="built_in">CAAnimationGroup</span> animation];</span><br><span class="line"><span class="comment">// 将动画添加到动画组</span></span><br><span class="line">group<span class="variable">.animations</span> = @[rotation, position, scale];</span><br><span class="line"><span class="comment">// 动画时间</span></span><br><span class="line">group<span class="variable">.duration</span> = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 取消反弹</span></span><br><span class="line">group<span class="variable">.removedOnCompletion</span> = <span class="literal">NO</span>;</span><br><span class="line"><span class="comment">// 保存动画最前面的效果</span></span><br><span class="line">group<span class="variable">.fillMode</span> = k<span class="built_in">CAFillModeForwards</span>;</span><br><span class="line"><span class="comment">// 给控件图层添加动画</span></span><br><span class="line">[image<span class="variable">.layer</span> addAnimation:group forKey:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<pre><code>使用动画组的好处:不需要每次都去添加动画,设置动画完成时的属性.
-只需要把要执行的动画,添加到动画组的animations数组当中即可.
-最后把组动画添加到层上面,就会自动执行数组当中的动画.
-动画完成时设置的属性也只需要设置一次.
-</code></pre></li>
+<p> 使用动画组的好处: 不需要每次都去添加动画,设置动画完成时的属性.只需要把要执行的动画,添加到动画组的animations数组当中即可.最后把组动画添加到层上面,就会自动执行数组当中的动画.动画完成时设置的属性也只需要设置一次.</p>
+</li>
 <li><p><strong>关键帧动画</strong></p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1.创建关键帧动画对象</span></span><br><span class="line"><span class="built_in">CAKeyframeAnimation</span> *frameAnim = [<span class="built_in">CAKeyframeAnimation</span> animation];</span><br><span class="line"><span class="comment">// 2.绘制一个路径</span></span><br><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>)];</span><br><span class="line"><span class="comment">// 3.设置动画参数</span></span><br><span class="line">group<span class="variable">.duration</span> = <span class="number">1</span>;</span><br><span class="line">group<span class="variable">.removedOnCompletion</span> = <span class="literal">NO</span>;</span><br><span class="line">group<span class="variable">.fillMode</span> = k<span class="built_in">CAFillModeForwards</span>;</span><br><span class="line"><span class="comment">// 4.给控件添加动画</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.redView</span><span class="variable">.layer</span> addAnimation:frameAnim forKey:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 </li>
@@ -304,7 +308,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 转场动画要和转场代码写在同一个方法当中才有动画效果.</span></span><br><span class="line">    <span class="comment">// 1.1 设定转场条件</span></span><br><span class="line">    _i++;</span><br><span class="line">    <span class="keyword">if</span> (_i &gt; <span class="number">3</span>) &#123;</span><br><span class="line">        _i = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 1.2 添加转场代码 - 替换图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>, _i]];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.1 添加一个转场动画</span></span><br><span class="line">    <span class="built_in">CATransition</span> *anim = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">    <span class="comment">// 2.2 设置转场样式</span></span><br><span class="line">    anim<span class="variable">.type</span> = <span class="string">@"cube"</span>;</span><br><span class="line">    <span class="comment">// 2.3 动画参数</span></span><br><span class="line">      <span class="comment">//设置动画的开始位置</span></span><br><span class="line">      anim<span class="variable">.startProgress</span> = <span class="number">0.5</span>;</span><br><span class="line">	  <span class="comment">//设置动画的结束位置</span></span><br><span class="line">      anim<span class="variable">.endProgress</span>  =<span class="number">0.8</span>;</span><br><span class="line">    <span class="comment">// 2.3 添加转场动画</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.layer</span> addAnimation:anim forKey:<span class="literal">nil</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="" alt="转场动画过渡效果"></p>
+<p><img src="http://r5.loli.io/iyUn22.png" alt="转场动画过渡效果"></p>
 <ul>
 <li><p>核心动画的代理方法 - 它所使用的是非正式协议(其实就是个分类)</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 动画开始</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStart:(<span class="built_in">CAAnimation</span> *)anim;</span><br><span class="line"><span class="comment">// 动画结束</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStop:(<span class="built_in">CAAnimation</span> *)anim finished:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
@@ -314,21 +318,8 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </li>
 </ul>
 <ul>
-<li><p>补充两个控制动画的属性:</p>
-<pre><code><span class="header">fillMode属性值（要想fillMode有效，最好设置removedOnCompletion = NO）
---------------</span>
-kCAFillModeRemoved: 这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态;
-kCAFillModeForwards: 当动画结束后,layer会一直保持着动画最后的状态;
-kCAFillModeBackwards: 在动画开始前,只需要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始;
-kCAFillModeBoth: 这个其实就是上面两个的合成.动画加入后开始之前,layer便处于动画初始状态,动画结束后layer保持动画最后的状态.
-
-<span class="header">速度控制函数(CAMediaTimingFunction) 
---------------</span>
-kCAMediaTimingFunctionLinear(线性): 匀速,给你一个相对静态的感觉;
-kCAMediaTimingFunctionEaseIn(渐进): 动画缓慢进入,然后加速离开;
-kCAMediaTimingFunctionEaseOut(渐出): 动画全速进入,然后减速的到达目的地;
-kCAMediaTimingFunctionEaseInEaseOut(渐进渐出): 动画缓慢的进入,中间加速，然后减速的到达目的地。这个是默认的动画行为.
-</code></pre></li>
+<li>补充两个控制动画的属性: <figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="header">fillMode属性值（要想fillMode有效，最好设置removedOnCompletion = NO）</span><br><span class="line">--------------</span></span><br><span class="line">kCAFillModeRemoved: 这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态;</span><br><span class="line">kCAFillModeForwards: 当动画结束后,layer会一直保持着动画最后的状态;</span><br><span class="line">kCAFillModeBackwards: 在动画开始前,只需要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始;</span><br><span class="line">kCAFillModeBoth: 这个其实就是上面两个的合成.动画加入后开始之前,layer便处于动画初始状态,动画结束后layer保持动画最后的状态.</span><br><span class="line"></span><br><span class="line"><span class="header">速度控制函数(CAMediaTimingFunction) </span><br><span class="line">--------------</span></span><br><span class="line">kCAMediaTimingFunctionLinear(线性): 匀速,给你一个相对静态的感觉;</span><br><span class="line">kCAMediaTimingFunctionEaseIn(渐进): 动画缓慢进入,然后加速离开;</span><br><span class="line">kCAMediaTimingFunctionEaseOut(渐出): 动画全速进入,然后减速的到达目的地;</span><br><span class="line">kCAMediaTimingFunctionEaseInEaseOut(渐进渐出): 动画缓慢的进入,中间加速，然后减速的到达目的地。这个是默认的动画行为.</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h2 id="UIView动画与核心动画对比?">UIView动画与核心动画对比?</h2><ul>
 <li>UIView动画和核心动画区别?<ul>
