@@ -288,19 +288,19 @@
 <p>打印结果: 第一个就是我们要拿到的成员属性.</p>
 <figure class="highlight erlang"><table><tr><td class="code"><pre><span class="line"><span class="variable">_</span>targets</span><br><span class="line"><span class="variable">_</span>delayed<span class="variable">Touches</span></span><br><span class="line"><span class="variable">_</span>delayed<span class="variable">Presses</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>通过KVC拿到其关键作用的<code>target</code></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拿到打印结果,通过KVC拿到那个target</span></span><br><span class="line"><span class="built_in">NSArray</span> *targets = [<span class="keyword">self</span><span class="variable">.interactivePopGestureRecognizer</span> valueForKeyPath:<span class="string">@"_targets"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, targets);</span><br><span class="line"><span class="keyword">id</span> target = [targets[<span class="number">0</span>] valueForKeyPath:<span class="string">@"target"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// handleNavigationTransition:这个方法是通过打印结果得知系统内部会调用的方法,不用我们去实现.</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:target action:<span class="keyword">@selector</span>(handleNavigationTransition:)];</span><br><span class="line">pan<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在根控制器禁用pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 </li>
-</ul>
-<pre><code>4. 通过KVC拿到其关键作用的`target`
-<span class="comment"><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拿到打印结果,通过KVC拿到那个target</span></span><br><span class="line"><span class="built_in">NSArray</span> *targets = [<span class="keyword">self</span><span class="variable">.interactivePopGestureRecognizer</span> valueForKeyPath:<span class="string">@"_targets"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, targets);</span><br><span class="line"><span class="keyword">id</span> target = [targets[<span class="number">0</span>] valueForKeyPath:<span class="string">@"target"</span>];</span><br></pre></td></tr></table></figure></span>
-
-5. 创建一个pan手势
-<span class="comment"><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// handleNavigationTransition:这个方法是通过打印结果得知系统内部会调用的方法,不用我们去实现.</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:target action:<span class="keyword">@selector</span>(handleNavigationTransition:)];</span><br><span class="line">pan<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure></span>
-
-6. 在根控制器禁用pan手势
-<span class="comment"><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
-</code></pre><ul>
-<li>至此我们就已经修改完成了,是不是很暴力很直接!当然我本人是不支持这种方法的:1.它破坏了苹果的封装性.2它仍然有局限性,因为是利用系统的方法,如果有其他自定义要求不便于修改.</li>
+<li><p>至此我们就已经修改完成了,是不是很暴力很直接!当然我本人是不支持这种方法的:1.它破坏了苹果的封装性.2它仍然有局限性,因为是利用系统的方法,如果有其他自定义要求不便于修改.</p>
+</li>
 </ul>
 
       
