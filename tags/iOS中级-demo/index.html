@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>image与color之间互转 | XionVV Coding</title>
+  <title>Tag: iOS中级-demo | XionVV Coding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
-<meta property="og:type" content="article">
-<meta property="og:title" content="image与color之间互转">
-<meta property="og:url" content="http://xionv.com/2015/12/23/Import/post/26.image与color之间互转/index.html">
+  <meta name="description" content="XionVV Coding | iOS">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XionVV Coding">
+<meta property="og:url" content="http://xionv.com/tags/iOS中级-demo/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
-<meta property="og:updated_time" content="2015-12-23T04:33:44.000Z">
+<meta property="og:description" content="XionVV Coding | iOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="image与color之间互转">
-<meta name="twitter:description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
+<meta name="twitter:title" content="XionVV Coding">
+<meta name="twitter:description" content="XionVV Coding | iOS">
   
     <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
   
@@ -170,103 +169,53 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Import/post/26.image与color之间互转" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/12/23/Import/post/26.image与color之间互转/" class="article-date">
-  	<time datetime="2015-12-23T04:24:57.000Z" itemprop="datePublished">2015-12-23</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/01/06/Import/post/38.新特性界面的两种搭建方法/" class="archive-article-date">
+  	<time datetime="2016-01-06T05:43:57.000Z" itemprop="datePublished">Jan 6</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      image与color之间互转
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/01/06/Import/post/38.新特性界面的两种搭建方法/">新特性界面的两种搭建方法</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级-demo/">iOS中级-demo</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>颜色转图片, 集成到UIImage分类<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 描述矩形</span></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line">    <span class="comment">// 开启位图上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line">    <span class="comment">// 获取位图上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 使用color演示填充上下文</span></span><br><span class="line">    <span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line">    <span class="comment">// 渲染上下文</span></span><br><span class="line">    <span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line">    <span class="comment">// 从上下文中获取图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 结束上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>图片转颜色<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/12/23/Import/post/28.直接修改对象frame结构体的成员属性/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          直接修改对象frame结构体中的成员属性
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/12/23/Import/post/24.UIAlertView在IOS9中的使用/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIAlertView在IOS9中的使用demo</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Import/post/26.image与color之间互转" data-title="image与color之间互转" data-url="http://xionv.com/2015/12/23/Import/post/26.image与color之间互转/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"xionv"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -292,9 +241,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false
 	}
