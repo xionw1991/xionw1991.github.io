@@ -171,6 +171,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Import/post/28.直接修改对象frame结构体的成员属性" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/23/Import/post/28.直接修改对象frame结构体的成员属性/" class="article-date">
+  	<time datetime="2015-12-23T04:36:57.000Z" itemprop="datePublished">2015-12-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/23/Import/post/28.直接修改对象frame结构体的成员属性/">直接修改对象frame结构体中的成员属性</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在iOS中系统默认不能直接修改结构体成员属性的值, 通过添加分类来实现这个功能.</p>
+</blockquote>
+<ul>
+<li>头文件(.h)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIView</span> (<span class="title">Extension</span>)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> x;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> y;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> centerX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> centerY;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> width;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> height;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGSize</span> size;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGPoint</span> origin;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>实现文件(.m)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="preprocessor">#import <span class="title">"UIView+Extension.h"</span></span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">@implementation</span> <span class="title">UIView</span> (<span class="title">Extension</span>)</span></span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setX:(<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.x</span> = x;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setY:(<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.y</span> = y;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterX:(<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.x</span> = centerX;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterY:(<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.y</span> = centerY;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setWidth:(<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.width</span> = width;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setHeight:(<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.height</span> = height;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setSize:(<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span> = size;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setOrigin:(<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span> = origin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Import/post/26.image与color之间互转" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -857,87 +921,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步-demo/">iOS初步-demo</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/模型控制View的显示demo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/14/Import/post/模型控制View的显示demo/" class="article-date">
-  	<time datetime="2015-12-14T12:31:57.000Z" itemprop="datePublished">2015-12-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/14/Import/post/模型控制View的显示demo/">TableView中MVC模式的简单应用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="模型视图控制器之间:">模型视图控制器之间:</h3><ul>
-<li>模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.</li>
-<li>模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.</li>
-<li>人机之间的交互由控制器完成</li>
-<li>视图和模型互不干扰.  </li>
-<li><p>作用: 便于代码的管理和阅读</p>
-<p>图解:by斯坦福大叔<br><img src="http://r5.loli.io/yIfmQ3.png" alt=""></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:</p>
-<ol>
-<li><p>自定义一个cell (View)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重写构造方法</span></span><br><span class="line">- (instancetype)initWithStyle:(<span class="built_in">UITableViewCellStyle</span>)style reuseIdentifier:(<span class="built_in">NSString</span> *)reuseIdentifier</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithStyle:style reuseIdentifier:reuseIdentifier];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    <span class="built_in">UIImageView</span> *checkImg = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    checkImg<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"check"</span>];</span><br><span class="line">    checkImg<span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    [<span class="keyword">self</span> addSubview:checkImg];</span><br><span class="line">    _checkImg = checkImg;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 快速创建一个cell</span></span><br><span class="line">+ (instancetype)cellWithTable:(<span class="built_in">UITableView</span> *)tableView</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">XVWineCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];</span><br><span class="line">    <span class="keyword">if</span> (cell == <span class="literal">nil</span>) &#123;</span><br><span class="line">        cell = [[XVWineCell alloc] initWithStyle:<span class="built_in">UITableViewCellStyleSubtitle</span> reuseIdentifier:ID];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在控制器中实现数据源协议, 将自定义cell作为tableView的cell显示, 并将模型传递给cell (Controller)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVWineCell *cell = [XVWineCell cellWithTable:tableView];</span><br><span class="line">    cell<span class="variable">.wine</span> = <span class="keyword">self</span><span class="variable">.wine</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在自定义cell类中重写模型属性的setter方法,给cell中的子控件赋值 (Model)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)setWine:(XVWine *)wine</span><br><span class="line">&#123;</span><br><span class="line">    _wine = wine;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:wine<span class="variable">.image</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = wine<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"￥%@"</span>, wine<span class="variable">.money</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在控制器中修改模型数据刷新tableView, 这时会来到控制器的数据源方法将所有的cell重新赋予修改后的模型的值,cell的显示内容改变. (Controller)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 添加数据</span></span><br><span class="line">    - (<span class="keyword">void</span>)addWine</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 新建一个模型</span></span><br><span class="line">    XVWine *wine = [[XVWine alloc] init];</span><br><span class="line">    wine<span class="variable">.image</span> = <span class="string">@"newWine"</span>;</span><br><span class="line">    wine<span class="variable">.name</span> = <span class="string">@"新酒"</span>;</span><br><span class="line">    wine<span class="variable">.money</span> = <span class="string">@"999"</span>;</span><br><span class="line">    <span class="comment">// 将新模型添加进数组</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.wine</span> addObject:wine];</span><br><span class="line">    <span class="comment">// cell对应的模型数组的最后一位</span></span><br><span class="line">    <span class="built_in">NSIndexPath</span> *indexPath = [<span class="built_in">NSIndexPath</span> indexPathForRow:(<span class="keyword">self</span><span class="variable">.wine</span><span class="variable">.count</span> - <span class="number">1</span>) inSection:<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// 刷新表格</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> insertRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationAutomatic</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
 	</div>
 
       

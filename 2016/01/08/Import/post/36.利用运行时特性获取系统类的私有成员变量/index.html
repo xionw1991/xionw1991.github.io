@@ -17,7 +17,7 @@ interactivePopGestureRecognizer这个api功能就是在NavigationController堆�
 
 
 interactivePopGestureRecognizer这个api功能就是在NavigationController堆栈内的UIViewController可以支持右滑手势,轻轻在屏幕左边一滑,屏幕就会返回.但是, 1.这个功能在自定义返回按钮后会失效; 2">
-<meta property="og:updated_time" content="2016-01-09T04:31:55.000Z">
+<meta property="og:updated_time" content="2016-01-09T04:37:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用运行时特性获取系统类的私有成员属性">
 <meta name="twitter:description" content="在iOS7以后苹果添加了一个边缘滑动返回的手势操作,我们通过修改这个手势操作来说明如何利用系统的私有成员属性来达到在项目中的要求.
@@ -247,7 +247,7 @@ interactivePopGestureRecognizer这个api功能就是在NavigationController堆�
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// handleNavigationTransition:这个方法是通过打印结果得知系统内部会调用的方法,不用我们去实现.</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:target action:<span class="keyword">@selector</span>(handleNavigationTransition:)];</span><br><span class="line">pan<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在根控制器禁用pan手势</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">     - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -273,8 +273,8 @@ interactivePopGestureRecognizer这个api功能就是在NavigationController堆�
     </a>
   
   
-    <a href="/2015/12/30/Import/post/34.NSFileManager和NSFileHandle的常用方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">NSFileManager和NSFileHandle的常用方法</div>
+    <a href="/2016/01/07/Import/post/37.封装NavigationController基类/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">封装NavigationController基类</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
