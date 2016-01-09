@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>图片折叠小demo | XionVV Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="利用图层特性实现图片折叠的效果#import &quot;ViewController.h&quot;#define imageWH 200.0@interface ViewController ()@property (nonatomic, weak) UIImageView *imageTop;@property (nonatomic, weak) UIImageView *imageBottom;@proper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片折叠小demo">
+<meta property="og:url" content="http://xionv.com/2016/01/04/Import/post/40.图片折叠小demo/index.html">
+<meta property="og:site_name" content="XionVV Coding">
+<meta property="og:description" content="利用图层特性实现图片折叠的效果#import &quot;ViewController.h&quot;#define imageWH 200.0@interface ViewController ()@property (nonatomic, weak) UIImageView *imageTop;@property (nonatomic, weak) UIImageView *imageBottom;@proper">
+<meta property="og:updated_time" content="2016-01-09T14:40:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片折叠小demo">
+<meta name="twitter:description" content="利用图层特性实现图片折叠的效果#import &quot;ViewController.h&quot;#define imageWH 200.0@interface ViewController ()@property (nonatomic, weak) UIImageView *imageTop;@property (nonatomic, weak) UIImageView *imageBottom;@proper">
+  
+    <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS中级-demo/" style="font-size: 10px;">iOS中级 - demo</a> <a href="/tags/iOS中级-demo/" style="font-size: 10px;">iOS中级-demo</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Import/post/40.图片折叠小demo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/04/Import/post/40.图片折叠小demo/" class="article-date">
+  	<time datetime="2016-01-04T14:40:57.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图片折叠小demo
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级-demo/">iOS中级 - demo</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="利用图层特性实现图片折叠的效果">利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define imageWH 200.0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageTop;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageBottom;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">CAGradientLayer</span> *gradient;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化图片</span></span><br><span class="line">    [<span class="keyword">self</span> setupImageView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 初始化图片 */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupImageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个透明的蒙版作为手势的接受者 */</span></span><br><span class="line">    <span class="built_in">UIView</span> *cover = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    cover<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, imageWH, imageWH);</span><br><span class="line">    cover<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    cover<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">    <span class="comment">// 添加pan手势</span></span><br><span class="line">    <span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br><span class="line">    [cover addGestureRecognizer:pan];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:cover];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 添加图片 - 原图片添加两次,分别显示上下部分 */</span></span><br><span class="line">    <span class="comment">// 上半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageTop = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageTop<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageTop<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的上半部</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为图片的高度</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</span><br><span class="line">    _imageTop = imageTop;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageBottom = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageBottom<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageBottom<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的下半部</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为0</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    _imageBottom = imageBottom;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 给下半部图片添加阴影效果 */</span></span><br><span class="line">    <span class="comment">// 创建一个渐变层用来显示阴影效果</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    _gradient = gradient;</span><br><span class="line">    <span class="comment">// 设置图层的位置</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = imageBottom<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置渐变颜色</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> clearColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 设置不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 给下半部图片添加图层</span></span><br><span class="line">    [imageBottom<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">    </span><br><span class="line">    [cover addSubview:imageBottom];</span><br><span class="line">    [cover addSubview:imageTop];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 监听pan手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获得手指偏移量的Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> offsetY = [pan translationInView:<span class="keyword">self</span><span class="variable">.view</span>]<span class="variable">.y</span>;</span><br><span class="line">    <span class="comment">// 将偏移量转成旋转弧度</span></span><br><span class="line">    <span class="built_in">CGFloat</span> angle = offsetY * M_PI / imageWH;</span><br><span class="line">    <span class="keyword">if</span> (angle &gt; M_PI) &#123;</span><br><span class="line">        angle = M_PI;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置透视效果 - 除数值越大透视效果越不明显(可以理解成眼睛看到物体的距离)</span></span><br><span class="line">    <span class="built_in">CATransform3D</span> transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">    transform<span class="variable">.m34</span> = -<span class="number">1</span> / <span class="number">400.0</span>;</span><br><span class="line">    <span class="comment">// 根据偏移量沿x轴旋转上半部图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DRotate</span>(transform, -angle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 给下半部图片添加阴影效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = offsetY * <span class="number">1</span> / imageWH;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当手指松开的时候将位置返回</span></span><br><span class="line">    <span class="keyword">if</span> (pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置反弹动画</span></span><br><span class="line">        <span class="comment">// Duration:动画的执行时长</span></span><br><span class="line">        <span class="comment">// delay:延时执行时长</span></span><br><span class="line">        <span class="comment">// Damping:弹性系数(越小,弹性越大)</span></span><br><span class="line">        <span class="comment">// SpringVelocity:初始的弹性系数</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">1.25</span> delay:<span class="number">0</span> usingSpringWithDamping:<span class="number">0.1</span> initialSpringVelocity:<span class="number">0</span> options:<span class="number">0</span> animations:^&#123;</span><br><span class="line">            <span class="comment">// 清空transform</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">            <span class="comment">// 还原不透明度</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/05/Import/post/39.渐变图层,复制图层和形状图层的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          渐变图层,复制图层和形状图层的简单用法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/30/Import/post/34.NSFileManager和NSFileHandle的常用方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NSFileManager和NSFileHandle的常用方法</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Import/post/40.图片折叠小demo" data-title="图片折叠小demo" data-url="http://xionv.com/2016/01/04/Import/post/40.图片折叠小demo/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

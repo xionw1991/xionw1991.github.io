@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS中级-demo/" style="font-size: 10px;">iOS中级-demo</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS中级-demo/" style="font-size: 10px;">iOS中级 - demo</a> <a href="/tags/iOS中级-demo/" style="font-size: 10px;">iOS中级-demo</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -514,6 +514,60 @@
 
 
   
+    <article id="post-Import/post/40.图片折叠小demo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/04/Import/post/40.图片折叠小demo/" class="article-date">
+  	<time datetime="2016-01-04T14:40:57.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/04/Import/post/40.图片折叠小demo/">图片折叠小demo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="利用图层特性实现图片折叠的效果">利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define imageWH 200.0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageTop;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageBottom;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">CAGradientLayer</span> *gradient;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化图片</span></span><br><span class="line">    [<span class="keyword">self</span> setupImageView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 初始化图片 */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupImageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个透明的蒙版作为手势的接受者 */</span></span><br><span class="line">    <span class="built_in">UIView</span> *cover = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    cover<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, imageWH, imageWH);</span><br><span class="line">    cover<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    cover<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">    <span class="comment">// 添加pan手势</span></span><br><span class="line">    <span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br><span class="line">    [cover addGestureRecognizer:pan];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:cover];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 添加图片 - 原图片添加两次,分别显示上下部分 */</span></span><br><span class="line">    <span class="comment">// 上半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageTop = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageTop<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageTop<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的上半部</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为图片的高度</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</span><br><span class="line">    _imageTop = imageTop;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageBottom = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageBottom<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageBottom<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的下半部</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为0</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    _imageBottom = imageBottom;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 给下半部图片添加阴影效果 */</span></span><br><span class="line">    <span class="comment">// 创建一个渐变层用来显示阴影效果</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    _gradient = gradient;</span><br><span class="line">    <span class="comment">// 设置图层的位置</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = imageBottom<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置渐变颜色</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> clearColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 设置不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 给下半部图片添加图层</span></span><br><span class="line">    [imageBottom<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">    </span><br><span class="line">    [cover addSubview:imageBottom];</span><br><span class="line">    [cover addSubview:imageTop];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 监听pan手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获得手指偏移量的Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> offsetY = [pan translationInView:<span class="keyword">self</span><span class="variable">.view</span>]<span class="variable">.y</span>;</span><br><span class="line">    <span class="comment">// 将偏移量转成旋转弧度</span></span><br><span class="line">    <span class="built_in">CGFloat</span> angle = offsetY * M_PI / imageWH;</span><br><span class="line">    <span class="keyword">if</span> (angle &gt; M_PI) &#123;</span><br><span class="line">        angle = M_PI;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置透视效果 - 除数值越大透视效果越不明显(可以理解成眼睛看到物体的距离)</span></span><br><span class="line">    <span class="built_in">CATransform3D</span> transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">    transform<span class="variable">.m34</span> = -<span class="number">1</span> / <span class="number">400.0</span>;</span><br><span class="line">    <span class="comment">// 根据偏移量沿x轴旋转上半部图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DRotate</span>(transform, -angle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 给下半部图片添加阴影效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = offsetY * <span class="number">1</span> / imageWH;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当手指松开的时候将位置返回</span></span><br><span class="line">    <span class="keyword">if</span> (pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置反弹动画</span></span><br><span class="line">        <span class="comment">// Duration:动画的执行时长</span></span><br><span class="line">        <span class="comment">// delay:延时执行时长</span></span><br><span class="line">        <span class="comment">// Damping:弹性系数(越小,弹性越大)</span></span><br><span class="line">        <span class="comment">// SpringVelocity:初始的弹性系数</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">1.25</span> delay:<span class="number">0</span> usingSpringWithDamping:<span class="number">0.1</span> initialSpringVelocity:<span class="number">0</span> options:<span class="number">0</span> animations:^&#123;</span><br><span class="line">            <span class="comment">// 清空transform</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">            <span class="comment">// 还原不透明度</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级-demo/">iOS中级 - demo</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Import/post/34.NSFileManager和NSFileHandle的常用方法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -864,94 +918,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/30.手势识别基本使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/25/Import/post/30.手势识别基本使用/" class="article-date">
-  	<time datetime="2015-12-25T01:31:57.000Z" itemprop="datePublished">2015-12-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/25/Import/post/30.手势识别基本使用/">手势识别基本使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
-<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
-<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
-<li>手势有以下几种:<ul>
-<li>UITapGestureRecognizer(敲击)</li>
-<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
-<li>UIPanGestureRecognizer(拖拽)</li>
-<li>UISwipeGestureRecognizer(轻扫)</li>
-<li>UIRotationGestureRecognizer(旋转)</li>
-<li>UILongPressGestureRecognizer(长按)</li>
-</ul>
-</li>
-<li><p>手势使用方法:</p>
-<ul>
-<li><p>创建手势</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加手势</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现手势方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>拖动的状态</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拖动状态复位</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>手势常用的代理方法</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步/">iOS初步</a></li></ul>
 	</div>
 
       
