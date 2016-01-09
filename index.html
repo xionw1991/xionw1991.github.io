@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,171 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Import/post/35.UIButton调换文字与图片位置的两种方法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/09/Import/post/35.UIButton调换文字与图片位置的两种方法/" class="article-date">
+  	<time datetime="2016-01-09T02:12:57.000Z" itemprop="datePublished">2016-01-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/09/Import/post/35.UIButton调换文字与图片位置的两种方法/">UIButton调换文字与图片位置的两种方法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置button文字</span></span><br><span class="line">        [<span class="keyword">self</span> setTitle:<span class="string">@"title"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置button图片</span></span><br><span class="line">        [<span class="keyword">self</span> setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置文字大小</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>];</span><br><span class="line">        <span class="comment">// 设置图片居中</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeCenter</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="第一种_-_重写layoutSubviews方法来实现">第一种 - 重写<code>layoutSubviews</code>方法来实现</h3><ol>
+<li><p>重写<code>layoutSubviews</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)layoutSubviews</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> layoutSubviews];</span><br><span class="line">    <span class="comment">// 修改titleButton里面子控件的位置</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span> &lt; <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>) &#123; </span><br><span class="line">        <span class="comment">// 1. 取出title和image的frame</span></span><br><span class="line">        <span class="built_in">CGRect</span> titleFrame = <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span>;</span><br><span class="line">        <span class="built_in">CGRect</span> imageFrame = <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span>;</span><br><span class="line">        <span class="comment">// 2. 调整title和imageView的x值</span></span><br><span class="line">        titleFrame<span class="variable">.origin</span><span class="variable">.x</span> = imageFrame<span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">        imageFrame<span class="variable">.origin</span><span class="variable">.x</span> = <span class="built_in">CGRectGetMaxX</span>(titleFrame) + <span class="number">5</span>;</span><br><span class="line">        <span class="comment">// 3. 重新赋值</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span> = titleFrame;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span> = imageFrame;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写<code>setImage: forState:</code>和<code>setTitle: forState:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 重写父类setImage方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setImage:(<span class="built_in">UIImage</span> *)image forState:(<span class="built_in">UIControlState</span>)state</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> setImage:image forState:state];</span><br><span class="line">    <span class="comment">// 自动计算尺寸</span></span><br><span class="line">    [<span class="keyword">self</span> sizeToFit];</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">// 重写父类setTitle方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setTitle:(<span class="built_in">NSString</span> *)title forState:(<span class="built_in">UIControlState</span>)state</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> setTitle:title forState:state];</span><br><span class="line">    <span class="comment">// 自动计算尺寸</span></span><br><span class="line">    [<span class="keyword">self</span> sizeToFit];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="第二种_-_重写titleRectForContentRect:和imageRectForContentRect:方法来实现">第二种 - 重写<code>titleRectForContentRect:</code>和<code>imageRectForContentRect:</code>方法来实现</h3><ol>
+<li><p>重写<code>titleRectForContentRect:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 返回文字的位置</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)titleRectForContentRect:(<span class="built_in">CGRect</span>)contentRect</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleX = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleY = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleW = [<span class="keyword">self</span><span class="variable">.currentTitle</span> boundingRectWithSize:<span class="built_in">CGSizeMake</span>(MAXFLOAT, MAXFLOAT)</span><br><span class="line">                                                     options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                                                  attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>]&#125;</span><br><span class="line">                                                     context:<span class="literal">nil</span>]<span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleH = contentRect<span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(titleX, titleY, titleW, titleH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写<code>imageRectForContentRect:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 返回图片位置</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)imageRectForContentRect:(<span class="built_in">CGRect</span>)contentRect</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageW = <span class="number">16</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageH = contentRect<span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageX = contentRect<span class="variable">.size</span><span class="variable">.width</span> - imageW;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageY = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(imageX, imageY, imageW, imageH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Import/post/36.利用运行时特性获取系统类的私有成员变量" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/08/Import/post/36.利用运行时特性获取系统类的私有成员变量/" class="article-date">
+  	<time datetime="2016-01-08T03:00:57.000Z" itemprop="datePublished">2016-01-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/08/Import/post/36.利用运行时特性获取系统类的私有成员变量/">利用运行时特性获取系统类的私有成员属性</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在iOS7以后苹果添加了一个边缘滑动返回的手势操作,我们通过修改这个手势操作来说明如何利用系统的私有成员属性来达到在项目中的要求.</p>
+</blockquote>
+<ul>
+<li><p><code>interactivePopGestureRecognizer</code>这个api功能就是在NavigationController堆栈内的UIViewController可以支持右滑手势,轻轻在屏幕左边一滑,屏幕就会返回.<br>但是, 1.这个功能在自定义返回按钮后会失效; 2.它的作用范围在手机屏幕左侧边缘,如果要求全屏接受这个事件就需要自定义这个功能了.</p>
+</li>
+<li><p>通过打印<code>interactivePopGestureRecognizer</code>得知这个功能是通过<code>UIScreenEdgePanGestureRecognizer</code>这个手势来实现的.如果是手势就一定有<code>target</code>和<code>action</code>这两个成员属性,我们只要拿到<code>target</code>的真实类型.然后通过KVC就能”借用”系统实现方式来达到以上两个要求.</p>
+</li>
+<li><p>利用运行时获取所有的成员变量</p>
+<ol>
+<li><p>导入运行时头文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用runtime函数获取获取类中的所有成员属性</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用来接收数组元素个数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outcount = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// UIGestureRecognizer是interactivePopGestureRecognizer的类型</span></span><br><span class="line">Ivar *ivars = class_copyIvarList([<span class="built_in">UIGestureRecognizer</span> class], &amp;outcount);</span><br><span class="line"><span class="comment">// Ivar：成员属性的意思;</span></span><br><span class="line"><span class="comment">// 第一个参数:表示获取哪个类中的成员属性;</span></span><br><span class="line"><span class="comment">// 第二个参数:表示这个类有多少成员属性,传入一个Int变量地址,会自动给这个变量赋值;</span></span><br><span class="line"><span class="comment">// 返回值Ivar*:指的是一个ivar数组,会把所有成员属性放在一个数组中,通过返回的数组就能全部获取到;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有的成员属性名</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历ivars获取目标类中每一个成员属性名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outcount; i++) &#123;</span><br><span class="line">    <span class="comment">// 打印所有的成员属性名</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @(ivar_getName(ivars[i])));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果: 第一个就是我们要拿到的成员属性.</p>
+<pre><code><span class="variable">_</span>targets
+<span class="variable">_</span>delayed<span class="variable">Touches</span>
+<span class="variable">_</span>delayed<span class="variable">Presses</span>
+...
+</code></pre></li>
+<li><p>通过KVC拿到其关键作用的<code>target</code></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拿到打印结果,通过KVC拿到那个target</span></span><br><span class="line"><span class="built_in">NSArray</span> *targets = [<span class="keyword">self</span><span class="variable">.interactivePopGestureRecognizer</span> valueForKeyPath:<span class="string">@"_targets"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, targets);</span><br><span class="line"><span class="keyword">id</span> target = [targets[<span class="number">0</span>] valueForKeyPath:<span class="string">@"target"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// handleNavigationTransition:这个方法是通过打印结果得知系统内部会调用的方法,不用我们去实现.</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:target action:<span class="keyword">@selector</span>(handleNavigationTransition:)];</span><br><span class="line">pan<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在根控制器禁用pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">     - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>至此我们就已经修改完成了,是不是很暴力很直接!当然我本人是不支持这种方法的:1.它破坏了苹果的封装性.2它仍然有局限性,因为是利用系统的方法,如果有其他自定义要求不便于修改.</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Import/post/34.NSFileManager和NSFileHandle的常用方法" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -361,7 +526,7 @@
 </li>
 <li><p>设置CALayer属性</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br> <strong>PS</strong>: 为什么要使用CGImageRef、CGColorRef?         为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.</p>
+<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br> <strong>PS1</strong>: 为什么要使用CGImageRef、CGColorRef?         为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.<br> <strong>PS2</strong>: 所有的动画都是基于锚点做参照来进行的.</p>
 </li>
 <li><p>CALayer的<code>CATransform3D</code>属性 (只有旋转的时候才可以看出3D的效果).</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// x,y,z 分别代表x,y,z轴.</span></span><br><span class="line"><span class="comment">// 旋转: </span></span><br><span class="line"><span class="built_in">CATransform3DMakeRotation</span>(M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 平移:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeTranslation</span>(x,y,z);</span><br><span class="line"><span class="comment">// 缩放:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeScale</span>(x,y,z);</span><br></pre></td></tr></table></figure>
@@ -376,6 +541,7 @@
 </ul>
 </li>
 <li>隐式动画就是当对非根层的部分属性进行修改时,它会自动的产生一些动画的效果.我们称这个默认产生的动画为隐式动画.</li>
+<li>给根层添加的动画叫做核心动画.隐式动画是系统默认给非根层添加的动画,核心动画是程序员自己手动来添加的,其实隐式动画就是核心动画.</li>
 </ul>
 </li>
 <li>如何取消隐式动画<ul>
@@ -416,10 +582,8 @@
 </li>
 <li><p><strong>转场动画</strong></p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 转场动画要和转场代码写在同一个方法当中才有动画效果.</span></span><br><span class="line">    <span class="comment">// 1.1 设定转场条件</span></span><br><span class="line">    _i++;</span><br><span class="line">    <span class="keyword">if</span> (_i &gt; <span class="number">3</span>) &#123;</span><br><span class="line">        _i = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 1.2 添加转场代码 - 替换图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>, _i]];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.1 添加一个转场动画</span></span><br><span class="line">    <span class="built_in">CATransition</span> *anim = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">    <span class="comment">// 2.2 设置转场样式</span></span><br><span class="line">    anim<span class="variable">.type</span> = <span class="string">@"cube"</span>;</span><br><span class="line">    <span class="comment">// 2.3 动画参数</span></span><br><span class="line">      <span class="comment">//设置动画的开始位置</span></span><br><span class="line">      anim<span class="variable">.startProgress</span> = <span class="number">0.5</span>;</span><br><span class="line">	  <span class="comment">//设置动画的结束位置</span></span><br><span class="line">      anim<span class="variable">.endProgress</span>  =<span class="number">0.8</span>;</span><br><span class="line">    <span class="comment">// 2.3 添加转场动画</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.layer</span> addAnimation:anim forKey:<span class="literal">nil</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>转场动画过渡效果</strong><br><img src="http://r5.loli.io/iyUn22.png" alt="转场动画过渡效果"></p>
 </li>
-</ul>
-<p><img src="http://r5.loli.io/iyUn22.png" alt="转场动画过渡效果"></p>
-<ul>
 <li><p>核心动画的代理方法 - 它所使用的是非正式协议(其实就是个分类)</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 动画开始</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStart:(<span class="built_in">CAAnimation</span> *)anim;</span><br><span class="line"><span class="comment">// 动画结束</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStop:(<span class="built_in">CAAnimation</span> *)anim finished:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
 </li>
@@ -892,124 +1056,6 @@
 
 
   
-    <article id="post-Import/post/26.image与color之间互转" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/23/Import/post/26.image与color之间互转/" class="article-date">
-  	<time datetime="2015-12-23T04:24:57.000Z" itemprop="datePublished">2015-12-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/23/Import/post/26.image与color之间互转/">image与color之间互转</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>颜色转图片, 集成到UIImage分类<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 描述矩形</span></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line">    <span class="comment">// 开启位图上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line">    <span class="comment">// 获取位图上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 使用color演示填充上下文</span></span><br><span class="line">    <span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line">    <span class="comment">// 渲染上下文</span></span><br><span class="line">    <span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line">    <span class="comment">// 从上下文中获取图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 结束上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>图片转颜色<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS工具类与方法/">iOS工具类与方法</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Import/post/24.UIAlertView在IOS9中的使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/23/Import/post/24.UIAlertView在IOS9中的使用/" class="article-date">
-  	<time datetime="2015-12-23T02:37:57.000Z" itemprop="datePublished">2015-12-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/23/Import/post/24.UIAlertView在IOS9中的使用/">UIAlertView在IOS9中的使用demo</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>iOS9中改变了UIAlertView的使用方式, 并且与UIActionSheet融合进了一个类里面,统一进行管理.</p>
-</blockquote>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 注销</span></span><br><span class="line">- (<span class="keyword">void</span>)loginOut</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.创建一个alertController来管理警示窗口, 并指定样式</span></span><br><span class="line">    <span class="built_in">UIAlertController</span> *alertController = [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="string">@"确定注销吗?"</span> message:<span class="literal">nil</span> preferredStyle:<span class="built_in">UIAlertControllerStyleActionSheet</span>];</span><br><span class="line">    <span class="comment">// 2.创建点击行为, 在block中实现事件</span></span><br><span class="line">    <span class="built_in">UIAlertAction</span> *action = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"确定"</span> style:<span class="built_in">UIAlertActionStyleDestructive</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.navigationController</span> popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"已注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">UIAlertAction</span> *cancel = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"取消"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"取消注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">// 3.为alertController添加点击行为</span></span><br><span class="line">    [alertController addAction:action];</span><br><span class="line">    [alertController addAction:cancel];</span><br><span class="line">    <span class="comment">// 4.弹出警示窗口</span></span><br><span class="line">    [<span class="keyword">self</span> presentViewController:alertController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS初步-demo/">iOS初步-demo</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1020,7 +1066,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 XionVV
+    		&copy; 2016 XionVV
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

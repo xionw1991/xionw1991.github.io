@@ -34,7 +34,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 <meta property="og:image" content="http://r6.loli.io/NNvIvy.png">
 <meta property="og:image" content="http://r5.loli.io/YryMbm.png">
 <meta property="og:image" content="http://r5.loli.io/iyUn22.png">
-<meta property="og:updated_time" content="2015-12-30T12:57:27.000Z">
+<meta property="og:updated_time" content="2015-12-31T03:42:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="核心动画与UIView动画的对比">
 <meta name="twitter:description" content="CALayer
@@ -141,7 +141,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
 					</div>
 				</section>
 				
@@ -251,7 +251,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </li>
 <li><p>设置CALayer属性</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br> <strong>PS</strong>: 为什么要使用CGImageRef、CGColorRef?         为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.</p>
+<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br> <strong>PS1</strong>: 为什么要使用CGImageRef、CGColorRef?         为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.<br> <strong>PS2</strong>: 所有的动画都是基于锚点做参照来进行的.</p>
 </li>
 <li><p>CALayer的<code>CATransform3D</code>属性 (只有旋转的时候才可以看出3D的效果).</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// x,y,z 分别代表x,y,z轴.</span></span><br><span class="line"><span class="comment">// 旋转: </span></span><br><span class="line"><span class="built_in">CATransform3DMakeRotation</span>(M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 平移:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeTranslation</span>(x,y,z);</span><br><span class="line"><span class="comment">// 缩放:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeScale</span>(x,y,z);</span><br></pre></td></tr></table></figure>
@@ -266,6 +266,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </ul>
 </li>
 <li>隐式动画就是当对非根层的部分属性进行修改时,它会自动的产生一些动画的效果.我们称这个默认产生的动画为隐式动画.</li>
+<li>给根层添加的动画叫做核心动画.隐式动画是系统默认给非根层添加的动画,核心动画是程序员自己手动来添加的,其实隐式动画就是核心动画.</li>
 </ul>
 </li>
 <li>如何取消隐式动画<ul>
@@ -306,10 +307,8 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </li>
 <li><p><strong>转场动画</strong></p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 转场动画要和转场代码写在同一个方法当中才有动画效果.</span></span><br><span class="line">    <span class="comment">// 1.1 设定转场条件</span></span><br><span class="line">    _i++;</span><br><span class="line">    <span class="keyword">if</span> (_i &gt; <span class="number">3</span>) &#123;</span><br><span class="line">        _i = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 1.2 添加转场代码 - 替换图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>, _i]];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.1 添加一个转场动画</span></span><br><span class="line">    <span class="built_in">CATransition</span> *anim = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">    <span class="comment">// 2.2 设置转场样式</span></span><br><span class="line">    anim<span class="variable">.type</span> = <span class="string">@"cube"</span>;</span><br><span class="line">    <span class="comment">// 2.3 动画参数</span></span><br><span class="line">      <span class="comment">//设置动画的开始位置</span></span><br><span class="line">      anim<span class="variable">.startProgress</span> = <span class="number">0.5</span>;</span><br><span class="line">	  <span class="comment">//设置动画的结束位置</span></span><br><span class="line">      anim<span class="variable">.endProgress</span>  =<span class="number">0.8</span>;</span><br><span class="line">    <span class="comment">// 2.3 添加转场动画</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.layer</span> addAnimation:anim forKey:<span class="literal">nil</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>转场动画过渡效果</strong><br><img src="http://r5.loli.io/iyUn22.png" alt="转场动画过渡效果"></p>
 </li>
-</ul>
-<p><img src="http://r5.loli.io/iyUn22.png" alt="转场动画过渡效果"></p>
-<ul>
 <li><p>核心动画的代理方法 - 它所使用的是非正式协议(其实就是个分类)</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 动画开始</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStart:(<span class="built_in">CAAnimation</span> *)anim;</span><br><span class="line"><span class="comment">// 动画结束</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStop:(<span class="built_in">CAAnimation</span> *)anim finished:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
 </li>
@@ -404,7 +403,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 XionVV
+    		&copy; 2016 XionVV
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UIButton调换文字与图片位置的两种方法 | XionVV Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:      - (instancetype)initWithFrame:(CGRect)frame&amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        // 设置button文字        [self s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIButton调换文字与图片位置的两种方法">
+<meta property="og:url" content="http://xionv.com/2016/01/09/Import/post/35.UIButton调换文字与图片位置的两种方法/index.html">
+<meta property="og:site_name" content="XionVV Coding">
+<meta property="og:description" content="假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:      - (instancetype)initWithFrame:(CGRect)frame&amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        // 设置button文字        [self s">
+<meta property="og:updated_time" content="2016-01-09T03:00:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIButton调换文字与图片位置的两种方法">
+<meta name="twitter:description" content="假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:      - (instancetype)initWithFrame:(CGRect)frame&amp;#123;    self = [super initWithFrame:frame];    if (self) &amp;#123;        // 设置button文字        [self s">
+  
+    <link rel="alternative" href="/atom.xml" title="XionVV Coding" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XionVV</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">崔佛是个好程序员</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔/">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS中级/" style="font-size: 18px;">iOS中级</a> <a href="/tags/iOS初步/" style="font-size: 20px;">iOS初步</a> <a href="/tags/iOS初步-demo/" style="font-size: 16px;">iOS初步-demo</a> <a href="/tags/iOS备忘/" style="font-size: 16px;">iOS备忘</a> <a href="/tags/iOS工具类与方法/" style="font-size: 14px;">iOS工具类与方法</a> <a href="/tags/iOS概念/" style="font-size: 12px;">iOS概念</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是崔佛, 我在写代码, 想到什么就写什么.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">XionVV</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://r5.loli.io/2QRNvu.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XionVV</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">崔佛是个好程序员</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔/">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xionw1991" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/wei-xion" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Import/post/35.UIButton调换文字与图片位置的两种方法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/09/Import/post/35.UIButton调换文字与图片位置的两种方法/" class="article-date">
+  	<time datetime="2016-01-09T02:12:57.000Z" itemprop="datePublished">2016-01-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UIButton调换文字与图片位置的两种方法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS中级/">iOS中级</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置button文字</span></span><br><span class="line">        [<span class="keyword">self</span> setTitle:<span class="string">@"title"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置button图片</span></span><br><span class="line">        [<span class="keyword">self</span> setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置文字大小</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>];</span><br><span class="line">        <span class="comment">// 设置图片居中</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeCenter</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="第一种_-_重写layoutSubviews方法来实现">第一种 - 重写<code>layoutSubviews</code>方法来实现</h3><ol>
+<li><p>重写<code>layoutSubviews</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)layoutSubviews</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> layoutSubviews];</span><br><span class="line">    <span class="comment">// 修改titleButton里面子控件的位置</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span> &lt; <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>) &#123; </span><br><span class="line">        <span class="comment">// 1. 取出title和image的frame</span></span><br><span class="line">        <span class="built_in">CGRect</span> titleFrame = <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span>;</span><br><span class="line">        <span class="built_in">CGRect</span> imageFrame = <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span>;</span><br><span class="line">        <span class="comment">// 2. 调整title和imageView的x值</span></span><br><span class="line">        titleFrame<span class="variable">.origin</span><span class="variable">.x</span> = imageFrame<span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">        imageFrame<span class="variable">.origin</span><span class="variable">.x</span> = <span class="built_in">CGRectGetMaxX</span>(titleFrame) + <span class="number">5</span>;</span><br><span class="line">        <span class="comment">// 3. 重新赋值</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span> = titleFrame;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span> = imageFrame;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写<code>setImage: forState:</code>和<code>setTitle: forState:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 重写父类setImage方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setImage:(<span class="built_in">UIImage</span> *)image forState:(<span class="built_in">UIControlState</span>)state</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> setImage:image forState:state];</span><br><span class="line">    <span class="comment">// 自动计算尺寸</span></span><br><span class="line">    [<span class="keyword">self</span> sizeToFit];</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">// 重写父类setTitle方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setTitle:(<span class="built_in">NSString</span> *)title forState:(<span class="built_in">UIControlState</span>)state</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> setTitle:title forState:state];</span><br><span class="line">    <span class="comment">// 自动计算尺寸</span></span><br><span class="line">    [<span class="keyword">self</span> sizeToFit];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="第二种_-_重写titleRectForContentRect:和imageRectForContentRect:方法来实现">第二种 - 重写<code>titleRectForContentRect:</code>和<code>imageRectForContentRect:</code>方法来实现</h3><ol>
+<li><p>重写<code>titleRectForContentRect:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 返回文字的位置</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)titleRectForContentRect:(<span class="built_in">CGRect</span>)contentRect</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleX = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleY = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleW = [<span class="keyword">self</span><span class="variable">.currentTitle</span> boundingRectWithSize:<span class="built_in">CGSizeMake</span>(MAXFLOAT, MAXFLOAT)</span><br><span class="line">                                                     options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                                                  attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>]&#125;</span><br><span class="line">                                                     context:<span class="literal">nil</span>]<span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleH = contentRect<span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(titleX, titleY, titleW, titleH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写<code>imageRectForContentRect:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 返回图片位置</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)imageRectForContentRect:(<span class="built_in">CGRect</span>)contentRect</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageW = <span class="number">16</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageH = contentRect<span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageX = contentRect<span class="variable">.size</span><span class="variable">.width</span> - imageW;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageY = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(imageX, imageY, imageW, imageH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/08/Import/post/36.利用运行时特性获取系统类的私有成员变量/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用运行时特性获取系统类的私有成员属性</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Import/post/35.UIButton调换文字与图片位置的两种方法" data-title="UIButton调换文字与图片位置的两种方法" data-url="http://xionv.com/2016/01/09/Import/post/35.UIButton调换文字与图片位置的两种方法/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"xionv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 XionVV
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
