@@ -155,6 +155,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
 
       
       
@@ -197,7 +207,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -300,7 +310,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -376,7 +386,7 @@
 <li><p>获取所有的成员属性名</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历ivars获取目标类中每一个成员属性名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outcount; i++) &#123;</span><br><span class="line">    <span class="comment">// 打印所有的成员属性名</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @(ivar_getName(ivars[i])));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>打印结果: 第一个就是我们要拿到的成员属性.</p>
-<figure class="highlight erlang"><table><tr><td class="code"><pre><span class="line"><span class="variable">_</span>targets</span><br><span class="line"><span class="variable">_</span>delayed<span class="variable">Touches</span></span><br><span class="line"><span class="variable">_</span>delayed<span class="variable">Presses</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">_targets</span><br><span class="line">_delayedTouches</span><br><span class="line">_delayedPresses</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>通过KVC拿到其关键作用的<code>target</code></p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拿到打印结果,通过KVC拿到那个target</span></span><br><span class="line"><span class="built_in">NSArray</span> *targets = [<span class="keyword">self</span><span class="variable">.interactivePopGestureRecognizer</span> valueForKeyPath:<span class="string">@"_targets"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, targets);</span><br><span class="line"><span class="keyword">id</span> target = [targets[<span class="number">0</span>] valueForKeyPath:<span class="string">@"target"</span>];</span><br></pre></td></tr></table></figure>
@@ -1343,10 +1353,10 @@
           </div>
 
           <div class="site-state-item site-state-tags">
-            
+            <a href="/tags">
               <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">标签</span>
-              
+              </a>
           </div>
 
         </nav>
