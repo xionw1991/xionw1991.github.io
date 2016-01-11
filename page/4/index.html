@@ -200,100 +200,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/" itemprop="url">
-                  NSFileManager计算文件夹大小
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-10T10:08:57+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="计算文件夹大小">计算文件夹大小</h2><ul>
-<li><p>给NSString添加一个计算文件夹大小的分类, 以字节输出</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">                <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                    fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将字节单位转化为兆  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size)&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">    <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">    sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">    <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">        cacheSize /= <span class="number">1000</span>;</span><br><span class="line">        sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">        sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sizeStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/12/09/demonayu/blog/SQLite在iOS中的使用(下)/" itemprop="url">
                   SQLite在iOS中的使用(下)
                 </a>
@@ -1391,6 +1297,117 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/29/demonayu/blog/Singleton/" itemprop="url">
+                  单例设计模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-29T21:27:57+08:00" content="2015-11-29">
+              2015-11-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/29/demonayu/blog/Singleton/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/demonayu/blog/Singleton/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-单例模式概念">1.单例模式概念</h2><ul>
+<li><p>什么是单例模式:(Singleton)</p>
+<ul>
+<li>单例模式的意图是是的类的对象成为系统中唯一的实例,􏰀供一个访问点,供客户类 共享资源。</li>
+</ul>
+</li>
+<li><p>什么情况下使用单例?</p>
+<ul>
+<li>1、类只能有一个实例,而且必须从一个为人熟知的访问点对其进行访问,比如工厂方 法。</li>
+<li>2、这个唯一的实例只能通过子类化进行扩展,而且扩展的对象不会破坏客户端代码。</li>
+</ul>
+</li>
+<li><p>单例设计模式的要点:</p>
+<ul>
+<li>1) 某个类只能有一个实例。</li>
+<li>2)他必须自行创建这个对象</li>
+<li>3)必须自行向整个系统􏰀供这个实例;</li>
+<li>4)为了保证实例的唯一性,我们必须将</li>
+<li>5)这个方法必须是一个静态类</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/29/demonayu/blog/Singleton/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
 
   </section>
 
@@ -1437,7 +1454,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

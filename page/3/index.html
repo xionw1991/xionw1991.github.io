@@ -200,106 +200,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/" itemprop="url">
-                  重写可变数组的[removeObject:]方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-18T21:51:57+08:00" content="2015-12-18">
-              2015-12-18
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ul>
-<li><p>可变数组删除元素的原理:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSMutableArray</span> removeObject:obj];</span><br></pre></td></tr></table></figure>
-<p>可变数组在调用<code>removeObject:</code>方法的时候会先去根类<code>NSObject</code>中调用<code>isEqual:</code>方法来遍历数组中所有对象的地址,来比对需要删除对象的地址,如果一样返回YES,如果不同返回NO.<br>我们可以根据这个特性在子类中重写<code>isEqual:</code>方法来达到只要对象的某一个属性值一样就能删除掉这个对象的目的.</p>
-</li>
-</ul>
-<ul>
-<li><p>系统默认的做法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)isEqual:(Book *)other</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">self</span> == ohter) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在子类中重写方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)isEqual:(Book *)other</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 比对两个对象的name属性值是否一样</span></span><br><span class="line">  <span class="keyword">return</span> [<span class="keyword">self</span><span class="variable">.name</span> isEqualToString:other<span class="variable">.name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/12/17/demonayu/blog/一个应用程序的启动流程/" itemprop="url">
                   一个应用程序的启动流程
                 </a>
@@ -1327,6 +1227,100 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/" itemprop="url">
+                  NSFileManager计算文件夹大小
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-10T10:08:57+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="计算文件夹大小">计算文件夹大小</h2><ul>
+<li><p>给NSString添加一个计算文件夹大小的分类, 以字节输出</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">                <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                    fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将字节单位转化为兆  </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size)&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">    <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">    sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">    <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">        cacheSize /= <span class="number">1000</span>;</span><br><span class="line">        sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">        sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sizeStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
 
   </section>
 
@@ -1373,7 +1367,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
