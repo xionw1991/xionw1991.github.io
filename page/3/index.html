@@ -207,6 +207,181 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/24/demonayu/blog/29.事件处理/" itemprop="url">
+                  事件处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-24T22:12:57+08:00" content="2015-12-24">
+              2015-12-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/24/demonayu/blog/29.事件处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/24/demonayu/blog/29.事件处理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="事件的产生和传递">事件的产生和传递</h2><ul>
+<li>iOS当中常用的事件:<ul>
+<li>触摸事件</li>
+<li>加速计事件</li>
+<li>远程控制事件</li>
+</ul>
+</li>
+<li><p>处理事件的常用方法:</p>
+<ul>
+<li><p>触摸事件:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加速计事件:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)motionBegan:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionEnded:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionCancelled:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>远程控制事件:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)remoteControlReceivedWithEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>事件是怎么传递的?</p>
+<ul>
+<li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
+<li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
+<li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
+<li><strong>触摸事件的传递是从父控件传递到子控件的, 如果一个父控件不能接收事件,那么它里面的了子控件也不能够接收事件.</strong></li>
+</ul>
+</li>
+<li>一个控件什么情况下不能够接收事件.<ul>
+<li>不能与用户交互的时候<code>userInteractionEnabled = NO</code>.(注意:UIImageView默认是不可交互的)</li>
+<li>隐藏的时候<code>Hidden = YES</code>.</li>
+<li>颜色为全透明的时候<code>alpha = 0</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="事件响应">事件响应</h2><ul>
+<li>用户点击屏幕后产生的一个触摸事件，经过一系列的传递过程 后，会找到最合适的视图控件来处理这个事件,找到最合适的视图控件后,就会调用控件的touches方法来作具体的事件处理那这些touches方法的默认做法是将事件顺着响应者链条向上传递,将事件交给上一个响应者进行处理.</li>
+<li>什么是响应者对象和响应者链条: <ul>
+<li>继承了UIResponds的对象我们称它为响应者对象</li>
+<li>UIApplication、UIViewController、UIView都继承自UIResponder,因此它们都是响应者对象，都能够接收并处理事件</li>
+<li>响应者链条是由多个响应者对象连接起来的链条.</li>
+</ul>
+</li>
+<li><p>响应者链的事件传递过程</p>
+<ol>
+<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图<ul>
+<li>如果当前的View是控制器的View,那么控制器就是上一个响应者.</li>
+<li>如果当前的View不是控制器的View,那么它的父控件就是上一个响应者.</li>
+</ul>
+</li>
+<li>在视图层次结构的最顶级视图，如果也不能处理收到的事件或消息，则其将事件或消息传递给window对象进行处理</li>
+<li>如果window对象也不处理，则其将事件或消息传递给UIApplication对象</li>
+<li>如果UIApplication也不能处理该事件或消息，则将其丢弃<br><img src="http://r5.loli.io/UR77V3.png" alt="响应者链条示意图"></li>
+</ol>
+</li>
+<li><p>如何寻找最合适的view</p>
+<ol>
+<li>先判断自己是否能够接收触摸事件,如果能再继续往下判断,</li>
+<li>再判断触摸的当前点在不在自己的身上.</li>
+<li>如果在自己身上,它会从后往前遍历子控件,遍历出每一个子控件后,重复前面的两个步骤.</li>
+<li>如果没有符合条件的子控件,那么它自己就是最适合的View.<br><img src="http://r6.loli.io/j26faq.png" alt=""></li>
+</ol>
+</li>
+</ul>
+<h2 id="事件传递的完整过程">事件传递的完整过程</h2><ol>
+<li>以触摸事件为例,先将事件对象由上往下传递(由父控件传递给子控件),找到最合适的控件来处理这个事件.</li>
+<li>调用最合适控件的<code>touches…</code>方法.</li>
+<li>如果调用了<code>[super touches….]</code>就会将事件顺着响应者链条往上传递,传递给上一个响应者.</li>
+<li>接着就会调用上一个响应者的<code>touches…</code>方法.</li>
+</ol>
+<h3 id="hitTest方法与pointInside方法">hitTest方法与pointInside方法</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:寻找最适合的View.</span></span><br><span class="line"><span class="comment">// 参数:当前手指所在的点;产生的事件</span></span><br><span class="line"><span class="comment">// 返回值:返回谁, 谁就是最适合的View.</span></span><br><span class="line"><span class="comment">// 什么时候用调用:只要一个事件,传递给一个控件时,就会调用这个控件的hitTest方法</span></span><br><span class="line">-(<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:判断point在不在方法调用者上</span></span><br><span class="line"><span class="comment">// point:必须是方法调用者的坐标系</span></span><br><span class="line"><span class="comment">// 什么时候调用:hitTest方法底层会调用这个方法,判断点在不在控件上.</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)pointInside:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>模拟<code>hitTest:withEvent:</code>方法的底层实现(寻找最合适view)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监听UIView的触摸事件来实现拖拽:">监听UIView的触摸事件来实现拖拽:</h3><ul>
+<li>想要监听UIViiew的触摸事件,首先第一步要自定义UIView,因为只有实现了UIResponder的事件方法才能够监听事件.</li>
+<li><p>一次完整的触摸过程，会经历3个状态：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 1. 触摸开始</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 2. 触摸移动</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 3. 触摸结束</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 触摸取消（可能会经历,比如突然来电,手机自动关机）</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
+<ul>
+<li>一次完整的触摸过程中，只会产生一个事件对象，4个触摸方法都是同一个event参数.</li>
+<li>如果两根手指同时触摸一个view，那么view只会调用一次<code>touchesBegan:withEvent:</code>方法，touches参数中装着2个UITouch对象.</li>
+<li>如果这两根手指一前一后分开触摸同一个view，那么view会分别调用2次<code>touchesBegan:withEvent:</code>方法，并且每次调用时的touches参数中只包含一个UITouch对象.</li>
+</ul>
+</li>
+<li>举例: 实现UIview的拖拽<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    - (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 拿到这个点</span></span><br><span class="line">    <span class="built_in">UITouch</span> *touch = [touches anyObject];</span><br><span class="line">    <span class="comment">// 获得这个点的当前位置</span></span><br><span class="line">    <span class="built_in">CGPoint</span> currentP = [touch locationInView:<span class="keyword">self</span>];</span><br><span class="line">    <span class="comment">// 获得这个点之前的位置</span></span><br><span class="line">    <span class="built_in">CGPoint</span> previousP = [touch previousLocationInView:<span class="keyword">self</span>];</span><br><span class="line">    <span class="comment">// 计算出偏移量 - 要移动的距离</span></span><br><span class="line">    <span class="built_in">CGFloat</span> distanceX = currentP<span class="variable">.x</span> - previousP<span class="variable">.x</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> distanceY = currentP<span class="variable">.y</span> - previousP<span class="variable">.y</span> ;</span><br><span class="line">    <span class="comment">// 改变view状态</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.transform</span> = <span class="built_in">CGAffineTransformTranslate</span>(<span class="keyword">self</span><span class="variable">.transform</span>, distanceX, distanceY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="url">
                   NSArray和NSDictionary控制台中文打印
                 </a>
@@ -661,122 +836,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/19/demonayu/blog/23.copy深浅的规律/" itemprop="url">
-                  copy深浅的规律
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-19T15:42:57+08:00" content="2015-12-19">
-              2015-12-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/19/demonayu/blog/23.copy深浅的规律/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/19/demonayu/blog/23.copy深浅的规律/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
-</blockquote>
-<ul>
-<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
-<li>源对象和副本对象是同一个对象</li>
-<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
-<li>本质是：没有产生新的对象</li>
-<li>原对象引用计数器+1</li>
-<li>必须对原对象进行释放</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
-<li>源对象和副本对象是不同的两个对象</li>
-<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
-<li>本质是：产生了新的对象</li>
-<li>必须释放新对象</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -817,7 +882,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

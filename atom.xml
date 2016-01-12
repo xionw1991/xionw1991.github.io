@@ -4,7 +4,7 @@
   <subtitle><![CDATA[好啦,好啦,我知道了!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xionv.com/"/>
-  <updated>2016-01-11T08:28:52.000Z</updated>
+  <updated>2016-01-12T03:44:54.000Z</updated>
   <id>http://xionv.com/</id>
   
   <author>
@@ -13,6 +13,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[TableVIew单元格多图下载]]></title>
+    <link href="http://xionv.com/2016/01/12/demonayu/blog/41.TableVIew%E5%8D%95%E5%85%83%E6%A0%BC%E5%A4%9A%E5%9B%BE%E4%B8%8B%E8%BD%BD/"/>
+    <id>http://xionv.com/2016/01/12/demonayu/blog/41.TableVIew单元格多图下载/</id>
+    <published>2016-01-12T03:06:57.000Z</published>
+    <updated>2016-01-12T03:44:54.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="考虑因素">考虑因素</h2><ul>
+<li>单元格的多图下载要考虑到:<ul>
+<li>必须要在子线程进行下载</li>
+<li>防止重复下载</li>
+<li>数据缓存</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现思路">实现思路</h2><p><img src="http://r5.loli.io/bIRVfm.png" alt=""></p>
+<h2 id="实现方法">实现方法</h2><ul>
+<li><p>将cache路径写成宏</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#define cachePath(url) [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject stringByAppendingPathComponent:[url lastPathComponent]]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>cellForRowAtIndexPath:</code>方法中判断图片是否存在</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 取出对应的模型</span></span><br><span class="line">XVModel *item = <span class="keyword">self</span><span class="variable">.items</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">cell<span class="variable">.textLabel</span><span class="variable">.text</span> = item<span class="variable">.title</span>;</span><br><span class="line">cell<span class="variable">.detailTextLabel</span><span class="variable">.text</span> = item<span class="variable">.subTitle</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1&gt; 先从内存缓存中取</span></span><br><span class="line"><span class="comment">// 根据url取出图片</span></span><br><span class="line"><span class="built_in">UIImage</span> *memoryImage = <span class="keyword">self</span><span class="variable">.images</span>[item<span class="variable">.icon</span>];</span><br><span class="line"><span class="keyword">if</span> (memoryImage) &#123; <span class="comment">// 当内存中有图片时</span></span><br><span class="line">    cell<span class="variable">.imageView</span><span class="variable">.image</span> = memoryImage;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// 当内存中没有图片时</span></span><br><span class="line">    <span class="comment">// 2&gt; 再从沙盒中取 - 每一张图片都是一个文件 文件名为url名</span></span><br><span class="line">    <span class="built_in">UIImage</span> *diskImage = [<span class="built_in">UIImage</span> imageWithContentsOfFile:cachePath(item<span class="variable">.icon</span>)];</span><br><span class="line">    <span class="keyword">if</span> (diskImage) &#123; <span class="comment">// 沙盒中有图片时</span></span><br><span class="line">        cell<span class="variable">.imageView</span><span class="variable">.image</span> = diskImage;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当沙盒中没有对应的图片时</span></span><br><span class="line">        <span class="comment">// 设置占位图片</span></span><br><span class="line">        cell<span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"placeholder3"</span>];</span><br><span class="line">        <span class="comment">// 3&gt; 从网络上下载</span></span><br><span class="line">        [<span class="keyword">self</span> downloadImageWithUrlStr:item<span class="variable">.icon</span> indexPath:indexPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现异步下载</p>
+<ul>
+<li>为了保证一张图片只下载一次,需要判断当前url是否有下载任务,如果没有才需要创建下载任务.</li>
+<li>如何才能判断当前的url是否有下载任务呢?利用字典把url作为key绑定下载操作来判断.<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)downloadImageWithUrlStr:(<span class="built_in">NSString</span> *)urlStr indexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 取出字典中url对应的下载任务</span></span><br><span class="line">    <span class="built_in">NSBlockOperation</span> *operation = <span class="keyword">self</span><span class="variable">.operations</span>[urlStr];</span><br><span class="line">    <span class="comment">// 如果当前url有下载任务 - 就不创建任务</span></span><br><span class="line">    <span class="keyword">if</span> (!operation) &#123; <span class="comment">// 没有下载任务</span></span><br><span class="line">        __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakself = <span class="keyword">self</span>;</span><br><span class="line">        <span class="comment">// 创建异步任务 - 将下载图片的操作放入到子线程中 - (解决异步下载的问题)</span></span><br><span class="line">        operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">            <span class="comment">// 将字符串转成url</span></span><br><span class="line">            <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">            <span class="comment">// 从url获取数据</span></span><br><span class="line">            <span class="built_in">NSData</span> *imageData = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">            <span class="comment">// 将二进制数据转成图片</span></span><br><span class="line">            <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:imageData];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 返回主线程刷新数据</span></span><br><span class="line">            [[<span class="built_in">NSOperationQueue</span> mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line">                <span class="comment">// 如果下载成功将图片存入字典 - 字典不能存空</span></span><br><span class="line">                <span class="keyword">if</span> (image) &#123;</span><br><span class="line">                    <span class="comment">// 1)将下载好的图片添加进图片字典中 url为key</span></span><br><span class="line">                    [weakself<span class="variable">.images</span> setObject:image forKey:urlStr];</span><br><span class="line">                    <span class="comment">// 刷新表格</span></span><br><span class="line">                    [weakself<span class="variable">.tableView</span> reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationFade</span>];</span><br><span class="line">                    <span class="comment">// 2)将image写入沙盒</span></span><br><span class="line">                    <span class="comment">// 将图片转成二进制数据</span></span><br><span class="line">                    <span class="built_in">NSData</span> *data = <span class="built_in">UIImagePNGRepresentation</span>(image);</span><br><span class="line">                    <span class="comment">// 写入沙盒</span></span><br><span class="line">                    [data writeToFile:cachePath(urlStr) atomically:<span class="literal">YES</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 下载完毕后将任务从字典中移除 - 如果下载失败将任务移除后还有机会下载,如果不移除,这个key就会一直存在永远也不能再次下载了</span></span><br><span class="line">                <span class="comment">// 在主线程中移除是为了保证下载操作已经执行完毕</span></span><br><span class="line">                [weakself<span class="variable">.operations</span> removeObjectForKey:urlStr];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将任务添加到队列</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.queue</span> addOperation:operation];</span><br><span class="line">    <span class="comment">// 将下载任务写入到字典里(解决重复下载问题)</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.operations</span> setObject:operation forKey:urlStr];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="考虑因素">考虑因素</h2><ul>
+<li>单元格的多图下载要考虑到:<ul>
+<li>必须要在子线程进行下载</li>
+<li>防止重复下载</li>
+<li>数据缓存</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现思路">实现思路</h]]>
+    </summary>
+    
+      <category term="iOS中级" scheme="http://xionv.com/tags/iOS%E4%B8%AD%E7%BA%A7/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[UIButton调换文字与图片位置的两种方法]]></title>
@@ -783,36 +829,6 @@
 <ul>
 <li><p>利用NSValue包装常用结构体</p>
 <figure class="]]>
-    </summary>
-    
-      <category term="iOS中级" scheme="http://xionv.com/tags/iOS%E4%B8%AD%E7%BA%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[重写可变数组的[removeObject:]方法]]></title>
-    <link href="http://xionv.com/2015/12/18/demonayu/blog/22.%E9%87%8D%E5%86%99%E5%8F%AF%E5%8F%98%E6%95%B0%E7%BB%84%E7%9A%84removeObject:%E6%96%B9%E6%B3%95/"/>
-    <id>http://xionv.com/2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/</id>
-    <published>2015-12-18T13:51:57.000Z</published>
-    <updated>2016-01-11T08:28:51.000Z</updated>
-    <content type="html"><![CDATA[<ul>
-<li><p>可变数组删除元素的原理:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSMutableArray</span> removeObject:obj];</span><br></pre></td></tr></table></figure>
-<p>可变数组在调用<code>removeObject:</code>方法的时候会先去根类<code>NSObject</code>中调用<code>isEqual:</code>方法来遍历数组中所有对象的地址,来比对需要删除对象的地址,如果一样返回YES,如果不同返回NO.<br>我们可以根据这个特性在子类中重写<code>isEqual:</code>方法来达到只要对象的某一个属性值一样就能删除掉这个对象的目的.</p>
-</li>
-</ul>
-<ul>
-<li><p>系统默认的做法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)isEqual:(Book *)other</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">self</span> == ohter) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在子类中重写方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)isEqual:(Book *)other</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 比对两个对象的name属性值是否一样</span></span><br><span class="line">  <span class="keyword">return</span> [<span class="keyword">self</span><span class="variable">.name</span> isEqualToString:other<span class="variable">.name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<ul>
-<li><p>可变数组删除元素的原理:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSMu]]>
     </summary>
     
       <category term="iOS中级" scheme="http://xionv.com/tags/iOS%E4%B8%AD%E7%BA%A7/"/>

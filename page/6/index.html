@@ -207,6 +207,100 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/" itemprop="url">
+                  NSFileManager计算文件夹大小
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-10T10:08:57+08:00" content="2015-12-10">
+              2015-12-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/demonayu/blog/NSFileManager计算文件夹大小/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="计算文件夹大小">计算文件夹大小</h2><ul>
+<li><p>给NSString添加一个计算文件夹大小的分类, 以字节输出</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">                <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                    fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将字节单位转化为兆  </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size)&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">    <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">    sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">    <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">        cacheSize /= <span class="number">1000</span>;</span><br><span class="line">        sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">        sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sizeStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/09/demonayu/blog/SQLite在iOS中的使用(下)/" itemprop="url">
                   SQLite在iOS中的使用(下)
                 </a>
@@ -862,129 +956,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/04/demonayu/blog/KVC&KVO/" itemprop="url">
-                  KVC & KVO简单应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-04T19:36:57+08:00" content="2015-12-04">
-              2015-12-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/04/demonayu/blog/KVC&KVO/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/04/demonayu/blog/KVC&KVO/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="KVC">KVC</h2><ul>
-<li>全称：Key Value Coding（键值编码）</li>
-<li>赋值</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能修改私有成员变量</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span> *)keyedValues;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>取值</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能取得私有成员变量的值</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span> *)keys;</span><br></pre></td></tr></table></figure>
-<h2 id="KVO">KVO</h2><ul>
-<li>全称：Key Value Observing（键值监听）</li>
-<li>作用：监听模型的属性值改变</li>
-<li><p>步骤</p>
-<ul>
-<li><p>添加监听器</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 利用b对象来监听a对象name属性的改变</span></span><br><span class="line">[a addObserver:b forKeyPath:<span class="string">@"name"</span> options:<span class="built_in">NSKeyValueObservingOptionOld</span> | <span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="string">@"test"</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在监听器中实现监听方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change     context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@ %@ %@ %@"</span>, object, keyPath, change, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>举例:</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line">- (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1025,7 +1002,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

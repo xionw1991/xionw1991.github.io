@@ -179,15 +179,116 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/12/demonayu/blog/41.TableVIew单元格多图下载/" itemprop="url">
+                  TableVIew单元格多图下载
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-12T11:06:57+08:00" content="2016-01-12">
+              2016-01-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/12/demonayu/blog/41.TableVIew单元格多图下载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/demonayu/blog/41.TableVIew单元格多图下载/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="考虑因素">考虑因素</h2><ul>
+<li>单元格的多图下载要考虑到:<ul>
+<li>必须要在子线程进行下载</li>
+<li>防止重复下载</li>
+<li>数据缓存</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现思路">实现思路</h2><p><img src="http://r5.loli.io/bIRVfm.png" alt=""></p>
+<h2 id="实现方法">实现方法</h2><ul>
+<li><p>将cache路径写成宏</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#define cachePath(url) [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject stringByAppendingPathComponent:[url lastPathComponent]]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>cellForRowAtIndexPath:</code>方法中判断图片是否存在</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 取出对应的模型</span></span><br><span class="line">XVModel *item = <span class="keyword">self</span><span class="variable">.items</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">cell<span class="variable">.textLabel</span><span class="variable">.text</span> = item<span class="variable">.title</span>;</span><br><span class="line">cell<span class="variable">.detailTextLabel</span><span class="variable">.text</span> = item<span class="variable">.subTitle</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1&gt; 先从内存缓存中取</span></span><br><span class="line"><span class="comment">// 根据url取出图片</span></span><br><span class="line"><span class="built_in">UIImage</span> *memoryImage = <span class="keyword">self</span><span class="variable">.images</span>[item<span class="variable">.icon</span>];</span><br><span class="line"><span class="keyword">if</span> (memoryImage) &#123; <span class="comment">// 当内存中有图片时</span></span><br><span class="line">    cell<span class="variable">.imageView</span><span class="variable">.image</span> = memoryImage;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// 当内存中没有图片时</span></span><br><span class="line">    <span class="comment">// 2&gt; 再从沙盒中取 - 每一张图片都是一个文件 文件名为url名</span></span><br><span class="line">    <span class="built_in">UIImage</span> *diskImage = [<span class="built_in">UIImage</span> imageWithContentsOfFile:cachePath(item<span class="variable">.icon</span>)];</span><br><span class="line">    <span class="keyword">if</span> (diskImage) &#123; <span class="comment">// 沙盒中有图片时</span></span><br><span class="line">        cell<span class="variable">.imageView</span><span class="variable">.image</span> = diskImage;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当沙盒中没有对应的图片时</span></span><br><span class="line">        <span class="comment">// 设置占位图片</span></span><br><span class="line">        cell<span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"placeholder3"</span>];</span><br><span class="line">        <span class="comment">// 3&gt; 从网络上下载</span></span><br><span class="line">        [<span class="keyword">self</span> downloadImageWithUrlStr:item<span class="variable">.icon</span> indexPath:indexPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现异步下载</p>
+<ul>
+<li>为了保证一张图片只下载一次,需要判断当前url是否有下载任务,如果没有才需要创建下载任务.</li>
+<li>如何才能判断当前的url是否有下载任务呢?利用字典把url作为key绑定下载操作来判断.<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)downloadImageWithUrlStr:(<span class="built_in">NSString</span> *)urlStr indexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 取出字典中url对应的下载任务</span></span><br><span class="line">    <span class="built_in">NSBlockOperation</span> *operation = <span class="keyword">self</span><span class="variable">.operations</span>[urlStr];</span><br><span class="line">    <span class="comment">// 如果当前url有下载任务 - 就不创建任务</span></span><br><span class="line">    <span class="keyword">if</span> (!operation) &#123; <span class="comment">// 没有下载任务</span></span><br><span class="line">        __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakself = <span class="keyword">self</span>;</span><br><span class="line">        <span class="comment">// 创建异步任务 - 将下载图片的操作放入到子线程中 - (解决异步下载的问题)</span></span><br><span class="line">        operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">            <span class="comment">// 将字符串转成url</span></span><br><span class="line">            <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">            <span class="comment">// 从url获取数据</span></span><br><span class="line">            <span class="built_in">NSData</span> *imageData = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">            <span class="comment">// 将二进制数据转成图片</span></span><br><span class="line">            <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:imageData];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 返回主线程刷新数据</span></span><br><span class="line">            [[<span class="built_in">NSOperationQueue</span> mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line">                <span class="comment">// 如果下载成功将图片存入字典 - 字典不能存空</span></span><br><span class="line">                <span class="keyword">if</span> (image) &#123;</span><br><span class="line">                    <span class="comment">// 1)将下载好的图片添加进图片字典中 url为key</span></span><br><span class="line">                    [weakself<span class="variable">.images</span> setObject:image forKey:urlStr];</span><br><span class="line">                    <span class="comment">// 刷新表格</span></span><br><span class="line">                    [weakself<span class="variable">.tableView</span> reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationFade</span>];</span><br><span class="line">                    <span class="comment">// 2)将image写入沙盒</span></span><br><span class="line">                    <span class="comment">// 将图片转成二进制数据</span></span><br><span class="line">                    <span class="built_in">NSData</span> *data = <span class="built_in">UIImagePNGRepresentation</span>(image);</span><br><span class="line">                    <span class="comment">// 写入沙盒</span></span><br><span class="line">                    [data writeToFile:cachePath(urlStr) atomically:<span class="literal">YES</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 下载完毕后将任务从字典中移除 - 如果下载失败将任务移除后还有机会下载,如果不移除,这个key就会一直存在永远也不能再次下载了</span></span><br><span class="line">                <span class="comment">// 在主线程中移除是为了保证下载操作已经执行完毕</span></span><br><span class="line">                [weakself<span class="variable">.operations</span> removeObjectForKey:urlStr];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将任务添加到队列</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.queue</span> addOperation:operation];</span><br><span class="line">    <span class="comment">// 将下载任务写入到字典里(解决重复下载问题)</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.operations</span> setObject:operation forKey:urlStr];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -698,99 +799,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/demonayu/blog/40.图片折叠小demo/" itemprop="url">
-                  图片折叠小demo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-04T22:40:57+08:00" content="2016-01-04">
-              2016-01-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/04/demonayu/blog/40.图片折叠小demo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/demonayu/blog/40.图片折叠小demo/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="利用图层特性实现图片折叠的效果">利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define imageWH 200.0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageTop;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageBottom;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">CAGradientLayer</span> *gradient;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化图片</span></span><br><span class="line">    [<span class="keyword">self</span> setupImageView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 初始化图片 */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupImageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个透明的蒙版作为手势的接受者 */</span></span><br><span class="line">    <span class="built_in">UIView</span> *cover = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    cover<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, imageWH, imageWH);</span><br><span class="line">    cover<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    cover<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">    <span class="comment">// 添加pan手势</span></span><br><span class="line">    <span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br><span class="line">    [cover addGestureRecognizer:pan];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:cover];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 添加图片 - 原图片添加两次,分别显示上下部分 */</span></span><br><span class="line">    <span class="comment">// 上半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageTop = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageTop<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageTop<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的上半部</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为图片的高度</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</span><br><span class="line">    _imageTop = imageTop;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageBottom = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageBottom<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageBottom<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的下半部</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为0</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    _imageBottom = imageBottom;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 给下半部图片添加阴影效果 */</span></span><br><span class="line">    <span class="comment">// 创建一个渐变层用来显示阴影效果</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    _gradient = gradient;</span><br><span class="line">    <span class="comment">// 设置图层的位置</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = imageBottom<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置渐变颜色</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> clearColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 设置不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 给下半部图片添加图层</span></span><br><span class="line">    [imageBottom<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">    </span><br><span class="line">    [cover addSubview:imageBottom];</span><br><span class="line">    [cover addSubview:imageTop];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 监听pan手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获得手指偏移量的Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> offsetY = [pan translationInView:<span class="keyword">self</span><span class="variable">.view</span>]<span class="variable">.y</span>;</span><br><span class="line">    <span class="comment">// 将偏移量转成旋转弧度</span></span><br><span class="line">    <span class="built_in">CGFloat</span> angle = offsetY * M_PI / imageWH;</span><br><span class="line">    <span class="keyword">if</span> (angle &gt; M_PI) &#123;</span><br><span class="line">        angle = M_PI;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置透视效果 - 除数值越大透视效果越不明显(可以理解成眼睛看到物体的距离)</span></span><br><span class="line">    <span class="built_in">CATransform3D</span> transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">    transform<span class="variable">.m34</span> = -<span class="number">1</span> / <span class="number">400.0</span>;</span><br><span class="line">    <span class="comment">// 根据偏移量沿x轴旋转上半部图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DRotate</span>(transform, -angle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 给下半部图片添加阴影效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = offsetY * <span class="number">1</span> / imageWH;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当手指松开的时候将位置返回</span></span><br><span class="line">    <span class="keyword">if</span> (pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置反弹动画</span></span><br><span class="line">        <span class="comment">// Duration:动画的执行时长</span></span><br><span class="line">        <span class="comment">// delay:延时执行时长</span></span><br><span class="line">        <span class="comment">// Damping:弹性系数(越小,弹性越大)</span></span><br><span class="line">        <span class="comment">// SpringVelocity:初始的弹性系数</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">1.25</span> delay:<span class="number">0</span> usingSpringWithDamping:<span class="number">0.1</span> initialSpringVelocity:<span class="number">0</span> options:<span class="number">0</span> animations:^&#123;</span><br><span class="line">            <span class="comment">// 清空transform</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">            <span class="comment">// 还原不透明度</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -831,7 +845,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

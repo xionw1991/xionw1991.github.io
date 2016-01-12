@@ -56,8 +56,7 @@
 <meta name="description" content="KVC
 全称：Key Value Coding（键值编码）
 赋值
-
-// 能修改私有成员变量- (void)setValue:(id)value forKey:(NSString *)key;- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;- (void)setValuesForKeysWithDictionary:(NSDict">
+// 能修改私有成员变量- (void)setValue:(id)value forKey:(NSString *)key;- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;- (void)setValuesForKeysWithDictionary:(NSDicti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KVC & KVO简单应用">
 <meta property="og:url" content="http://xionv.com/2015/12/04/demonayu/blog/KVC&KVO/index.html">
@@ -65,16 +64,14 @@
 <meta property="og:description" content="KVC
 全称：Key Value Coding（键值编码）
 赋值
-
-// 能修改私有成员变量- (void)setValue:(id)value forKey:(NSString *)key;- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;- (void)setValuesForKeysWithDictionary:(NSDict">
-<meta property="og:updated_time" content="2016-01-11T08:28:53.000Z">
+// 能修改私有成员变量- (void)setValue:(id)value forKey:(NSString *)key;- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;- (void)setValuesForKeysWithDictionary:(NSDicti">
+<meta property="og:updated_time" content="2016-01-12T02:00:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVC & KVO简单应用">
 <meta name="twitter:description" content="KVC
 全称：Key Value Coding（键值编码）
 赋值
-
-// 能修改私有成员变量- (void)setValue:(id)value forKey:(NSString *)key;- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;- (void)setValuesForKeysWithDictionary:(NSDict">
+// 能修改私有成员变量- (void)setValue:(id)value forKey:(NSString *)key;- (void)setValue:(id)value forKeyPath:(NSString *)keyPath;- (void)setValuesForKeysWithDictionary:(NSDicti">
 
 
 
@@ -248,13 +245,13 @@
       
         <span itemprop="articleBody"><h2 id="KVC">KVC</h2><ul>
 <li>全称：Key Value Coding（键值编码）</li>
-<li>赋值</li>
-</ul>
+<li><p>赋值</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能修改私有成员变量</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span> *)keyedValues;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>取值</li>
-</ul>
+</li>
+<li><p>取值</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能取得私有成员变量的值</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span> *)keys;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <h2 id="KVO">KVO</h2><ul>
 <li>全称：Key Value Observing（键值监听）</li>
 <li>作用：监听模型的属性值改变</li>
@@ -271,11 +268,12 @@
 </ul>
 <hr>
 <ul>
-<li>举例:</li>
+<li><p>举例:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line"> - (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line"> - (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line">- (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -375,7 +373,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
