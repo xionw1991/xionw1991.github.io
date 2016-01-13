@@ -202,6 +202,127 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/25/demonayu/blog/30.手势识别基本使用/" itemprop="url">
+                  手势识别基本使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-25T09:31:57+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/demonayu/blog/30.手势识别基本使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/25/demonayu/blog/30.手势识别基本使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
+<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
+<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
+<li>手势有以下几种:<ul>
+<li>UITapGestureRecognizer(敲击)</li>
+<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
+<li>UIPanGestureRecognizer(拖拽)</li>
+<li>UISwipeGestureRecognizer(轻扫)</li>
+<li>UIRotationGestureRecognizer(旋转)</li>
+<li>UILongPressGestureRecognizer(长按)</li>
+</ul>
+</li>
+<li><p>手势使用方法:</p>
+<ul>
+<li><p>创建手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现手势方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>拖动的状态</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动状态复位</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手势常用的代理方法</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/24/demonayu/blog/29.事件处理/" itemprop="url">
                   事件处理
                 </a>
@@ -727,110 +848,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/22/demonayu/blog/25.KVC的底层实现/" itemprop="url">
-                  KVC的底层实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-22T19:37:57+08:00" content="2015-12-22">
-              2015-12-22
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/22/demonayu/blog/25.KVC的底层实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/demonayu/blog/25.KVC的底层实现/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>KVC的本质就是调用成员属性的setter和getter方法.</p>
-</blockquote>
-<ul>
-<li><code>setValuesForKeysWithDictionary:</code>方法的底层实现  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)</span></span><br><span class="line">  [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">      [item setValue:obj forKeyPath:key];</span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><code>setValue:forKeyPath:</code>的底层实现:<ol>
-<li>调用key对应成员属性名的setter方法;</li>
-<li>如果找不到,找带下划线(_)的成员属性名,然后给这个成员属性直接赋值.</li>
-<li>如果找不到,找与key名完全相同的成员属性名,然后直接赋值.</li>
-<li>如果都找不到,则程序崩溃,报错找不到对应的成员属性.</li>
-</ol>
-</li>
-</ul>
-<p>ps: 可以利用KVC的实现原理来重写赋值过程</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -877,7 +894,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

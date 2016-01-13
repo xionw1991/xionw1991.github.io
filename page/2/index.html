@@ -202,6 +202,96 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/05/demonayu/blog/39.渐变图层,复制图层和形状图层的使用/" itemprop="url">
+                  渐变图层,复制图层和形状图层的简单用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-05T14:55:57+08:00" content="2016-01-05">
+              2016-01-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/05/demonayu/blog/39.渐变图层,复制图层和形状图层的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/05/demonayu/blog/39.渐变图层,复制图层和形状图层的使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="渐变图层">渐变图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">/* 创建一个imageView控件 */</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]];</span><br><span class="line">    imageV<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    imageV<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageV];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> addGradientLayerToView:imageV];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 添加渐变图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addGradientLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个渐变图层 */</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = view<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 渐变颜色(用(id)强转成OC对象)</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 渐变范围(取值范围是0~1, 差值越大表示渐变范围越大)</span></span><br><span class="line">    gradient<span class="variable">.locations</span> = @[@<span class="number">0</span>, @<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 渐变方向(下面代码表示左上角到右下角的渐变)</span></span><br><span class="line">    gradient<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    gradient<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0.5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 给控件添加渐变图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="复制图层">复制图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 添加复制图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addReplicatorLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个复制层 */</span></span><br><span class="line">    <span class="built_in">CAReplicatorLayer</span> *replicator = [<span class="built_in">CAReplicatorLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    replicator<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 设置背景颜色</span></span><br><span class="line">    replicator<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:replicator];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子层1</span></span><br><span class="line">    <span class="built_in">CALayer</span> *sublayer1 = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    sublayer1<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    sublayer1<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    [replicator addSublayer:sublayer1];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子层2</span></span><br><span class="line">    <span class="built_in">CALayer</span> *sublayer2 = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    sublayer2<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">70</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    sublayer2<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> greenColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    [replicator addSublayer:sublayer2];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 复制层是复制里面的子层,而不是复制层本身</span></span><br><span class="line">    <span class="comment">// 设置要复制图层中子层的个数(数量包括自己本身的)</span></span><br><span class="line">    replicator<span class="variable">.instanceCount</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 子层形变(基于上一次子层的形变)</span></span><br><span class="line">    replicator<span class="variable">.instanceTransform</span> = <span class="built_in">CATransform3DMakeTranslation</span>(<span class="number">100</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="形状图层">形状图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 添加形状图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addShapeLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 绘制一个圆形路径 */</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 创建一个形状图层 */</span></span><br><span class="line">    <span class="built_in">CAShapeLayer</span> *shape = [<span class="built_in">CAShapeLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置路径(将路径装换成形状图层)</span></span><br><span class="line">    shape<span class="variable">.path</span> = path<span class="variable">.CGPath</span>;</span><br><span class="line">    <span class="comment">// 设置填充色</span></span><br><span class="line">    shape<span class="variable">.fillColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置描边色</span></span><br><span class="line">    shape<span class="variable">.strokeColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置线宽</span></span><br><span class="line">    shape<span class="variable">.lineWidth</span> = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// 描边起始点 (取值范围是0~1)</span></span><br><span class="line">    shape<span class="variable">.strokeStart</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 描边结束点 (取值范围是0~1)</span></span><br><span class="line">    shape<span class="variable">.strokeEnd</span> = <span class="number">0.75</span>;</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:shape];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义view时重写父类类方法来修改view的初始层">自定义view时重写父类类方法来修改view的初始层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回当前View当中layer的类型</span></span><br><span class="line">+ (Class)layerClass</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 将初始层修改为复制层</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">CAReplicatorLayer</span> class];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/04/demonayu/blog/40.图片折叠小demo/" itemprop="url">
                   图片折叠小demo
                 </a>
@@ -769,127 +859,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/25/demonayu/blog/30.手势识别基本使用/" itemprop="url">
-                  手势识别基本使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-25T09:31:57+08:00" content="2015-12-25">
-              2015-12-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/25/demonayu/blog/30.手势识别基本使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/25/demonayu/blog/30.手势识别基本使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
-<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
-<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
-<li>手势有以下几种:<ul>
-<li>UITapGestureRecognizer(敲击)</li>
-<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
-<li>UIPanGestureRecognizer(拖拽)</li>
-<li>UISwipeGestureRecognizer(轻扫)</li>
-<li>UIRotationGestureRecognizer(旋转)</li>
-<li>UILongPressGestureRecognizer(长按)</li>
-</ul>
-</li>
-<li><p>手势使用方法:</p>
-<ul>
-<li><p>创建手势</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加手势</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现手势方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>拖动的状态</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拖动状态复位</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>手势常用的代理方法</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -936,7 +905,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
