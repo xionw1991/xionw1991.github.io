@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS概念," />
+  <meta name="keywords" content="iOS中级," />
 
 
 
@@ -53,25 +53,25 @@
 
 
 
-<meta name="description" content="KVC的本质就是调用成员属性的setter和getter方法.
+<meta name="description" content="这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.
 
-
-setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)  [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnul">
+NSCache介绍
+借此说一下SDWebImage这个框架中cleanDisk与clearDisk的区别://clean:删除过期缓存(缓存周期为1周),计算当前缓存文件的总大小,比较设置的最大缓存,如果超出的话,那么就继续删除(按照缓存文件创建的顺序),直到小于最大缓存为止[[SDWebImageManager">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KVC的底层实现">
-<meta property="og:url" content="http://xionv.com/2015/12/22/demonayu/blog/25.KVC的底层实现/index.html">
+<meta property="og:title" content="NSCache的介绍">
+<meta property="og:url" content="http://xionv.com/2016/01/13/demonayu/blog/43.NSCache的介绍/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="KVC的本质就是调用成员属性的setter和getter方法.
+<meta property="og:description" content="这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.
 
-
-setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)  [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnul">
-<meta property="og:updated_time" content="2016-01-11T08:28:51.000Z">
+NSCache介绍
+借此说一下SDWebImage这个框架中cleanDisk与clearDisk的区别://clean:删除过期缓存(缓存周期为1周),计算当前缓存文件的总大小,比较设置的最大缓存,如果超出的话,那么就继续删除(按照缓存文件创建的顺序),直到小于最大缓存为止[[SDWebImageManager">
+<meta property="og:updated_time" content="2016-01-13T15:44:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KVC的底层实现">
-<meta name="twitter:description" content="KVC的本质就是调用成员属性的setter和getter方法.
+<meta name="twitter:title" content="NSCache的介绍">
+<meta name="twitter:description" content="这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.
 
-
-setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)  [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnul">
+NSCache介绍
+借此说一下SDWebImage这个框架中cleanDisk与clearDisk的区别://clean:删除过期缓存(缓存周期为1周),计算当前缓存文件的总大小,比较设置的最大缓存,如果超出的话,那么就继续删除(按照缓存文件创建的顺序),直到小于最大缓存为止[[SDWebImageManager">
 
 
 
@@ -83,7 +83,7 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
   };
 </script>
 
-  <title> KVC的底层实现 | XionVV Coding </title>
+  <title> NSCache的介绍 | XionVV Coding </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -203,7 +203,7 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
             
             
               
-                KVC的底层实现
+                NSCache的介绍
               
             
           </h1>
@@ -212,8 +212,8 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-22T19:37:57+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-01-13T13:29:57+08:00" content="2016-01-13">
+              2016-01-13
             </time>
           </span>
 
@@ -223,8 +223,8 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/22/demonayu/blog/25.KVC的底层实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/demonayu/blog/25.KVC的底层实现/" itemprop="commentsCount"></span>
+                <a href="/2016/01/13/demonayu/blog/43.NSCache的介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/13/demonayu/blog/43.NSCache的介绍/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -244,22 +244,10 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
 
       
         <span itemprop="articleBody"><blockquote>
-<p>KVC的本质就是调用成员属性的setter和getter方法.</p>
+<p>这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.</p>
 </blockquote>
-<ul>
-<li><code>setValuesForKeysWithDictionary:</code>方法的底层实现  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)</span></span><br><span class="line">  [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">      [item setValue:obj forKeyPath:key];</span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><code>setValue:forKeyPath:</code>的底层实现:<ol>
-<li>调用key对应成员属性名的setter方法;</li>
-<li>如果找不到,找带下划线(_)的成员属性名,然后给这个成员属性直接赋值.</li>
-<li>如果找不到,找与key名完全相同的成员属性名,然后直接赋值.</li>
-<li>如果都找不到,则程序崩溃,报错找不到对应的成员属性.</li>
-</ol>
-</li>
-</ul>
-<p>ps: 可以利用KVC的实现原理来重写赋值过程</p>
+<p><a href="http://www.15yan.com/topic/yi-dong-kai-fa-na-dian-shi/45toOUzFGlr/" target="_blank" rel="external">NSCache介绍</a></p>
+<p>借此说一下SDWebImage这个框架中<code>cleanDisk</code>与<code>clearDisk</code>的区别:<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//clean:删除过期缓存(缓存周期为1周),计算当前缓存文件的总大小,比较设置的最大缓存,如果超出的话,那么就继续删除(按照缓存文件创建的顺序),直到小于最大缓存为止</span></span><br><span class="line">[[SDWebImageManager sharedManager]<span class="variable">.imageCache</span> cleanDisk];</span><br><span class="line"><span class="comment">//clear:简单粗暴,直接删除然后重新创建</span></span><br><span class="line">[[SDWebImageManager sharedManager]<span class="variable">.imageCache</span> clearDisk];</span><br></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -268,7 +256,7 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
       
         <div class="post-tags">
           
-            <a href="/tags/iOS概念/" rel="tag">#iOS概念</a>
+            <a href="/tags/iOS中级/" rel="tag">#iOS中级</a>
           
         </div>
       
@@ -277,17 +265,13 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/19/demonayu/blog/23.copy深浅的规律/" rel="next" title="copy深浅的规律">
-                <i class="fa fa-chevron-left"></i> copy深浅的规律
+              <a href="/2016/01/13/demonayu/blog/42.RunLoop基础知识/" rel="next" title="RunLoop基础知识">
+                <i class="fa fa-chevron-left"></i> RunLoop基础知识
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" rel="prev" title="UIAlertView在IOS9中的使用demo">
-                UIAlertView在IOS9中的使用demo <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -314,8 +298,8 @@ setValuesForKeysWithDictionary:方法的底层实现  // 遍历字典给对应�
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/22/demonayu/blog/25.KVC的底层实现/"
-           data-title="KVC的底层实现" data-url="http://xionv.com/2015/12/22/demonayu/blog/25.KVC的底层实现/">
+      <div class="ds-thread" data-thread-key="2016/01/13/demonayu/blog/43.NSCache的介绍/"
+           data-title="NSCache的介绍" data-url="http://xionv.com/2016/01/13/demonayu/blog/43.NSCache的介绍/">
       </div>
     
   </div>

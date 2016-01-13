@@ -4,8 +4,25 @@
 
     
   <url>
+    <loc>http://xionv.com/2016/01/13/demonayu/blog/43.NSCache%E7%9A%84%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2016-01-13T15:44:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>NSCache的介绍</title>
+        <pubTime>2016-01-13T05:29:57.000Z</pubTime>
+        
+        <tag>iOS中级</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2016-01-13T15:16:48.000Z</lastmod>
+    <lastmod>2016-01-13T15:22:39.000Z</lastmod>
     <data>
         <display>
         <title>RunLoop基础知识</title>
@@ -211,23 +228,6 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/17/demonayu/blog/%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
-    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>一个应用程序的启动流程</title>
-        <pubTime>2015-12-17T12:30:57.000Z</pubTime>
-        
-        <tag>iOS初步</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://xionv.com/2015/12/10/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
     <lastmod>2016-01-11T08:28:53.000Z</lastmod>
     <data>
@@ -246,14 +246,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/03/demonayu/blog/%E5%AD%97%E5%85%B8%E8%BD%AC%E6%A8%A1%E5%9E%8B/</loc>
+    <loc>http://xionv.com/2015/12/05/demonayu/blog/%E5%9C%A8iOS%E4%B8%AD%E4%BD%BF%E7%94%A8SQLite(%E4%B8%8A)/</loc>
     <lastmod>2016-01-11T08:28:53.000Z</lastmod>
     <data>
         <display>
-        <title>字典转模型</title>
-        <pubTime>2015-12-03T15:27:57.000Z</pubTime>
+        <title>SQLite在iOS中的使用(上)</title>
+        <pubTime>2015-12-05T11:08:57.000Z</pubTime>
         
-        <tag>iOS初步</tag>
+        <tag>iOS中级</tag>
          
          
            
@@ -297,14 +297,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/05/demonayu/blog/%E5%9C%A8iOS%E4%B8%AD%E4%BD%BF%E7%94%A8SQLite(%E4%B8%8A)/</loc>
+    <loc>http://xionv.com/2015/12/03/demonayu/blog/%E5%AD%97%E5%85%B8%E8%BD%AC%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2016-01-11T08:28:53.000Z</lastmod>
     <data>
         <display>
-        <title>SQLite在iOS中的使用(上)</title>
-        <pubTime>2015-12-05T11:08:57.000Z</pubTime>
+        <title>字典转模型</title>
+        <pubTime>2015-12-03T15:27:57.000Z</pubTime>
         
-        <tag>iOS中级</tag>
+        <tag>iOS初步</tag>
          
          
            
@@ -331,12 +331,12 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/11/29/demonayu/blog/Singleton/</loc>
+    <loc>http://xionv.com/2015/12/17/demonayu/blog/%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
     <lastmod>2016-01-11T08:28:53.000Z</lastmod>
     <data>
         <display>
-        <title>单例设计模式</title>
-        <pubTime>2015-11-29T13:27:57.000Z</pubTime>
+        <title>一个应用程序的启动流程</title>
+        <pubTime>2015-12-17T12:30:57.000Z</pubTime>
         
         <tag>iOS初步</tag>
          
@@ -348,12 +348,12 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/14/demonayu/blog/%E6%A8%A1%E5%9E%8B%E6%8E%A7%E5%88%B6View%E7%9A%84%E6%98%BE%E7%A4%BAdemo/</loc>
-    <lastmod>2016-01-11T08:28:52.000Z</lastmod>
+    <loc>http://xionv.com/2015/11/29/demonayu/blog/Singleton/</loc>
+    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
     <data>
         <display>
-        <title>TableView中MVC模式的简单应用</title>
-        <pubTime>2015-12-14T12:31:57.000Z</pubTime>
+        <title>单例设计模式</title>
+        <pubTime>2015-11-29T13:27:57.000Z</pubTime>
         
         <tag>iOS初步</tag>
          
@@ -536,12 +536,29 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/23/demonayu/blog/27.NSArray%E5%92%8CNSDictionary%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E6%89%93%E5%8D%B0/</loc>
+    <loc>http://xionv.com/2015/12/14/demonayu/blog/%E6%A8%A1%E5%9E%8B%E6%8E%A7%E5%88%B6View%E7%9A%84%E6%98%BE%E7%A4%BAdemo/</loc>
+    <lastmod>2016-01-11T08:28:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>TableView中MVC模式的简单应用</title>
+        <pubTime>2015-12-14T12:31:57.000Z</pubTime>
+        
+        <tag>iOS初步</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xionv.com/2015/12/23/demonayu/blog/26.image%E4%B8%8Ecolor%E4%B9%8B%E9%97%B4%E4%BA%92%E8%BD%AC/</loc>
     <lastmod>2016-01-11T08:28:51.000Z</lastmod>
     <data>
         <display>
-        <title>NSArray和NSDictionary控制台中文打印</title>
-        <pubTime>2015-12-23T04:36:57.000Z</pubTime>
+        <title>image与color之间互转</title>
+        <pubTime>2015-12-23T04:24:57.000Z</pubTime>
         
         <tag>iOS工具类与方法</tag>
          
@@ -553,31 +570,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/30/demonayu/blog/34.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
+    <loc>http://xionv.com/2015/12/30/demonayu/blog/33.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2016-01-11T08:28:51.000Z</lastmod>
     <data>
         <display>
-        <title>NSFileManager和NSFileHandle的常用方法</title>
-        <pubTime>2015-12-30T11:52:57.000Z</pubTime>
+        <title>调用系统相册方法</title>
+        <pubTime>2015-12-30T07:59:57.000Z</pubTime>
         
         <tag>iOS备忘</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://xionv.com/2015/12/30/demonayu/blog/32.%E6%A0%B8%E5%BF%83%E5%8A%A8%E7%94%BB%E4%B8%8E%E6%98%BE%E7%A4%BA%E5%8A%A8%E7%94%BB%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
-    <lastmod>2016-01-11T08:28:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>核心动画与UIView动画的对比</title>
-        <pubTime>2015-12-30T07:45:57.000Z</pubTime>
-        
-        <tag>iOS中级</tag>
          
          
            
@@ -655,14 +655,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/30/demonayu/blog/33.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/</loc>
+    <loc>http://xionv.com/2015/12/23/demonayu/blog/27.NSArray%E5%92%8CNSDictionary%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E6%89%93%E5%8D%B0/</loc>
     <lastmod>2016-01-11T08:28:51.000Z</lastmod>
     <data>
         <display>
-        <title>调用系统相册方法</title>
-        <pubTime>2015-12-30T07:59:57.000Z</pubTime>
+        <title>NSArray和NSDictionary控制台中文打印</title>
+        <pubTime>2015-12-23T04:36:57.000Z</pubTime>
         
-        <tag>iOS备忘</tag>
+        <tag>iOS工具类与方法</tag>
          
          
            
@@ -672,14 +672,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/23/demonayu/blog/26.image%E4%B8%8Ecolor%E4%B9%8B%E9%97%B4%E4%BA%92%E8%BD%AC/</loc>
+    <loc>http://xionv.com/2015/12/30/demonayu/blog/32.%E6%A0%B8%E5%BF%83%E5%8A%A8%E7%94%BB%E4%B8%8E%E6%98%BE%E7%A4%BA%E5%8A%A8%E7%94%BB%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
     <lastmod>2016-01-11T08:28:51.000Z</lastmod>
     <data>
         <display>
-        <title>image与color之间互转</title>
-        <pubTime>2015-12-23T04:24:57.000Z</pubTime>
+        <title>核心动画与UIView动画的对比</title>
+        <pubTime>2015-12-30T07:45:57.000Z</pubTime>
         
-        <tag>iOS工具类与方法</tag>
+        <tag>iOS中级</tag>
          
          
            
@@ -748,6 +748,23 @@
         <pubTime>2015-12-18T13:51:57.000Z</pubTime>
         
         <tag>iOS中级</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xionv.com/2015/12/30/demonayu/blog/34.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2016-01-11T08:28:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>NSFileManager和NSFileHandle的常用方法</title>
+        <pubTime>2015-12-30T11:52:57.000Z</pubTime>
+        
+        <tag>iOS备忘</tag>
          
          
            

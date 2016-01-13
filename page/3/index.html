@@ -179,6 +179,102 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/26/demonayu/blog/31.Quartz2D/" itemprop="url">
+                  Quartz2D
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-26T09:35:57+08:00" content="2015-12-26">
+              2015-12-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/26/demonayu/blog/31.Quartz2D/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/26/demonayu/blog/31.Quartz2D/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="长按截屏">长按截屏</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)longPress:(<span class="built_in">UILongPressGestureRecognizer</span> *)longPress</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意这个longPress会调用两次,一次是触发时,一次是结束时, 所以这里需要对状态进行一次判定,避免两次触发</span></span><br><span class="line">    <span class="keyword">if</span> (longPress<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过设置首尾式动画来达到屏幕闪一下的效果</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.2</span> animations:^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">0.6</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">            [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.5</span> animations:^&#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">1</span>;</span><br><span class="line">            &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">                <span class="comment">// 开启一个全屏位图上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>([<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span>, <span class="literal">YES</span>, <span class="number">0.0</span> );</span><br><span class="line">                <span class="comment">// 获取当前上下文</span></span><br><span class="line">                <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">                <span class="comment">// 渲染图层到上下文</span></span><br><span class="line">                [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:ctx];</span><br><span class="line">                <span class="comment">// 将当前上下文中的内容转成图片</span></span><br><span class="line">                <span class="built_in">UIImage</span> *capture = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">                <span class="comment">// 关闭上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">                <span class="comment">// 将图片输出</span></span><br><span class="line">                <span class="built_in">NSData</span> *imgData = <span class="built_in">UIImagePNGRepresentation</span>(capture);</span><br><span class="line">                [imgData writeToFile:<span class="string">@"/Users/Xion/Desktop/image.png"</span> atomically:<span class="literal">YES</span>];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="图片裁剪">图片裁剪</h3><blockquote>
+<p>为UIimage增加一个分类类方法,在实例化图片时就对其进行裁剪</p>
+</blockquote>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="preprocessor">#import <span class="title">"UIImage+ClipImage.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">ClipImage</span>)</span></span><br><span class="line">+ (instancetype)imageNamed:(<span class="built_in">NSString</span> *)name withClipShape:(ClipShape)shape;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="keyword">self</span> imageNamed:name];</span><br><span class="line">    <span class="comment">// 开启一个上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(image<span class="variable">.size</span>, <span class="literal">NO</span>, <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 设置为模具</span></span><br><span class="line">    <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithCircle: &#123; <span class="comment">// 圆</span></span><br><span class="line">            <span class="built_in">CGFloat</span> radius = image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>;</span><br><span class="line">            <span class="built_in">CGPoint</span> center = <span class="built_in">CGPointMake</span>(radius, radius);</span><br><span class="line">            <span class="built_in">UIBezierPath</span> *circlePath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">            <span class="comment">// 设置裁剪区</span></span><br><span class="line">            [circlePath addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithtriangle: &#123; <span class="comment">// 三角形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            <span class="comment">// 关闭路径</span></span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithRhombus: &#123; <span class="comment">// 菱形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 画出裁剪范围</span></span><br><span class="line">    [image drawAtPoint:<span class="built_in">CGPointZero</span>];</span><br><span class="line">    <span class="comment">// 将当前上下文的内容转成图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 关闭上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -498,96 +594,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="url">
-                  NSArray和NSDictionary控制台中文打印
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T12:36:57+08:00" content="2015-12-23">
-              2015-12-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/12/23/demonayu/blog/28.直接修改对象frame结构体的成员属性/" itemprop="url">
                   直接修改对象frame结构体中的成员属性
                 </a>
@@ -644,6 +650,96 @@
 <li>实现文件(.m)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="preprocessor">#import <span class="title">"UIView+Extension.h"</span></span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">@implementation</span> <span class="title">UIView</span> (<span class="title">Extension</span>)</span></span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setX:(<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.x</span> = x;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setY:(<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.y</span> = y;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterX:(<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.x</span> = centerX;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterY:(<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.y</span> = centerY;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setWidth:(<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.width</span> = width;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setHeight:(<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.height</span> = height;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setSize:(<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span> = size;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setOrigin:(<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span> = origin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="url">
+                  NSArray和NSDictionary控制台中文打印
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-23T12:36:57+08:00" content="2015-12-23">
+              2015-12-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
             
           </span>
         
@@ -758,96 +854,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" itemprop="url">
-                  UIAlertView在IOS9中的使用demo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T10:37:57+08:00" content="2015-12-23">
-              2015-12-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>iOS9中改变了UIAlertView的使用方式, 并且与UIActionSheet融合进了一个类里面,统一进行管理.</p>
-</blockquote>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 注销</span></span><br><span class="line">- (<span class="keyword">void</span>)loginOut</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.创建一个alertController来管理警示窗口, 并指定样式</span></span><br><span class="line">    <span class="built_in">UIAlertController</span> *alertController = [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="string">@"确定注销吗?"</span> message:<span class="literal">nil</span> preferredStyle:<span class="built_in">UIAlertControllerStyleActionSheet</span>];</span><br><span class="line">    <span class="comment">// 2.创建点击行为, 在block中实现事件</span></span><br><span class="line">    <span class="built_in">UIAlertAction</span> *action = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"确定"</span> style:<span class="built_in">UIAlertActionStyleDestructive</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.navigationController</span> popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"已注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">UIAlertAction</span> *cancel = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"取消"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"取消注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">// 3.为alertController添加点击行为</span></span><br><span class="line">    [alertController addAction:action];</span><br><span class="line">    [alertController addAction:cancel];</span><br><span class="line">    <span class="comment">// 4.弹出警示窗口</span></span><br><span class="line">    [<span class="keyword">self</span> presentViewController:alertController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -894,7 +900,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -79,7 +79,7 @@ Runloop: 顾名思义就是跑圈,兜圈子的意思.一个应用程序能够一
 <meta property="og:image" content="http://r6.loli.io/AnI3eu.png">
 <meta property="og:image" content="http://r5.loli.io/ZrimYv.png">
 <meta property="og:image" content="http://r6.loli.io/NNn26b.png">
-<meta property="og:updated_time" content="2016-01-13T15:16:48.000Z">
+<meta property="og:updated_time" content="2016-01-13T15:22:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RunLoop基础知识">
 <meta name="twitter:description" content="什么是Runloop
@@ -315,7 +315,7 @@ Runloop: 顾名思义就是跑圈,兜圈子的意思.一个应用程序能够一
 <li>Runloop和相关类之间的关系图<br> <img src="http://r6.loli.io/AnI3eu.png" alt="Runloop和相关类之间的关系图"></li>
 </ul>
 <h3 id="Runloop的运行模式">Runloop的运行模式</h3><ul>
-<li>每一个Runloop运行必须要指定一个模式,而且必须要有<code>source</code>和<code>timer</code>,如果子线程的NSRunLoop没有设置<code>source</code>和<code>timer</code>,那么子线程的RunLoop会立刻关闭,不会检查observer.</li>
+<li>每一个Runloop运行必须要指定一个模式,而且必须要有<code>source</code>和<code>timer</code>,如果子线程的NSRunLoop没有设置<code>source</code>和<code>timer</code>,那么子线程的RunLoop会立刻关闭.</li>
 <li>一个Runloop可以有多个模式,一个模式可以有多个source\observer\timer.</li>
 <li>如果需要切换mode,只能先退出当前Runloop,在重新指定一个模式进入.</li>
 <li>系统默认提供了5个模式:<ul>
@@ -408,6 +408,10 @@ Runloop: 顾名思义就是跑圈,兜圈子的意思.一个应用程序能够一
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/01/13/demonayu/blog/43.NSCache的介绍/" rel="prev" title="NSCache的介绍">
+                NSCache的介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -478,7 +482,7 @@ Runloop: 顾名思义就是跑圈,兜圈子的意思.一个应用程序能够一
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

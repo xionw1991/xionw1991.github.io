@@ -179,6 +179,164 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/05/demonayu/blog/在iOS中使用SQLite(上)/" itemprop="url">
+                  SQLite在iOS中的使用(上)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-05T19:08:57+08:00" content="2015-12-05">
+              2015-12-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/05/demonayu/blog/在iOS中使用SQLite(上)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/05/demonayu/blog/在iOS中使用SQLite(上)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="1-_什么是SQLite">1. 什么是SQLite</h1><ul>
+<li>SQLite是一款轻型的嵌入式数据库, 它属于关系数据库</li>
+<li>它的处理速度非常快,它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了.</li>
+</ul>
+<h2 id="如何使用SQLite">如何使用SQLite</h2><ol>
+<li><p>在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.<br>如图:<br><img src="http://r6.loli.io/j2mIvy.png" alt=""></p>
+</li>
+<li><p>新建一个模型类, 并导入头文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;sqlite3.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在实现方法中定义一个全局的静态变量</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line"><span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>链接数据库, 创建表</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首次调用这个类的时候链接数据库</span></span><br><span class="line">+ (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1&gt; 获取沙盒路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"computer.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 2&gt; 根据路径打开数据库(相当于执行connection),传入数据库对象的地址,如果打开成功创建表.</span></span><br><span class="line">    <span class="keyword">int</span> result = sqlite3_open(path<span class="variable">.UTF8String</span>, &amp;_db); </span><br><span class="line">    <span class="keyword">if</span> (result != SQLITE_OK) &#123; <span class="comment">// 打开数据库失败</span></span><br><span class="line">        <span class="comment">// 关闭数据库</span></span><br><span class="line">        sqlite3_close(_db);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"打开数据库失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 打开数据库成功</span></span><br><span class="line">        <span class="keyword">char</span> *err; <span class="comment">// 创表失败的错误信息</span></span><br><span class="line">        <span class="comment">// 定义sql语句</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *sql = <span class="string">"CREATE TABLE IF NOT EXISTS t_computer (ID INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>; </span><br><span class="line">        <span class="comment">// 3&gt; 执行sql语句,在数据库(_db)中建表</span></span><br><span class="line">        <span class="keyword">if</span> (sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;err) != SQLITE_OK) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表失败---%s"</span>, err); <span class="comment">// 打印错误信息</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表成功"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义类方法来快速实现数据库的增\删\改\查</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 增 - 传一个名字和价格增加一条记录</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertDataWithName:(<span class="built_in">NSString</span> *)name price:(<span class="keyword">float</span>)price</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 定义sql语句</span></span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"INSERT INTO t_computer (name, price) VALUES ('%@', '%f');"</span>, name, price];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str<span class="variable">.UTF8String</span>;</span><br><span class="line">    <span class="comment">// 执行sql语句</span></span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 删 - 传入名字删除对应名字的记录</span></span><br><span class="line">+ (<span class="keyword">void</span>)deletedDataWithName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"DELETE FROM t_computer WHERE name = '%@';"</span>, name];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str<span class="variable">.UTF8String</span>;</span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 改 - 修改对应名字的价格</span></span><br><span class="line">+ (<span class="keyword">void</span>)updatePrice:(<span class="keyword">float</span>)price forName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"UPDATE t_computer SET price = '%f' WHERE name = '%@';"</span>, price, name];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str<span class="variable">.UTF8String</span>;</span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查 - 取出数据库中所有的数据并将每一个字段转成模型的属性值存入数组返回出去</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)computers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个可变数组来接收模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 定义sql语句</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"SELECT * FROM t_computer;"</span>]<span class="variable">.UTF8String</span>;</span><br><span class="line">    <span class="comment">// 用来接收数据库查询的所有内容</span></span><br><span class="line">    sqlite3_stmt *stmt = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">// 如果查询到数据</span></span><br><span class="line">    <span class="keyword">if</span> (sqlite3_prepare_v2(_db, sql, -<span class="number">1</span>, &amp;stmt, <span class="literal">nil</span>) == SQLITE_OK) &#123;</span><br><span class="line">        <span class="comment">// 传入所有查询结果(stmt),逐步检索每一条记录,一直往下查找,直到SQLITE_ROW为null</span></span><br><span class="line">        <span class="keyword">while</span> (sqlite3_step(stmt) == SQLITE_ROW) &#123;</span><br><span class="line">            XVComputers *computer = [[XVComputers alloc] init];</span><br><span class="line">            <span class="comment">// 取出查找的值并赋给模型</span></span><br><span class="line">            computer<span class="variable">.name</span> = [<span class="built_in">NSString</span> stringWithUTF8String:(<span class="keyword">char</span> *)sqlite3_column_text(stmt, <span class="number">1</span>)];</span><br><span class="line">            computer<span class="variable">.price</span> = sqlite3_column_double(stmt, <span class="number">2</span>);</span><br><span class="line">            <span class="comment">// 将赋值后的对象放进数组</span></span><br><span class="line">            [arrayM addObject:computer];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrayM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="2-_FMDB">2. FMDB</h1><ul>
+<li>什么是FMDB<ul>
+<li>FMDB是iOS平台的SQLite数据库框架</li>
+<li>FMDB以OC的方式封装了SQLite的C语言API</li>
+</ul>
+</li>
+<li>FMDB的优点<ul>
+<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
+<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
+<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
+</ul>
+</li>
+<li>项目地址: <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">FMDB</a></li>
+</ul>
+<h2 id="如何使用FMDB">如何使用FMDB</h2><ol>
+<li><p>在Xcode中导入libsqlite3.dylib动态链接库</p>
+</li>
+<li><p>新建一个模型类导入框架的头文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"FMDB.h"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在实现方法中定义一个全局的静态变量</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 创建一个FMDatabase对象</span></span><br><span class="line"><span class="keyword">static</span> FMDatabase *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>链接数据库,建表</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> + (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 文件路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"cmpt.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 链接数据库</span></span><br><span class="line">    _db = [FMDatabase databaseWithPath:path];</span><br><span class="line">    <span class="comment">// 打开数据库</span></span><br><span class="line">    [_db open];</span><br><span class="line">    <span class="comment">// 建表</span></span><br><span class="line">    [_db executeUpdate:<span class="string">@"CREATE TABLE IF NOT EXISTS t_cmpt (id INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现增\删\改\查  </p>
+<ul>
+<li><em>框架中的增删改都是用的 executeUpdate 方法</em></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertName:(<span class="built_in">NSString</span> *)name price:(<span class="keyword">float</span>)price</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意在这个框架中sql语句中的字符串占位符不需要加单引号</span></span><br><span class="line">    [_db executeUpdateWithFormat:<span class="string">@"INSERT INTO t_cmpt (name, price) VALUES (%@, %f)"</span>, name, price];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 删除数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)deleteAll</span><br><span class="line">&#123;</span><br><span class="line">    [_db executeUpdateWithFormat:<span class="string">@"DELETE FROM t_cmpt"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>查询使用的是 executeQuery 方法</em></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查询数据并返回模型数组</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)computers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 返回一个查询到的结果集</span></span><br><span class="line">    FMResultSet *set = [_db executeQuery:<span class="string">@"SELECT * FROM t_cmpt;"</span>];</span><br><span class="line">    <span class="comment">// 创建一个可变数组来存放模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 在集中往下查询每一条记录</span></span><br><span class="line">    <span class="keyword">while</span> ([set next]) &#123;</span><br><span class="line">        XVComputers *computer = [[XVComputers alloc] init];</span><br><span class="line">        computer<span class="variable">.name</span> = [set stringForColumn:<span class="string">@"name"</span>];</span><br><span class="line">        computer<span class="variable">.price</span> = [set stringForColumn:<span class="string">@"price"</span>]<span class="variable">.floatValue</span>;</span><br><span class="line">        [arrM addObject:computer];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="FMDatabaseQueue">FMDatabaseQueue</h3><ul>
+<li>FMDatabase这个类是线程不安全的，如果在多个线程中同时使用一个FMDatabase实例，会造成数据混乱等问题.</li>
+<li><p>为了保证线程安全，FMDB提供方便快捷的FMDatabaseQueue类.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个FMDatabaseQueue队列</span></span><br><span class="line"><span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span> stringByAppendingPathComponent:<span class="string">@"cmpt.sqlite"</span>];</span><br><span class="line">FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];</span><br><span class="line"><span class="comment">// 执行队列</span></span><br><span class="line">[queue inDatabase:^(FMDatabase *db) &#123;</span><br><span class="line">    <span class="comment">// 写数据</span></span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"惠普"</span>];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"戴尔"</span>];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"华硕"</span>];</span><br><span class="line">    <span class="comment">// 取数据</span></span><br><span class="line">    FMResultSet *set = [db executeQuery:<span class="string">@"select * from t_cpmt"</span>];</span><br><span class="line">    <span class="keyword">while</span> ([set next]) &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -770,117 +928,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/29/demonayu/blog/Singleton/" itemprop="url">
-                  单例设计模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T21:27:57+08:00" content="2015-11-29">
-              2015-11-29
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/29/demonayu/blog/Singleton/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/demonayu/blog/Singleton/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="1-单例模式概念">1.单例模式概念</h2><ul>
-<li><p>什么是单例模式:(Singleton)</p>
-<ul>
-<li>单例模式的意图是是的类的对象成为系统中唯一的实例,􏰀供一个访问点,供客户类 共享资源。</li>
-</ul>
-</li>
-<li><p>什么情况下使用单例?</p>
-<ul>
-<li>1、类只能有一个实例,而且必须从一个为人熟知的访问点对其进行访问,比如工厂方 法。</li>
-<li>2、这个唯一的实例只能通过子类化进行扩展,而且扩展的对象不会破坏客户端代码。</li>
-</ul>
-</li>
-<li><p>单例设计模式的要点:</p>
-<ul>
-<li>1) 某个类只能有一个实例。</li>
-<li>2)他必须自行创建这个对象</li>
-<li>3)必须自行向整个系统􏰀供这个实例;</li>
-<li>4)为了保证实例的唯一性,我们必须将</li>
-<li>5)这个方法必须是一个静态类</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="2-简单的单例模式实现">2.简单的单例模式实现</h2>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/29/demonayu/blog/Singleton/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -927,7 +974,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

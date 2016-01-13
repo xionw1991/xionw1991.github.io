@@ -179,6 +179,101 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" itemprop="url">
+                  UIAlertView在IOS9中的使用demo
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-23T10:37:57+08:00" content="2015-12-23">
+              2015-12-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>iOS9中改变了UIAlertView的使用方式, 并且与UIActionSheet融合进了一个类里面,统一进行管理.</p>
+</blockquote>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 注销</span></span><br><span class="line">- (<span class="keyword">void</span>)loginOut</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.创建一个alertController来管理警示窗口, 并指定样式</span></span><br><span class="line">    <span class="built_in">UIAlertController</span> *alertController = [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="string">@"确定注销吗?"</span> message:<span class="literal">nil</span> preferredStyle:<span class="built_in">UIAlertControllerStyleActionSheet</span>];</span><br><span class="line">    <span class="comment">// 2.创建点击行为, 在block中实现事件</span></span><br><span class="line">    <span class="built_in">UIAlertAction</span> *action = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"确定"</span> style:<span class="built_in">UIAlertActionStyleDestructive</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.navigationController</span> popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"已注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">UIAlertAction</span> *cancel = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"取消"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"取消注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">// 3.为alertController添加点击行为</span></span><br><span class="line">    [alertController addAction:action];</span><br><span class="line">    [alertController addAction:cancel];</span><br><span class="line">    <span class="comment">// 4.弹出警示窗口</span></span><br><span class="line">    [<span class="keyword">self</span> presentViewController:alertController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -765,153 +860,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/16/demonayu/blog/监听事件的4种方式/" itemprop="url">
-                  监听事件的4种方式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-16T17:23:57+08:00" content="2015-12-16">
-              2015-12-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/16/demonayu/blog/监听事件的4种方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/demonayu/blog/监听事件的4种方式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="OC中监听事件的4种方法">OC中监听事件的4种方法</h3><ul>
-<li>通知（NSNotificationCenter\NSNotification）<ul>
-<li>任何对象之间都可以传递消息</li>
-<li>1个对象可以发通知给多个对象</li>
-<li>1个对象可以接受多个对象发出的通知</li>
-<li>要求:必须得保证通知的名字在发出和监听时是一致的</li>
-</ul>
-</li>
-<li>KVO<ul>
-<li>仅仅是能监听对象属性的改变（灵活度不如通知和代理）</li>
-<li>只能作用在单个文件</li>
-</ul>
-</li>
-<li>代理 <ul>
-<li>协议就是接口, 提供方法的声明来给代理去实现.</li>
-<li>1个对象只能设置一个代理(假设这个对象只有1个代理属性)</li>
-<li>1个对象能成为多个对象的代理</li>
-</ul>
-</li>
-<li>target<ul>
-<li>继承UIControl的类都能使用addTarget方法来监听事件</li>
-<li>必须在控件创建时就添加监听行为</li>
-<li>一个对象只能监听一个事件点击</li>
-<li>只能作用在单个文件</li>
-</ul>
-</li>
-</ul>
-<h3 id="如何选择?">如何选择?</h3><ul>
-<li><code>target</code>用于监听控件的点击/长按等触发事件</li>
-<li><code>通知</code>适用于层级很深或者两个没有关联的类之间的事件监听</li>
-<li><code>KVO</code>适用于监听对象某个属性的改变</li>
-<li><code>代理</code>比<code>通知</code>规范,建议使用<code>代理</code>多于<code>通知</code>,能使用代理尽量使用代理</li>
-</ul>
-<h3 id="监听方式的核心代码">监听方式的核心代码</h3><ul>
-<li><p><strong>通知</strong><br>notificationName: 通知内容(key)<br>object: 通知发布者<br>userInfo: 发布者附带的信息 </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 发布通知</span></span><br><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] postNotificationName:key object:object userInfo:userInfo];</span><br></pre></td></tr></table></figure>
-<p>observer: 监听者<br>selector: 监听后执行的方法<br>name: 通知内容(key)<br>object: 通知发布者</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加监听者</span></span><br><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:observer selector:<span class="keyword">@selector</span>(selector:) name:name object:object];</span><br></pre></td></tr></table></figure>
-<p>注意: 有添加就要有移除, 一般移除监听写在dealloc方法中  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 移除监听</span></span><br><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] removeObserver:<span class="keyword">self</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p><strong>KVO</strong><br>object: 被监听者<br>observer: 监听者<br>keyPath: 被监听者的属性<br>options: 监听模式(内容)<br>context: 上下文   </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加监听</span></span><br><span class="line">[object addObserver:observer forKeyPath:keyPath options:options context:context];</span><br></pre></td></tr></table></figure>
-<p>keyPath: 被监听的属性<br>object: 被监听的对象<br>change: 被监听属性值的改变情况(字典)<br>context: 上下文</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 实现监听方法</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 监听当_per这个成员变量的age这个属性发生改变时</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == _person) &#123;</span><br><span class="line">        <span class="comment">// 给控制器的成员变量赋新值</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p><strong>代理</strong><br>@required: 代理方法必须实现(默认)<br>@optional: 代理方法选择实现  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义协议</span></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span>  <span class="title">XVFooterBarDelegate</span>&lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line">- (<span class="keyword">void</span>)footbarValueChanged:(XVFooterBar *)footbar;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加代理</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="keyword">id</span>&lt;XVFooterBarDelegate&gt; delegate;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)cleanBuy</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 添加代理的事件监听</span></span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span><span class="variable">.delegate</span> respondsToSelector:<span class="keyword">@selector</span>(footbarValueChanged:)]) &#123;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.delegate</span> footbarValueChanged:<span class="keyword">self</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 在代理的类中实现代理方法</span></span><br><span class="line">  - (<span class="keyword">void</span>)footbarValueChanged:(XVFooterBar *)footbar</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><strong>target</strong><br>target: 监听者<br>action: 要执行的方法<br>controlEvents:触发事件    <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加监听</span></span><br><span class="line">- (<span class="keyword">void</span>)addTarget:(nullable <span class="keyword">id</span>)target action:(SEL)action forControlEvents:(<span class="built_in">UIControlEvents</span>)controlEvents;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -958,7 +906,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

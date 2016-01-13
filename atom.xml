@@ -4,7 +4,7 @@
   <subtitle><![CDATA[好啦,好啦,我知道了!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xionv.com/"/>
-  <updated>2016-01-13T15:16:48.000Z</updated>
+  <updated>2016-01-13T15:44:40.000Z</updated>
   <id>http://xionv.com/</id>
   
   <author>
@@ -15,11 +15,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[NSCache的介绍]]></title>
+    <link href="http://xionv.com/2016/01/13/demonayu/blog/43.NSCache%E7%9A%84%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://xionv.com/2016/01/13/demonayu/blog/43.NSCache的介绍/</id>
+    <published>2016-01-13T05:29:57.000Z</published>
+    <updated>2016-01-13T15:44:40.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.</p>
+</blockquote>
+<p><a href="http://www.15yan.com/topic/yi-dong-kai-fa-na-dian-shi/45toOUzFGlr/" target="_blank" rel="external">NSCache介绍</a></p>
+<p>借此说一下SDWebImage这个框架中<code>cleanDisk</code>与<code>clearDisk</code>的区别:<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//clean:删除过期缓存(缓存周期为1周),计算当前缓存文件的总大小,比较设置的最大缓存,如果超出的话,那么就继续删除(按照缓存文件创建的顺序),直到小于最大缓存为止</span></span><br><span class="line">[[SDWebImageManager sharedManager]<span class="variable">.imageCache</span> cleanDisk];</span><br><span class="line"><span class="comment">//clear:简单粗暴,直接删除然后重新创建</span></span><br><span class="line">[[SDWebImageManager sharedManager]<span class="variable">.imageCache</span> clearDisk];</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.</p>
+</blockquote>
+<p><a href="http://www.15yan.com/topic/yi-dong-kai-fa-na-dian-shi]]>
+    </summary>
+    
+      <category term="iOS中级" scheme="http://xionv.com/tags/iOS%E4%B8%AD%E7%BA%A7/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[RunLoop基础知识]]></title>
     <link href="http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop基础知识/</id>
     <published>2016-01-13T03:06:57.000Z</published>
-    <updated>2016-01-13T15:16:48.000Z</updated>
+    <updated>2016-01-13T15:22:39.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是Runloop">什么是Runloop</h2><ul>
 <li>Runloop: 顾名思义就是跑圈,兜圈子的意思.一个应用程序能够一直运行而不会退出就是基于这种模式.</li>
 <li>基本作用:<ol>
@@ -73,7 +96,7 @@
 <li>Runloop和相关类之间的关系图<br> <img src="http://r6.loli.io/AnI3eu.png" alt="Runloop和相关类之间的关系图"></li>
 </ul>
 <h3 id="Runloop的运行模式">Runloop的运行模式</h3><ul>
-<li>每一个Runloop运行必须要指定一个模式,而且必须要有<code>source</code>和<code>timer</code>,如果子线程的NSRunLoop没有设置<code>source</code>和<code>timer</code>,那么子线程的RunLoop会立刻关闭,不会检查observer.</li>
+<li>每一个Runloop运行必须要指定一个模式,而且必须要有<code>source</code>和<code>timer</code>,如果子线程的NSRunLoop没有设置<code>source</code>和<code>timer</code>,那么子线程的RunLoop会立刻关闭.</li>
 <li>一个Runloop可以有多个模式,一个模式可以有多个source\observer\timer.</li>
 <li>如果需要切换mode,只能先退出当前Runloop,在重新指定一个模式进入.</li>
 <li>系统默认提供了5个模式:<ul>
@@ -758,27 +781,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[NSArray和NSDictionary控制台中文打印]]></title>
-    <link href="http://xionv.com/2015/12/23/demonayu/blog/27.NSArray%E5%92%8CNSDictionary%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E6%89%93%E5%8D%B0/"/>
-    <id>http://xionv.com/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/</id>
-    <published>2015-12-23T04:36:57.000Z</published>
-    <updated>2016-01-11T08:28:51.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class]]>
-    </summary>
-    
-      <category term="iOS工具类与方法" scheme="http://xionv.com/tags/iOS%E5%B7%A5%E5%85%B7%E7%B1%BB%E4%B8%8E%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[直接修改对象frame结构体中的成员属性]]></title>
     <link href="http://xionv.com/2015/12/23/demonayu/blog/28.%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E5%AF%B9%E8%B1%A1frame%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7/"/>
     <id>http://xionv.com/2015/12/23/demonayu/blog/28.直接修改对象frame结构体的成员属性/</id>
@@ -801,6 +803,27 @@
 </blockquote>
 <ul>
 <li>头文件(.h)<figure class="highlight objc"><table><tr><td cla]]>
+    </summary>
+    
+      <category term="iOS工具类与方法" scheme="http://xionv.com/tags/iOS%E5%B7%A5%E5%85%B7%E7%B1%BB%E4%B8%8E%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[NSArray和NSDictionary控制台中文打印]]></title>
+    <link href="http://xionv.com/2015/12/23/demonayu/blog/27.NSArray%E5%92%8CNSDictionary%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E6%89%93%E5%8D%B0/"/>
+    <id>http://xionv.com/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/</id>
+    <published>2015-12-23T04:36:57.000Z</published>
+    <updated>2016-01-11T08:28:51.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class]]>
     </summary>
     
       <category term="iOS工具类与方法" scheme="http://xionv.com/tags/iOS%E5%B7%A5%E5%85%B7%E7%B1%BB%E4%B8%8E%E6%96%B9%E6%B3%95/"/>
@@ -881,50 +904,6 @@
 </blockquote>
 <ul>
 <li><code>setValuesForKeysWithDictionary:</code>方法的底层实现  <figure clas]]>
-    </summary>
-    
-      <category term="iOS概念" scheme="http://xionv.com/tags/iOS%E6%A6%82%E5%BF%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[copy深浅的规律]]></title>
-    <link href="http://xionv.com/2015/12/19/demonayu/blog/23.copy%E6%B7%B1%E6%B5%85%E7%9A%84%E8%A7%84%E5%BE%8B/"/>
-    <id>http://xionv.com/2015/12/19/demonayu/blog/23.copy深浅的规律/</id>
-    <published>2015-12-19T07:42:57.000Z</published>
-    <updated>2016-01-11T08:28:51.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
-</blockquote>
-<ul>
-<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
-<li>源对象和副本对象是同一个对象</li>
-<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
-<li>本质是：没有产生新的对象</li>
-<li>原对象引用计数器+1</li>
-<li>必须对原对象进行释放</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
-<li>源对象和副本对象是不同的两个对象</li>
-<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
-<li>本质是：产生了新的对象</li>
-<li>必须释放新对象</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
-</blockquote>
-<ul>
-<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
-<li>源对象和副本对象是同一个对象</li>
-<li>源对象（副本对]]>
     </summary>
     
       <category term="iOS概念" scheme="http://xionv.com/tags/iOS%E6%A6%82%E5%BF%B5/"/>
