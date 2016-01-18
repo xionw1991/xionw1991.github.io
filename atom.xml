@@ -38,11 +38,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[RunLoop础知识]]></title>
+    <title><![CDATA[RunLoop基础知识]]></title>
     <link href="http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop基础知识/</id>
     <published>2016-01-13T03:06:57.000Z</published>
-    <updated>2016-01-18T15:05:27.000Z</updated>
+    <updated>2016-01-18T15:09:48.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是RunLoop">什么是RunLoop</h2><ul>
 <li>RunLoop: 运行循环, 顾名思义就是跑圈, 兜圈子的意思. 一个应用程序能够一直运行而不会退出就是基于这种机制.</li>
 <li>基本作用:<ol>
