@@ -79,7 +79,7 @@ RunLoop: 运行循环, 顾名思义就是跑圈, 兜圈子的意思. 一个应�
 <meta property="og:image" content="http://r6.loli.io/AnI3eu.png">
 <meta property="og:image" content="http://r5.loli.io/ZrimYv.png">
 <meta property="og:image" content="http://r6.loli.io/NNn26b.png">
-<meta property="og:updated_time" content="2016-01-18T15:09:48.000Z">
+<meta property="og:updated_time" content="2016-01-18T16:01:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RunLoop基础知识">
 <meta name="twitter:description" content="什么是RunLoop
@@ -358,7 +358,7 @@ RunLoop: 运行循环, 顾名思义就是跑圈, 兜圈子的意思. 一个应�
 </ul>
 </li>
 <li><p>添加输入源<code>[performSelector:OnThread]</code>. Cocoa提供了可以在任一线程执行函数<code>[perform selector]</code>的输入源, 和基于端口的源不同的是, <code>[perform selector]</code>执行完后会自动清除出RunLoop. </p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 发送消息给主线程并且是否等待任务执行完成(下面一个方法是指定RunLoop模式)</span></span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:  </span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给指定的线程并且是否等待任务执行完成</span></span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:  </span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给主线程延迟调用方法(只能在主线程中执行)</span></span><br><span class="line">performSelector:withObject:afterDelay:</span><br><span class="line">performSelector:withObject:afterDelay:inModes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消当前线程的消息发送</span></span><br><span class="line">cancelPreviousPerformRequestsWithTarget:  </span><br><span class="line">cancelPreviousPerformRequestsWithTarget:selector:object:</span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 发送消息给主线程并且是否等待任务执行完成(下面一个方法是指定RunLoop模式)</span></span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:  </span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给指定的线程并且是否等待任务执行完成</span></span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:  </span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给主线程延迟调用方法</span></span><br><span class="line">performSelector:withObject:afterDelay:</span><br><span class="line">performSelector:withObject:afterDelay:inModes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消当前线程的消息发送</span></span><br><span class="line">cancelPreviousPerformRequestsWithTarget:  </span><br><span class="line">cancelPreviousPerformRequestsWithTarget:selector:object:</span><br></pre></td></tr></table></figure>
 <ul>
 <li>当调用NSObject的<code>performSelecter:afterDelay:</code>后, 实际上其内部会创建一个<code>Timer</code>并添加到当前线程的RunLoop中. 所以如果当前线程没有开启RunLoop, 这个方法则会失效. </li>
 <li>当调用<code>performSelector:onThread:</code>时, 实际上其会创建一个<code>Timer</code>加到对应的线程去, 同样的如果对应线程没有开启RunLoop该方法也会失效.</li>
@@ -491,7 +491,7 @@ RunLoop: 运行循环, 顾名思义就是跑圈, 兜圈子的意思. 一个应�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[好啦,好啦,我知道了!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xionv.com/"/>
-  <updated>2016-01-14T04:57:16.000Z</updated>
+  <updated>2016-01-19T14:02:53.000Z</updated>
   <id>http://xionv.com/</id>
   
   <author>
@@ -13,6 +13,153 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[GCD的一些总结]]></title>
+    <link href="http://xionv.com/2016/01/19/demonayu/blog/44.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/"/>
+    <id>http://xionv.com/2016/01/19/demonayu/blog/44.GCD的一些总结/</id>
+    <published>2016-01-19T02:09:57.000Z</published>
+    <updated>2016-01-19T14:02:53.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="队列与任务">队列与任务</h2><ul>
+<li>同步: 同步任务,不开新线程,会阻塞当前线程.</li>
+<li>异步: 异步任务,开新线程,不会阻塞当前线程.</li>
+<li>串行: 串行队列,串行是按顺序排队执行任务,不会出现资源抢夺的问题,所以它默认是线程安全的.</li>
+<li>并行: 并行队列,多条线程同时执行任务,可能会导致多条线程抢夺同一块资源.所以它默认是线程不安全的,所以在一条线程访问一块资源时需要进行加锁处理;</li>
+</ul>
+<h3 id="主队列">主队列</h3><ul>
+<li><p>主队列</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 主队列</span></span><br><span class="line"><span class="built_in">dispatch_queue_t</span> main_queue= dispatch_get_main_queue();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>主队列只有一条主线程,所以它默认是串行的.</li>
+<li>在主队列中执行异步函数并不会开新的线程,所有任务默认都是在主线程执行.</li>
+<li><p>不要在主队列中执行同步函数,这样会产生死锁的问题.因为主队列默认只有一条主线程,如果在主队列添加一个同步任务,会马上执行这个同步任务.而主队列当前要执行的任务并没有结束,不肯放手.两个的优先级都很高,最终导致死锁.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在主线程执行一个同步函数 - 会发生死锁</span></span><br><span class="line"><span class="built_in">dispatch_sync</span>(main_queue, ^&#123;</span><br><span class="line">    <span class="comment">// 这句代码永远不会执行</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 这句代码永远不会执行</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"方法执行完毕"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果在主队列执行异步函数,那么异步函数要执行的任务会被排到队列的后面,只有当目前这个方法执行完毕后才会过来执行这个任务,如果有多个异步函数,那么任务会依次添加进队列并按顺序执行.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在主线程执行异步函数</span></span><br><span class="line"><span class="built_in">dispatch_async</span>(main_queue, ^&#123;</span><br><span class="line">    <span class="comment">// 再执行这一句</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 先执行这一句</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"方法执行完毕"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="非主队列">非主队列</h3><ul>
+<li><p>非主队列</p>
+<ul>
+<li><p>创建串行非主队列 (默认)</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> serial_queue = dispatch_queue_create(<span class="string">"my_queue"</span>, DISPATCH_QUEUE_SERIAL);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建并行非主队列</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> concurrent_queue = dispatch_queue_create(<span class="string">"my_queue"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>陷阱1</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在非主队列串行执行一个异步函数</span></span><br><span class="line"><span class="built_in">dispatch_async</span>(serial_queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务开始: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    <span class="comment">// 执行异步函数</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(serial_queue, ^&#123;</span><br><span class="line">        <span class="comment">/* 这句永远不会执行 */</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务1: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 执行同步函数</span></span><br><span class="line">    <span class="built_in">dispatch_sync</span>(serial_queue, ^&#123;</span><br><span class="line">        <span class="comment">/* 这句永远不会执行 */</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务2: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">/* 这句永远不会执行 */</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务执行完毕"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"方法执行完毕"</span>);</span><br></pre></td></tr></table></figure>
+<p>结果: 最后的这个线程会发生死锁.<br><br>分析: 非主队列串行执行异步函数, 这个队列只会开启一条新线程执行任务.<br><br>任务1是一个异步任务,不会阻塞当前线程,执行打它时,它会被挂起,等当前队列所有的同步任务执行完毕后再过来执行它.<br><br>任务2是一个同步任务,同步任务优先级很高,需要马上执行.但是外层的函数并没有执行完毕,不肯放手,所以导致了死锁.</p>
+</li>
+<li><p>陷阱2</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在非主队列并行执行一个异步函数</span></span><br><span class="line"><span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务开始: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    <span class="comment">// 执行异步函数</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务1: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 执行同步函数</span></span><br><span class="line">    <span class="built_in">dispatch_sync</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="comment">// 当前任务睡2秒</span></span><br><span class="line">        sleep(<span class="number">2.0</span>);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务2: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 执行异步函数</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务3: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务执行完毕"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"方法执行完毕"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后的执行顺序是: </p>
+<ul>
+<li>任务2 -&gt; 任务1 -&gt; 任务3 -&gt; 打印”任务执行完毕”.</li>
+<li>任务1 -&gt; 任务2 -&gt; 打印”任务执行完毕” -&gt; 任务3.<br></li>
+</ul>
+</li>
+<li>分析: <ul>
+<li>非主队列并发执行异步函数, 可能会开多条线程执行任务.</li>
+<li>任务1和任务2的运行优先级是一样的,只是任务1会开启一个新的线程来执行,而任务2是同步函数只会在当前线程执行,并且会阻塞当前线程.</li>
+<li>任务3是一个异步函数,它排在任务2之后,而任务2是一个同步函数阻塞了当前线程,所以必须要等任务2执行完毕后才能执行.</li>
+</ul>
+</li>
+<li>思考: <ul>
+<li>为什么在并发队列中执行同步函数不会死锁?</li>
+<li>在并发队列中执行同步函数是不是就能起到跟栅栏函数一样的作用?</li>
+<li>在并发队列中,当前线程起着两个作用,一个是执行任务,另一个是分配线程执行任务.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="全局并发队列">全局并发队列</h3><ul>
+<li>全局并发队列<ul>
+<li>默认全局来管理并发,类似于自己创建并发队列,可以设置线程调度的优先级,但是一般情况下不建议这么做.因为可能会引发<code>优先级反转</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="GCD的一些常用函数">GCD的一些常用函数</h2><ul>
+<li>通过GCD, 开发者不用再直接跟线程打交道了, 只需要向队列中添加代码块即可, GCD 在后端管理着一个线程池. GCD不仅决定着你的代码块将在哪个线程被执行, 它还根据可用的系统资源对这些线程进行管理. 这样可以将开发者从线程管理的工作中解放出来, 通过集中的管理线程, 来缓解大量线程被创建的问题.</li>
+<li>GCD 带来的另一个重要改变是, 作为开发者可以将工作考虑为一个队列, 而不是一堆线程, 这种并行的抽象模型更容易掌握和使用.</li>
+</ul>
+<h3 id="dispatch_after延迟函数">dispatch_after延迟函数</h3><ul>
+<li><p>利用<code>dispatch_after</code>函数延时执行任务</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在主队列延迟2秒后提交任务(这里的时间单位是纳秒)</span></span><br><span class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">2.0</span> * <span class="built_in">NSEC_PER_SEC</span>)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"在主队列延迟2秒执行"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用<code>performSelector: withObject: afterDelay:</code>延时执行任务</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(run:) withObject:<span class="string">@"延时两秒运行中..."</span> afterDelay:<span class="number">2.0</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用<code>NSTimer</code>延时执行任务</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">2.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(run:) userInfo:<span class="string">@"延时两秒运行中..."</span> repeats:<span class="literal">NO</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="dispatch_once一次性函数">dispatch_once一次性函数</h3><ul>
+<li><p>一次性代码</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// dispatch_once 保证代码在程序中只执行一次</span></span><br><span class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;  </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我只会执行一次"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用GCD实现单例</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 防止外部文件引用变量</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">id</span> musicRadio;</span><br><span class="line"><span class="comment">// 单例模式的核心就是 重写alloc</span></span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone</span><br><span class="line">    <span class="comment">// GCD实现单例</span></span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        musicRadio = [<span class="keyword">super</span> allocWithZone:zone];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用懒加载和同步锁实现单例</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">id</span> musicRadio;</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 添加同步锁防止资源抢夺</span></span><br><span class="line">    <span class="keyword">@synchronized</span>(<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123;</span><br><span class="line">        musicRadio = [<span class="keyword">super</span> allocWithZone:zone];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 工厂方法</span></span><br><span class="line">+ (instancetype)shareMusicRadio</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 防止多次加锁</span></span><br><span class="line">    <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123; </span><br><span class="line">        <span class="keyword">@synchronized</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123; <span class="comment">// 防止多次init</span></span><br><span class="line">                musicRadio = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考: <a href="http://xionv.com/2015/11/29/demonayu/blog/Singleton/">单例模式宏</a></p>
+</li>
+</ul>
+<h3 id="dispatch_barrier栅栏函数">dispatch_barrier栅栏函数</h3><ul>
+<li>栅栏函数作用: 在并发队列中实现阻塞.</li>
+<li>要想执行完前面所有的任务再执行barrier必须满足两个条件: <ul>
+<li>所有任务都是在同一个队列中.</li>
+<li>队列不能是全局并行队列, 必须是自己创建的队列.</li>
+</ul>
+</li>
+<li><p>在串行队列中执行同步栅栏函数会发生死锁</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dispatch_async</span>(serial_queue, ^&#123;</span><br><span class="line">    dispatch_barrier_sync(serial_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"会死锁!"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下面示例代码中, 只有等任务3完成后任务4和任务5才能执行.</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个并发的队列</span></span><br><span class="line"><span class="built_in">dispatch_queue_t</span> concurrent_queue = dispatch_queue_create(<span class="string">"my_queue"</span>, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line"><span class="comment">// 执行异步函数</span></span><br><span class="line"><span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务开始: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务1: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务2: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 执行栅栏函数</span></span><br><span class="line">    dispatch_barrier_async(concurrent_queue, ^&#123;</span><br><span class="line">        sleep(<span class="number">2.0</span>);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务3: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务4: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">dispatch_async</span>(concurrent_queue, ^&#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"任务5: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务完毕"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="dispatch_apply迭代函数">dispatch_apply迭代函数</h3><ul>
+<li><p>因为GCD的快速迭代是多线程并发的, 所以速度要快于普通的循环结构.</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 参数1: 迭代次数</span></span><br><span class="line"><span class="comment">// 参数2: 执行的队列</span></span><br><span class="line"><span class="comment">// 参数3: 当前迭代的索引</span></span><br><span class="line">dispatch_apply(<span class="number">20</span>, dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^(size_t index) &#123;</span><br><span class="line">    <span class="comment">//...需要迭代的代码, 迭代顺序并不确定</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意: 应该避免在串行队列中嵌套使用<code>dispatch_apply</code>, 会引发死锁.下面示例代码打印会永远停留在<code>第一层循环 - 0</code></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dispatch_queue_t</span> serial_queue = dispatch_queue_create(<span class="string">"my_queue"</span>, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">dispatch_apply(<span class="number">5</span>, serial_queue, ^(size_t i) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第一层循环 - %ld"</span>, i);</span><br><span class="line">    dispatch_apply(<span class="number">5</span>, serial_queue, ^(size_t j) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"第二层循环 - %ld"</span>, j);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"执行完毕 - %ld"</span>, i);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="dispatch_group队列组函数">dispatch_group队列组函数</h3><ul>
+<li>很多时候我们需要等待一系列任务执行完成后, 再做一些收尾的工作. 在串行队列中很容易办到, 如果在并行队列中使用组函数也可以达到这样的效果.</li>
+<li>组函数简单使用 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个队列组函数</span></span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line"><span class="comment">// 获得当前全局队列</span></span><br><span class="line"><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 执行组函数</span></span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务1: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"任务2: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 当所有组函数执行完毕后执行dispatch_group_notify</span></span><br><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"当任务1和任务2执行完毕后通知执行任务3: %@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="暂停和恢复队列">暂停和恢复队列</h3><ul>
+<li><p>暂停(挂起)队列</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">dispatch_suspend(concurrent_queue);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>恢复队列</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">dispatch_resume(concurrent_queue);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意: dispatch_suspend并不会立即暂停正在运行的block, 而是在当前block执行完成后, 暂停后续的block执行.</p>
+</li>
+</ul>
+<p>参考: <br><br><a href="http://objccn.io/issue-2-1/" target="_blank" rel="external">并发编程：API 及挑战</a><br><br><a href="https://github.com/ChenYilong/ParseSourceCodeStudy/blob/master/01_Parse的多线程处理思路/Parse的底层多线程处理思路.md" target="_blank" rel="external">GCD高级用法</a><br><br><a href="http://tutuge.me/2015/04/03/something-about-gcd/" target="_blank" rel="external">GCD使用经验与技巧浅谈</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="队列与任务">队列与任务</h2><ul>
+<li>同步: 同步任务,不开新线程,会阻塞当前线程.</li>
+<li>异步: 异步任务,开新线程,不会阻塞当前线程.</li>
+<li>串行: 串行队列,串行是按顺序排队执行任务,不会出现资源抢夺的问题,所以它默认是]]>
+    </summary>
+    
+      <category term="iOS中级" scheme="http://xionv.com/tags/iOS%E4%B8%AD%E7%BA%A7/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[NSCache的介绍]]></title>
@@ -42,7 +189,7 @@
     <link href="http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://xionv.com/2016/01/13/demonayu/blog/42.RunLoop基础知识/</id>
     <published>2016-01-13T03:06:57.000Z</published>
-    <updated>2016-01-18T15:09:48.000Z</updated>
+    <updated>2016-01-18T16:01:49.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是RunLoop">什么是RunLoop</h2><ul>
 <li>RunLoop: 运行循环, 顾名思义就是跑圈, 兜圈子的意思. 一个应用程序能够一直运行而不会退出就是基于这种机制.</li>
 <li>基本作用:<ol>
@@ -139,7 +286,7 @@
 </ul>
 </li>
 <li><p>添加输入源<code>[performSelector:OnThread]</code>. Cocoa提供了可以在任一线程执行函数<code>[perform selector]</code>的输入源, 和基于端口的源不同的是, <code>[perform selector]</code>执行完后会自动清除出RunLoop. </p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 发送消息给主线程并且是否等待任务执行完成(下面一个方法是指定RunLoop模式)</span></span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:  </span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给指定的线程并且是否等待任务执行完成</span></span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:  </span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给主线程延迟调用方法(只能在主线程中执行)</span></span><br><span class="line">performSelector:withObject:afterDelay:</span><br><span class="line">performSelector:withObject:afterDelay:inModes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消当前线程的消息发送</span></span><br><span class="line">cancelPreviousPerformRequestsWithTarget:  </span><br><span class="line">cancelPreviousPerformRequestsWithTarget:selector:object:</span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 发送消息给主线程并且是否等待任务执行完成(下面一个方法是指定RunLoop模式)</span></span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:  </span><br><span class="line">performSelectorOnMainThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给指定的线程并且是否等待任务执行完成</span></span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:  </span><br><span class="line">performSelector:onThread:withObject:waitUntilDone:modes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送消息给主线程延迟调用方法</span></span><br><span class="line">performSelector:withObject:afterDelay:</span><br><span class="line">performSelector:withObject:afterDelay:inModes:</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消当前线程的消息发送</span></span><br><span class="line">cancelPreviousPerformRequestsWithTarget:  </span><br><span class="line">cancelPreviousPerformRequestsWithTarget:selector:object:</span><br></pre></td></tr></table></figure>
 <ul>
 <li>当调用NSObject的<code>performSelecter:afterDelay:</code>后, 实际上其内部会创建一个<code>Timer</code>并添加到当前线程的RunLoop中. 所以如果当前线程没有开启RunLoop, 这个方法则会失效. </li>
 <li>当调用<code>performSelector:onThread:</code>时, 实际上其会创建一个<code>Timer</code>加到对应的线程去, 同样的如果对应线程没有开启RunLoop该方法也会失效.</li>
@@ -880,42 +1027,6 @@
     </summary>
     
       <category term="iOS初步-demo" scheme="http://xionv.com/tags/iOS%E5%88%9D%E6%AD%A5-demo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[KVC的底层实现]]></title>
-    <link href="http://xionv.com/2015/12/22/demonayu/blog/25.KVC%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://xionv.com/2015/12/22/demonayu/blog/25.KVC的底层实现/</id>
-    <published>2015-12-22T11:37:57.000Z</published>
-    <updated>2016-01-11T08:28:51.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>KVC的本质就是调用成员属性的setter和getter方法.</p>
-</blockquote>
-<ul>
-<li><code>setValuesForKeysWithDictionary:</code>方法的底层实现  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)</span></span><br><span class="line">  [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">      [item setValue:obj forKeyPath:key];</span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><code>setValue:forKeyPath:</code>的底层实现:<ol>
-<li>调用key对应成员属性名的setter方法;</li>
-<li>如果找不到,找带下划线(_)的成员属性名,然后给这个成员属性直接赋值.</li>
-<li>如果找不到,找与key名完全相同的成员属性名,然后直接赋值.</li>
-<li>如果都找不到,则程序崩溃,报错找不到对应的成员属性.</li>
-</ol>
-</li>
-</ul>
-<p>ps: 可以利用KVC的实现原理来重写赋值过程</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>KVC的本质就是调用成员属性的setter和getter方法.</p>
-</blockquote>
-<ul>
-<li><code>setValuesForKeysWithDictionary:</code>方法的底层实现  <figure clas]]>
-    </summary>
-    
-      <category term="iOS概念" scheme="http://xionv.com/tags/iOS%E6%A6%82%E5%BF%B5/"/>
     
   </entry>
   
