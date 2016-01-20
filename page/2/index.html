@@ -202,6 +202,128 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/08/demonayu/blog/36.利用运行时特性获取系统类的私有成员变量/" itemprop="url">
+                  利用运行时特性获取系统类的私有成员属性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-08T11:00:57+08:00" content="2016-01-08">
+              2016-01-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/08/demonayu/blog/36.利用运行时特性获取系统类的私有成员变量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/08/demonayu/blog/36.利用运行时特性获取系统类的私有成员变量/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>在iOS7以后苹果添加了一个边缘滑动返回的手势操作,我们通过修改这个手势操作来说明如何利用系统的私有成员属性来达到在项目中的要求.</p>
+</blockquote>
+<ul>
+<li><p><code>interactivePopGestureRecognizer</code>这个api功能就是在NavigationController堆栈内的UIViewController可以支持右滑手势,轻轻在屏幕左边一滑,屏幕就会返回.<br>但是, 1.这个功能在自定义返回按钮后会失效; 2.它的作用范围在手机屏幕左侧边缘,如果要求全屏接受这个事件就需要自定义这个功能了.</p>
+</li>
+<li><p>通过打印<code>interactivePopGestureRecognizer</code>得知这个功能是通过<code>UIScreenEdgePanGestureRecognizer</code>这个手势来实现的.如果是手势就一定有<code>target</code>和<code>action</code>这两个成员属性,我们只要拿到<code>target</code>的真实类型.然后通过KVC就能”借用”系统实现方式来达到以上两个要求.</p>
+</li>
+<li><p>利用运行时获取所有的成员变量</p>
+<ol>
+<li><p>导入运行时头文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用runtime函数获取获取类中的所有成员属性</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用来接收数组元素个数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outcount = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// UIGestureRecognizer是interactivePopGestureRecognizer的类型</span></span><br><span class="line">Ivar *ivars = class_copyIvarList([<span class="built_in">UIGestureRecognizer</span> class], &amp;outcount);</span><br><span class="line"><span class="comment">// Ivar：成员属性的意思;</span></span><br><span class="line"><span class="comment">// 第一个参数:表示获取哪个类中的成员属性;</span></span><br><span class="line"><span class="comment">// 第二个参数:表示这个类有多少成员属性,传入一个Int变量地址,会自动给这个变量赋值;</span></span><br><span class="line"><span class="comment">// 返回值Ivar*:指的是一个ivar数组,会把所有成员属性放在一个数组中,通过返回的数组就能全部获取到;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有的成员属性名</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历ivars获取目标类中每一个成员属性名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outcount; i++) &#123;</span><br><span class="line">    <span class="comment">// 打印所有的成员属性名</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @(ivar_getName(ivars[i])));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果: 第一个就是我们要拿到的成员属性.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">_targets</span><br><span class="line">_delayedTouches</span><br><span class="line">_delayedPresses</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过KVC拿到其关键作用的<code>target</code></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拿到打印结果,通过KVC拿到那个target</span></span><br><span class="line"><span class="built_in">NSArray</span> *targets = [<span class="keyword">self</span><span class="variable">.interactivePopGestureRecognizer</span> valueForKeyPath:<span class="string">@"_targets"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, targets);</span><br><span class="line"><span class="keyword">id</span> target = [targets[<span class="number">0</span>] valueForKeyPath:<span class="string">@"target"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// handleNavigationTransition:这个方法是通过打印结果得知系统内部会调用的方法,不用我们去实现.</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:target action:<span class="keyword">@selector</span>(handleNavigationTransition:)];</span><br><span class="line">pan<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在根控制器禁用pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>至此我们就已经修改完成了,是不是很暴力很直接!当然我本人是不支持这种方法的:1.它破坏了苹果的封装性.2它仍然有局限性,因为是利用系统的方法,如果有其他自定义要求不便于修改.</p>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/07/demonayu/blog/37.封装NavigationController基类/" itemprop="url">
                   封装NavigationController基类
                 </a>
@@ -662,114 +784,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/30/demonayu/blog/33.调用系统相册方法/" itemprop="url">
-                  调用系统相册方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-30T15:59:57+08:00" content="2015-12-30">
-              2015-12-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/30/demonayu/blog/33.调用系统相册方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30/demonayu/blog/33.调用系统相册方法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ul>
-<li><p>调用系统相册</p>
-<ol>
-<li><p>调用系统相册需要先实例化一个照片选择控制器</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 创建照片选择器</span></span><br><span class="line"><span class="built_in">UIImagePickerController</span> *picker = [[<span class="built_in">UIImagePickerController</span> alloc] init];</span><br><span class="line"><span class="comment">// 2. 设置数据源类型(是相册还是照相机)</span></span><br><span class="line">picker<span class="variable">.sourceType</span> = <span class="built_in">UIImagePickerControllerSourceTypeSavedPhotosAlbum</span>;</span><br><span class="line"><span class="comment">// 3. 将调用改控制的对象设置为代理 - 这里必须要实现系统要求的两个协议</span></span><br><span class="line">picker<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line"><span class="comment">// 4. modal出照片选择控制器</span></span><br><span class="line">[<span class="keyword">self</span> presentViewController:picker animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>调用代理方法拿到照片</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// info这个字典参数是选中照片的一些信息,根据里面的key可以拿到选择的照片</span></span><br><span class="line"> - (<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 拿到图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *image = info[<span class="built_in">UIImagePickerControllerOriginalImage</span>];</span><br><span class="line">    <span class="comment">// 将照片选取器隐藏</span></span><br><span class="line">    [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>往相册里存入照片</p>
-<ol>
-<li><p>调用写入方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将图片保存到用户相册里面</span></span><br><span class="line"><span class="comment">// image: 将要保存的图片</span></span><br><span class="line"><span class="comment">// target: 方法监听者</span></span><br><span class="line"><span class="comment">// SEL: 保存图片完成时调用的方法(系统规定写法,用来监听保存状态)</span></span><br><span class="line"><span class="comment">// contextInfo: 上下文信息</span></span><br><span class="line"><span class="built_in">UIImageWriteToSavedPhotosAlbum</span>(image, <span class="keyword">self</span>, <span class="keyword">@selector</span>(image:didFinishSavingWithError:contextInfo:), <span class="literal">nil</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现监听方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 保存相册后回调的监听方法</span></span><br><span class="line"> - (<span class="keyword">void</span>)image:(<span class="built_in">UIImage</span> *)image didFinishSavingWithError:(<span class="built_in">NSError</span> *)error contextInfo:(<span class="keyword">void</span> *)contextInfo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -816,7 +830,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
