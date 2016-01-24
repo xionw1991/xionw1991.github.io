@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xionv.com/2016/01/19/demonayu/blog/45.NSURLConnection%E5%92%8CNSURLSession%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2016-01-24T09:58:01.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xionv.com/2015/12/05/demonayu/blog/KVC%E5%92%8CKVO/</loc>
     <lastmod>2016-01-20T15:28:16.000Z</lastmod>
   </url>
@@ -9,11 +14,6 @@
   <url>
     <loc>http://xionv.com/2016/01/19/demonayu/blog/44.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2016-01-20T15:26:17.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2016/01/19/demonayu/blog/45.NSURLConnection%E5%92%8CNSURLSession%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2016-01-20T00:53:43.000Z</lastmod>
   </url>
   
   <url>
