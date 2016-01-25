@@ -174,7 +174,7 @@
     <link href="http://xionv.com/2016/01/19/demonayu/blog/44.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/"/>
     <id>http://xionv.com/2016/01/19/demonayu/blog/44.GCD的一些总结/</id>
     <published>2016-01-19T02:09:57.000Z</published>
-    <updated>2016-01-20T15:26:17.000Z</updated>
+    <updated>2016-01-24T10:22:29.000Z</updated>
     <content type="html"><![CDATA[<h2 id="队列与任务">队列与任务</h2><ul>
 <li>同步: 同步任务,不开新线程,会阻塞当前线程.</li>
 <li>异步: 异步任务,开新线程,不会阻塞当前线程.</li>
@@ -304,7 +304,12 @@
 <li><p>注意: dispatch_suspend并不会立即暂停正在运行的block, 而是在当前block执行完成后, 暂停后续的block执行.</p>
 </li>
 </ul>
-<p>参考: <br><br><a href="http://objccn.io/issue-2-1/" target="_blank" rel="external">并发编程：API 及挑战</a><br><br><a href="https://github.com/ChenYilong/ParseSourceCodeStudy/blob/master/01_Parse的多线程处理思路/Parse的底层多线程处理思路.md" target="_blank" rel="external">GCD高级用法</a><br><br><a href="http://tutuge.me/2015/04/03/something-about-gcd/" target="_blank" rel="external">GCD使用经验与技巧浅谈</a></p>
+<p>参考:</p>
+<ul>
+<li><a href="http://objccn.io/issue-2-1/" target="_blank" rel="external">并发编程：API 及挑战</a></li>
+<li><a href="https://github.com/ChenYilong/ParseSourceCodeStudy/blob/master/01_Parse的多线程处理思路/Parse的底层多线程处理思路.md" target="_blank" rel="external">GCD高级用法</a></li>
+<li><a href="http://tutuge.me/2015/04/03/something-about-gcd/" target="_blank" rel="external">GCD使用经验与技巧浅谈</a></li>
+</ul>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="队列与任务">队列与任务</h2><ul>

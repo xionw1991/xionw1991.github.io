@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xionv.com/2015/11/29/demonayu/blog/Singleton/</loc>
+    <lastmod>2016-01-25T08:41:17.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xionv.com/2016/01/19/demonayu/blog/44.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2016-01-24T10:22:29.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xionv.com/2016/01/19/demonayu/blog/45.NSURLConnection%E5%92%8CNSURLSession%E6%80%9D%E8%80%83/</loc>
     <lastmod>2016-01-24T09:58:01.000Z</lastmod>
   </url>
@@ -9,11 +19,6 @@
   <url>
     <loc>http://xionv.com/2015/12/05/demonayu/blog/KVC%E5%92%8CKVO/</loc>
     <lastmod>2016-01-20T15:28:16.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2016/01/19/demonayu/blog/44.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2016-01-20T15:26:17.000Z</lastmod>
   </url>
   
   <url>
@@ -42,6 +47,16 @@
   </url>
   
   <url>
+    <loc>http://xionv.com/2015/12/13/demonayu/blog/TableView%E9%A1%B6%E9%83%A8%E5%9B%BE%E7%89%87%E4%B8%8B%E6%8B%89%E6%94%BE%E5%A4%A7demo/</loc>
+    <lastmod>2016-01-11T08:28:54.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xionv.com/2015/12/09/demonayu/blog/SQLite%E5%9C%A8iOS%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%8B)/</loc>
+    <lastmod>2016-01-11T08:28:54.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xionv.com/2015/12/07/demonayu/blog/UIScrollView%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5/</loc>
     <lastmod>2016-01-11T08:28:54.000Z</lastmod>
   </url>
@@ -57,47 +72,12 @@
   </url>
   
   <url>
-    <loc>http://xionv.com/2015/12/09/demonayu/blog/SQLite%E5%9C%A8iOS%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%8B)/</loc>
-    <lastmod>2016-01-11T08:28:54.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://xionv.com/2015/12/10/demonayu/blog/Xcode%E6%8F%92%E4%BB%B6%E5%A4%B1%E6%95%88%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
     <lastmod>2016-01-11T08:28:54.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://xionv.com/2015/12/13/demonayu/blog/TableView%E9%A1%B6%E9%83%A8%E5%9B%BE%E7%89%87%E4%B8%8B%E6%8B%89%E6%94%BE%E5%A4%A7demo/</loc>
-    <lastmod>2016-01-11T08:28:54.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2015/11/29/demonayu/blog/Singleton/</loc>
-    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2015/12/03/demonayu/blog/%E5%AD%97%E5%85%B8%E8%BD%AC%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2015/12/04/demonayu/blog/NSFileManager%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2015/12/10/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
-    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2015/12/08/demonayu/blog/AutoLayout%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xionv.com/2015/11/29/demonayu/blog/request/</loc>
+    <loc>http://xionv.com/2015/12/10/demonayu/blog/NSFileManager%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F/</loc>
     <lastmod>2016-01-11T08:28:53.000Z</lastmod>
   </url>
   
@@ -112,7 +92,27 @@
   </url>
   
   <url>
-    <loc>http://xionv.com/2015/12/10/demonayu/blog/NSFileManager%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F/</loc>
+    <loc>http://xionv.com/2015/12/08/demonayu/blog/AutoLayout%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xionv.com/2015/12/03/demonayu/blog/%E5%AD%97%E5%85%B8%E8%BD%AC%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xionv.com/2015/12/10/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xionv.com/2015/11/29/demonayu/blog/request/</loc>
+    <lastmod>2016-01-11T08:28:53.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xionv.com/2015/12/04/demonayu/blog/NSFileManager%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-01-11T08:28:53.000Z</lastmod>
   </url>
   
