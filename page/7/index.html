@@ -223,6 +223,112 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/09/demonayu/blog/SQLite在iOS中的使用(下)/" itemprop="url">
+                  SQLite在iOS中的使用(下)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-09T19:08:57+08:00" content="2015-12-09">
+              2015-12-09
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/09/demonayu/blog/SQLite在iOS中的使用(下)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/demonayu/blog/SQLite在iOS中的使用(下)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="使用数据库存储任意对象">使用数据库存储任意对象</h2><blockquote>
+<p>使用FMDB框架来操作数据库</p>
+</blockquote>
+<ol>
+<li><p>新建一个模型类,有name和price两个属性, 并导入FMDB头文件 </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"Shop.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"FMDB.h"</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在加载类的时候创建数据库</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 初始化一个FMDatabase类的对象</span></span><br><span class="line">  <span class="keyword">static</span> FMDatabase *_db;</span><br><span class="line">  <span class="comment">// 第一次使用类时</span></span><br><span class="line">  + (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// 1.数据库路径</span></span><br><span class="line">     <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>,</span><br><span class="line">                                                          <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.lastObject</span></span><br><span class="line">                      stringByAppendingPathComponent:<span class="string">@"shop.sqlite"</span>];</span><br><span class="line">     <span class="comment">// 2.链接数据库</span></span><br><span class="line">     _db = [FMDatabase databaseWithPath:path];</span><br><span class="line">     <span class="comment">// 3.打开数据库</span></span><br><span class="line">     [_db open];</span><br><span class="line">     <span class="comment">// 4.建表</span></span><br><span class="line">     [_db executeUpdate:<span class="string">@"CREATE TABLE IF NOT EXISTS t_shop (id integer PRIMARY KEY, shop blob NOT NULL)"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加增/删/查方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入数据, 直接传入shop对象</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertObject:(<span class="keyword">id</span>)object</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// 将对象转成NSData数据</span></span><br><span class="line">     <span class="built_in">NSData</span> *data = [<span class="built_in">NSKeyedArchiver</span> archivedDataWithRootObject:shop];</span><br><span class="line">     <span class="comment">// 将data存进数据库</span></span><br><span class="line">     [_db executeUpdateWithFormat:<span class="string">@"INSERT INTO t_shop (shop) VALUES (%@);"</span>, data];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除所有数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)deleteAll</span><br><span class="line">&#123;</span><br><span class="line">     [_db executeUpdateWithFormat:<span class="string">@"DELETE FROM t_shop;"</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取出数据</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)shops</span><br><span class="line">&#123;</span><br><span class="line">     <span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">     FMResultSet *set = [_db executeQuery:<span class="string">@"SELECT * FROM t_shop;"</span>];</span><br><span class="line">     <span class="keyword">while</span> (set<span class="variable">.next</span>) &#123;</span><br><span class="line">        <span class="comment">// 取出二进制数据</span></span><br><span class="line">        <span class="built_in">NSData</span> *data = [set dataForColumn:<span class="string">@"shop"</span>];</span><br><span class="line">        <span class="comment">// 将二进制数据还原成对象</span></span><br><span class="line">        Shop *shop = [<span class="built_in">NSKeyedUnarchiver</span> unarchiveObjectWithData:data];</span><br><span class="line">        <span class="comment">// 将还原出来的对象存进数组</span></span><br><span class="line">        [array addObject:shop];</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在shop.h中遵守 &lt; NSCoding &gt; 协议,并在shop.m中实现 encodeWithCoder: 和 initWithCoder:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder</span><br><span class="line">&#123;</span><br><span class="line">     [aCoder encodeObject:<span class="keyword">self</span><span class="variable">.name</span> forKey:<span class="string">@"name"</span>];</span><br><span class="line">     [aCoder encodeFloat:<span class="keyword">self</span><span class="variable">.price</span> forKey:<span class="string">@"price"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (instancetype)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder</span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">self</span><span class="variable">.name</span> = [aDecoder decodeObjectForKey:<span class="string">@"name"</span>];</span><br><span class="line">     <span class="keyword">self</span><span class="variable">.price</span> = [aDecoder decodeFloatForKey:<span class="string">@"price"</span>];</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中直接调用模型方法就可以从数据库中得到数据了</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 存入对象</span></span><br><span class="line">- (<span class="keyword">void</span>)save</span><br><span class="line">&#123;</span><br><span class="line">     Shop *shop = [[Shop alloc] init];</span><br><span class="line">     shop<span class="variable">.name</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"电脑"</span>];</span><br><span class="line">     shop<span class="variable">.price</span> = <span class="number">1999.9</span>;</span><br><span class="line">     <span class="comment">// 存入数据</span></span><br><span class="line">     [Shop insertObject:shop];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取</span></span><br><span class="line">- (<span class="keyword">void</span>)read</span><br><span class="line">&#123;</span><br><span class="line">     <span class="built_in">NSArray</span> *array = [Shop shops];</span><br><span class="line">     <span class="keyword">for</span> (Shop *shop <span class="keyword">in</span> array) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, shop);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删</span></span><br><span class="line">- (<span class="keyword">void</span>)delete</span><br><span class="line">&#123;</span><br><span class="line">     [Shop deleteAll];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/08/demonayu/blog/AutoLayout的简单使用/" itemprop="url">
                   AutoLayout的简单使用
                 </a>
@@ -890,126 +996,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/04/demonayu/blog/首尾式动画/" itemprop="url">
-                  简单的首尾式动画
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-04T16:27:57+08:00" content="2015-12-04">
-              2015-12-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/04/demonayu/blog/首尾式动画/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/04/demonayu/blog/首尾式动画/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.</p>
-</blockquote>
-<h2 id="1-_实现渐变动画">1. 实现渐变动画</h2><ul>
-<li>在控制器中新建一个监听手势点击的方法.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在方法中添加一个UIView, 当然UIImageView,UILabel都可以, 只要继承自UIView就OK.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 子控件的初始状态</span></span><br><span class="line"><span class="built_in">UIView</span> *animationView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>)];</span><br><span class="line">animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line"><span class="comment">// 初始化view的alpha为0.0,它是一个实型,可以理解成透明度,当控件alpha的为0时是全透明,不可见且不可交互.</span></span><br><span class="line"><span class="comment">// 使用alpha可以实现渐隐的动画效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">animationView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"><span class="comment">// 将控件添加进父控件</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:animationView];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现动画效果</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 开始动画</span></span><br><span class="line">[<span class="built_in">UIView</span> beginAnimations:<span class="literal">nil</span> context:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 2. 动画时长</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> time = <span class="number">2.0</span>;</span><br><span class="line">[<span class="built_in">UIView</span> setAnimationDuration:time];</span><br><span class="line"><span class="comment">// 3. 需要动画执行完毕后控件的状态</span></span><br><span class="line">animationView<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="comment">//    改变alpha值实现渐隐效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line"><span class="comment">// 4. 提交动画</span></span><br><span class="line">[<span class="built_in">UIView</span> commitAnimations];</span><br></pre></td></tr></table></figure>
-<p>这样我们新创建的控件会伴有动画效果显示出来并且一直待在父控件上.</p>
-<ul>
-<li>用block来是实现动画效果</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; </span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<h2 id="2-_实现首尾式动画">2. 实现首尾式动画</h2><ul>
-<li>实现提示框(hub)那种类型的首尾式动画效果 (显示后立即消失). </li>
-<li>block嵌套实现首尾式动画</li>
-<li>将上面实现动画的代码替换成下面的代码:</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// delay: 表示动画需要延时多少秒后执行</span></span><br><span class="line"><span class="comment">// options: 可以选择动画在执行过程中方式(比如先快后慢等等)</span></span><br><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> delay:<span class="number">0</span> options:<span class="built_in">UIViewAnimationOptionCurveEaseInOut</span> animations:^&#123;</span><br><span class="line">    <span class="comment">// 第一阶段动画执行完毕后的控件状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line">&#125; completion:^(<span class="built_in">BOOL</span> finished) &#123; <span class="comment">// 第一阶段动画执行完毕后</span></span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; <span class="comment">// 第二阶段动画并显示控件最终状态</span></span><br><span class="line">        animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">        animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">        animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这个子控件会在两秒钟内放大并显示,然后在两秒钟后缩小消失.</li>
-</ul>
-<hr>
-<blockquote>
-<p>ps: 首尾式动画是显式动画.<br>pps: 能够实现动画的属性基本都是实型,像BOOL类型的属性就不能用来显示动画效果.<br>ppps: 每个UIView都是由图层来显示图像的, 也就是说每个UIView中都有一个CALayer成员变量,来显示图像, 而且这个成员变量是不可交互的, 改变自定义图层的属性, 可以触发隐式动画.</p>
-</blockquote>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1056,7 +1042,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

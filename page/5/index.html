@@ -223,6 +223,116 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/19/demonayu/blog/利用NSValue来包装结构体/" itemprop="url">
+                  利用NSValue来包装结构体
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-19T14:51:57+08:00" content="2015-12-19">
+              2015-12-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/19/demonayu/blog/利用NSValue来包装结构体/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/19/demonayu/blog/利用NSValue来包装结构体/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>NSValue可以包装任意值,可以用NSValue将结构体包装后,加入NSArray\NSDictionary中.</p>
+</blockquote>
+<ul>
+<li><p>利用NSValue包装常用结构体</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CGPoint</span> point = <span class="built_in">NSMakePoint</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">NSValue</span> *value = [<span class="built_in">NSValue</span> valueWithPoint:point];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[value];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用NSValue包装自定义结构体</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">double</span> height;</span><br><span class="line">&#125;Person;</span><br><span class="line"></span><br><span class="line">Person p = &#123;<span class="number">24</span>, <span class="string">"XiaoMing"</span>, <span class="number">183</span>&#125;;</span><br><span class="line"><span class="comment">// valueWithBytes: 接收一个指针, 传递需要包装的结构体的地址.</span></span><br><span class="line"><span class="comment">// objCType: 需要包装的数据类型</span></span><br><span class="line"><span class="built_in">NSValue</span> *pValue = [<span class="built_in">NSValue</span> valueWithBytes:&amp;p objCType:@encode(Person)];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[pValue];</span><br><span class="line"><span class="comment">// 从NSValue中取出自定义的结构体变量</span></span><br><span class="line">Person res;</span><br><span class="line">[pValue getValue:&amp;res];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常见的结构体包装方法</p>
+<ul>
+<li><p>将结构体包装成NSValue对象</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithPoint:(<span class="built_in">NSPoint</span>)point;</span><br><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithSize:(<span class="built_in">NSSize</span>)size;</span><br><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithRect:(<span class="built_in">NSRect</span>)rect;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从NSValue中取出包装的结构体</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSPoint</span>)pointValue;</span><br><span class="line">- (<span class="built_in">NSSize</span>)sizeValue;</span><br><span class="line">- (<span class="built_in">NSRect</span>)rectValue;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>NSValue包装任意数据类型</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// value参数 : 所包装数据的地址</span></span><br><span class="line"><span class="comment">// type参数 : 用来描述这个数据类型的字符串, 用@encode指令来生成</span></span><br><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithBytes:(<span class="keyword">const</span> <span class="keyword">void</span> *)value objCType:(<span class="keyword">const</span> <span class="keyword">char</span> *)type;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从NSValue中取出所包装的数据</span></span><br><span class="line">- (<span class="keyword">void</span>)getValue:(<span class="keyword">void</span> *)value;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/" itemprop="url">
                   重写可变数组的[removeObject:]方法
                 </a>
@@ -810,124 +920,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/" itemprop="url">
-                  Github, Gitcafe和 Coding的Pages服务对比
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-14T12:01:57+08:00" content="2015-12-14">
-              2015-12-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ul>
-<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
-</li>
-<li><p>说说心得:</p>
-<ul>
-<li>github: 稳定,除了网络抽风push的时候有点慢和国内的搜索引擎可能爬不到,其他完美仍然是首选.</li>
-<li>gitcafe: 据说服务器在香港,相比github访问速度要快一些,但是最近很不稳定,比如昨天就宕机了很久,导致博客打不开,之后push上去的新内容不能及时更新.不知道是不是我昨天运气不好,等稳定了再说.</li>
-<li>coding: 速度快,而且界面友好,但是不支持免费自定义域名,需要花钱办会员,对于没有绑定域名需求的朋友还是很推荐的.</li>
-</ul>
-</li>
-<li><p>最后: 我还是推荐把github作为主站,然后把gitcafe作为镜像用于国内的搜索引擎去收入(使用dnspods把gitcafe.io解析为搜索引擎线路).coding作为备份网站,当前面两个网站打不开的时候救急.</p>
-<blockquote>
-<p>最后的最后, 生命止于折腾.</p>
-</blockquote>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -974,7 +966,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

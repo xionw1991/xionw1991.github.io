@@ -53,29 +53,29 @@
 
 
 
-<meta name="description" content="NSURLConnectionNSURLConnection基本使用
+<meta name="description" content="NSURLConnection基本使用
 有两种请求方式:
 
 使用block回调:
-// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLRespon">
+// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSURLConnection和NSURLSession">
 <meta property="og:url" content="http://xionv.com/2016/01/19/demonayu/blog/45.NSURLConnection和NSURLSession思考/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="NSURLConnectionNSURLConnection基本使用
+<meta property="og:description" content="NSURLConnection基本使用
 有两种请求方式:
 
 使用block回调:
-// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLRespon">
+// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable">
 <meta property="og:image" content="http://techdoc.fd.zol-img.com.cn/g4/M01/02/07/Cg-4WlKjd1eIB4piAAF0o6rDWYsAAOIzwON0NgAAXS7235.png">
-<meta property="og:updated_time" content="2016-01-24T09:58:01.000Z">
+<meta property="og:updated_time" content="2016-01-27T01:01:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSURLConnection和NSURLSession">
-<meta name="twitter:description" content="NSURLConnectionNSURLConnection基本使用
+<meta name="twitter:description" content="NSURLConnection基本使用
 有两种请求方式:
 
 使用block回调:
-// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLRespon">
+// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable">
 
 
 
@@ -268,7 +268,7 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="NSURLConnection">NSURLConnection</h2><h3 id="NSURLConnection基本使用">NSURLConnection基本使用</h3><ul>
+        <span itemprop="articleBody"><h2 id="NSURLConnection">NSURLConnection</h2><h3 id="基本使用">基本使用</h3><ul>
 <li><p>有两种请求方式:</p>
 <ul>
 <li><p>使用block回调:</p>
@@ -339,7 +339,7 @@
 </ol>
 </li>
 </ul>
-<h2 id="NSURLSession">NSURLSession</h2><h3 id="NSURLSession基本使用">NSURLSession基本使用</h3><ul>
+<h2 id="NSURLSession">NSURLSession</h2><h3 id="基本使用-1">基本使用</h3><ul>
 <li><p>NSURLSession的几种任务模式<br><img src="http://techdoc.fd.zol-img.com.cn/g4/M01/02/07/Cg-4WlKjd1eIB4piAAF0o6rDWYsAAOIzwON0NgAAXS7235.png" alt=""></p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象类-不具备执行任务功能</span></span><br><span class="line"><span class="built_in">NSURLSessionTask</span></span><br><span class="line"><span class="comment">// 执行普通的GET/POST请求任务</span></span><br><span class="line"><span class="built_in">NSURLSessionDataTask</span></span><br><span class="line"><span class="comment">// 执行下载请求任务</span></span><br><span class="line"><span class="built_in">NSURLSessionDownloadTask</span></span><br><span class="line"><span class="comment">// 执行上传请求任务</span></span><br><span class="line"><span class="built_in">NSURLSessionUploadTask</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -430,6 +430,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/01/29/demonayu/blog/46.Runtime黑魔法/" rel="prev" title="Runtime黑魔法">
+                Runtime黑魔法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -500,7 +504,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -585,7 +589,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLConnection"><span class="nav-number">1.</span> <span class="nav-text">NSURLConnection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSURLConnection基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">NSURLConnection基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap1"><span class="nav-number">1.2.</span> <span class="nav-text">trap1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap2"><span class="nav-number">1.3.</span> <span class="nav-text">trap2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件下载_+_断点续传"><span class="nav-number">1.4.</span> <span class="nav-text">大文件下载 + 断点续传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLSession"><span class="nav-number">2.</span> <span class="nav-text">NSURLSession</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSURLSession基本使用"><span class="nav-number">2.1.</span> <span class="nav-text">NSURLSession基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件下载_+_断点续传-1"><span class="nav-number">2.2.</span> <span class="nav-text">大文件下载 + 断点续传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节"><span class="nav-number">2.3.</span> <span class="nav-text">细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLConnection"><span class="nav-number">1.</span> <span class="nav-text">NSURLConnection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap1"><span class="nav-number">1.2.</span> <span class="nav-text">trap1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap2"><span class="nav-number">1.3.</span> <span class="nav-text">trap2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件下载_+_断点续传"><span class="nav-number">1.4.</span> <span class="nav-text">大文件下载 + 断点续传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLSession"><span class="nav-number">2.</span> <span class="nav-text">NSURLSession</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用-1"><span class="nav-number">2.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件下载_+_断点续传-1"><span class="nav-number">2.2.</span> <span class="nav-text">大文件下载 + 断点续传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节"><span class="nav-number">2.3.</span> <span class="nav-text">细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
