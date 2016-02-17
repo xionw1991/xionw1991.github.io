@@ -1190,7 +1190,7 @@
     <link href="http://xionv.com/2015/12/24/demonayu/blog/29.%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
     <id>http://xionv.com/2015/12/24/demonayu/blog/29.事件处理/</id>
     <published>2015-12-24T14:12:57.000Z</published>
-    <updated>2016-02-17T03:04:22.000Z</updated>
+    <updated>2016-02-17T05:07:14.000Z</updated>
     <content type="html"><![CDATA[<h2 id="事件的产生和传递">事件的产生和传递</h2><ul>
 <li>iOS当中常用的事件:<ul>
 <li>触摸事件</li>
@@ -1198,19 +1198,21 @@
 <li>远程控制事件</li>
 </ul>
 </li>
-<li>处理事件的常用方法:<ul>
-<li>触摸事件:  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+<li><p>处理事件的常用方法:</p>
+<ul>
+<li><p>触摸事件:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加速计事件:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)motionBegan:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionEnded:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionCancelled:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>远程控制事件:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)remoteControlReceivedWithEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-</ul>
-<pre><code>- 加速计事件:
-    <span class="comment"><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)motionBegan:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionEnded:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionCancelled:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure></span>
-
-- 远程控制事件:
-    <span class="comment"><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)remoteControlReceivedWithEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure></span>
-</code></pre><ul>
-<li>事件是怎么传递的?<ul>
+<li><p>事件是怎么传递的?</p>
+<ul>
 <li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
 <li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
 <li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
@@ -1262,7 +1264,7 @@
 <h3 id="hitTest方法与pointInside方法">hitTest方法与pointInside方法</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:寻找最适合的View.</span></span><br><span class="line"><span class="comment">// 参数:当前手指所在的点;产生的事件</span></span><br><span class="line"><span class="comment">// 返回值:返回谁, 谁就是最适合的View.</span></span><br><span class="line"><span class="comment">// 什么时候用调用:只要一个事件,传递给一个控件时,就会调用这个控件的hitTest方法</span></span><br><span class="line">- (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:判断point在不在方法调用者上</span></span><br><span class="line"><span class="comment">// point:必须是方法调用者的坐标系</span></span><br><span class="line"><span class="comment">// 什么时候调用:hitTest方法底层会调用这个方法,判断点在不在控件上.</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)pointInside:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>模拟<code>hitTest:withEvent:</code>方法的底层实现(寻找最合适view)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>模拟<code>hitTest:withEvent:</code>方法的底层实现(寻找最合适view)  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="监听UIView的触摸事件来实现拖拽:">监听UIView的触摸事件来实现拖拽:</h3><ul>
@@ -1290,8 +1292,9 @@
 <li>远程控制事件</li>
 </ul>
 </li>
-<li>处理事件的常用方法:<ul>
-<li>触摸事件]]>
+<li><p>处理事件的常用方法:</p>
+<ul>
+]]>
     </summary>
     
       <category term="iOS初步" scheme="http://xionv.com/tags/iOS%E5%88%9D%E6%AD%A5/"/>
