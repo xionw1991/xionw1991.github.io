@@ -68,7 +68,7 @@ UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] in">
 <meta property="og:image" content="http://cn.cocos2d-x.org/uploads/20141018/1413628797629491.png">
 <meta property="og:image" content="http://r5.loli.io/EVBVVn.png">
 <meta property="og:image" content="http://images.cnitblog.com/i/31852/201404/231837047638961.png">
-<meta property="og:updated_time" content="2016-01-30T14:34:51.000Z">
+<meta property="og:updated_time" content="2016-03-04T04:38:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime黑魔法">
 <meta name="twitter:description" content="Runtime消息机制之前写过一篇短文: 利用运行时特性获取系统类的私有成员属性.通过运行时特性获得私有的成员变量target, 然后为target重新指定手势方法来达到全屏都能接收到滑动返回的事件.
@@ -285,7 +285,7 @@ UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] in">
 <li><p>上面的代码可以使用runtime函数改写:</p>
 <ul>
 <li><p>导入头文件,在项目设置中将<code>enable strict checking of objcmsgsend calls</code>改成<code>NO</code></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import<span class="title">&lt;objc/message&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;objc/message.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>改写方法为消息函数</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = objc_msgSend(objc_msgSend (objc_getClass(<span class="string">"UIPanGestureRecognizer"</span>), sel_registerName(<span class="string">"alloc"</span>)), sel_registerName(<span class="string">"initWithTarget:action:"</span>), <span class="keyword">self</span>, sel_registerName(<span class="string">"pan:"</span>));</span><br></pre></td></tr></table></figure>
@@ -351,6 +351,7 @@ UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] in">
 <h4 id="三种方式调用私有方法">三种方式调用私有方法</h4><ol>
 <li><p>performSelector: – 优点:方便; 缺点:最多只能传2个参数</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[[XVPerson new] performSelector:<span class="keyword">@selector</span>(eat:drink:play:) withObject:<span class="string">@"hamburger"</span> withObject:<span class="string">@"coke"</span>];</span><br></pre></td></tr></table></figure>
+<p>ps: 让selector调用的方法接受的参数类型为Dictionary类型可以间接实现多参数传递.</p>
 </li>
 <li><p>NSInvocation – 优点:可以传多个参数; 缺点:调用麻烦,代码较多</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化一个方法签名</span></span><br><span class="line">SEL myMethod = <span class="keyword">@selector</span>(eat:drink:play:);</span><br><span class="line"><span class="built_in">NSMethodSignature</span> *signature = [[XVPerson class] instanceMethodSignatureForSelector:myMethod];</span><br><span class="line"><span class="comment">// 初始化一个NSInvocation对象</span></span><br><span class="line"><span class="built_in">NSInvocation</span> *invocation = [<span class="built_in">NSInvocation</span> invocationWithMethodSignature:signature];</span><br><span class="line"><span class="comment">// 要执行的方法</span></span><br><span class="line">[invocation setSelector:myMethod];</span><br><span class="line"><span class="comment">// 注: 这里的index为什么要从2开始? 因为每一个OC方法的本质就是一个至少带有两个参数(self,_cmd)的普通C函数</span></span><br><span class="line"><span class="comment">// 这两个参数在这里所对应的就是Target和Selector, 这两个参数已经将0 和 1 的位置给占了.所以其他参数要从 2 开始.</span></span><br><span class="line"><span class="built_in">NSString</span> *param1 = <span class="string">@"hamburger"</span>;</span><br><span class="line"><span class="built_in">NSString</span> *param2 = <span class="string">@"coke"</span>;</span><br><span class="line"><span class="built_in">NSString</span> *param3 = <span class="string">@"hockey"</span>;</span><br><span class="line">[invocation setArgument:&amp;param1 atIndex:<span class="number">2</span>];</span><br><span class="line">[invocation setArgument:&amp;param2 atIndex:<span class="number">3</span>];</span><br><span class="line">[invocation setArgument:&amp;param3 atIndex:<span class="number">4</span>];</span><br><span class="line"><span class="comment">// 调用方法 并指定调用谁的方法</span></span><br><span class="line">[invocation invokeWithTarget:[XVPerson new]];</span><br></pre></td></tr></table></figure>
@@ -546,7 +547,7 @@ UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] in">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

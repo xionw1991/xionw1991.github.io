@@ -67,7 +67,7 @@ int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;     
 int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate">
 <meta property="og:image" content="http://r.loli.io/fuUbqq.png">
 <meta property="og:image" content="http://r.loli.io/AzaUje.png">
-<meta property="og:updated_time" content="2016-02-17T01:40:48.000Z">
+<meta property="og:updated_time" content="2016-02-18T07:10:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个应用程序的启动流程">
 <meta name="twitter:description" content="应用程序完整启动流程
@@ -359,6 +359,7 @@ int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;     
 <p>附:在Xcode6以后配置pch文件<br><img src="http://r.loli.io/AzaUje.png" alt=""></p>
 <p> 在pch文件中配置调试模式时运行XWLog(…)代码:<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#ifdef DEBUG</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...) NSLog(__VA_ARGS__)</span></span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...)</span></span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure></p>
 <p> ps: 在宏当中<code>...</code>表示可变参数.在函数中表示可变参数用:<code>__VA_ARGS__</code>.</p>
+<p> 拓展阅读: <a href="http://www.jianshu.com/p/aa50e5350852?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=writer_share&amp;utm_source=weibo" target="_blank" rel="external">iOS应用程序的生命周期</a>.</p>
 </span>
       
     </div>
@@ -458,7 +459,7 @@ int main(int argc, char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;     
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
