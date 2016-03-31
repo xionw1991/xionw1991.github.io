@@ -1,0 +1,867 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS中级," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XionVV Coding" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="NSURLConnection基本使用
+有两种请求方式:
+
+使用block回调:
+// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSURLConnection和NSURLSession">
+<meta property="og:url" content="http://xionv.com/2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/index.html">
+<meta property="og:site_name" content="XionVV Coding">
+<meta property="og:description" content="NSURLConnection基本使用
+有两种请求方式:
+
+使用block回调:
+// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable">
+<meta property="og:image" content="http://techdoc.fd.zol-img.com.cn/g4/M01/02/07/Cg-4WlKjd1eIB4piAAF0o6rDWYsAAOIzwON0NgAAXS7235.png">
+<meta property="og:updated_time" content="2016-03-31T10:05:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSURLConnection和NSURLSession">
+<meta name="twitter:description" content="NSURLConnection基本使用
+有两种请求方式:
+
+使用block回调:
+// 直接使用类方法发送一个异步请求,然后用block回调[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> NSURLConnection和NSURLSession | XionVV Coding </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XionVV Coding</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">It`s Breeze, It`s Sunshine.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'b6LmcvqYVXPpognWevjG','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NSURLConnection和NSURLSession
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-07-19T22:09:57+08:00" content="2015-07-19">
+              2015-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="NSURLConnection">NSURLConnection</h2><h3 id="基本使用">基本使用</h3><ul>
+<li><p>有两种请求方式:</p>
+<ul>
+<li><p>使用block回调:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 直接使用类方法发送一个异步请求,然后用block回调</span></span><br><span class="line">[<span class="built_in">NSURLConnection</span> sendAsynchronousRequest:request queue:[<span class="built_in">NSOperationQueue</span> mainQueue] completionHandler:^(<span class="built_in">NSURLResponse</span> * _Nullable response, <span class="built_in">NSData</span> * _Nullable data, <span class="built_in">NSError</span> * _Nullable connectionError) &#123;</span><br><span class="line">    <span class="comment">//... 处理返回结果</span></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用代理方法监听:</p>
+<ol>
+<li><p>发送一个请求并指定代理</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 使用代理监听有两种发送请求的方式 */</span></span><br><span class="line"><span class="comment">// 1. 发送请求指定代理,并且立即发送请求</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.connection</span> = [<span class="built_in">NSURLConnection</span> connectionWithRequest:request delegate:<span class="keyword">self</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 当startImmediately为NO时,请求不会立即执行,而是要等待start方法</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.connection</span> = [[<span class="built_in">NSURLConnection</span> alloc] initWithRequest:request delegate:<span class="keyword">self</span> startImmediately:<span class="literal">NO</span>];</span><br><span class="line"><span class="comment">// 开始发送请求</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.connection</span> start];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用代理方法来监听请求返回的结果</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"收到响应"</span>);</span><br><span class="line">&#125;</span><br><span class="line"> - (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"收到数据"</span>);</span><br><span class="line">&#125;</span><br><span class="line"> - (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection &#123;</span><br><span class="line"> <span class="built_in">NSLog</span>(<span class="string">@"下载完成"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="trap1">trap1</h3><ul>
+<li><p>在主队列中执行请求</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">NSURLConnection</span> connectionWithRequest:request delegate:<span class="keyword">self</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>分析: 上面这段代码分别执行了几个步骤:<ol>
+<li>在当前队列(主队列)建立一个请求任务;</li>
+<li>将请求任务放入当前队列线程的runloop,并且指定运行模式为默认模式;</li>
+<li>开始发送一个异步下载请求.</li>
+</ol>
+</li>
+<li><p>测试: 在主队列中发送请求,如果此时拖拽界面的控件,下载任务会暂停,停止拖拽后下载任务会自动恢复. 如果<code>指定代理方法在主队列调用</code>或者<code>设定任务在runloop中的调度方式</code>那么会产生不一样的结果.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 指定代理方法在主队列</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.connection</span> setDelegateQueue:[<span class="built_in">NSOperationQueue</span> mainQueue]];</span><br><span class="line"><span class="comment">// 或者: 指定调度模式为 forMode:NSRunLoopCommonModes</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.connection</span> scheduleInRunLoop:[<span class="built_in">NSRunLoop</span> currentRunLoop] forMode:<span class="built_in">NSRunLoopCommonModes</span>];</span><br></pre></td></tr></table></figure>
+<p>此时如果拖拽界面并不会阻塞下载任务的执行.</p>
+</li>
+<li>猜测: 在主队列中发送connection请求是异步的,而且始终只有一条线程就是主线程在执行这个任务.</li>
+<li>最后: 在本地使用NSURLConnection下载一个288M的视频文件大概耗时3s左右.如果在子线程进行下载大概耗时1s左右.</li>
+</ul>
+</li>
+</ul>
+<h3 id="trap2">trap2</h3><ul>
+<li><p>在非主队列中执行发送请求和下载操作</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在全局队列中发送一个异步请求</span></span><br><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">    <span class="comment">// 直接开始发送请求</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.connection</span> = [[<span class="built_in">NSURLConnection</span> alloc] initWithRequest:request delegate:<span class="keyword">self</span>];</span><br><span class="line">    <span class="comment">// 在子线程中调用代理方法</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.connection</span> setDelegateQueue:[[<span class="built_in">NSOperationQueue</span> alloc] init]];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 分析: 在上面的代码中, connection的代理方法不会被调用, 因为下载操作是一个持续性的操作, 需要保证执行任务的线程不会被释放,如果指定代理方法在子线程中调用,那么需要在该线程中开启一个runloop才能保证持续接收到返回的数据(原理与在主队列发送请求一样).</p>
+</li>
+<li><p>改进</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在全局队列中发送一个异步请求</span></span><br><span class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">    <span class="comment">// 发送一个请求并不马上执行</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.connection</span> = [[<span class="built_in">NSURLConnection</span> alloc] initWithRequest:request delegate:<span class="keyword">self</span> startImmediately:<span class="literal">NO</span>];</span><br><span class="line">    <span class="comment">// 在子线程中调用代理方法</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.connection</span> setDelegateQueue:[[<span class="built_in">NSOperationQueue</span> alloc] init]];</span><br><span class="line">    <span class="comment">// 开始发送请求 - 注:如果是在子线程发送一个请求那么这个方法会默认在子线程开启一个runloop.</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.connection</span> start];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 分析: <code>start</code>方法会在子线程中开启一个runloop来持续接收事件源的输入.调用<code>start</code>方法时要保证至少有一个事件源来驱动runloop的运行.</p>
+</li>
+</ul>
+<h3 id="大文件下载_+_断点续传">大文件下载 + 断点续传</h3><ul>
+<li>在使用NSURLConnection进行大文件下载时,如果不进行手动处理的话会消耗大量内存直至程序崩溃.</li>
+<li>要进行内存优化必须要使用代理方法来监听下载进度.</li>
+<li>核心思想:边下载边存沙盒,拿到当前文件的信息然后拼接.</li>
+<li><p>核心步骤:</p>
+<ol>
+<li><p>初始化一个可变的请求对象并设置请求头信息</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://abc.com/videos/video_01"</span>];</span><br><span class="line"><span class="built_in">NSMutableURLRequest</span> *request = [<span class="built_in">NSMutableURLRequest</span> requestWithURL:url];</span><br><span class="line"><span class="comment">// 使用一个全局变量 currentLength 来记录已经下载的字节数</span></span><br><span class="line"><span class="comment">// 设置请求头, 根据数据进度拼接请求, 来判断断点下载的开始范围 ** 断点续传核心代码</span></span><br><span class="line"><span class="built_in">NSString</span> *range = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"bytes=%lld-"</span>, <span class="keyword">self</span><span class="variable">.currentLength</span>];</span><br><span class="line">[request setValue:range forHTTPHeaderField:<span class="string">@"Range"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在代理方法<code>didReceiveResponse:</code>新建沙盒文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 防止文件重复写入, 当已经有数据就不再创建新文件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.currentLength</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 新建一个空的缓存文件</span></span><br><span class="line">    <span class="built_in">NSString</span> *cache = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>) lastObject];</span><br><span class="line">    <span class="built_in">NSString</span> *filePath = [cache stringByAppendingPathComponent:response<span class="variable">.suggestedFilename</span>];</span><br><span class="line">    [[<span class="built_in">NSFileManager</span> defaultManager] createFileAtPath:filePath contents:<span class="literal">nil</span> attributes:<span class="literal">nil</span>];</span><br><span class="line">    <span class="comment">// 定义一个句柄成员变量来记录已经下载文件的信息</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.handle</span> = [<span class="built_in">NSFileHandle</span> fileHandleForWritingAtPath:filePath];</span><br><span class="line">    <span class="comment">// 根据响应头获得文件总大小</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.totalLength</span> = response<span class="variable">.expectedContentLength</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在代理方法<code>didReceiveData:</code>拼接文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(<span class="built_in">NSData</span> *)data</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 将写入位置移到文件末尾</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.handle</span> seekToEndOfFile];</span><br><span class="line">    <span class="comment">// 写入数据</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.handle</span> writeData:data];</span><br><span class="line">    <span class="comment">// 记录已经下载文件大小</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.currentLength</span> += data<span class="variable">.length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载完成后需要处理的事情</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.currentLength</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.totalLength</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 文件下载完毕后释放文件句柄</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.handle</span> closeFile];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.handle</span> = <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意: 断点续传暂停时要清空当前的下载操作</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)suspend &#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.connection</span> cancel];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.connection</span> = <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="NSURLSession">NSURLSession</h2><h3 id="基本使用-1">基本使用</h3><ul>
+<li><p>NSURLSession的几种任务模式<br><img src="http://techdoc.fd.zol-img.com.cn/g4/M01/02/07/Cg-4WlKjd1eIB4piAAF0o6rDWYsAAOIzwON0NgAAXS7235.png" alt=""></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象类-不具备执行任务功能</span></span><br><span class="line"><span class="built_in">NSURLSessionTask</span></span><br><span class="line"><span class="comment">// 执行普通的GET/POST请求任务</span></span><br><span class="line"><span class="built_in">NSURLSessionDataTask</span></span><br><span class="line"><span class="comment">// 执行下载请求任务</span></span><br><span class="line"><span class="built_in">NSURLSessionDownloadTask</span></span><br><span class="line"><span class="comment">// 执行上传请求任务</span></span><br><span class="line"><span class="built_in">NSURLSessionUploadTask</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>NSURLSession工作模式</p>
+<ul>
+<li>一般模式(default): 工作模式类似于原来的NSURLConnection,可以使用缓存的Cache,Cookie,鉴权.</li>
+<li>及时模式(ephemeral): 不使用缓存的Cache,Cookie,鉴权.</li>
+<li>后台模式(background): 在后台完成上传下载,创建Configuration对象的时候需要给一个NSString的ID用于追踪完成工作的Session是哪一个.</li>
+</ul>
+</li>
+<li><p>两种请求方式</p>
+<ul>
+<li><p>使用block回调:</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 初始一个会话对象(session)</span></span><br><span class="line"><span class="built_in">NSURLSession</span> *session = [<span class="built_in">NSURLSession</span> sharedSession];</span><br><span class="line"><span class="comment">// 2. 初始化一个data任务</span></span><br><span class="line"><span class="built_in">NSURLSessionDataTask</span> *dataTask = [session dataTaskWithURL:url completionHandler:^(<span class="built_in">NSData</span> * _Nullable data, <span class="built_in">NSURLResponse</span> * _Nullable response, <span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">    <span class="comment">//... 处理返回结果</span></span><br><span class="line">&#125;];</span><br><span class="line"><span class="comment">// 3. 开始任务</span></span><br><span class="line">[dataTask resume];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用代理方法监听: </p>
+<ol>
+<li><p>发送一个请求并指定代理</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 初始化session的工作模式</span></span><br><span class="line"><span class="built_in">NSURLSessionConfiguration</span> *cgr = [<span class="built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration];</span><br><span class="line"><span class="comment">// 2. 初始化session并指定代理, 指定调用代理方法的线程</span></span><br><span class="line"><span class="built_in">NSURLSession</span> *session = [<span class="built_in">NSURLSession</span> sessionWithConfiguration:cgr delegate:<span class="keyword">self</span> delegateQueue:[<span class="built_in">NSOperationQueue</span> mainQueue]];</span><br><span class="line"><span class="comment">// 3. 初始化一个data任务</span></span><br><span class="line"><span class="built_in">NSURLSessionDataTask</span> *datatask = [session dataTaskWithURL:url];</span><br><span class="line"><span class="comment">// 4. 开始任务</span></span><br><span class="line">[dataTask resume];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用代理方法来监听请求返回的结果</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask</span><br><span class="line">didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response</span><br><span class="line">completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLSessionResponseDisposition</span> disposition))completionHandler &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"收到响应"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> - (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask</span><br><span class="line">didReceiveData:(<span class="built_in">NSData</span> *)data &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"收到数据"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="大文件下载_+_断点续传-1">大文件下载 + 断点续传</h3><ul>
+<li>NSURLSession已经默认实现大文件下载和断点续传.其原理也是沙盒缓存原理.</li>
+<li><p>也就是说执行下面的操作并不会暴涨内存,系统已经在内部优化好了.</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.session</span> downloadTaskWithURL:url];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在执行下载操作时系统默认会把下载的文件存放到沙盒的temp文件夹,如果不进行处理会马上将文件删掉.</p>
+</li>
+<li><p>核心步骤:</p>
+<ol>
+<li><p>暂停任务</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)suspend</span><br><span class="line">&#123;</span><br><span class="line">    __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakself = <span class="keyword">self</span>;</span><br><span class="line">    <span class="comment">// resumeData包含了继续下载的开始位置和下载的url等信息</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.task</span> cancelByProducingResumeData:^(<span class="built_in">NSData</span> *resumeData) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%zd"</span>, resumeData<span class="variable">.length</span>);</span><br><span class="line">        weakself<span class="variable">.resumeData</span> = resumeData;</span><br><span class="line">        <span class="comment">// 将task清空释放内存</span></span><br><span class="line">        weakself<span class="variable">.task</span> = <span class="literal">nil</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>恢复任务</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)resume</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 传入上次暂停下载返回的数据，恢复下载 从resumeData接着下载</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.task</span> = [<span class="keyword">self</span><span class="variable">.session</span> downloadTaskWithResumeData:<span class="keyword">self</span><span class="variable">.resumeData</span>];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.task</span> resume];</span><br><span class="line">    <span class="comment">// 将恢复信息释放</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.resumeData</span> = <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在代理方法<code>didFinishDownloadingToURL:</code>转移文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 目标文件储存路径</span></span><br><span class="line"><span class="built_in">NSString</span> *caches = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>) lastObject];</span><br><span class="line"><span class="built_in">NSString</span> *filePath = [caches stringByAppendingPathComponent:downloadTask<span class="variable">.response</span><span class="variable">.suggestedFilename</span>];</span><br><span class="line"><span class="comment">// 将下载好的文件移到目标路径 - 下载完成后的文件默认在tmp文件夹（location.path），需要转移到其他位置才能查看</span></span><br><span class="line"><span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">[mgr moveItemAtPath:location<span class="variable">.path</span> toPath:filePath error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="细节">细节</h3><ul>
+<li><p>配置代理方法的执行队列</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化session并指定代理, 指定调用代理方法的队列为主队列</span></span><br><span class="line"><span class="built_in">NSURLSession</span> *session = [<span class="built_in">NSURLSession</span> sessionWithConfiguration:cgr delegate:<span class="keyword">self</span> delegateQueue:[<span class="built_in">NSOperationQueue</span> mainQueue]];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果 delegateQueue 为 <code>nil</code> 则等同于 <code>[[NSOperationQueue alloc] init]</code> 则不会把获得的数据返回给主线程 (无线程通信)</li>
+<li>如果 delegateQueue 为 <code>[NSOperationQueue mainQueue]</code> 则会把获得的数据传给主线程 (有线程通信)</li>
+</ul>
+</li>
+<li><p>在代理方法<code>totalBytesExpectedToWrite:</code>监听下载进度,打印当前的线程为主线程,与NSURLConnection一致.<strong>如果此时拖拽屏幕上的控件却并不会阻塞下载操作</strong>.为什么打印都在主线程,但是一个下载受影响一个不受影响? </p>
+<ul>
+<li>猜测: <strong>session的下载任务是开辟子线程异步执行的, 然后再将结果返回给主线程.</strong>并不是只有一条线程在处理这个操作,这里与connection有很大不同.并且测试出默认情况下用session下载同一个文件要比connection快,同时下载的时间却与connection开子线程异步下载的时间差不多.故有此猜测(仅仅是猜测).</li>
+</ul>
+</li>
+</ul>
+<h2 id="补充">补充</h2><p>还有很多不完善的地方以后慢慢添砖.<br><br>以上的结论有很多仅仅只是猜测,欢迎来打脸.</p>
+<p>参考: <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html#//apple_ref/doc/uid/TP40013509-SW1" target="_blank" rel="external">苹果官方文档</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS中级/" rel="tag">#iOS中级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/14/demonayu/blog/31.NSCache的介绍/" rel="next" title="NSCache的介绍">
+                <i class="fa fa-chevron-left"></i> NSCache的介绍
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/21/demonayu/blog/33.GCD的一些总结/" rel="prev" title="GCD的一些总结">
+                GCD的一些总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/"
+           data-title="NSURLConnection和NSURLSession" data-url="http://xionv.com/2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="http://r.loli.io/bA3a2e.jpg" alt="XionVV" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">XionVV</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xionw1991" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/demonayu" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLConnection"><span class="nav-number">1.</span> <span class="nav-text">NSURLConnection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap1"><span class="nav-number">1.2.</span> <span class="nav-text">trap1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trap2"><span class="nav-number">1.3.</span> <span class="nav-text">trap2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件下载_+_断点续传"><span class="nav-number">1.4.</span> <span class="nav-text">大文件下载 + 断点续传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLSession"><span class="nav-number">2.</span> <span class="nav-text">NSURLSession</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用-1"><span class="nav-number">2.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件下载_+_断点续传-1"><span class="nav-number">2.2.</span> <span class="nav-text">大文件下载 + 断点续传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节"><span class="nav-number">2.3.</span> <span class="nav-text">细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XionVV</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xionv"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

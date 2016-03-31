@@ -210,11 +210,6 @@
 
     
     
-      
-      
-
-      
-    
 
     
       
@@ -238,8 +233,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="url">
-                  NSArray和NSDictionary控制台中文打印
+                <a class="post-title-link" href="/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/" itemprop="url">
+                  NSFileManager和NSFileHandle的常用方法
                 </a>
               
             
@@ -249,8 +244,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T12:36:57+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2015-04-30T19:52:57+08:00" content="2015-04-30">
+              2015-04-30
             </time>
           </span>
 
@@ -260,8 +255,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/27.NSArray和NSDictionary控制台中文打印/" itemprop="commentsCount"></span>
+                <a href="/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -283,10 +278,31 @@
         
           <span itemprop="articleBody">
             
-              <blockquote>
-<p>使用方法: 在项目中新建一个.m文件将代码拷贝到文件中即可.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSDictionary</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"&#123;\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历字典的所有键值对</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span> key, <span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"\t%@ = %@,\n"</span>, key, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"&#125;"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSArray</span> (<span class="title">Log</span>)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)descriptionWithLocale:(<span class="keyword">id</span>)locale</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSMutableString</span> *str = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line">    [str appendString:<span class="string">@"[\n"</span>];</span><br><span class="line">    <span class="comment">// 遍历数组的所有元素</span></span><br><span class="line">    [<span class="keyword">self</span> enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">        [str appendFormat:<span class="string">@"%@,\n"</span>, obj];</span><br><span class="line">    &#125;];</span><br><span class="line">    [str appendString:<span class="string">@"]"</span>];</span><br><span class="line">    <span class="comment">// 查出最后一个,的范围</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [str rangeOfString:<span class="string">@","</span> options:<span class="built_in">NSBackwardsSearch</span>];</span><br><span class="line">    <span class="comment">// 删掉最后一个,</span></span><br><span class="line">    [str deleteCharactersInRange:range];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+              <h2 id="NSFileManager">NSFileManager</h2><ul>
+<li><p>创建一个文件管理者对象</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件与目录的操作</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">createFileAtPath:    <span class="comment">// 创建文件</span></span><br><span class="line">copyItemAtPath:    <span class="comment">// 复制文件</span></span><br><span class="line">moveItemAtPath:    <span class="comment">// 移动文件</span></span><br><span class="line">removeItemFileAtPath:    <span class="comment">// 删除文件</span></span><br><span class="line">attributesOfItemAtPath:    <span class="comment">// 获取文件的属性</span></span><br><span class="line">setAttributes:    <span class="comment">// 更改属性</span></span><br><span class="line">currentDirectoryPath:    <span class="comment">// 获取当前的目录</span></span><br><span class="line">changeCurrentDirectoryPath:    <span class="comment">// 更改目录</span></span><br><span class="line">createDirectoryAtPath:    <span class="comment">//  创建目录</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取文件和目录信息</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">contentsAtPath:    <span class="comment">// 获取文件中的信息</span></span><br><span class="line">enumeratorAtPath:    <span class="comment">// 枚举目录</span></span><br><span class="line">contentsOfDirectoryAtPath:    <span class="comment">// 列举目录</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断文件</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">fileExistsAtPath:    <span class="comment">// 判断文件是否存在</span></span><br><span class="line">isReadableFile:    <span class="comment">// 判断是否能进行读取操作</span></span><br><span class="line">isWritableFileAtPath:    <span class="comment">// 判断是否能进行写入操作</span></span><br><span class="line">isDeletableFileAtPath:    <span class="comment">// 判断是否可删除</span></span><br><span class="line">isExecutableFileAtPath:    <span class="comment">// 判断是否可以执行</span></span><br><span class="line">contentsEqualAtPath:    <span class="comment">// 判断是否相等</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目录工具函数</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSUserName</span>()    <span class="comment">// 函数:返回登录名</span></span><br><span class="line"><span class="built_in">NSFullUserName</span>()    <span class="comment">// 函数:返回完整用户名</span></span><br><span class="line"><span class="built_in">NSHomeDirectory</span>()   <span class="comment">// 函数:返回路径</span></span><br><span class="line"><span class="built_in">NSHomeDirectoryForUser</span>()    <span class="comment">// 函数:返回用户的主目录</span></span><br><span class="line"><span class="built_in">NSTemporaryDirectory</span>()  <span class="comment">// 函数:返回临时文件的路径目录</span></span><br><span class="line">[fileList pathsMatchingExtensions:[<span class="built_in">NSArrayarrayWithObject</span>:<span class="string">@"jpg"</span>]];   <span class="comment">// 过滤数组中的文件类型</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用路径工具方法</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span> *)pathWithComponents:components        <span class="comment">// 根据components中元素构造有效路径</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)pathComponents        <span class="comment">// 析构路径,获取路径的各个部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)lastPathComponent        <span class="comment">// 提取路径的最后一个组成部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)pathExtension        <span class="comment">// 路径扩展名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByAppendingPathComponent:path        <span class="comment">// 将path添加到现有路径末尾</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByAppendingPathExtension:ext        <span class="comment">// 将拓展名添加的路径最后一个组成部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByDeletingPathComponent        <span class="comment">// 删除路径的最后一个部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByDeletingPathExtension        <span class="comment">// 删除路径的最后一个部分 的扩展名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByExpandingTildeInPath        <span class="comment">// 将路径中的代字符扩展成用户主目录(~)或指定用户主目录(~user)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByResolvingSymlinksInPath        <span class="comment">// 尝试解析路径中的符号链接</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByStandardizingPath        <span class="comment">// 通过尝试解析~、..、.、和符号链接来标准化路径</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="NSFileHandle">NSFileHandle</h2><ul>
+<li>文件读取 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">init:    <span class="comment">// 初始化文件读写对象</span></span><br><span class="line">fileHandleForReadingAtPath:    <span class="comment">// 读取时打开文件</span></span><br><span class="line">fileHandleForWritingAtPath:    <span class="comment">// 写入时打开文件</span></span><br><span class="line">fileHandleForUpdatingAtPath:    <span class="comment">// 更新时打开文件</span></span><br><span class="line">writeData:    <span class="comment">// 数据写入文件</span></span><br><span class="line">readDataToEndOfFile:    <span class="comment">// 读取数据</span></span><br><span class="line">readDataOfLength:    <span class="comment">// 读取固定大小的内容</span></span><br><span class="line">offsetInFile:    <span class="comment">// 获取当前偏移量</span></span><br><span class="line">seekToFileOffset:    <span class="comment">// 设置当前的偏移量</span></span><br><span class="line">seekToEndOfFile:    <span class="comment">// 将偏移量定位到文件尾</span></span><br><span class="line">truncateFileAtOffset:    <span class="comment">// 设置字节</span></span><br><span class="line">availableData:    <span class="comment">// 返回可用数据</span></span><br><span class="line">closeFile:    <span class="comment">// 关闭文件</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息">NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSProcessInfo</span> *)processInfo        <span class="comment">// 返回当前进程的信息</span></span><br><span class="line">- (<span class="built_in">NSArray</span>*)arguments        <span class="comment">// 以NSString对象数字的形式返回当前进程的参数</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)environment        <span class="comment">//  返回变量/值对词典。描述当前的环境变量</span></span><br><span class="line">- (<span class="keyword">int</span>)processIdentity        <span class="comment">// 返回进程标识</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)processName        <span class="comment">// 返回进程名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)globallyUniqueString        <span class="comment">// 每次调用该方法都会返回不同的单值字符串，可以用这个字符串生成单值临时文件名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)hostname        <span class="comment">// 返回主机系统的名称</span></span><br><span class="line">- (<span class="keyword">unsigned</span> <span class="keyword">int</span>)operatingSystem        <span class="comment">// 返回表示操作系统的数字</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemName        <span class="comment">// 返回操作系统名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemVersionString        <span class="comment">// 返回操作系统当前版本</span></span><br><span class="line">- (<span class="keyword">void</span>)setProcessName:(<span class="built_in">NSString</span> *)name        <span class="comment">// 将当前进程名称设置为name</span></span><br></pre></td></tr></table></figure>
             
           </span>
         
@@ -328,8 +344,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/demonayu/blog/28.直接修改对象frame结构体的成员属性/" itemprop="url">
-                  直接修改对象frame结构体中的成员属性
+                <a class="post-title-link" href="/2015/04/02/demonayu/blog/27.TableVIew单元格多图下载/" itemprop="url">
+                  TableVIew单元格多图下载
                 </a>
               
             
@@ -339,8 +355,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T12:36:57+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2015-04-02T11:06:57+08:00" content="2015-04-02">
+              2015-04-02
             </time>
           </span>
 
@@ -350,8 +366,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/demonayu/blog/28.直接修改对象frame结构体的成员属性/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/28.直接修改对象frame结构体的成员属性/" itemprop="commentsCount"></span>
+                <a href="/2015/04/02/demonayu/blog/27.TableVIew单元格多图下载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/02/demonayu/blog/27.TableVIew单元格多图下载/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -373,16 +389,310 @@
         
           <span itemprop="articleBody">
             
-              <blockquote>
-<p>在iOS中系统默认不能直接修改结构体成员属性的值, 通过添加分类来实现这个功能.</p>
+              <h2 id="考虑因素">考虑因素</h2><ul>
+<li>单元格的多图下载要考虑到:<ul>
+<li>必须要在子线程进行下载</li>
+<li>防止重复下载</li>
+<li>数据缓存</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现思路">实现思路</h2><p><img src="http://r5.loli.io/bIRVfm.png" alt=""></p>
+<h2 id="实现方法">实现方法</h2><ul>
+<li><p>将cache路径写成宏</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#define cachePath(url) [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject stringByAppendingPathComponent:[url lastPathComponent]]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>cellForRowAtIndexPath:</code>方法中判断图片是否存在</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 取出对应的模型</span></span><br><span class="line">XVModel *item = <span class="keyword">self</span><span class="variable">.items</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">cell<span class="variable">.textLabel</span><span class="variable">.text</span> = item<span class="variable">.title</span>;</span><br><span class="line">cell<span class="variable">.detailTextLabel</span><span class="variable">.text</span> = item<span class="variable">.subTitle</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1&gt; 先从内存缓存中取</span></span><br><span class="line"><span class="comment">// 根据url取出图片</span></span><br><span class="line"><span class="built_in">UIImage</span> *memoryImage = <span class="keyword">self</span><span class="variable">.images</span>[item<span class="variable">.icon</span>];</span><br><span class="line"><span class="keyword">if</span> (memoryImage) &#123; <span class="comment">// 当内存中有图片时</span></span><br><span class="line">    cell<span class="variable">.imageView</span><span class="variable">.image</span> = memoryImage;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// 当内存中没有图片时</span></span><br><span class="line">    <span class="comment">// 2&gt; 再从沙盒中取 - 每一张图片都是一个文件 文件名为url名</span></span><br><span class="line">    <span class="built_in">UIImage</span> *diskImage = [<span class="built_in">UIImage</span> imageWithContentsOfFile:cachePath(item<span class="variable">.icon</span>)];</span><br><span class="line">    <span class="keyword">if</span> (diskImage) &#123; <span class="comment">// 沙盒中有图片时</span></span><br><span class="line">        cell<span class="variable">.imageView</span><span class="variable">.image</span> = diskImage;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当沙盒中没有对应的图片时</span></span><br><span class="line">        <span class="comment">// 设置占位图片</span></span><br><span class="line">        cell<span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"placeholder3"</span>];</span><br><span class="line">        <span class="comment">// 3&gt; 从网络上下载</span></span><br><span class="line">        [<span class="keyword">self</span> downloadImageWithUrlStr:item<span class="variable">.icon</span> indexPath:indexPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现异步下载</p>
+<ul>
+<li>为了保证一张图片只下载一次,需要判断当前url是否有下载任务,如果没有才需要创建下载任务.</li>
+<li>如何才能判断当前的url是否有下载任务呢?利用字典把url作为key绑定下载操作来判断.<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="keyword">void</span>)downloadImageWithUrlStr:(<span class="built_in">NSString</span> *)urlStr indexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 取出字典中url对应的下载任务</span></span><br><span class="line">    <span class="built_in">NSBlockOperation</span> *operation = <span class="keyword">self</span><span class="variable">.operations</span>[urlStr];</span><br><span class="line">    <span class="comment">// 如果当前url有下载任务 - 就不创建任务</span></span><br><span class="line">    <span class="keyword">if</span> (!operation) &#123; <span class="comment">// 没有下载任务</span></span><br><span class="line">        __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakself = <span class="keyword">self</span>;</span><br><span class="line">        <span class="comment">// 创建异步任务 - 将下载图片的操作放入到子线程中 - (解决异步下载的问题)</span></span><br><span class="line">        operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">            <span class="comment">// 将字符串转成url</span></span><br><span class="line">            <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">            <span class="comment">// 从url获取数据</span></span><br><span class="line">            <span class="built_in">NSData</span> *imageData = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">            <span class="comment">// 将二进制数据转成图片</span></span><br><span class="line">            <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:imageData];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 返回主线程刷新数据</span></span><br><span class="line">            [[<span class="built_in">NSOperationQueue</span> mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line">                <span class="comment">// 如果下载成功将图片存入字典 - 字典不能存空</span></span><br><span class="line">                <span class="keyword">if</span> (image) &#123;</span><br><span class="line">                    <span class="comment">// 1)将下载好的图片添加进图片字典中 url为key</span></span><br><span class="line">                    [weakself<span class="variable">.images</span> setObject:image forKey:urlStr];</span><br><span class="line">                    <span class="comment">// 刷新表格</span></span><br><span class="line">                    [weakself<span class="variable">.tableView</span> reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationFade</span>];</span><br><span class="line">                    <span class="comment">// 2)将image写入沙盒</span></span><br><span class="line">                    <span class="comment">// 将图片转成二进制数据</span></span><br><span class="line">                    <span class="built_in">NSData</span> *data = <span class="built_in">UIImagePNGRepresentation</span>(image);</span><br><span class="line">                    <span class="comment">// 写入沙盒</span></span><br><span class="line">                    [data writeToFile:cachePath(urlStr) atomically:<span class="literal">YES</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 下载完毕后将任务从字典中移除 - 如果下载失败将任务移除后还有机会下载,如果不移除,这个key就会一直存在永远也不能再次下载了</span></span><br><span class="line">                <span class="comment">// 在主线程中移除是为了保证下载操作已经执行完毕</span></span><br><span class="line">                [weakself<span class="variable">.operations</span> removeObjectForKey:urlStr];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将任务添加到队列</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.queue</span> addOperation:operation];</span><br><span class="line">    <span class="comment">// 将下载任务写入到字典里(解决重复下载问题)</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.operations</span> setObject:operation forKey:urlStr];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/14/demonayu/blog/26.渐变图层,复制图层和形状图层的使用/" itemprop="url">
+                  渐变图层,复制图层和形状图层的简单用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-03-14T14:55:57+08:00" content="2015-03-14">
+              2015-03-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/14/demonayu/blog/26.渐变图层,复制图层和形状图层的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/14/demonayu/blog/26.渐变图层,复制图层和形状图层的使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="渐变图层">渐变图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">/* 创建一个imageView控件 */</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]];</span><br><span class="line">    imageV<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    imageV<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageV];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> addGradientLayerToView:imageV];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 添加渐变图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addGradientLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个渐变图层 */</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = view<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 渐变颜色(用(id)强转成OC对象)</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 渐变范围(取值范围是0~1, 差值越大表示渐变范围越大)</span></span><br><span class="line">    gradient<span class="variable">.locations</span> = @[@<span class="number">0</span>, @<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 渐变方向(下面代码表示左上角到右下角的渐变)</span></span><br><span class="line">    gradient<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    gradient<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0.5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 给控件添加渐变图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="复制图层">复制图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 添加复制图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addReplicatorLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个复制层 */</span></span><br><span class="line">    <span class="built_in">CAReplicatorLayer</span> *replicator = [<span class="built_in">CAReplicatorLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    replicator<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 设置背景颜色</span></span><br><span class="line">    replicator<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:replicator];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子层1</span></span><br><span class="line">    <span class="built_in">CALayer</span> *sublayer1 = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    sublayer1<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    sublayer1<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    [replicator addSublayer:sublayer1];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子层2</span></span><br><span class="line">    <span class="built_in">CALayer</span> *sublayer2 = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    sublayer2<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">70</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    sublayer2<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> greenColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    [replicator addSublayer:sublayer2];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 复制层是复制里面的子层,而不是复制层本身</span></span><br><span class="line">    <span class="comment">// 设置要复制图层中子层的个数(数量包括自己本身的)</span></span><br><span class="line">    replicator<span class="variable">.instanceCount</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 子层形变(基于上一次子层的形变)</span></span><br><span class="line">    replicator<span class="variable">.instanceTransform</span> = <span class="built_in">CATransform3DMakeTranslation</span>(<span class="number">100</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="形状图层">形状图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 添加形状图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addShapeLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 绘制一个圆形路径 */</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 创建一个形状图层 */</span></span><br><span class="line">    <span class="built_in">CAShapeLayer</span> *shape = [<span class="built_in">CAShapeLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置路径(将路径装换成形状图层)</span></span><br><span class="line">    shape<span class="variable">.path</span> = path<span class="variable">.CGPath</span>;</span><br><span class="line">    <span class="comment">// 设置填充色</span></span><br><span class="line">    shape<span class="variable">.fillColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置描边色</span></span><br><span class="line">    shape<span class="variable">.strokeColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置线宽</span></span><br><span class="line">    shape<span class="variable">.lineWidth</span> = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// 描边起始点 (取值范围是0~1)</span></span><br><span class="line">    shape<span class="variable">.strokeStart</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 描边结束点 (取值范围是0~1)</span></span><br><span class="line">    shape<span class="variable">.strokeEnd</span> = <span class="number">0.75</span>;</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:shape];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义view时重写父类类方法来修改view的初始层">自定义view时重写父类类方法来修改view的初始层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回当前View当中layer的类型</span></span><br><span class="line">+ (Class)layerClass</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 将初始层修改为复制层</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">CAReplicatorLayer</span> class];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/02/18/demonayu/blog/25.核心动画与显示动画的区别/" itemprop="url">
+                  核心动画与UIView动画的对比
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-02-18T15:45:57+08:00" content="2015-02-18">
+              2015-02-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/02/18/demonayu/blog/25.核心动画与显示动画的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/18/demonayu/blog/25.核心动画与显示动画的区别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="CALayer">CALayer</h2><ul>
+<li>CALayer简介<ul>
+<li>CALayer我们又称它叫做层.</li>
+<li>在每个UIView内部都有一个layer这样一个属性.</li>
+<li>UIView之所以能够显示,就是因为它里面有这个一个层,才具有显示的功能.</li>
+<li>我们通过操作CALayer对象,可以很方便地调整UIView的一些外观属性.比如给UIView设置阴影,圆角,边框等等…</li>
+<li>所进行的核心动画在层里完成</li>
+</ul>
+</li>
+<li><p>设置CALayer属性</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)add<span class="built_in">CALayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 自定义一个图层</span></span><br><span class="line">    <span class="built_in">CALayer</span> *layer = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层的宽高</span></span><br><span class="line">    layer<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层位置</span></span><br><span class="line">    layer<span class="variable">.position</span> = <span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 图层的锚点(它决定CALayer身上哪一个点会在position属性所指的位置,默认为(0.5, 0.5)</span></span><br><span class="line">    layer<span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 图层的背景颜色</span></span><br><span class="line">    layer<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层的圆角</span></span><br><span class="line">    layer<span class="variable">.cornerRadius</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 相当于Clip</span></span><br><span class="line">    layer<span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框宽度</span></span><br><span class="line">    layer<span class="variable">.borderWidth</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 设置图层边框颜色</span></span><br><span class="line">    layer<span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> whiteColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置图层显示内容</span></span><br><span class="line">    layer<span class="variable">.contents</span> = (__bridge <span class="keyword">id</span>)([<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]<span class="variable">.CGImage</span>);</span><br><span class="line">    <span class="comment">// 将自定义图层加载到父图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:layer];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>注意</strong>: UIImageView当中Image并不是直接添加在层上面的.而是添加在layer当中的<code>contents</code>里.我们设置层的所有属性它只作用在层上面.对contents里面的东西并不起作用.所以如果直接只设置<code>cornerRadius</code>我们是看不到图片的圆角效果的.想要让图片有圆角的效果,需要设置<code>masksToBounds</code>属性设为YES,它会把超过根层以外的东西都给裁剪掉.<br> <strong>PS1</strong>: 为什么要使用CGImageRef、CGColorRef?         为了保证可移植性,QuartzCore不能使用UIImage、UIColor,只能使用CGImageRef、CGColorRef.<br> <strong>PS2</strong>: 所有的动画都是基于锚点做参照来进行的.</p>
+</li>
+<li><p>CALayer的<code>CATransform3D</code>属性 (只有旋转的时候才可以看出3D的效果).</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// x,y,z 分别代表x,y,z轴.</span></span><br><span class="line"><span class="comment">// 旋转: </span></span><br><span class="line"><span class="built_in">CATransform3DMakeRotation</span>(M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 平移:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeTranslation</span>(x,y,z);</span><br><span class="line"><span class="comment">// 缩放:</span></span><br><span class="line"><span class="built_in">CATransform3DMakeScale</span>(x,y,z);</span><br></pre></td></tr></table></figure>
+<p> <strong>CATransform3D的键值</strong><br><img src="http://r6.loli.io/NNvIvy.png" alt="CATransform3D Key Paths"></p>
+</li>
+</ul>
+<h2 id="隐式动画">隐式动画</h2><ul>
+<li>什么是隐式动画 <br><ul>
+<li>在了解隐式动画前先了解什么是根层和非根层:<ul>
+<li>根层: UIView内部自动关联着的那个layer我们称它是根层.</li>
+<li>非根层: 自己手动创建的层,称为非根层.</li>
+</ul>
+</li>
+<li>隐式动画就是当对非根层的部分属性进行修改时,它会自动的产生一些动画的效果.我们称这个默认产生的动画为隐式动画.</li>
+<li>给根层添加的动画叫做核心动画.隐式动画是系统默认给非根层添加的动画,核心动画是程序员自己手动来添加的,其实隐式动画就是核心动画.</li>
+</ul>
+</li>
+<li>如何取消隐式动画<ul>
+<li>隐式动画的底层是包装成一个事务(<code>CATransaction</code>)来进行的.<ul>
+<li>事物: 很多操作绑定在一起,当这些操作执行完毕后,才去执行下一个操作.</li>
+</ul>
+</li>
+<li>手动在事物中关闭动画<code>[CATransaction setDisableActions:YES];</code><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UITouch</span> *touch = [touches anyObject];</span><br><span class="line">    <span class="built_in">CGPoint</span> point = [touch locationInView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1. 开启事务</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> begin];</span><br><span class="line">        <span class="comment">// 动画时长</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> setAnimationDuration:<span class="number">0.1</span>];</span><br><span class="line">        <span class="comment">// 取消隐式动画 (默认有)</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> setDisableActions:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 修改图层属性</span></span><br><span class="line">    <span class="built_in">CGFloat</span> r = arc4random_uniform(<span class="number">256</span>) / <span class="number">255.0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> g = arc4random_uniform(<span class="number">256</span>) / <span class="number">255.0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> b = arc4random_uniform(<span class="number">256</span>) / <span class="number">255.0</span>;</span><br><span class="line">    <span class="comment">// 修改背景颜色</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> colorWithRed:r green:g blue:b alpha:<span class="number">1</span>]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 修改圆角度数</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.cornerRadius</span> = arc4random_uniform(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">// 修改位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.position</span> = point;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 提交事务</span></span><br><span class="line">    [<span class="built_in">CATransaction</span> commit];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="核心动画">核心动画</h2><p><img src="http://r5.loli.io/YryMbm.png" alt="核心动画的继承结构"></p>
+<blockquote>
+<p>核心动画中所有类都遵守CAMediaTiming协议</p>
 </blockquote>
 <ul>
-<li>头文件(.h)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIView</span> (<span class="title">Extension</span>)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> x;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> y;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> centerX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> centerY;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> width;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> height;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGSize</span> size;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGPoint</span> origin;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<li><p><strong>核心动画的继承结构</strong></p>
+<ul>
+<li>CAAnaimation是个抽象类,不具备动画效果,必须用它的子类才有动画效果,其中:<ul>
+<li>CAAnimationGroup是个动画组,可以同时进行缩放,旋转;</li>
+<li>CATransition是转场动画,界面之间跳转都可以用转场动画;</li>
+</ul>
+</li>
+<li>CAPropertyAnimation也是个抽象类,本身不具备动画效果,只有调用其子类才有动画,其中:<ul>
+<li>CABasicAnimation基本动画，做一些简单效果;</li>
+<li>CAKeyframeAnimation帧动画，做一些连续的流畅的动画;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基础核心动画</strong></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建基本核心动画</span></span><br><span class="line"><span class="comment">// 旋转</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *rotation = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line"><span class="comment">// 直接通过KVC来更改键值</span></span><br><span class="line">rotation<span class="variable">.keyPath</span> = <span class="string">@"transform.rotation"</span>;</span><br><span class="line">rotation<span class="variable">.toValue</span> = @M_PI_2;</span><br><span class="line"><span class="comment">// 位移</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *position = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line">position<span class="variable">.keyPath</span> = <span class="string">@"position"</span>;</span><br><span class="line">position<span class="variable">.toValue</span> = [<span class="built_in">NSValue</span> valueWith<span class="built_in">CGPoint</span>:<span class="built_in">CGPointMake</span>(<span class="number">50</span>, <span class="number">200</span>)];</span><br><span class="line"><span class="comment">// 缩放</span></span><br><span class="line"><span class="built_in">CABasicAnimation</span> *scale = [<span class="built_in">CABasicAnimation</span> animation];</span><br><span class="line">scale<span class="variable">.keyPath</span> = <span class="string">@"transform.scale"</span>;</span><br><span class="line">scale<span class="variable">.toValue</span> = @<span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个动画组(组合动画)</span></span><br><span class="line"><span class="built_in">CAAnimationGroup</span> *group = [<span class="built_in">CAAnimationGroup</span> animation];</span><br><span class="line"><span class="comment">// 将动画添加到动画组</span></span><br><span class="line">group<span class="variable">.animations</span> = @[rotation, position, scale];</span><br><span class="line"><span class="comment">// 动画时间</span></span><br><span class="line">group<span class="variable">.duration</span> = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 取消反弹</span></span><br><span class="line">group<span class="variable">.removedOnCompletion</span> = <span class="literal">NO</span>;</span><br><span class="line"><span class="comment">// 保存动画最前面的效果</span></span><br><span class="line">group<span class="variable">.fillMode</span> = k<span class="built_in">CAFillModeForwards</span>;</span><br><span class="line"><span class="comment">// 给控件图层添加动画</span></span><br><span class="line">[image<span class="variable">.layer</span> addAnimation:group forKey:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<p> 使用动画组的好处: 不需要每次都去添加动画,设置动画完成时的属性.只需要把要执行的动画,添加到动画组的animations数组当中即可.最后把组动画添加到层上面,就会自动执行数组当中的动画.动画完成时设置的属性也只需要设置一次.</p>
+</li>
+<li><p><strong>关键帧动画</strong></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1.创建关键帧动画对象</span></span><br><span class="line"><span class="built_in">CAKeyframeAnimation</span> *frameAnim = [<span class="built_in">CAKeyframeAnimation</span> animation];</span><br><span class="line"><span class="comment">// 2.绘制一个路径</span></span><br><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>)];</span><br><span class="line"><span class="comment">// 3.设置动画参数</span></span><br><span class="line">group<span class="variable">.duration</span> = <span class="number">1</span>;</span><br><span class="line">group<span class="variable">.removedOnCompletion</span> = <span class="literal">NO</span>;</span><br><span class="line">group<span class="variable">.fillMode</span> = k<span class="built_in">CAFillModeForwards</span>;</span><br><span class="line"><span class="comment">// 4.给控件添加动画</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.redView</span><span class="variable">.layer</span> addAnimation:frameAnim forKey:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>转场动画</strong></p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 转场动画要和转场代码写在同一个方法当中才有动画效果.</span></span><br><span class="line">    <span class="comment">// 1.1 设定转场条件</span></span><br><span class="line">    _i++;</span><br><span class="line">    <span class="keyword">if</span> (_i &gt; <span class="number">3</span>) &#123;</span><br><span class="line">        _i = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 1.2 添加转场代码 - 替换图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>, _i]];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.1 添加一个转场动画</span></span><br><span class="line">    <span class="built_in">CATransition</span> *anim = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">    <span class="comment">// 2.2 设置转场样式</span></span><br><span class="line">    anim<span class="variable">.type</span> = <span class="string">@"cube"</span>;</span><br><span class="line">    <span class="comment">// 2.3 动画参数</span></span><br><span class="line">      <span class="comment">//设置动画的开始位置</span></span><br><span class="line">      anim<span class="variable">.startProgress</span> = <span class="number">0.5</span>;</span><br><span class="line">	  <span class="comment">//设置动画的结束位置</span></span><br><span class="line">      anim<span class="variable">.endProgress</span>  =<span class="number">0.8</span>;</span><br><span class="line">    <span class="comment">// 2.3 添加转场动画</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.layer</span> addAnimation:anim forKey:<span class="literal">nil</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>转场动画过渡效果</strong><br><img src="http://r5.loli.io/iyUn22.png" alt="转场动画过渡效果"></p>
+</li>
+<li><p>核心动画的代理方法 - 它所使用的是非正式协议(其实就是个分类)</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 动画开始</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStart:(<span class="built_in">CAAnimation</span> *)anim;</span><br><span class="line"><span class="comment">// 动画结束</span></span><br><span class="line">- (<span class="keyword">void</span>)animationDidStop:(<span class="built_in">CAAnimation</span> *)anim finished:(<span class="built_in">BOOL</span>)flag;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>暂停动画和恢复动画</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 暂停动画</span></span><br><span class="line">-(<span class="keyword">void</span>)pauseLayer:(<span class="built_in">CALayer</span>*)layer</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">CFTimeInterval</span> pausedTime = [layer convertTime:<span class="built_in">CACurrentMediaTime</span>() fromLayer:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 让CALayer的时间停止走动</span></span><br><span class="line">  layer<span class="variable">.speed</span> = <span class="number">0.0</span>;</span><br><span class="line"><span class="comment">// 让CALayer的时间停留在pausedTime这个时刻</span></span><br><span class="line">layer<span class="variable">.timeOffset</span> = pausedTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恢复动画</span></span><br><span class="line">-(<span class="keyword">void</span>)resumeLayer:(<span class="built_in">CALayer</span>*)layer</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">CFTimeInterval</span> pausedTime = layer<span class="variable">.timeOffset</span>;</span><br><span class="line"><span class="comment">// 1. 让CALayer的时间继续行走</span></span><br><span class="line">  layer<span class="variable">.speed</span> = <span class="number">1.0</span>;</span><br><span class="line"><span class="comment">// 2. 取消上次记录的停留时刻</span></span><br><span class="line">  layer<span class="variable">.timeOffset</span> = <span class="number">0.0</span>;</span><br><span class="line"><span class="comment">// 3. 取消上次设置的时间</span></span><br><span class="line">  layer<span class="variable">.beginTime</span> = <span class="number">0.0</span>;    </span><br><span class="line"><span class="comment">// 4. 计算暂停的时间(这里也可以用CACurrentMediaTime()-pausedTime)</span></span><br><span class="line"><span class="built_in">CFTimeInterval</span> timeSincePause = [layer convertTime:<span class="built_in">CACurrentMediaTime</span>() fromLayer:<span class="literal">nil</span>] - pausedTime;</span><br><span class="line"><span class="comment">// 5. 设置相对于父坐标系的开始时间(往后退timeSincePause)</span></span><br><span class="line">  layer<span class="variable">.beginTime</span> = timeSincePause;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
-<li>实现文件(.m)<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="preprocessor">#import <span class="title">"UIView+Extension.h"</span></span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">@implementation</span> <span class="title">UIView</span> (<span class="title">Extension</span>)</span></span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setX:(<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.x</span> = x;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setY:(<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.y</span> = y;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)x</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)y</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterX:(<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.x</span> = centerX;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setCenterY:(<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> center = <span class="keyword">self</span><span class="variable">.center</span>;</span><br><span class="line">    center<span class="variable">.y</span> = centerY;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.center</span> = center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerX</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)centerY</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.center</span><span class="variable">.y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setWidth:(<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.width</span> = width;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setHeight:(<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.height</span> = height;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)height</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGFloat</span>)width</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setSize:(<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span> = size;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="keyword">void</span>)setOrigin:(<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span> = origin;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  - (<span class="built_in">CGPoint</span>)origin</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
+<li>补充两个控制动画的属性: <figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="header">fillMode属性值（要想fillMode有效，最好设置removedOnCompletion = NO）</span><br><span class="line">--------------</span></span><br><span class="line">kCAFillModeRemoved: 这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态;</span><br><span class="line">kCAFillModeForwards: 当动画结束后,layer会一直保持着动画最后的状态;</span><br><span class="line">kCAFillModeBackwards: 在动画开始前,只需要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始;</span><br><span class="line">kCAFillModeBoth: 这个其实就是上面两个的合成.动画加入后开始之前,layer便处于动画初始状态,动画结束后layer保持动画最后的状态.</span><br><span class="line"></span><br><span class="line"><span class="header">速度控制函数(CAMediaTimingFunction) </span><br><span class="line">--------------</span></span><br><span class="line">kCAMediaTimingFunctionLinear(线性): 匀速,给你一个相对静态的感觉;</span><br><span class="line">kCAMediaTimingFunctionEaseIn(渐进): 动画缓慢进入,然后加速离开;</span><br><span class="line">kCAMediaTimingFunctionEaseOut(渐出): 动画全速进入,然后减速的到达目的地;</span><br><span class="line">kCAMediaTimingFunctionEaseInEaseOut(渐进渐出): 动画缓慢的进入,中间加速，然后减速的到达目的地。这个是默认的动画行为.</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<h2 id="UIView动画与核心动画对比?">UIView动画与核心动画对比?</h2><ul>
+<li>UIView动画和核心动画区别?<ul>
+<li>核心动画只能添加到CALayer(图层);</li>
+<li>核心动画一切都是假象,并不会改变真实的值;</li>
+</ul>
+</li>
+<li>什么时候使用UIView的动画?<ul>
+<li>如果需要与用户交互就使用UIView的动画;</li>
+<li>不需要与用户交互可以使用核心动画;</li>
+</ul>
+</li>
+<li>什么场景使用核心动画最多?<ul>
+<li>在转场动画中,核心动画的类型比较多;</li>
+<li>根据一个路径做动画,只能用核心动画（帧动画）;</li>
+<li>动画组: 同时做多个动画;</li>
+</ul>
+</li>
+<li>UIView和CALayer该怎样选择?<ul>
+<li>对比CALayer,UIView多了一个事件处理的功能.也就是说CALayer不能处理用户的触摸事件,而UIView可以,如果显示出来的东西需要跟用户进行交互的话,用UIView;如果不需要跟用户进行交互,用UIView或者CALayer都可以.CALayer的性能会高一些,因为它少了事件处理的功能,更加轻量级.</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用UIView动画函数实现转场动画">使用UIView动画函数实现转场动画</h3> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 单视图 */</span></span><br><span class="line">+ (<span class="keyword">void</span>)transitionWithView:(<span class="built_in">UIView</span> *)view duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</span><br><span class="line"><span class="comment">// 参数说明：</span></span><br><span class="line"><span class="comment">// duration：动画的持续时间</span></span><br><span class="line"><span class="comment">// view：需要进行转场动画的视图</span></span><br><span class="line"><span class="comment">// options：转场动画的类型</span></span><br><span class="line"><span class="comment">// animations：将改变视图属性的代码放在这个block中</span></span><br><span class="line"><span class="comment">// completion：动画结束后，会自动调用这个block</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 双视图 */</span></span><br><span class="line">+ (<span class="keyword">void</span>)transitionFromView:(<span class="built_in">UIView</span> *)fromView toView:(<span class="built_in">UIView</span> *)toView duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</span><br><span class="line"><span class="comment">// 参数说明：</span></span><br><span class="line"><span class="comment">// duration：动画的持续时间</span></span><br><span class="line"><span class="comment">// options：转场动画的类型</span></span><br><span class="line"><span class="comment">// animations：将改变视图属性的代码放在这个block中</span></span><br><span class="line"><span class="comment">// completion：动画结束后，会自动调用这个block</span></span><br></pre></td></tr></table></figure>
 
             
           </span>
@@ -425,7 +735,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/demonayu/blog/26.image与color之间互转/" itemprop="url">
+                <a class="post-title-link" href="/2015/01/26/demonayu/blog/24.image与color之间互转/" itemprop="url">
                   image与color之间互转
                 </a>
               
@@ -436,8 +746,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T12:24:57+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2015-01-26T12:24:57+08:00" content="2015-01-26">
+              2015-01-26
             </time>
           </span>
 
@@ -447,8 +757,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/demonayu/blog/26.image与color之间互转/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/26.image与color之间互转/" itemprop="commentsCount"></span>
+                <a href="/2015/01/26/demonayu/blog/24.image与color之间互转/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/26/demonayu/blog/24.image与color之间互转/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -519,8 +829,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" itemprop="url">
-                  UIAlertView在IOS9中的使用demo
+                <a class="post-title-link" href="/2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/" itemprop="url">
+                  长按截屏和图片裁剪
                 </a>
               
             
@@ -530,8 +840,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T10:37:57+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2015-01-25T09:35:57+08:00" content="2015-01-25">
+              2015-01-25
             </time>
           </span>
 
@@ -541,8 +851,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/demonayu/blog/24.UIAlertView在IOS9中的使用/" itemprop="commentsCount"></span>
+                <a href="/2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -564,230 +874,11 @@
         
           <span itemprop="articleBody">
             
-              <blockquote>
-<p>iOS9中改变了UIAlertView的使用方式, 并且与UIActionSheet融合进了一个类里面,统一进行管理.</p>
+              <h3 id="长按截屏">长按截屏</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)longPress:(<span class="built_in">UILongPressGestureRecognizer</span> *)longPress</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意这个longPress会调用两次,一次是触发时,一次是结束时, 所以这里需要对状态进行一次判定,避免两次触发</span></span><br><span class="line">    <span class="keyword">if</span> (longPress<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过设置首尾式动画来达到屏幕闪一下的效果</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.2</span> animations:^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">0.6</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">            [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.5</span> animations:^&#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">1</span>;</span><br><span class="line">            &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">                <span class="comment">// 开启一个全屏位图上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>([<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span>, <span class="literal">YES</span>, <span class="number">0.0</span> );</span><br><span class="line">                <span class="comment">// 获取当前上下文</span></span><br><span class="line">                <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">                <span class="comment">// 渲染图层到上下文</span></span><br><span class="line">                [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:ctx];</span><br><span class="line">                <span class="comment">// 将当前上下文中的内容转成图片</span></span><br><span class="line">                <span class="built_in">UIImage</span> *capture = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">                <span class="comment">// 关闭上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">                <span class="comment">// 将图片输出</span></span><br><span class="line">                <span class="built_in">NSData</span> *imgData = <span class="built_in">UIImagePNGRepresentation</span>(capture);</span><br><span class="line">                [imgData writeToFile:<span class="string">@"/Users/Xion/Desktop/image.png"</span> atomically:<span class="literal">YES</span>];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="图片裁剪">图片裁剪</h3><blockquote>
+<p>为UIimage增加一个分类类方法,在实例化图片时就对其进行裁剪</p>
 </blockquote>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 注销</span></span><br><span class="line">- (<span class="keyword">void</span>)loginOut</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.创建一个alertController来管理警示窗口, 并指定样式</span></span><br><span class="line">    <span class="built_in">UIAlertController</span> *alertController = [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="string">@"确定注销吗?"</span> message:<span class="literal">nil</span> preferredStyle:<span class="built_in">UIAlertControllerStyleActionSheet</span>];</span><br><span class="line">    <span class="comment">// 2.创建点击行为, 在block中实现事件</span></span><br><span class="line">    <span class="built_in">UIAlertAction</span> *action = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"确定"</span> style:<span class="built_in">UIAlertActionStyleDestructive</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.navigationController</span> popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"已注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">UIAlertAction</span> *cancel = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"取消"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"取消注销"</span>);</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">// 3.为alertController添加点击行为</span></span><br><span class="line">    [alertController addAction:action];</span><br><span class="line">    [alertController addAction:cancel];</span><br><span class="line">    <span class="comment">// 4.弹出警示窗口</span></span><br><span class="line">    [<span class="keyword">self</span> presentViewController:alertController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/19/demonayu/blog/23.copy深浅的规律/" itemprop="url">
-                  copy深浅的规律
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-19T15:42:57+08:00" content="2015-12-19">
-              2015-12-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/19/demonayu/blog/23.copy深浅的规律/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/19/demonayu/blog/23.copy深浅的规律/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
-</blockquote>
-<ul>
-<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
-<li>源对象和副本对象是同一个对象</li>
-<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
-<li>本质是：没有产生新的对象</li>
-<li>原对象引用计数器+1</li>
-<li>必须对原对象进行释放</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
-<li>源对象和副本对象是不同的两个对象</li>
-<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
-<li>本质是：产生了新的对象</li>
-<li>必须释放新对象</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/19/demonayu/blog/利用NSValue来包装结构体/" itemprop="url">
-                  利用NSValue来包装结构体
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-19T14:51:57+08:00" content="2015-12-19">
-              2015-12-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/19/demonayu/blog/利用NSValue来包装结构体/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/19/demonayu/blog/利用NSValue来包装结构体/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
-<p>NSValue可以包装任意值,可以用NSValue将结构体包装后,加入NSArray\NSDictionary中.</p>
-</blockquote>
-<ul>
-<li><p>利用NSValue包装常用结构体</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CGPoint</span> point = <span class="built_in">NSMakePoint</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">NSValue</span> *value = [<span class="built_in">NSValue</span> valueWithPoint:point];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[value];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用NSValue包装自定义结构体</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">double</span> height;</span><br><span class="line">&#125;Person;</span><br><span class="line"></span><br><span class="line">Person p = &#123;<span class="number">24</span>, <span class="string">"XiaoMing"</span>, <span class="number">183</span>&#125;;</span><br><span class="line"><span class="comment">// valueWithBytes: 接收一个指针, 传递需要包装的结构体的地址.</span></span><br><span class="line"><span class="comment">// objCType: 需要包装的数据类型</span></span><br><span class="line"><span class="built_in">NSValue</span> *pValue = [<span class="built_in">NSValue</span> valueWithBytes:&amp;p objCType:@encode(Person)];</span><br><span class="line"><span class="built_in">NSArray</span> *arr = @[pValue];</span><br><span class="line"><span class="comment">// 从NSValue中取出自定义的结构体变量</span></span><br><span class="line">Person res;</span><br><span class="line">[pValue getValue:&amp;res];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常见的结构体包装方法</p>
-<ul>
-<li><p>将结构体包装成NSValue对象</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithPoint:(<span class="built_in">NSPoint</span>)point;</span><br><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithSize:(<span class="built_in">NSSize</span>)size;</span><br><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithRect:(<span class="built_in">NSRect</span>)rect;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从NSValue中取出包装的结构体</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSPoint</span>)pointValue;</span><br><span class="line">- (<span class="built_in">NSSize</span>)sizeValue;</span><br><span class="line">- (<span class="built_in">NSRect</span>)rectValue;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>NSValue包装任意数据类型</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// value参数 : 所包装数据的地址</span></span><br><span class="line"><span class="comment">// type参数 : 用来描述这个数据类型的字符串, 用@encode指令来生成</span></span><br><span class="line">+ (<span class="built_in">NSValue</span> *)valueWithBytes:(<span class="keyword">const</span> <span class="keyword">void</span> *)value objCType:(<span class="keyword">const</span> <span class="keyword">char</span> *)type;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从NSValue中取出所包装的数据</span></span><br><span class="line">- (<span class="keyword">void</span>)getValue:(<span class="keyword">void</span> *)value;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="preprocessor">#import <span class="title">"UIImage+ClipImage.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">ClipImage</span>)</span></span><br><span class="line">+ (instancetype)imageNamed:(<span class="built_in">NSString</span> *)name withClipShape:(ClipShape)shape;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="keyword">self</span> imageNamed:name];</span><br><span class="line">    <span class="comment">// 开启一个上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(image<span class="variable">.size</span>, <span class="literal">NO</span>, <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 设置为模具</span></span><br><span class="line">    <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithCircle: &#123; <span class="comment">// 圆</span></span><br><span class="line">            <span class="built_in">CGFloat</span> radius = image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>;</span><br><span class="line">            <span class="built_in">CGPoint</span> center = <span class="built_in">CGPointMake</span>(radius, radius);</span><br><span class="line">            <span class="built_in">UIBezierPath</span> *circlePath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">            <span class="comment">// 设置裁剪区</span></span><br><span class="line">            [circlePath addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithtriangle: &#123; <span class="comment">// 三角形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            <span class="comment">// 关闭路径</span></span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithRhombus: &#123; <span class="comment">// 菱形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 画出裁剪范围</span></span><br><span class="line">    [image drawAtPoint:<span class="built_in">CGPointZero</span>];</span><br><span class="line">    <span class="comment">// 将当前上下文的内容转成图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 关闭上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             
           </span>
         
@@ -854,7 +945,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -868,7 +959,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

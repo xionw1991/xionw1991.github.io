@@ -210,11 +210,6 @@
 
     
     
-      
-      
-
-      
-    
 
     
       
@@ -238,7 +233,561 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/" itemprop="url">
+                <a class="post-title-link" href="/2015/01/25/demonayu/blog/22.手势识别基本使用/" itemprop="url">
+                  使用手势识别来简化事件处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-01-25T09:31:57+08:00" content="2015-01-25">
+              2015-01-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/25/demonayu/blog/22.手势识别基本使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/demonayu/blog/22.手势识别基本使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
+<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
+<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
+<li>手势有以下几种:<ul>
+<li>UITapGestureRecognizer(敲击)</li>
+<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
+<li>UIPanGestureRecognizer(拖拽)</li>
+<li>UISwipeGestureRecognizer(轻扫)</li>
+<li>UIRotationGestureRecognizer(旋转)</li>
+<li>UILongPressGestureRecognizer(长按)</li>
+</ul>
+</li>
+<li><p>手势使用方法:</p>
+<ul>
+<li><p>创建手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现手势方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>拖动的状态</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动状态复位</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手势常用的代理方法</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/13/demonayu/blog/21.事件处理/" itemprop="url">
+                  事件处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-01-13T22:12:57+08:00" content="2015-01-13">
+              2015-01-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/13/demonayu/blog/21.事件处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/13/demonayu/blog/21.事件处理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="事件的产生和传递">事件的产生和传递</h2><ul>
+<li>iOS当中常用的事件:<ul>
+<li>触摸事件</li>
+<li>加速计事件</li>
+<li>远程控制事件</li>
+</ul>
+</li>
+<li><p>处理事件的常用方法:</p>
+<ul>
+<li><p>触摸事件:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加速计事件:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)motionBegan:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionEnded:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br><span class="line">- (<span class="keyword">void</span>)motionCancelled:(<span class="built_in">UIEventSubtype</span>)motion withEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>远程控制事件:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)remoteControlReceivedWithEvent:(<span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>事件是怎么传递的?</p>
+<ul>
+<li>比如当发生一个触摸事件后,系统会将该事件加入到一个由UIApplication管理的事件队列中.</li>
+<li>UIApplication会从事件队列中取出最前面的事件,并将事件分发下去以便处理.</li>
+<li>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件.</li>
+<li><strong>触摸事件的传递是从父控件传递到子控件的, 如果一个父控件不能接收事件,那么它里面的了子控件也不能够接收事件.</strong></li>
+</ul>
+</li>
+<li>一个控件什么情况下不能够接收事件.<ul>
+<li>不能与用户交互的时候<code>userInteractionEnabled = NO</code>.(注意:UIImageView默认是不可交互的)</li>
+<li>隐藏的时候<code>Hidden = YES</code>.</li>
+<li>颜色为全透明的时候<code>alpha = 0</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="事件响应">事件响应</h2><ul>
+<li>用户点击屏幕后产生的一个触摸事件，经过一系列的传递过程 后，会找到最合适的视图控件来处理这个事件,找到最合适的视图控件后,就会调用控件的touches方法来作具体的事件处理那这些touches方法的默认做法是将事件顺着响应者链条向上传递,将事件交给上一个响应者进行处理.</li>
+<li>什么是响应者对象和响应者链条: <ul>
+<li>继承了UIResponds的对象我们称它为响应者对象</li>
+<li>UIApplication、UIViewController、UIView都继承自UIResponder,因此它们都是响应者对象，都能够接收并处理事件</li>
+<li>响应者链条是由多个响应者对象连接起来的链条.</li>
+</ul>
+</li>
+<li><p>响应者链的事件传递过程</p>
+<ol>
+<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图<ul>
+<li>如果当前的View是控制器的View,那么控制器就是上一个响应者.</li>
+<li>如果当前的View不是控制器的View,那么它的父控件就是上一个响应者.</li>
+</ul>
+</li>
+<li>在视图层次结构的最顶级视图，如果也不能处理收到的事件或消息，则其将事件或消息传递给window对象进行处理</li>
+<li>如果window对象也不处理，则其将事件或消息传递给UIApplication对象</li>
+<li>如果UIApplication也不能处理该事件或消息，则将其丢弃<br><img src="http://r5.loli.io/UR77V3.png" alt="响应者链条示意图"></li>
+</ol>
+</li>
+<li><p>如何寻找最合适的view</p>
+<ol>
+<li>先判断自己是否能够接收触摸事件,如果能再继续往下判断,</li>
+<li>再判断触摸的当前点在不在自己的身上.</li>
+<li>如果在自己身上,它会从后往前遍历子控件,遍历出每一个子控件后,重复前面的两个步骤.</li>
+<li>如果没有符合条件的子控件,那么它自己就是最适合的View.<br><img src="http://r6.loli.io/j26faq.png" alt=""></li>
+</ol>
+</li>
+</ul>
+<h2 id="事件传递的完整过程">事件传递的完整过程</h2><ol>
+<li>以触摸事件为例,先将事件对象由上往下传递(由父控件传递给子控件),找到最合适的控件来处理这个事件.</li>
+<li>调用最合适控件的<code>touches…</code>方法.</li>
+<li>如果调用了<code>[super touches….]</code>就会将事件顺着响应者链条往上传递,传递给上一个响应者.</li>
+<li>接着就会调用上一个响应者的<code>touches…</code>方法.</li>
+</ol>
+<h3 id="hitTest方法与pointInside方法">hitTest方法与pointInside方法</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:寻找最适合的View.</span></span><br><span class="line"><span class="comment">// 参数:当前手指所在的点;产生的事件</span></span><br><span class="line"><span class="comment">// 返回值:返回谁, 谁就是最适合的View.</span></span><br><span class="line"><span class="comment">// 什么时候用调用:只要一个事件,传递给一个控件时,就会调用这个控件的hitTest方法</span></span><br><span class="line">- (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用:判断point在不在方法调用者上</span></span><br><span class="line"><span class="comment">// point:必须是方法调用者的坐标系</span></span><br><span class="line"><span class="comment">// 什么时候调用:hitTest方法底层会调用这个方法,判断点在不在控件上.</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)pointInside:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>模拟<code>hitTest:withEvent:</code>方法的底层实现(寻找最合适view)  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1.判断自己能否接收事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.hidden</span> == <span class="literal">YES</span> || <span class="keyword">self</span><span class="variable">.alpha</span> &lt;= <span class="number">0.01</span> || <span class="keyword">self</span><span class="variable">.userInteractionEnabled</span> == <span class="literal">NO</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.触摸点是否在自己身上</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="keyword">self</span> pointInside:point withEvent:event]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3.从后往前遍历子控件,看自己的子控制器是否是最适合的View.</span></span><br><span class="line">    <span class="keyword">int</span> count = (<span class="keyword">int</span>)<span class="keyword">self</span><span class="variable">.subviews</span><span class="variable">.count</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="built_in">UIView</span> *childV = <span class="keyword">self</span><span class="variable">.subviews</span>[i];</span><br><span class="line">        <span class="comment">//判断自己子控件是否是最适合的view</span></span><br><span class="line">        <span class="comment">//point点必须得要跟方法调用者在同一个坐标系上.</span></span><br><span class="line">        <span class="comment">//把当前点转换成子控件坐标系上面的点.</span></span><br><span class="line">        <span class="built_in">CGPoint</span> childViewP = [<span class="keyword">self</span> convertPoint:point toView:childV];</span><br><span class="line">        <span class="built_in">UIView</span> *fitView = [childV hitTest:childViewP withEvent:event];</span><br><span class="line">        <span class="keyword">if</span> (fitView) &#123;</span><br><span class="line">            <span class="keyword">return</span> fitView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//没有比它更适合的View.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="监听UIView的触摸事件来实现拖拽:">监听UIView的触摸事件来实现拖拽:</h3><ul>
+<li>想要监听UIViiew的触摸事件,首先第一步要自定义UIView,因为只有实现了UIResponder的事件方法才能够监听事件.</li>
+<li><p>一次完整的触摸过程，会经历3个状态：</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 1. 触摸开始</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 2. 触摸移动</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 3. 触摸结束</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line"><span class="comment">// 触摸取消（可能会经历,比如突然来电,手机自动关机）</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
+<ul>
+<li>一次完整的触摸过程中，只会产生一个事件对象，4个触摸方法都是同一个event参数.</li>
+<li>如果两根手指同时触摸一个view，那么view只会调用一次<code>touchesBegan:withEvent:</code>方法，touches参数中装着2个UITouch对象.</li>
+<li>如果这两根手指一前一后分开触摸同一个view，那么view会分别调用2次<code>touchesBegan:withEvent:</code>方法，并且每次调用时的touches参数中只包含一个UITouch对象.</li>
+</ul>
+</li>
+<li>举例: 实现UIview的拖拽<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 拿到这个点</span></span><br><span class="line">    <span class="built_in">UITouch</span> *touch = [touches anyObject];</span><br><span class="line">    <span class="comment">// 获得这个点的当前位置</span></span><br><span class="line">    <span class="built_in">CGPoint</span> currentP = [touch locationInView:<span class="keyword">self</span>];</span><br><span class="line">    <span class="comment">// 获得这个点之前的位置</span></span><br><span class="line">    <span class="built_in">CGPoint</span> previousP = [touch previousLocationInView:<span class="keyword">self</span>];</span><br><span class="line">    <span class="comment">// 计算出偏移量 - 要移动的距离</span></span><br><span class="line">    <span class="built_in">CGFloat</span> distanceX = currentP<span class="variable">.x</span> - previousP<span class="variable">.x</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> distanceY = currentP<span class="variable">.y</span> - previousP<span class="variable">.y</span> ;</span><br><span class="line">    <span class="comment">// 改变view状态</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.transform</span> = <span class="built_in">CGAffineTransformTranslate</span>(<span class="keyword">self</span><span class="variable">.transform</span>, distanceX, distanceY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>使用手势识别来简化事件处理: <a href="http://xionv.com/2015/12/25/demonayu/blog/30.手势识别基本使用/">手势识别基本使用</a>.</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/21/demonayu/blog/19.NSFileManager计算文件夹大小/" itemprop="url">
+                  NSFileManager计算文件夹大小
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2014-12-21T10:08:57+08:00" content="2014-12-21">
+              2014-12-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/21/demonayu/blog/19.NSFileManager计算文件夹大小/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/21/demonayu/blog/19.NSFileManager计算文件夹大小/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="计算文件夹大小">计算文件夹大小</h1><ul>
+<li><p>给NSString添加一个计算文件夹大小的分类, 以字节输出</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">                <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                    fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将字节单位转化为兆  </p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size)&#123;</span><br><span class="line">      <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">      <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">      <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">      sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">      <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">          cacheSize /= <span class="number">1000</span>;</span><br><span class="line">          sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">          sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> sizeStr;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="NSFileManager一些常用方法">NSFileManager一些常用方法</h1><ul>
+<li><strong>判断一个文件或者文件夹是否存在</strong><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>判断一个文件是否存在, 并且判断它是否是一个文件夹</strong></p>
+<ul>
+<li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
+<li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
+<li>BOOL dir = NO;</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> isDirectory:&amp;dir];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>获取文件或文件夹的属性</strong></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>获取文件夹中所有的文件</strong></p>
+<ul>
+<li>contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
+<li>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *res = [manager contentsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>创建文件夹</strong></p>
+<ul>
+<li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
+<li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
+<li>attributes: 指定创建出来的文件夹的属性</li>
+<li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
+<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> flag = [manager createDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/abc"</span> withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>创建文件</strong></p>
+<ul>
+<li>createFileAtPath: 指定文件创建出来的位置</li>
+<li>contents : 文件中的内容</li>
+<li>attributes: 创建出来的文件的属性</li>
+<li>NSData : 二进制数据</li>
+<li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
+<li>NSString *str = @“我叫野原新之助”;</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">[manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/12/19/demonayu/blog/18.copy深浅的规律/" itemprop="url">
+                  copy深浅的规律
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2014-12-19T15:42:57+08:00" content="2014-12-19">
+              2014-12-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/19/demonayu/blog/18.copy深浅的规律/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/19/demonayu/blog/18.copy深浅的规律/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <blockquote>
+<p>只有源对象和副本对象都不可变时，才是浅复制，其它都是深复制.</p>
+</blockquote>
+<ul>
+<li>浅复制（浅拷贝，指针拷贝，shallow copy）<ul>
+<li>源对象和副本对象是同一个对象</li>
+<li>源对象（副本对象）引用计数器+1,相当于做一次retain操作</li>
+<li>本质是：没有产生新的对象</li>
+<li>原对象引用计数器+1</li>
+<li>必须对原对象进行释放</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>深复制（深拷贝，内容拷贝，deep copy）<ul>
+<li>源对象和副本对象是不同的两个对象</li>
+<li>源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</li>
+<li>本质是：产生了新的对象</li>
+<li>必须释放新对象</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://r.loli.io/ee63aa.png" alt=""></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/10/18/demonayu/blog/17.重写可变数组的removeObject:方法/" itemprop="url">
                   重写可变数组的[removeObject:]方法
                 </a>
               
@@ -249,8 +798,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-18T21:51:57+08:00" content="2015-12-18">
-              2015-12-18
+            <time itemprop="dateCreated" datetime="2014-10-18T21:51:57+08:00" content="2014-10-18">
+              2014-10-18
             </time>
           </span>
 
@@ -260,8 +809,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/18/demonayu/blog/22.重写可变数组的removeObject:方法/" itemprop="commentsCount"></span>
+                <a href="/2014/10/18/demonayu/blog/17.重写可变数组的removeObject:方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/18/demonayu/blog/17.重写可变数组的removeObject:方法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -338,422 +887,7 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/17/demonayu/blog/一个应用程序的启动流程/" itemprop="url">
-                  一个应用程序的启动流程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-17T20:30:57+08:00" content="2015-12-17">
-              2015-12-17
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/17/demonayu/blog/一个应用程序的启动流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/demonayu/blog/一个应用程序的启动流程/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="应用程序完整启动流程">应用程序完整启动流程</h2><ol>
-<li>执行Main函数.</li>
-<li><p>在main函数中调用UIApplicationMain函数. </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([AppDelegate class]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建UIApplication对象,并设置UIApplicationMain对象的代理.</p>
-<ul>
-<li>UIApplicationMain的第三个参数就是UIApplication的名称,如果指定为nil,它会默认为UIApplication.(nil == @”UIApplication”);</li>
-<li>UIApplicationMain的第四个参数为UIApplication的代理.</li>
-</ul>
-</li>
-<li>开启一个主运行循环,保证应用程序不退出.  </li>
-<li>加载info.plist程序配置文件.判断info.plist文件当中的key:[Main storyboard file base name]<br>有没有指定storyboard文件,如果有就去加载storyboard文件,如果没有,那么应用程序加载完毕.</li>
-</ol>
-<h3 id="UIApplication">UIApplication</h3><ul>
-<li>UIApplication类提供了对运行在iOS设备上的app集中控制和调度的机制.每一个app有且只有一个UIApplication或者其子类的实例.当程序启动的时候,会调用UIApplicationMain函数,在这个函数中会创建一个UIApplication类的单例,这个单例在整个iOS系统中就是app的抽象.之后你就能够通过shareApplication方法来调用该单例.</li>
-<li>UIApplication对象的主要工作是处理用户事件的路由.它也会给UIcontrol对象分发动作消息.另外,UIApplication还维护了当前App打开的窗口的列表.所以,你通过它能够取到你App中任何一个View.</li>
-<li>这个app实例还实现了一个delegate,接受各种各样程序运行时的事件,比如: 程序启动、低内存警告、程序崩溃等等.</li>
-<li>程序还能通过openURL: 方法来接受和处理一个邮件或者图片文件.比如一个以Email开头的URL将能够唤起Email程序来展示这个邮件.</li>
-<li>UIApplication的编程接口让你能够管理一些硬件指定的行为.比如: <ul>
-<li>控制App来响应设备方向变化</li>
-<li>暂时终止接受触摸事件</li>
-<li>打开或者关闭接近用户脸部的感应</li>
-<li>注册远程消息通知</li>
-<li>打开或者关闭undo-redo UI</li>
-<li>决定你的程序是否能够支持某一类的URL</li>
-<li>扩展程序能力,让app能够在后台运行</li>
-<li>发布或者取消本地通知</li>
-<li>接受运程控制事件</li>
-<li>执行程序级别的复位操作</li>
-</ul>
-</li>
-<li>UIApplication必须实现UIApplicationDelegate协议来实现他的一些协议.</li>
-</ul>
-<h4 id="UIApplication的一些功能具体使用">UIApplication的一些功能具体使用</h4><ul>
-<li><p>设置应用的监听权限</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取当前iOS版本号</span></span><br><span class="line"><span class="keyword">float</span> sysVersion = [[<span class="built_in">UIDevice</span> currentDevice] systemVersion]<span class="variable">.floatValue</span>;</span><br><span class="line"><span class="comment">// iOS8以后必须要获取通知权限才能显示applicationIconBadgeNumber</span></span><br><span class="line"><span class="keyword">if</span> (sysVersion &gt;= <span class="number">8.0</span>) &#123;</span><br><span class="line">    <span class="built_in">UIUserNotificationType</span> type = <span class="built_in">UIUserNotificationTypeBadge</span> | <span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeSound</span>;</span><br><span class="line">    <span class="built_in">UIUserNotificationSettings</span> *setting = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:type categories:<span class="literal">nil</span>];</span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] registerUserNotificationSettings:setting];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>网络提醒(连接网络提示)</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">application<span class="variable">.networkActivityIndicatorVisible</span> = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置状态栏</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 隐藏状态栏</span></span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarHidden:<span class="literal">YES</span> withAnimation:<span class="literal">YES</span>];</span><br><span class="line"><span class="comment">// 状态栏样式</span></span><br><span class="line">application<span class="variable">.statusBarStyle</span> = <span class="built_in">UIStatusBarStyleLightContent</span>;</span><br></pre></td></tr></table></figure>
-<p> 应用程序的状态栏默认是控制器来管理, 但是通常在开发当中都设置为应用程序来统一管理状态栏. 在info.plist当中进行配置:<code>View controller-based status bar appearance : NO</code></p>
-</li>
-<li>跳转页面 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 打开网页</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];</span><br><span class="line"><span class="comment">// 跳转到打电话</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"tel://10000"</span>]];</span><br><span class="line"><span class="comment">// 跳转到发短信</span></span><br><span class="line">[application openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"sms://10000"</span>]];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="应用程序的生命周期">应用程序的生命周期</h2><ul>
-<li><p>应用程序启动完成</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"应用程序启动了"</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"UIApplication调用了我"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序即将失去焦点</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我退出了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序完全进入后台</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationDidEnterBackground:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"进入后台"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序即将进入前台</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationWillEnterForeground:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我回来了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序重新获得焦点</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationDidBecomeActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我刷新了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>应用程序即将关闭</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationWillTerminate:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"我拜拜了"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="应用程序显示流程">应用程序显示流程</h2><ol>
-<li>创建一个窗口 (UIWindow, 系统已经默认创建这个成员属性, 需要手动初始化)</li>
-<li>创建根控制器 (rootViewController)</li>
-<li>给窗口设置根控制器 (window.rootViewController)</li>
-<li><p>显示窗口(makeKeyAndVisible).<br>makeKeyAndVisible方法 : 把窗口设置为应用程序的主窗口. 窗口默认是隐藏的,当调用该方法后, 会设置窗口的hidden = no, 并把这个窗口设置为主窗口并显示.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.创建UIWindow</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span> = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[[<span class="built_in">UIScreen</span> mainScreen] bounds]];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line">    <span class="comment">// 2.初始化根控制器</span></span><br><span class="line">    ViewController *vc = [[ViewController alloc] init];</span><br><span class="line">    <span class="comment">// 3.设置窗口根控制器</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.rootViewController</span> = vc;</span><br><span class="line">    <span class="comment">// 4.把UIWindow 设为当前窗口</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.window</span> makeKeyAndVisible];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ps: window的显示与根控制器中view的显示互不影响. view在window的上面.</p>
-</li>
-</ol>
-<h3 id="控制器view的显示流程">控制器view的显示流程</h3><ol>
-<li><p>先判断控制器是不是从storyboard中加载. </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIStoryboard</span> storyboardWithName:<span class="string">@"Main"</span> bundle:<span class="literal">nil</span>] instantiateInitialViewController];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再判断是不是从xib中加载</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIViewController</span> *vc = [[<span class="built_in">UIViewController</span> alloc] initWithNibName:<span class="string">@"VC"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 1&gt; initWithNibName:如果指定了名称,那么它就会去加载指定名称的Xib.</span></span><br><span class="line"><span class="comment">//  MyViewController *vc =  [[MyViewController alloc] initWithNibName:@"VC" bundle:nil];</span></span><br><span class="line"><span class="comment">// 2&gt; 如果没有指定名称.指定为nil,那么它就会去先加载跟它相同名称的Xib.</span></span><br><span class="line"><span class="comment">//  MyViewController *vc =  [[MyViewController alloc] initWithNibName:nil bundle:nil];</span></span><br><span class="line"><span class="comment">// 3&gt; 如果没有跟它名称相同的Xib,那么它就会去加载去掉Controller后跟它名称相同的Xib</span></span><br></pre></td></tr></table></figure>
-<p>ps: 控制器的<code>init</code>方法默认会调用<code>initWithNibName:</code>方法.</p>
-<p><img src="http://r.loli.io/fuUbqq.png" alt=""></p>
-</li>
-<li><p>如果都不是,控制器会调用loadView方法,创建一个空的UIView.</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当控制器被使用的时候,控制器会调用loadView方法.loadView --&gt; viewDidLoad</span></span><br><span class="line">- (<span class="keyword">void</span>)loadView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span> = [[<span class="built_in">UIView</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>附:在Xcode6以后配置pch文件<br><img src="http://r.loli.io/AzaUje.png" alt=""></p>
-<p> 在pch文件中配置调试模式时运行XWLog(…)代码:<br> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#ifdef DEBUG</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...) NSLog(__VA_ARGS__)</span></span><br><span class="line"><span class="preprocessor">#else</span></span><br><span class="line"><span class="preprocessor">#define XWLog(...)</span></span><br><span class="line"><span class="preprocessor">#endif</span></span><br></pre></td></tr></table></figure></p>
-<p> ps: 在宏当中<code>...</code>表示可变参数.在函数中表示可变参数用:<code>__VA_ARGS__</code>.</p>
-<p> 拓展阅读: <a href="http://www.jianshu.com/p/aa50e5350852?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=writer_share&amp;utm_source=weibo" target="_blank" rel="external">iOS应用程序的生命周期</a>.</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/16/demonayu/blog/监听事件的4种方式/" itemprop="url">
-                  监听事件的4种方式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-16T17:23:57+08:00" content="2015-12-16">
-              2015-12-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/16/demonayu/blog/监听事件的4种方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/demonayu/blog/监听事件的4种方式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="OC中监听事件的4种方法">OC中监听事件的4种方法</h3><ul>
-<li>通知（NSNotificationCenter\NSNotification）<ul>
-<li>任何对象之间都可以传递消息</li>
-<li>1个对象可以发通知给多个对象</li>
-<li>1个对象可以接受多个对象发出的通知</li>
-<li>要求:必须得保证通知的名字在发出和监听时是一致的</li>
-</ul>
-</li>
-<li>KVO<ul>
-<li>仅仅是能监听对象属性的改变（灵活度不如通知和代理）</li>
-<li>只能作用在单个文件</li>
-</ul>
-</li>
-<li>代理 <ul>
-<li>协议就是接口, 提供方法的声明来给代理去实现.</li>
-<li>1个对象只能设置一个代理(假设这个对象只有1个代理属性)</li>
-<li>1个对象能成为多个对象的代理</li>
-</ul>
-</li>
-<li>target<ul>
-<li>继承UIControl的类都能使用addTarget方法来监听事件</li>
-<li>必须在控件创建时就添加监听行为</li>
-<li>一个对象只能监听一个事件点击</li>
-<li>只能作用在单个文件</li>
-</ul>
-</li>
-</ul>
-<h3 id="如何选择?">如何选择?</h3><ul>
-<li><code>target</code>用于监听控件的点击/长按等触发事件</li>
-<li><code>通知</code>适用于层级很深或者两个没有关联的类之间的事件监听</li>
-<li><code>KVO</code>适用于监听对象某个属性的改变</li>
-<li><code>代理</code>比<code>通知</code>规范,建议使用<code>代理</code>多于<code>通知</code>,能使用代理尽量使用代理</li>
-</ul>
-<h3 id="监听方式的核心代码">监听方式的核心代码</h3><ul>
-<li><p><strong>通知</strong><br>notificationName: 通知内容(key)<br>object: 通知发布者<br>userInfo: 发布者附带的信息 </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 发布通知</span></span><br><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] postNotificationName:key object:object userInfo:userInfo];</span><br></pre></td></tr></table></figure>
-<p>observer: 监听者<br>selector: 监听后执行的方法<br>name: 通知内容(key)<br>object: 通知发布者</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加监听者</span></span><br><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:observer selector:<span class="keyword">@selector</span>(selector:) name:name object:object];</span><br></pre></td></tr></table></figure>
-<p>注意: 有添加就要有移除, 一般移除监听写在dealloc方法中  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 移除监听</span></span><br><span class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] removeObserver:<span class="keyword">self</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p><strong>KVO</strong><br>object: 被监听者<br>observer: 监听者<br>keyPath: 被监听者的属性<br>options: 监听模式(内容)<br>context: 上下文   </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加监听</span></span><br><span class="line">[object addObserver:observer forKeyPath:keyPath options:options context:context];</span><br></pre></td></tr></table></figure>
-<p>keyPath: 被监听的属性<br>object: 被监听的对象<br>change: 被监听属性值的改变情况(字典)<br>context: 上下文</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 实现监听方法</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 监听当_per这个成员变量的age这个属性发生改变时</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == _person) &#123;</span><br><span class="line">        <span class="comment">// 给控制器的成员变量赋新值</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p><strong>代理</strong><br>@required: 代理方法必须实现(默认)<br>@optional: 代理方法选择实现  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义协议</span></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span>  <span class="title">XVFooterBarDelegate</span>&lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line">- (<span class="keyword">void</span>)footbarValueChanged:(XVFooterBar *)footbar;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加代理</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="keyword">id</span>&lt;XVFooterBarDelegate&gt; delegate;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)cleanBuy</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 添加代理的事件监听</span></span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span><span class="variable">.delegate</span> respondsToSelector:<span class="keyword">@selector</span>(footbarValueChanged:)]) &#123;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.delegate</span> footbarValueChanged:<span class="keyword">self</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">  <span class="comment">// 在代理的类中实现代理方法</span></span><br><span class="line">  - (<span class="keyword">void</span>)footbarValueChanged:(XVFooterBar *)footbar</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><strong>target</strong><br>target: 监听者<br>action: 要执行的方法<br>controlEvents:触发事件    <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加监听</span></span><br><span class="line">- (<span class="keyword">void</span>)addTarget:(nullable <span class="keyword">id</span>)target action:(SEL)action forControlEvents:(<span class="built_in">UIControlEvents</span>)controlEvents;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/16/demonayu/blog/TableView自定义header/" itemprop="url">
-                  TableView自定义header
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-16T11:03:57+08:00" content="2015-12-16">
-              2015-12-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/16/demonayu/blog/TableView自定义header/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/demonayu/blog/TableView自定义header/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="自定义tableView的header,_利用转换坐标系来达到header的停留与跟随">自定义tableView的header, 利用转换坐标系来达到header的停留与跟随</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define toolbarH 44</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> () &lt;<span class="title">UITableViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UITableView</span> *tableView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIView</span> *toolbar;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建tableView</span></span><br><span class="line">    <span class="built_in">UITableView</span> *tableView = [[<span class="built_in">UITableView</span> alloc] init];</span><br><span class="line">    tableView<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置tableView的内边距的top位置为toolbar的高</span></span><br><span class="line">    tableView<span class="variable">.contentInset</span> = <span class="built_in">UIEdgeInsetsMake</span>(toolbarH, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    tableView<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:tableView];</span><br><span class="line">    _tableView = tableView;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建toolbar</span></span><br><span class="line">    <span class="built_in">CGFloat</span> toolbarW = <span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">UIView</span> *toolbar = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    toolbar<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, -toolbarH, toolbarW, toolbarH);</span><br><span class="line">    toolbar<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> addSubview:toolbar];</span><br><span class="line">    _toolbar = toolbar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UIScrollViewDelegate</span></span><br><span class="line"><span class="comment">// 模拟tableView plain模式的header停留</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 存放新Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> newY = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (toolbarH + scrollView<span class="variable">.contentOffset</span><span class="variable">.y</span> &gt; <span class="number">0</span>) &#123; <span class="comment">// 向上拖拽偏移量减少 - 转换坐标系</span></span><br><span class="line">        <span class="comment">// 转换坐标系</span></span><br><span class="line">        <span class="built_in">UIWindow</span> *window = [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.windows</span><span class="variable">.lastObject</span>;</span><br><span class="line">        [window addSubview:<span class="keyword">self</span><span class="variable">.toolbar</span>];</span><br><span class="line">        newY = [<span class="keyword">self</span><span class="variable">.tableView</span> convertRect:<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.bounds</span> toView:window]<span class="variable">.origin</span><span class="variable">.y</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 向下拖拽时偏移量增加 - toolBar跟随tableView</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.tableView</span> addSubview:<span class="keyword">self</span><span class="variable">.toolbar</span>];</span><br><span class="line">        newY = -toolbarH;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 更新frame</span></span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.toolbar</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.origin</span><span class="variable">.y</span> = newY;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.toolbar</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/14/demonayu/blog/模型控制View的显示demo/" itemprop="url">
+                <a class="post-title-link" href="/2014/10/12/demonayu/blog/16.模型控制View的显示demo/" itemprop="url">
                   TableView中MVC模式的简单应用
                 </a>
               
@@ -764,8 +898,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-14T20:31:57+08:00" content="2015-12-14">
-              2015-12-14
+            <time itemprop="dateCreated" datetime="2014-10-12T20:31:57+08:00" content="2014-10-12">
+              2014-10-12
             </time>
           </span>
 
@@ -775,8 +909,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/14/demonayu/blog/模型控制View的显示demo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/demonayu/blog/模型控制View的显示demo/" itemprop="commentsCount"></span>
+                <a href="/2014/10/12/demonayu/blog/16.模型控制View的显示demo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/12/demonayu/blog/16.模型控制View的显示demo/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -846,124 +980,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/" itemprop="url">
-                  Github, Gitcafe和 Coding的Pages服务对比
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-14T12:01:57+08:00" content="2015-12-14">
-              2015-12-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ul>
-<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
-</li>
-<li><p>说说心得:</p>
-<ul>
-<li>github: 稳定,除了网络抽风push的时候有点慢和国内的搜索引擎可能爬不到,其他完美仍然是首选.</li>
-<li>gitcafe: 据说服务器在香港,相比github访问速度要快一些,但是最近很不稳定,比如昨天就宕机了很久,导致博客打不开,之后push上去的新内容不能及时更新.不知道是不是我昨天运气不好,等稳定了再说.</li>
-<li>coding: 速度快,而且界面友好,但是不支持免费自定义域名,需要花钱办会员,对于没有绑定域名需求的朋友还是很推荐的.</li>
-</ul>
-</li>
-<li><p>最后: 我还是推荐把github作为主站,然后把gitcafe作为镜像用于国内的搜索引擎去收入(使用dnspods把gitcafe.io解析为搜索引擎线路).coding作为备份网站,当前面两个网站打不开的时候救急.</p>
-<blockquote>
-<p>最后的最后, 生命止于折腾.</p>
-</blockquote>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1010,7 +1026,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1024,7 +1040,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
