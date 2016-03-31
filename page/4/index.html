@@ -233,117 +233,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/" itemprop="url">
-                  NSFileManager和NSFileHandle的常用方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-04-30T19:52:57+08:00" content="2015-04-30">
-              2015-04-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="NSFileManager">NSFileManager</h2><ul>
-<li><p>创建一个文件管理者对象</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件与目录的操作</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">createFileAtPath:    <span class="comment">// 创建文件</span></span><br><span class="line">copyItemAtPath:    <span class="comment">// 复制文件</span></span><br><span class="line">moveItemAtPath:    <span class="comment">// 移动文件</span></span><br><span class="line">removeItemFileAtPath:    <span class="comment">// 删除文件</span></span><br><span class="line">attributesOfItemAtPath:    <span class="comment">// 获取文件的属性</span></span><br><span class="line">setAttributes:    <span class="comment">// 更改属性</span></span><br><span class="line">currentDirectoryPath:    <span class="comment">// 获取当前的目录</span></span><br><span class="line">changeCurrentDirectoryPath:    <span class="comment">// 更改目录</span></span><br><span class="line">createDirectoryAtPath:    <span class="comment">//  创建目录</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取文件和目录信息</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">contentsAtPath:    <span class="comment">// 获取文件中的信息</span></span><br><span class="line">enumeratorAtPath:    <span class="comment">// 枚举目录</span></span><br><span class="line">contentsOfDirectoryAtPath:    <span class="comment">// 列举目录</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>判断文件</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">fileExistsAtPath:    <span class="comment">// 判断文件是否存在</span></span><br><span class="line">isReadableFile:    <span class="comment">// 判断是否能进行读取操作</span></span><br><span class="line">isWritableFileAtPath:    <span class="comment">// 判断是否能进行写入操作</span></span><br><span class="line">isDeletableFileAtPath:    <span class="comment">// 判断是否可删除</span></span><br><span class="line">isExecutableFileAtPath:    <span class="comment">// 判断是否可以执行</span></span><br><span class="line">contentsEqualAtPath:    <span class="comment">// 判断是否相等</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>目录工具函数</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSUserName</span>()    <span class="comment">// 函数:返回登录名</span></span><br><span class="line"><span class="built_in">NSFullUserName</span>()    <span class="comment">// 函数:返回完整用户名</span></span><br><span class="line"><span class="built_in">NSHomeDirectory</span>()   <span class="comment">// 函数:返回路径</span></span><br><span class="line"><span class="built_in">NSHomeDirectoryForUser</span>()    <span class="comment">// 函数:返回用户的主目录</span></span><br><span class="line"><span class="built_in">NSTemporaryDirectory</span>()  <span class="comment">// 函数:返回临时文件的路径目录</span></span><br><span class="line">[fileList pathsMatchingExtensions:[<span class="built_in">NSArrayarrayWithObject</span>:<span class="string">@"jpg"</span>]];   <span class="comment">// 过滤数组中的文件类型</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常用路径工具方法</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span> *)pathWithComponents:components        <span class="comment">// 根据components中元素构造有效路径</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)pathComponents        <span class="comment">// 析构路径,获取路径的各个部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)lastPathComponent        <span class="comment">// 提取路径的最后一个组成部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)pathExtension        <span class="comment">// 路径扩展名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByAppendingPathComponent:path        <span class="comment">// 将path添加到现有路径末尾</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByAppendingPathExtension:ext        <span class="comment">// 将拓展名添加的路径最后一个组成部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByDeletingPathComponent        <span class="comment">// 删除路径的最后一个部分</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByDeletingPathExtension        <span class="comment">// 删除路径的最后一个部分 的扩展名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByExpandingTildeInPath        <span class="comment">// 将路径中的代字符扩展成用户主目录(~)或指定用户主目录(~user)</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByResolvingSymlinksInPath        <span class="comment">// 尝试解析路径中的符号链接</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)stringByStandardizingPath        <span class="comment">// 通过尝试解析~、..、.、和符号链接来标准化路径</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="NSFileHandle">NSFileHandle</h2><ul>
-<li>文件读取 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">init:    <span class="comment">// 初始化文件读写对象</span></span><br><span class="line">fileHandleForReadingAtPath:    <span class="comment">// 读取时打开文件</span></span><br><span class="line">fileHandleForWritingAtPath:    <span class="comment">// 写入时打开文件</span></span><br><span class="line">fileHandleForUpdatingAtPath:    <span class="comment">// 更新时打开文件</span></span><br><span class="line">writeData:    <span class="comment">// 数据写入文件</span></span><br><span class="line">readDataToEndOfFile:    <span class="comment">// 读取数据</span></span><br><span class="line">readDataOfLength:    <span class="comment">// 读取固定大小的内容</span></span><br><span class="line">offsetInFile:    <span class="comment">// 获取当前偏移量</span></span><br><span class="line">seekToFileOffset:    <span class="comment">// 设置当前的偏移量</span></span><br><span class="line">seekToEndOfFile:    <span class="comment">// 将偏移量定位到文件尾</span></span><br><span class="line">truncateFileAtOffset:    <span class="comment">// 设置字节</span></span><br><span class="line">availableData:    <span class="comment">// 返回可用数据</span></span><br><span class="line">closeFile:    <span class="comment">// 关闭文件</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息">NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSProcessInfo</span> *)processInfo        <span class="comment">// 返回当前进程的信息</span></span><br><span class="line">- (<span class="built_in">NSArray</span>*)arguments        <span class="comment">// 以NSString对象数字的形式返回当前进程的参数</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)environment        <span class="comment">//  返回变量/值对词典。描述当前的环境变量</span></span><br><span class="line">- (<span class="keyword">int</span>)processIdentity        <span class="comment">// 返回进程标识</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)processName        <span class="comment">// 返回进程名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)globallyUniqueString        <span class="comment">// 每次调用该方法都会返回不同的单值字符串，可以用这个字符串生成单值临时文件名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)hostname        <span class="comment">// 返回主机系统的名称</span></span><br><span class="line">- (<span class="keyword">unsigned</span> <span class="keyword">int</span>)operatingSystem        <span class="comment">// 返回表示操作系统的数字</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemName        <span class="comment">// 返回操作系统名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemVersionString        <span class="comment">// 返回操作系统当前版本</span></span><br><span class="line">- (<span class="keyword">void</span>)setProcessName:(<span class="built_in">NSString</span> *)name        <span class="comment">// 将当前进程名称设置为name</span></span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/04/02/demonayu/blog/27.TableVIew单元格多图下载/" itemprop="url">
                   TableVIew单元格多图下载
                 </a>
@@ -879,6 +768,127 @@
 <p>为UIimage增加一个分类类方法,在实例化图片时就对其进行裁剪</p>
 </blockquote>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="preprocessor">#import <span class="title">"UIImage+ClipImage.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">ClipImage</span>)</span></span><br><span class="line">+ (instancetype)imageNamed:(<span class="built_in">NSString</span> *)name withClipShape:(ClipShape)shape;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="keyword">self</span> imageNamed:name];</span><br><span class="line">    <span class="comment">// 开启一个上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(image<span class="variable">.size</span>, <span class="literal">NO</span>, <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 设置为模具</span></span><br><span class="line">    <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithCircle: &#123; <span class="comment">// 圆</span></span><br><span class="line">            <span class="built_in">CGFloat</span> radius = image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>;</span><br><span class="line">            <span class="built_in">CGPoint</span> center = <span class="built_in">CGPointMake</span>(radius, radius);</span><br><span class="line">            <span class="built_in">UIBezierPath</span> *circlePath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">            <span class="comment">// 设置裁剪区</span></span><br><span class="line">            [circlePath addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithtriangle: &#123; <span class="comment">// 三角形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            <span class="comment">// 关闭路径</span></span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithRhombus: &#123; <span class="comment">// 菱形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 画出裁剪范围</span></span><br><span class="line">    [image drawAtPoint:<span class="built_in">CGPointZero</span>];</span><br><span class="line">    <span class="comment">// 将当前上下文的内容转成图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 关闭上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/25/demonayu/blog/22.手势识别基本使用/" itemprop="url">
+                  使用手势识别来简化事件处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-01-25T09:31:57+08:00" content="2015-01-25">
+              2015-01-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/25/demonayu/blog/22.手势识别基本使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/demonayu/blog/22.手势识别基本使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
+<li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
+<li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
+<li>手势有以下几种:<ul>
+<li>UITapGestureRecognizer(敲击)</li>
+<li>UIPinchGestureRecognizer(捏合，用于缩放)</li>
+<li>UIPanGestureRecognizer(拖拽)</li>
+<li>UISwipeGestureRecognizer(轻扫)</li>
+<li>UIRotationGestureRecognizer(旋转)</li>
+<li>UILongPressGestureRecognizer(长按)</li>
+</ul>
+</li>
+<li><p>手势使用方法:</p>
+<ul>
+<li><p>创建手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个拖动手势</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现手势方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>拖动的状态</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"开始"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateChanged</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移动"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>)&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"移开"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动状态复位</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//复位 - 因为setTranslation会基于上一次的改变</span></span><br><span class="line">[pan setTranslation:<span class="built_in">CGPointZero</span> inView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手势常用的代理方法</p>
+ <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
             
           </span>
         

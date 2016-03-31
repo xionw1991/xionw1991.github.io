@@ -233,111 +233,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/05/demonayu/blog/iOS面试题/" itemprop="url">
-                  iOS面试题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-10-05T13:01:57+08:00" content="2015-10-05">
-              2015-10-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/05/demonayu/blog/iOS面试题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/05/demonayu/blog/iOS面试题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>这是从简书上拷贝下来题目,没事自己做做.</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/05/demonayu/blog/iOS面试题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/09/20/demonayu/blog/39.UIAlertView在IOS9中的使用/" itemprop="url">
                   UIAlertView在iOS9中的使用
                 </a>
@@ -1092,6 +987,109 @@
               阅读全文 &raquo;
             </a>
           </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/02/demonayu/blog/34.UIButton调换文字与图片位置的两种方法/" itemprop="url">
+                  UIButton调换文字与图片位置的两种方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-08-02T10:12:57+08:00" content="2015-08-02">
+              2015-08-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/02/demonayu/blog/34.UIButton调换文字与图片位置的两种方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/02/demonayu/blog/34.UIButton调换文字与图片位置的两种方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置button文字</span></span><br><span class="line">        [<span class="keyword">self</span> setTitle:<span class="string">@"title"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置button图片</span></span><br><span class="line">        [<span class="keyword">self</span> setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置文字大小</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>];</span><br><span class="line">        <span class="comment">// 设置图片居中</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeCenter</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="第一种_-_重写layoutSubviews方法来实现">第一种 - 重写<code>layoutSubviews</code>方法来实现</h3><ol>
+<li><p>重写<code>layoutSubviews</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)layoutSubviews</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> layoutSubviews];</span><br><span class="line">    <span class="comment">// 修改titleButton里面子控件的位置</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span> &lt; <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>) &#123; </span><br><span class="line">        <span class="comment">// 1. 取出title和image的frame</span></span><br><span class="line">        <span class="built_in">CGRect</span> titleFrame = <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span>;</span><br><span class="line">        <span class="built_in">CGRect</span> imageFrame = <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span>;</span><br><span class="line">        <span class="comment">// 2. 调整title和imageView的x值</span></span><br><span class="line">        titleFrame<span class="variable">.origin</span><span class="variable">.x</span> = imageFrame<span class="variable">.origin</span><span class="variable">.x</span>;</span><br><span class="line">        imageFrame<span class="variable">.origin</span><span class="variable">.x</span> = <span class="built_in">CGRectGetMaxX</span>(titleFrame) + <span class="number">5</span>;</span><br><span class="line">        <span class="comment">// 3. 重新赋值</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.frame</span> = titleFrame;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.frame</span> = imageFrame;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写<code>setImage: forState:</code>和<code>setTitle: forState:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 重写父类setImage方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setImage:(<span class="built_in">UIImage</span> *)image forState:(<span class="built_in">UIControlState</span>)state</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> setImage:image forState:state];</span><br><span class="line">    <span class="comment">// 自动计算尺寸</span></span><br><span class="line">    [<span class="keyword">self</span> sizeToFit];</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">// 重写父类setTitle方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setTitle:(<span class="built_in">NSString</span> *)title forState:(<span class="built_in">UIControlState</span>)state</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> setTitle:title forState:state];</span><br><span class="line">    <span class="comment">// 自动计算尺寸</span></span><br><span class="line">    [<span class="keyword">self</span> sizeToFit];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="第二种_-_重写titleRectForContentRect:和imageRectForContentRect:方法来实现">第二种 - 重写<code>titleRectForContentRect:</code>和<code>imageRectForContentRect:</code>方法来实现</h3><ol>
+<li><p>重写<code>titleRectForContentRect:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 返回文字的位置</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)titleRectForContentRect:(<span class="built_in">CGRect</span>)contentRect</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleX = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleY = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleW = [<span class="keyword">self</span><span class="variable">.currentTitle</span> boundingRectWithSize:<span class="built_in">CGSizeMake</span>(MAXFLOAT, MAXFLOAT)</span><br><span class="line">                                                     options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                                                  attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>]&#125;</span><br><span class="line">                                                     context:<span class="literal">nil</span>]<span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> titleH = contentRect<span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(titleX, titleY, titleW, titleH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写<code>imageRectForContentRect:</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 返回图片位置</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)imageRectForContentRect:(<span class="built_in">CGRect</span>)contentRect</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageW = <span class="number">16</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageH = contentRect<span class="variable">.size</span><span class="variable">.height</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageX = contentRect<span class="variable">.size</span><span class="variable">.width</span> - imageW;</span><br><span class="line">    <span class="built_in">CGFloat</span> imageY = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(imageX, imageY, imageW, imageH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+            
+          </span>
         
       
     </div>

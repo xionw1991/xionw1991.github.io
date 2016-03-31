@@ -545,148 +545,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/05/demonayu/blog/08.KVC和KVO/" itemprop="url">
-                  KVC和KVO简单使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-05T19:36:57+08:00" content="2015-12-05">
-              2015-12-05
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/05/demonayu/blog/08.KVC和KVO/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/05/demonayu/blog/08.KVC和KVO/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="KVC">KVC</h2><h3 id="KVC的一般使用">KVC的一般使用</h3><ul>
-<li>全称：Key Value Coding（键值编码）</li>
-<li><p>赋值</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能修改私有成员变量</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span> *)keyedValues;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>取值</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 能取得私有成员变量的值</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span> *)keys;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="KVC的底层原理">KVC的底层原理</h3><ul>
-<li><p>KVC的本质就是调用成员属性的setter和getter方法.</p>
-</li>
-<li><p><code>setValuesForKeysWithDictionary:</code>方法的底层实现  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历字典给对应模型的成员属性赋值(key值就是成员属性名)</span></span><br><span class="line">  [dict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">      [item setValue:obj forKeyPath:key];</span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p><code>setValue:forKeyPath:</code>的底层实现:</p>
-<ol>
-<li>调用key对应成员属性名的setter方法;</li>
-<li>如果找不到,找带下划线(_)的成员属性名,然后给这个成员属性直接赋值.</li>
-<li>如果找不到,找与key名完全相同的成员属性名,然后直接赋值.</li>
-<li>如果都找不到,则程序崩溃,报错找不到对应的成员属性.</li>
-</ol>
-<p>ps: 可以利用KVC的实现原理来重写赋值过程</p>
-</li>
-<li><p>容器操作符:KVC还提供了一些复杂的函数操作符,比如:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *array = @[<span class="string">@"aba"</span>,<span class="string">@"cbc"</span>,<span class="string">@"dvd"</span>];</span><br><span class="line"><span class="built_in">NSUInteger</span> totalLenth = [[array valueForKeyPath:<span class="string">@"@sum.length"</span>] intValue];</span><br></pre></td></tr></table></figure>
-<p>其中key值里面包含的<code>@sum</code>就是一个操作符, 能够对指定的属性(length)求和.类似数据操作的还有:<code>@avg</code>平均值, <code>@count</code> 总数, <code>@max</code>最大, <code>@min</code>最小.注:以上这些操作符只能用于集合(如:NSArray).</p>
-</li>
-</ul>
-<h2 id="KVO">KVO</h2><h3 id="KVO的一般使用">KVO的一般使用</h3><ul>
-<li>全称：Key Value Observing（键值监听）</li>
-<li>作用：监听模型的属性值改变</li>
-<li><p>步骤</p>
-<ul>
-<li><p>添加监听器</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 利用b对象来监听a对象name属性的改变</span></span><br><span class="line">[a addObserver:b forKeyPath:<span class="string">@"name"</span> options:<span class="built_in">NSKeyValueObservingOptionOld</span> | <span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="string">@"test"</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在监听器中实现监听方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span> *)change     context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@ %@ %@ %@"</span>, object, keyPath, change, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>举例:</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1&gt; 在控制器中创建和初始化成员变量</span></span><br><span class="line"><span class="keyword">self</span><span class="variable">.person</span> = [[Person alloc] initWithName:<span class="string">@"Xion"</span> age:<span class="number">23</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2&gt; 添加观察者 self.person将控制器添加为监听自己的观察者,来观察age属性的改变</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.person</span> addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"age"</span> options:<span class="number">0</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加一个button操作来修改成员变量的值</span></span><br><span class="line">- (<span class="keyword">void</span>)buttonClick</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 改变成员变量属性值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.person</span><span class="variable">.age</span> += <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3&gt; 控制器监听值的改变</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当监听的值为age, 且监听的对象为self.person</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"age"</span>] &amp;&amp; object == <span class="keyword">self</span><span class="variable">.person</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新显示</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.label</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@现在的年龄是%lu"</span>, _person<span class="variable">.name</span>, _person<span class="variable">.age</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="KVO的底层原理">KVO的底层原理</h3><ul>
-<li>一句话概括: 系统利用runtime动态添加一个被监听类(以NSKVONotifying_开头)的子类, 在该子类中重写需要被监听key值的setter方法,在内部调用<code>willChangeValueForKey:</code> <code>didChangeValueForKey:</code>方法来监听key值得变化.</li>
-<li>ps:苹果不希望这个机制暴露在外部.除了setters,这个动态生成的子类同时也重写了<code>-class</code>方法,依旧返回原先的class!如果不仔细看的话,被KVO过的object看起来和原先的object没什么两样.</li>
-<li>参考建议: <a href="http://limboy.me/ios/2013/08/05/internal-implementation-of-kvo.html" target="_blank" rel="external">(译)KVO的内部实现</a>, <a href="http://blog.sunnyxx.com/2014/03/09/objc_kvo_secret/" target="_blank" rel="external">objc kvo简单探索</a>.</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/12/04/demonayu/blog/41.图片折叠小demo/" itemprop="url">
                   图片折叠小demo
                 </a>
@@ -843,6 +701,111 @@
 
             
           </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/05/demonayu/blog/iOS面试题/" itemprop="url">
+                  iOS面试题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-10-05T13:01:57+08:00" content="2015-10-05">
+              2015-10-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/05/demonayu/blog/iOS面试题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/05/demonayu/blog/iOS面试题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>这是从简书上拷贝下来题目,没事自己做做.</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/05/demonayu/blog/iOS面试题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
