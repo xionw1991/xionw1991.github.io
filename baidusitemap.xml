@@ -3,6 +3,24 @@
 
 
     
+    
+  <url>
+    <loc>http://xionv.com/2015/10/08/demonayu/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2016-04-01T02:46:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>调用系统相册的两种方法</title>
+        <pubTime>2015-10-08T07:59:57.000Z</pubTime>
+        
+        <tag>iOS工具类</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://xionv.com/2014/12/22/demonayu/blog/20.NSArray%E5%92%8CNSDictionary%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E6%89%93%E5%8D%B0/</loc>
     <lastmod>2016-03-31T11:16:42.000Z</lastmod>
@@ -19,7 +37,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://xionv.com/2014/03/16/demonayu/blog/08.KVC%E5%92%8CKVO/</loc>
@@ -74,31 +91,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/04/demonayu/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/</loc>
+    <loc>http://xionv.com/2015/01/25/demonayu/blog/22.%E6%89%8B%E5%8A%BF%E8%AF%86%E5%88%AB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-03-31T10:05:06.000Z</lastmod>
     <data>
         <display>
-        <title>图片折叠小demo</title>
-        <pubTime>2015-12-04T14:40:57.000Z</pubTime>
+        <title>使用手势识别来简化事件处理</title>
+        <pubTime>2015-01-25T01:31:57.000Z</pubTime>
         
-        <tag>iOS中级 - demo</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://xionv.com/2015/10/08/demonayu/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2016-03-31T10:05:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>调用系统相册的两种方法</title>
-        <pubTime>2015-10-08T07:59:57.000Z</pubTime>
-        
-        <tag>iOS工具类</tag>
+        <tag>iOS概念</tag>
          
          
            
@@ -432,14 +432,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/01/25/demonayu/blog/22.%E6%89%8B%E5%8A%BF%E8%AF%86%E5%88%AB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://xionv.com/2015/12/04/demonayu/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/</loc>
     <lastmod>2016-03-31T10:05:06.000Z</lastmod>
     <data>
         <display>
-        <title>使用手势识别来简化事件处理</title>
-        <pubTime>2015-01-25T01:31:57.000Z</pubTime>
+        <title>图片折叠小demo</title>
+        <pubTime>2015-12-04T14:40:57.000Z</pubTime>
         
-        <tag>iOS概念</tag>
+        <tag>iOS中级 - demo</tag>
          
          
            

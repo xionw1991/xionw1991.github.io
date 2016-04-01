@@ -65,7 +65,7 @@
 
 调用系统相册需要先实例化一个照片选择控制器
 // 1. 创建照片选择器UIImagePickerController *picker = [[UIImagePickerController alloc] init];// 2. 设置数据源类型(是相册还是照相机)picker.sourceType = UIImagePickerControllerSourceTypeSavedPho">
-<meta property="og:updated_time" content="2016-03-31T10:05:06.000Z">
+<meta property="og:updated_time" content="2016-04-01T02:46:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="调用系统相册的两种方法">
 <meta name="twitter:description" content="调用系统相册
@@ -291,11 +291,13 @@
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将图片保存到用户相册里面</span></span><br><span class="line"><span class="comment">// image: 将要保存的图片</span></span><br><span class="line"><span class="comment">// target: 方法监听者</span></span><br><span class="line"><span class="comment">// SEL: 保存图片完成时调用的方法(系统规定写法,用来监听保存状态)</span></span><br><span class="line"><span class="comment">// contextInfo: 上下文信息</span></span><br><span class="line"><span class="built_in">UIImageWriteToSavedPhotosAlbum</span>(image, <span class="keyword">self</span>, <span class="keyword">@selector</span>(image:didFinishSavingWithError:contextInfo:), <span class="literal">nil</span>);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>实现监听方法</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 保存相册后回调的监听方法</span></span><br><span class="line"> - (<span class="keyword">void</span>)image:(<span class="built_in">UIImage</span> *)image didFinishSavingWithError:(<span class="built_in">NSError</span> *)error contextInfo:(<span class="keyword">void</span> *)contextInfo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 保存相册后回调的监听方法</span></span><br><span class="line"> - (<span class="keyword">void</span>)image:(<span class="built_in">UIImage</span> *)image didFinishSavingWithError:(<span class="built_in">NSError</span> *)error contextInfo:(<span class="keyword">void</span> *)contextInfo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 </li>
 </ul>
-</span>
+<pre><code>待续...
+</code></pre></span>
       
     </div>
 
