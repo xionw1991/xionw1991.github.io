@@ -82,7 +82,7 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 <meta property="og:image" content="http://r6.loli.io/NNvIvy.png">
 <meta property="og:image" content="http://r5.loli.io/YryMbm.png">
 <meta property="og:image" content="http://r5.loli.io/iyUn22.png">
-<meta property="og:updated_time" content="2016-03-31T10:05:06.000Z">
+<meta property="og:updated_time" content="2016-04-02T15:18:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="核心动画与UIView动画的对比">
 <meta name="twitter:description" content="CALayer
@@ -397,6 +397,10 @@ UIView之所以能够显示,就是因为它里面有这个一个层,才具有显
 </li>
 <li>UIView和CALayer该怎样选择?<ul>
 <li>对比CALayer,UIView多了一个事件处理的功能.也就是说CALayer不能处理用户的触摸事件,而UIView可以,如果显示出来的东西需要跟用户进行交互的话,用UIView;如果不需要跟用户进行交互,用UIView或者CALayer都可以.CALayer的性能会高一些,因为它少了事件处理的功能,更加轻量级.</li>
+</ul>
+</li>
+<li>猜想：<ul>
+<li>View持有CALayer用于显示，View中大部分用于显示的属性都是有layer映射过来的。是否Layer 的 delegate 在这里是 View，当其属性改变、动画产生时，View 能够得到通知。也就是说，UIView的动画只是对核心动画的一层封装，在动画完成后也同时改变了View的一些属性。UIView 和 CALayer 不是线程安全的，并且只能在主线程创建、访问和销毁。</li>
 </ul>
 </li>
 </ul>

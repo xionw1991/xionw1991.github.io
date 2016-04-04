@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS初步," />
+  <meta name="keywords" content="iOS小技巧," />
 
 
 
@@ -53,56 +53,16 @@
 
 
 
-<meta name="description" content="模型视图控制器之间:
-模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.
-模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.
-人机之间的交互由控制器完成
-视图和模型互不干扰.  
-作用: 便于代码的管理和阅读
-图解:by斯坦福大叔
-
-
-
-
-用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:
-
-自定义一个cell (">
+<meta name="description" content="实现tableView顶部图片下拉放大功能 @interface ViewController () &amp;lt;UITableViewDataSource, UITableViewDelegate&amp;gt;@property (weak, nonatomic) IBOutlet UITableView *tableView;@property(nonatomic, weak) UIImageView">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TableView中MVC模式的简单应用">
-<meta property="og:url" content="http://xionv.com/2014/10/12/demonayu/blog/16.模型控制View的显示demo/index.html">
+<meta property="og:title" content="TableView顶部图片下拉放大">
+<meta property="og:url" content="http://xionv.com/2014/09/13/demonayu/blog/16.TableView顶部图片下拉放大demo/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="模型视图控制器之间:
-模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.
-模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.
-人机之间的交互由控制器完成
-视图和模型互不干扰.  
-作用: 便于代码的管理和阅读
-图解:by斯坦福大叔
-
-
-
-
-用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:
-
-自定义一个cell (">
-<meta property="og:image" content="http://r5.loli.io/yIfmQ3.png">
-<meta property="og:updated_time" content="2016-03-31T10:05:06.000Z">
+<meta property="og:description" content="实现tableView顶部图片下拉放大功能 @interface ViewController () &amp;lt;UITableViewDataSource, UITableViewDelegate&amp;gt;@property (weak, nonatomic) IBOutlet UITableView *tableView;@property(nonatomic, weak) UIImageView">
+<meta property="og:updated_time" content="2016-04-02T15:27:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TableView中MVC模式的简单应用">
-<meta name="twitter:description" content="模型视图控制器之间:
-模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.
-模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.
-人机之间的交互由控制器完成
-视图和模型互不干扰.  
-作用: 便于代码的管理和阅读
-图解:by斯坦福大叔
-
-
-
-
-用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:
-
-自定义一个cell (">
+<meta name="twitter:title" content="TableView顶部图片下拉放大">
+<meta name="twitter:description" content="实现tableView顶部图片下拉放大功能 @interface ViewController () &amp;lt;UITableViewDataSource, UITableViewDelegate&amp;gt;@property (weak, nonatomic) IBOutlet UITableView *tableView;@property(nonatomic, weak) UIImageView">
 
 
 
@@ -114,7 +74,7 @@
   };
 </script>
 
-  <title> TableView中MVC模式的简单应用 | XionVV Coding </title>
+  <title> TableView顶部图片下拉放大 | XionVV Coding </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +225,7 @@
             
             
               
-                TableView中MVC模式的简单应用
+                TableView顶部图片下拉放大
               
             
           </h1>
@@ -274,8 +234,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2014-10-12T20:31:57+08:00" content="2014-10-12">
-              2014-10-12
+            <time itemprop="dateCreated" datetime="2014-09-13T22:31:57+08:00" content="2014-09-13">
+              2014-09-13
             </time>
           </span>
 
@@ -285,8 +245,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/10/12/demonayu/blog/16.模型控制View的显示demo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/12/demonayu/blog/16.模型控制View的显示demo/" itemprop="commentsCount"></span>
+                <a href="/2014/09/13/demonayu/blog/16.TableView顶部图片下拉放大demo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/13/demonayu/blog/16.TableView顶部图片下拉放大demo/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -305,34 +265,7 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="模型视图控制器之间:">模型视图控制器之间:</h3><ul>
-<li>模型与视图互不干涉, 由控制器来处理模型, 然后将模型传给视图显示.</li>
-<li>模型决定视图的显示内容而不是控制器, 控制器负责修改模型和传递模型.</li>
-<li>人机之间的交互由控制器完成</li>
-<li>视图和模型互不干扰.  </li>
-<li><p>作用: 便于代码的管理和阅读</p>
-<p>图解:by斯坦福大叔<br><img src="http://r5.loli.io/yIfmQ3.png" alt=""></p>
-</li>
-</ul>
-<hr>
-<ul>
-<li><p>用控制器来管理模型和视图, 通过修改模型来改变显示内容. 以tableView自定义cell为例:</p>
-<ol>
-<li><p>自定义一个cell (View)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重写构造方法</span></span><br><span class="line">- (instancetype)initWithStyle:(<span class="built_in">UITableViewCellStyle</span>)style reuseIdentifier:(<span class="built_in">NSString</span> *)reuseIdentifier</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithStyle:style reuseIdentifier:reuseIdentifier];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    <span class="built_in">UIImageView</span> *checkImg = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    checkImg<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"check"</span>];</span><br><span class="line">    checkImg<span class="variable">.hidden</span> = <span class="literal">YES</span>;</span><br><span class="line">    [<span class="keyword">self</span> addSubview:checkImg];</span><br><span class="line">    _checkImg = checkImg;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 快速创建一个cell</span></span><br><span class="line">+ (instancetype)cellWithTable:(<span class="built_in">UITableView</span> *)tableView</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">XVWineCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];</span><br><span class="line">    <span class="keyword">if</span> (cell == <span class="literal">nil</span>) &#123;</span><br><span class="line">        cell = [[XVWineCell alloc] initWithStyle:<span class="built_in">UITableViewCellStyleSubtitle</span> reuseIdentifier:ID];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在控制器中实现数据源协议, 将自定义cell作为tableView的cell显示, 并将模型传递给cell (Controller)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVWineCell *cell = [XVWineCell cellWithTable:tableView];</span><br><span class="line">    cell<span class="variable">.wine</span> = <span class="keyword">self</span><span class="variable">.wine</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在自定义cell类中重写模型属性的setter方法,给cell中的子控件赋值 (Model)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   - (<span class="keyword">void</span>)setWine:(XVWine *)wine</span><br><span class="line">&#123;</span><br><span class="line">    _wine = wine;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:wine<span class="variable">.image</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = wine<span class="variable">.name</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"￥%@"</span>, wine<span class="variable">.money</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.detailTextLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在控制器中修改模型数据刷新tableView, 这时会来到控制器的数据源方法将所有的cell重新赋予修改后的模型的值,cell的显示内容改变. (Controller)</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">   <span class="comment">// 添加数据</span></span><br><span class="line">    - (<span class="keyword">void</span>)addWine</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 新建一个模型</span></span><br><span class="line">    XVWine *wine = [[XVWine alloc] init];</span><br><span class="line">    wine<span class="variable">.image</span> = <span class="string">@"newWine"</span>;</span><br><span class="line">    wine<span class="variable">.name</span> = <span class="string">@"新酒"</span>;</span><br><span class="line">    wine<span class="variable">.money</span> = <span class="string">@"999"</span>;</span><br><span class="line">    <span class="comment">// 将新模型添加进数组</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.wine</span> addObject:wine];</span><br><span class="line">    <span class="comment">// cell对应的模型数组的最后一位</span></span><br><span class="line">    <span class="built_in">NSIndexPath</span> *indexPath = [<span class="built_in">NSIndexPath</span> indexPathForRow:(<span class="keyword">self</span><span class="variable">.wine</span><span class="variable">.count</span> - <span class="number">1</span>) inSection:<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// 刷新表格</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> insertRowsAtIndexPaths:@[indexPath] withRowAnimation:<span class="built_in">UITableViewRowAnimationAutomatic</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ul>
-</span>
+        <span itemprop="articleBody"><h2 id="实现tableView顶部图片下拉放大功能">实现tableView顶部图片下拉放大功能</h2> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> () &lt;<span class="title">UITableViewDataSource</span>, <span class="title">UITableViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UITableView</span> *tableView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *photoView;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"><span class="built_in">CGFloat</span> photoViewWH;</span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">// 设定图片的宽高</span></span><br><span class="line">    photoViewWH = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// 设置tableView内边距</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.contentInset</span> = <span class="built_in">UIEdgeInsetsMake</span>(photoViewWH * <span class="number">0.5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">UIImageView</span> *photoView = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    <span class="comment">// 设置图片的位置,保证图片正好在tableView的上面不被覆盖</span></span><br><span class="line">    photoView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, -photoViewWH, photoViewWH, photoViewWH);</span><br><span class="line">    photoView<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"photo"</span>];</span><br><span class="line">    <span class="comment">// 设置图片在photoView中的填充样式,ScaleAspectFill样式可以在图片size变大时,对图片等比例进行拉伸</span></span><br><span class="line">    photoView<span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeScaleAspectFill</span>;</span><br><span class="line">    <span class="comment">// 将photoView插入到tableView的最底层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.tableView</span> insertSubview:photoView atIndex:<span class="number">0</span>];</span><br><span class="line">    _photoView = photoView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UITableViewDataSource</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">    <span class="built_in">UITableViewCell</span> *cell = [tableView dequeueReusableCellWithIdentifier:ID];</span><br><span class="line">    <span class="keyword">if</span> (cell == <span class="literal">nil</span>) &#123;</span><br><span class="line">        cell = [[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:<span class="built_in">UITableViewCellStyleDefault</span> reuseIdentifier:ID];</span><br><span class="line">    &#125;</span><br><span class="line">    cell<span class="variable">.textLabel</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"测试数据&gt;&gt;&gt;%ld"</span>, indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UIScrollViewDelegate</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当tableView的偏移量的y值小于photoView高度的一半时,则不改变photoView的frame.因为偏移量是负数所以这里用加号</span></span><br><span class="line">    <span class="keyword">if</span> (photoViewWH * <span class="number">0.5</span> + scrollView<span class="variable">.contentOffset</span><span class="variable">.y</span> &gt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 取出photoView的frame修改高度后重新赋值</span></span><br><span class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.photoView</span><span class="variable">.frame</span>;</span><br><span class="line">    frame<span class="variable">.size</span><span class="variable">.height</span> =  frame<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span> - scrollView<span class="variable">.contentOffset</span><span class="variable">.y</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.photoView</span><span class="variable">.frame</span> = frame;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
       
     </div>
 
@@ -340,7 +273,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS初步/" rel="tag">#iOS初步</a>
+            <a href="/tags/iOS小技巧/" rel="tag">#iOS小技巧</a>
           
         </div>
       
@@ -386,8 +319,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/10/12/demonayu/blog/16.模型控制View的显示demo/"
-           data-title="TableView中MVC模式的简单应用" data-url="http://xionv.com/2014/10/12/demonayu/blog/16.模型控制View的显示demo/">
+      <div class="ds-thread" data-thread-key="2014/09/13/demonayu/blog/16.TableView顶部图片下拉放大demo/"
+           data-title="TableView顶部图片下拉放大" data-url="http://xionv.com/2014/09/13/demonayu/blog/16.TableView顶部图片下拉放大demo/">
       </div>
     
   </div>
@@ -516,7 +449,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型视图控制器之间:"><span class="nav-number">1.</span> <span class="nav-text">模型视图控制器之间:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现tableView顶部图片下拉放大功能"><span class="nav-number">1.</span> <span class="nav-text">实现tableView顶部图片下拉放大功能</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

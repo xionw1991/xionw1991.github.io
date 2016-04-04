@@ -1217,7 +1217,7 @@
     <link href="http://xionv.com/2015/02/18/demonayu/blog/25.%E6%A0%B8%E5%BF%83%E5%8A%A8%E7%94%BB%E4%B8%8E%E6%98%BE%E7%A4%BA%E5%8A%A8%E7%94%BB%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://xionv.com/2015/02/18/demonayu/blog/25.核心动画与显示动画的区别/</id>
     <published>2015-02-18T07:45:57.000Z</published>
-    <updated>2016-03-31T10:05:06.000Z</updated>
+    <updated>2016-04-02T15:18:57.000Z</updated>
     <content type="html"><![CDATA[<h2 id="CALayer">CALayer</h2><ul>
 <li>CALayer简介<ul>
 <li>CALayer我们又称它叫做层.</li>
@@ -1317,6 +1317,10 @@
 </li>
 <li>UIView和CALayer该怎样选择?<ul>
 <li>对比CALayer,UIView多了一个事件处理的功能.也就是说CALayer不能处理用户的触摸事件,而UIView可以,如果显示出来的东西需要跟用户进行交互的话,用UIView;如果不需要跟用户进行交互,用UIView或者CALayer都可以.CALayer的性能会高一些,因为它少了事件处理的功能,更加轻量级.</li>
+</ul>
+</li>
+<li>猜想：<ul>
+<li>View持有CALayer用于显示，View中大部分用于显示的属性都是有layer映射过来的。是否Layer 的 delegate 在这里是 View，当其属性改变、动画产生时，View 能够得到通知。也就是说，UIView的动画只是对核心动画的一层封装，在动画完成后也同时改变了View的一些属性。UIView 和 CALayer 不是线程安全的，并且只能在主线程创建、访问和销毁。</li>
 </ul>
 </li>
 </ul>
