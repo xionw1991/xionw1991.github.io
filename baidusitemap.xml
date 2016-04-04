@@ -3,6 +3,58 @@
 
 
     
+  <url>
+    <loc>http://xionv.com/2015/09/18/demonayu/blog/38.Runtime%E9%BB%91%E9%AD%94%E6%B3%95/</loc>
+    <lastmod>2016-04-04T09:08:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>Runtime黑魔法</title>
+        <pubTime>2015-09-18T14:09:57.000Z</pubTime>
+        
+        <tag>iOS进阶</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xionv.com/2015/09/13/demonayu/blog/37.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2016-04-04T08:54:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>RunLoop基础知识</title>
+        <pubTime>2015-09-13T03:06:57.000Z</pubTime>
+        
+        <tag>iOS进阶</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xionv.com/2015/10/05/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2016-04-04T04:48:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS面试题</title>
+        <pubTime>2015-10-05T05:01:57.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="随笔" url="http://xionv.com/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://xionv.com/2014/09/13/demonayu/blog/16.TableView%E9%A1%B6%E9%83%A8%E5%9B%BE%E7%89%87%E4%B8%8B%E6%8B%89%E6%94%BE%E5%A4%A7demo/</loc>
@@ -133,57 +185,6 @@
         <pubTime>2014-03-18T08:27:57.000Z</pubTime>
         
         <tag>iOS初步</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://xionv.com/2015/09/13/demonayu/blog/37.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2016-03-31T10:05:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>RunLoop基础知识</title>
-        <pubTime>2015-09-13T03:06:57.000Z</pubTime>
-        
-        <tag>iOS进阶</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://xionv.com/2015/08/06/demonayu/blog/36.%E5%B0%81%E8%A3%85NavigationController%E5%9F%BA%E7%B1%BB/</loc>
-    <lastmod>2016-03-31T10:05:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>封装NavigationController基类</title>
-        <pubTime>2015-08-06T04:47:57.000Z</pubTime>
-        
-        <tag>iOS经验之谈</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://xionv.com/2015/08/03/demonayu/blog/35.Singleton/</loc>
-    <lastmod>2016-03-31T10:05:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>单例设计模式</title>
-        <pubTime>2015-08-03T13:27:57.000Z</pubTime>
-        
-        <tag>iOS工具类</tag>
          
          
            
@@ -346,14 +347,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/12/04/demonayu/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/</loc>
+    <loc>http://xionv.com/2015/09/20/demonayu/blog/39.UIAlertView%E5%9C%A8IOS9%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2016-03-31T10:05:06.000Z</lastmod>
     <data>
         <display>
-        <title>图片折叠小demo</title>
-        <pubTime>2015-12-04T14:40:57.000Z</pubTime>
+        <title>UIAlertView在iOS9中的使用</title>
+        <pubTime>2015-09-20T02:37:57.000Z</pubTime>
         
-        <tag>iOS中级 - demo</tag>
+        <tag>iOS工具类</tag>
          
          
            
@@ -397,18 +398,17 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/10/05/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <loc>http://xionv.com/2015/12/04/demonayu/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/</loc>
     <lastmod>2016-03-31T10:05:06.000Z</lastmod>
     <data>
         <display>
-        <title>iOS面试题</title>
-        <pubTime>2015-10-05T05:01:57.000Z</pubTime>
+        <title>图片折叠小demo</title>
+        <pubTime>2015-12-04T14:40:57.000Z</pubTime>
         
+        <tag>iOS中级 - demo</tag>
+         
          
            
-             
-              <breadCrumb title="随笔" url="http://xionv.com/categories/%E9%9A%8F%E7%AC%94/"/>
-          
         </display>
     </data>
     </url>
@@ -500,14 +500,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/09/20/demonayu/blog/39.UIAlertView%E5%9C%A8IOS9%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://xionv.com/2015/08/06/demonayu/blog/36.%E5%B0%81%E8%A3%85NavigationController%E5%9F%BA%E7%B1%BB/</loc>
     <lastmod>2016-03-31T10:05:06.000Z</lastmod>
     <data>
         <display>
-        <title>UIAlertView在iOS9中的使用</title>
-        <pubTime>2015-09-20T02:37:57.000Z</pubTime>
+        <title>封装NavigationController基类</title>
+        <pubTime>2015-08-06T04:47:57.000Z</pubTime>
         
-        <tag>iOS工具类</tag>
+        <tag>iOS经验之谈</tag>
          
          
            
@@ -602,14 +602,14 @@
 
     
   <url>
-    <loc>http://xionv.com/2015/09/18/demonayu/blog/38.Runtime%E9%BB%91%E9%AD%94%E6%B3%95/</loc>
+    <loc>http://xionv.com/2015/08/03/demonayu/blog/35.Singleton/</loc>
     <lastmod>2016-03-31T10:05:06.000Z</lastmod>
     <data>
         <display>
-        <title>Runtime黑魔法</title>
-        <pubTime>2015-09-18T14:09:57.000Z</pubTime>
+        <title>单例设计模式</title>
+        <pubTime>2015-08-03T13:27:57.000Z</pubTime>
         
-        <tag>iOS进阶</tag>
+        <tag>iOS工具类</tag>
          
          
            
