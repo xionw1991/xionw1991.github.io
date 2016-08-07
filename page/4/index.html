@@ -633,6 +633,100 @@
             
               
                 
+                <a class="post-title-link" href="/2015/01/26/demonayu/blog/24.image与color之间互转/" itemprop="url">
+                  image与color之间互转
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-01-26T12:24:57+08:00" content="2015-01-26">
+              2015-01-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/26/demonayu/blog/24.image与color之间互转/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/26/demonayu/blog/24.image与color之间互转/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <ul>
+<li>颜色转图片, 集成到UIImage分类  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 描述矩形</span></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line">    <span class="comment">// 开启位图上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line">    <span class="comment">// 获取位图上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 使用color演示填充上下文</span></span><br><span class="line">    <span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line">    <span class="comment">// 渲染上下文</span></span><br><span class="line">    <span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line">    <span class="comment">// 从上下文中获取图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 结束上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>图片转颜色  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/" itemprop="url">
                   长按截屏和图片裁剪
                 </a>
