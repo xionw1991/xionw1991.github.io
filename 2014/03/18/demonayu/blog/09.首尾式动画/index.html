@@ -57,10 +57,9 @@
 
 1. 实现渐变动画
 在控制器中新建一个监听手势点击的方法.
+  - (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
 
-- (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
-
-在方法中添加一个UIView, 当然UIImageView,UILabel">
+在方法中添加一个UIView, 当然UIImageView,UILabe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的首尾式动画">
 <meta property="og:url" content="http://xionv.com/2014/03/18/demonayu/blog/09.首尾式动画/index.html">
@@ -69,21 +68,19 @@
 
 1. 实现渐变动画
 在控制器中新建一个监听手势点击的方法.
+  - (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
 
-- (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
-
-在方法中添加一个UIView, 当然UIImageView,UILabel">
-<meta property="og:updated_time" content="2016-08-07T02:03:57.000Z">
+在方法中添加一个UIView, 当然UIImageView,UILabe">
+<meta property="og:updated_time" content="2016-08-07T02:53:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的首尾式动画">
 <meta name="twitter:description" content="在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.
 
 1. 实现渐变动画
 在控制器中新建一个监听手势点击的方法.
+  - (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
 
-- (void)touchesBegan:(NSSet&amp;lt;UITouch *&amp;gt; *)touches withEvent:(UIEvent *)event &amp;#123;&amp;#125;
-
-在方法中添加一个UIView, 当然UIImageView,UILabel">
+在方法中添加一个UIView, 当然UIImageView,UILabe">
 
 
 
@@ -290,30 +287,29 @@
 <p>在iOS的中实现首尾式动画是一件很简单的事情, 只需要几行代码搞定.</p>
 </blockquote>
 <h2 id="1-_实现渐变动画">1. 实现渐变动画</h2><ul>
-<li>在控制器中新建一个监听手势点击的方法.</li>
+<li><p>在控制器中新建一个监听手势点击的方法.</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在方法中添加一个UIView, 当然UIImageView,UILabel都可以, 只要继承自UIView就OK.</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 子控件的初始状态</span></span><br><span class="line"><span class="built_in">UIView</span> *animationView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>)];</span><br><span class="line">animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line"><span class="comment">// 初始化view的alpha为0.0,它是一个实型,可以理解成透明度,当控件alpha的为0时是全透明,不可见且不可交互.</span></span><br><span class="line"><span class="comment">// 使用alpha可以实现渐隐的动画效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">animationView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"><span class="comment">// 将控件添加进父控件</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:animationView];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现动画效果</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 开始动画</span></span><br><span class="line">[<span class="built_in">UIView</span> beginAnimations:<span class="literal">nil</span> context:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 2. 动画时长</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> time = <span class="number">2.0</span>;</span><br><span class="line">[<span class="built_in">UIView</span> setAnimationDuration:time];</span><br><span class="line"><span class="comment">// 3. 需要动画执行完毕后控件的状态</span></span><br><span class="line">animationView<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="comment">// 改变alpha值实现渐隐效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line"><span class="comment">// 4. 提交动画</span></span><br><span class="line">[<span class="built_in">UIView</span> commitAnimations];</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在方法中添加一个UIView, 当然UIImageView,UILabel都可以, 只要继承自UIView就OK.</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 子控件的初始状态</span></span><br><span class="line"><span class="built_in">UIView</span> *animationView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>)];</span><br><span class="line">animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line"><span class="comment">// 初始化view的alpha为0.0,它是一个实型,可以理解成透明度,当控件alpha的为0时是全透明,不可见且不可交互.</span></span><br><span class="line"><span class="comment">// 使用alpha可以实现渐隐的动画效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">animationView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"><span class="comment">// 将控件添加进父控件</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:animationView];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现动画效果</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 开始动画</span></span><br><span class="line">[<span class="built_in">UIView</span> beginAnimations:<span class="literal">nil</span> context:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">// 2. 动画时长</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> time = <span class="number">2.0</span>;</span><br><span class="line">[<span class="built_in">UIView</span> setAnimationDuration:time];</span><br><span class="line"><span class="comment">// 3. 需要动画执行完毕后控件的状态</span></span><br><span class="line">animationView<span class="variable">.bounds</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="comment">//    改变alpha值实现渐隐效果</span></span><br><span class="line">animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line"><span class="comment">// 4. 提交动画</span></span><br><span class="line">[<span class="built_in">UIView</span> commitAnimations];</span><br></pre></td></tr></table></figure>
 <p>这样我们新创建的控件会伴有动画效果显示出来并且一直待在父控件上.</p>
 <ul>
-<li>用block来是实现动画效果</li>
+<li>用block来是实现动画效果  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; </span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; </span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <h2 id="2-_实现首尾式动画">2. 实现首尾式动画</h2><ul>
 <li>实现提示框(hub)那种类型的首尾式动画效果 (显示后立即消失). </li>
 <li>block嵌套实现首尾式动画</li>
-<li>将上面实现动画的代码替换成下面的代码:</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// delay: 表示动画需要延时多少秒后执行</span></span><br><span class="line"><span class="comment">// options: 可以选择动画在执行过程中方式(比如先快后慢等等)</span></span><br><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> delay:<span class="number">0</span> options:<span class="built_in">UIViewAnimationOptionCurveEaseInOut</span> animations:^&#123;</span><br><span class="line">    <span class="comment">// 第一阶段动画执行完毕后的控件状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line">&#125; completion:^(<span class="built_in">BOOL</span> finished) &#123; <span class="comment">// 第一阶段动画执行完毕后</span></span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; <span class="comment">// 第二阶段动画并显示控件最终状态</span></span><br><span class="line">        animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">        animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">        animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这个子控件会在两秒钟内放大并显示,然后在两秒钟后缩小消失.</li>
+<li><p>将上面实现动画的代码替换成下面的代码:</p>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// delay: 表示动画需要延时多少秒后执行</span></span><br><span class="line"><span class="comment">// options: 可以选择动画在执行过程中方式(比如先快后慢等等)</span></span><br><span class="line">[<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> delay:<span class="number">0</span> options:<span class="built_in">UIViewAnimationOptionCurveEaseInOut</span> animations:^&#123;</span><br><span class="line">    <span class="comment">// 第一阶段动画执行完毕后的控件状态</span></span><br><span class="line">    animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">    animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    animationView<span class="variable">.alpha</span> = <span class="number">0.8</span>;</span><br><span class="line">&#125; completion:^(<span class="built_in">BOOL</span> finished) &#123; <span class="comment">// 第一阶段动画执行完毕后</span></span><br><span class="line">    <span class="comment">// 控件的最终状态</span></span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.0</span> animations:^&#123; <span class="comment">// 第二阶段动画并显示控件最终状态</span></span><br><span class="line">        animationView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">        animationView<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">        animationView<span class="variable">.alpha</span> = <span class="number">0.0</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个子控件会在两秒钟内放大并显示,然后在两秒钟后缩小消失.</p>
+</li>
 </ul>
 <hr>
 <blockquote>

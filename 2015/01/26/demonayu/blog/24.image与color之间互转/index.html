@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
+<meta name="description" content="颜色转图片, 集成到UIImage分类 + (UIImage *)imageWithColor:(UIColor *)color&amp;#123;// 描述矩形CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);// 开启位图上下文UIGraphicsBeginImageContext(rect.size);// 获取位图上下文CGContextRef co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="image与color之间互转">
 <meta property="og:url" content="http://xionv.com/2015/01/26/demonayu/blog/24.image与color之间互转/index.html">
 <meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
-<meta property="og:updated_time" content="2016-08-07T01:44:00.000Z">
+<meta property="og:description" content="颜色转图片, 集成到UIImage分类 + (UIImage *)imageWithColor:(UIColor *)color&amp;#123;// 描述矩形CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);// 开启位图上下文UIGraphicsBeginImageContext(rect.size);// 获取位图上下文CGContextRef co">
+<meta property="og:updated_time" content="2016-08-07T03:02:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="image与color之间互转">
-<meta name="twitter:description" content="颜色转图片, 集成到UIImage分类+ (UIImage *)imageWithColor:(UIColor *)color&amp;#123;    // 描述矩形    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);    // 开启位图上下文    UIGraphicsBeginImageContext(rect.size);    // 获取位">
+<meta name="twitter:description" content="颜色转图片, 集成到UIImage分类 + (UIImage *)imageWithColor:(UIColor *)color&amp;#123;// 描述矩形CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);// 开启位图上下文UIGraphicsBeginImageContext(rect.size);// 获取位图上下文CGContextRef co">
 
 
 
@@ -266,11 +266,11 @@
 
       
         <span itemprop="articleBody"><ul>
-<li>颜色转图片, 集成到UIImage分类<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 描述矩形</span></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line">    <span class="comment">// 开启位图上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line">    <span class="comment">// 获取位图上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 使用color演示填充上下文</span></span><br><span class="line">    <span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line">    <span class="comment">// 渲染上下文</span></span><br><span class="line">    <span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line">    <span class="comment">// 从上下文中获取图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 结束上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>颜色转图片, 集成到UIImage分类 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">// 描述矩形</span></span><br><span class="line"><span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line"><span class="comment">// 开启位图上下文</span></span><br><span class="line"><span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line"><span class="comment">// 获取位图上下文</span></span><br><span class="line"><span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line"><span class="comment">// 使用color演示填充上下文</span></span><br><span class="line"><span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line"><span class="comment">// 渲染上下文</span></span><br><span class="line"><span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line"><span class="comment">// 从上下文中获取图片</span></span><br><span class="line"><span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line"><span class="comment">// 结束上下文</span></span><br><span class="line"><span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
-<li>图片转颜色<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
+<li>图片转颜色 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
 </ul>
 </span>
       

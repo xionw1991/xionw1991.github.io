@@ -55,20 +55,20 @@
 
 <meta name="description" content="计算文件夹大小
 给NSString添加一个计算文件夹大小的分类, 以字节输出
-// 文件大小- (NSUInteger)sizeOfFile&amp;#123;    // 创建一个文件管理者    NSFileManager *mgr = [NSFileManager defaultManager];    // 文件大小    NSUInteger fileSize = 0;    BOOL isDi">
+  // 文件大小- (NSUInteger)sizeOfFile&amp;#123;    // 创建一个文件管理者    NSFileManager *mgr = [NSFileManager defaultManager];    // 文件大小    NSUInteger fileSize = 0;    BOOL is">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSFileManager计算文件夹大小">
 <meta property="og:url" content="http://xionv.com/2014/12/21/demonayu/blog/19.NSFileManager计算文件夹大小/index.html">
 <meta property="og:site_name" content="XionVV Coding">
 <meta property="og:description" content="计算文件夹大小
 给NSString添加一个计算文件夹大小的分类, 以字节输出
-// 文件大小- (NSUInteger)sizeOfFile&amp;#123;    // 创建一个文件管理者    NSFileManager *mgr = [NSFileManager defaultManager];    // 文件大小    NSUInteger fileSize = 0;    BOOL isDi">
-<meta property="og:updated_time" content="2016-08-07T01:45:42.000Z">
+  // 文件大小- (NSUInteger)sizeOfFile&amp;#123;    // 创建一个文件管理者    NSFileManager *mgr = [NSFileManager defaultManager];    // 文件大小    NSUInteger fileSize = 0;    BOOL is">
+<meta property="og:updated_time" content="2016-08-07T03:01:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSFileManager计算文件夹大小">
 <meta name="twitter:description" content="计算文件夹大小
 给NSString添加一个计算文件夹大小的分类, 以字节输出
-// 文件大小- (NSUInteger)sizeOfFile&amp;#123;    // 创建一个文件管理者    NSFileManager *mgr = [NSFileManager defaultManager];    // 文件大小    NSUInteger fileSize = 0;    BOOL isDi">
+  // 文件大小- (NSUInteger)sizeOfFile&amp;#123;    // 创建一个文件管理者    NSFileManager *mgr = [NSFileManager defaultManager];    // 文件大小    NSUInteger fileSize = 0;    BOOL is">
 
 
 
@@ -273,10 +273,10 @@
       
         <span itemprop="articleBody"><h1 id="计算文件夹大小">计算文件夹大小</h1><ul>
 <li><p>给NSString添加一个计算文件夹大小的分类, 以字节输出</p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">                <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                    fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 文件大小</span></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)sizeOfFile</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个文件管理者</span></span><br><span class="line">    <span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br><span class="line">    <span class="comment">// 文件大小</span></span><br><span class="line">    <span class="built_in">NSUInteger</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span> (![mgr fileExistsAtPath:<span class="keyword">self</span> isDirectory:&amp;isDir]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//如果文件不存在直接退出</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isDir) &#123; <span class="comment">// 如果是文件夹</span></span><br><span class="line">        <span class="comment">// 取出所有子文件</span></span><br><span class="line">        <span class="built_in">NSArray</span> *subpaths = [mgr subpathsAtPath:<span class="keyword">self</span>];</span><br><span class="line">        <span class="comment">// 遍历所有子文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSString</span> *subpath <span class="keyword">in</span> subpaths) &#123;</span><br><span class="line">            <span class="comment">// 拼接拿到文件的全路径</span></span><br><span class="line">            <span class="built_in">NSString</span> *fullSubPath = [<span class="keyword">self</span> stringByAppendingPathComponent:subpath];</span><br><span class="line">            <span class="comment">// 判断是否是文件夹</span></span><br><span class="line">            <span class="built_in">BOOL</span> isDirectory = <span class="literal">NO</span>;</span><br><span class="line">            <span class="keyword">if</span> ([mgr fileExistsAtPath:fullSubPath isDirectory:&amp;isDirectory]) &#123; <span class="comment">// 这个文件夹/文件存在</span></span><br><span class="line">            <span class="keyword">if</span> (isDirectory == <span class="literal">NO</span>) &#123;  <span class="comment">// 是文件</span></span><br><span class="line">                fileSize += [[mgr attributesOfItemAtPath:fullSubPath error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果是文件</span></span><br><span class="line">        fileSize = [[mgr attributesOfItemAtPath:<span class="keyword">self</span> error:<span class="literal">nil</span>][<span class="built_in">NSFileSize</span>] integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将字节单位转化为兆  </p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size)&#123;</span><br><span class="line">      <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">      <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">      <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">      sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">      <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">          cacheSize /= <span class="number">1000</span>;</span><br><span class="line">          sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">          sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> sizeStr;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^fileSize)(<span class="built_in">NSUInteger</span>) = ^(<span class="built_in">NSUInteger</span> size) &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *sizeStr = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 拿到图片缓存, 将字节转为兆</span></span><br><span class="line">    <span class="keyword">float</span> cacheSize = size / <span class="number">1000</span>;</span><br><span class="line">    sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d KB"</span>, (<span class="keyword">int</span>)cacheSize];</span><br><span class="line">    <span class="keyword">if</span> (((<span class="keyword">int</span>)cacheSize / <span class="number">1000</span>)) &#123;</span><br><span class="line">        cacheSize /= <span class="number">1000</span>;</span><br><span class="line">        sizeStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.1f M"</span>, cacheSize];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cacheSize) &#123;</span><br><span class="line">        sizeStr = <span class="string">@"没有缓存"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sizeStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h1 id="NSFileManager一些常用方法">NSFileManager一些常用方法</h1><ul>
@@ -288,35 +288,34 @@
 <ul>
 <li>注意: 该方法的返回值是说明传入的路径对应的文件或文件夹是否存在</li>
 <li>第二个参数是用于保存判断结果的, 如果是一个目录, 那么就会赋值为YES, 如果不是就赋值为NO</li>
-<li>BOOL dir = NO;</li>
-</ul>
+<li><p>BOOL dir = NO;</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> flag = [manager fileExistsAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> isDirectory:&amp;dir];</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+</li>
 <li><p><strong>获取文件或文件夹的属性</strong></p>
-<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *info = [manager attributesOfItemAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>获取文件夹中所有的文件</strong></p>
 <ul>
 <li>contentsOfDirectoryAtPath方法有一个弊端, 只能获取当前文件夹下所有的文件, 不能获取子文件夹下面的文件</li>
-<li>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</li>
-</ul>
+<li><p>subpathsOfDirectoryAtPath方法能够获取当前文件夹下的所有子文件和孙子文件.</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *res = [manager contentsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *res = [manager subpathsOfDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/video"</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
-<ul>
+</li>
 <li><p><strong>创建文件夹</strong></p>
 <ul>
 <li>createDirectoryAtPath: 告诉系统文件夹需要创建到什么位置</li>
 <li>withIntermediateDirectories: 如果指定的文件中有一些文件夹不存在, 是否自动创建不存在的文件夹</li>
 <li>attributes: 指定创建出来的文件夹的属性</li>
 <li>error: 是否创建成功, 如果失败会给传入的参数赋值</li>
-<li>注意: 该方法只能用于创建文件夹, 不能用于创建文件</li>
-</ul>
+<li><p>注意: 该方法只能用于创建文件夹, 不能用于创建文件</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> flag = [manager createDirectoryAtPath:<span class="string">@"/Users/apple/Desktop/abc"</span> withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ul>
+</li>
 <li><p><strong>创建文件</strong></p>
 <ul>
 <li>createFileAtPath: 指定文件创建出来的位置</li>
@@ -324,9 +323,10 @@
 <li>attributes: 创建出来的文件的属性</li>
 <li>NSData : 二进制数据</li>
 <li>注意: 该方法只能用于创建文件, 不能用于创建文件夹</li>
-<li>NSString *str = @“我叫野原新之助”;</li>
-</ul>
+<li><p>NSString *str = @“我叫野原新之助”;</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSData</span> *data = [str dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">[manager createFileAtPath:<span class="string">@"/Users/apple/Desktop/abc.txt"</span> contents:data attributes:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 </span>
       
