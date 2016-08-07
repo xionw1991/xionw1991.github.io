@@ -210,11 +210,6 @@
 
     
     
-      
-      
-
-      
-    
 
     
       
@@ -281,14 +276,12 @@
 
       
         
-          <h4 id="拦截请求的一个重要代理方法">拦截请求的一个重要代理方法</h4><ul>
-<li>截取出请求中想要的字符段</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/07/26/demonayu/blog/15.WebView代理方法拦截网络请求/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          <span itemprop="articleBody">
+            
+              <h4 id="拦截请求的一个重要代理方法">拦截请求的一个重要代理方法</h4><p>这个代理方法是原生与网页之间的路由，通过这个方法可以拦截来自网页的请求。以下是截取出 URL 中想要的字符串来来进行 OAuth 认证。</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拦截网络请求</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.取得请求路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *urlStr = request<span class="variable">.URL</span><span class="variable">.absoluteString</span>;</span><br><span class="line">    <span class="comment">// 2.获取到是否有 code= 关键字</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [urlStr rangeOfString:<span class="string">@"code="</span>];</span><br><span class="line">    <span class="keyword">if</span> (range<span class="variable">.length</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 3.截取code的值</span></span><br><span class="line">        <span class="built_in">NSUInteger</span> fromIndex = range<span class="variable">.location</span> + range<span class="variable">.length</span>;</span><br><span class="line">        <span class="built_in">NSString</span> *code = [urlStr substringFromIndex:fromIndex];</span><br><span class="line">        <span class="comment">// 4.发送一个post请求，来获取到access_token</span></span><br><span class="line">        <span class="built_in">NSMutableDictionary</span> *param = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">        param[<span class="string">@"client_id"</span>] = client_id;</span><br><span class="line">        param[<span class="string">@"client_secret"</span>] = client_secret;</span><br><span class="line">        param[<span class="string">@"grant_type"</span>] = <span class="string">@"authorization_code"</span>;</span><br><span class="line">        param[<span class="string">@"code"</span>] = code;</span><br><span class="line">        param[<span class="string">@"redirect_uri"</span>] = redirect_uri;</span><br><span class="line">        [HTTPTool POST:<span class="string">@"https://api.weibo.com/oauth2/access_token"</span> parameters:param success:^(<span class="keyword">id</span> JSON) &#123;</span><br><span class="line">            <span class="comment">// 将返回值转成模型并归档</span></span><br><span class="line">            AccountData *account = [AccountData accountDataWithDict:JSON];</span><br><span class="line">            [AccountTool accountSave:account];</span><br><span class="line">        &#125; failure:^(<span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, error);</span><br><span class="line">        &#125;];</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
         
       
     </div>
@@ -1033,7 +1026,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
