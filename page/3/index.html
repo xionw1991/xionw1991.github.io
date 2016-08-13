@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -21,18 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -66,10 +99,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +117,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +124,18 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,15 +164,25 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -141,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -151,24 +200,24 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
       
     </ul>
   
@@ -176,21 +225,12 @@
   
     <div class="site-search">
       
-  
-  <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'b6LmcvqYVXPpognWevjG','2.0.0');
-</script>
-
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -202,20 +242,10 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-      
-      
-
-      
-    
-
     
       
 
@@ -248,7 +278,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-21T10:09:57+08:00" content="2015-07-21">
               2015-07-21
             </time>
@@ -269,21 +302,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="队列与任务">队列与任务</h2><ul>
+          
+            <h2 id="队列与任务">队列与任务</h2><ul>
 <li>同步: 同步任务,不开新线程,会阻塞当前线程.</li>
 <li>异步: 异步任务,开新线程,不会阻塞当前线程.</li>
 <li>串行: 串行队列,串行是按顺序排队执行任务,不会出现资源抢夺的问题,所以它默认是线程安全的.</li>
@@ -419,9 +455,16 @@
 <li><a href="http://tutuge.me/2015/04/03/something-about-gcd/" target="_blank" rel="external">GCD使用经验与技巧浅谈</a></li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -470,7 +513,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-19T22:09:57+08:00" content="2015-07-19">
               2015-07-19
             </time>
@@ -491,21 +537,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="NSURLConnection">NSURLConnection</h2><h3 id="基本使用">基本使用</h3><ul>
+          
+            <h2 id="NSURLConnection">NSURLConnection</h2><h3 id="基本使用">基本使用</h3><ul>
 <li><p>有两种请求方式:</p>
 <ul>
 <li><p>使用block回调:</p>
@@ -643,9 +692,16 @@
 <h2 id="补充">补充</h2><p>还有很多不完善的地方以后慢慢添砖.<br><br>以上的结论有很多仅仅只是猜测,欢迎来打脸.</p>
 <p>参考: <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html#//apple_ref/doc/uid/TP40013509-SW1" target="_blank" rel="external">苹果官方文档</a></p>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -694,7 +750,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-14T11:29:57+08:00" content="2015-07-14">
               2015-07-14
             </time>
@@ -715,29 +774,39 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <blockquote>
+          
+            <blockquote>
 <p>这篇文章介绍了如何使用NSCache来替代NSDictionary进行数据缓存.</p>
 </blockquote>
 <p><a href="http://www.15yan.com/topic/yi-dong-kai-fa-na-dian-shi/45toOUzFGlr/" target="_blank" rel="external">NSCache介绍</a></p>
 <p>借此说一下SDWebImage这个框架中<code>cleanDisk</code>与<code>clearDisk</code>的区别:<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//clean:删除过期缓存(缓存周期为1周),计算当前缓存文件的总大小,比较设置的最大缓存,如果超出的话,那么就继续删除(按照缓存文件创建的顺序),直到小于最大缓存为止</span></span><br><span class="line">[[SDWebImageManager sharedManager]<span class="variable">.imageCache</span> cleanDisk];</span><br><span class="line"><span class="comment">//clear:简单粗暴,直接删除然后重新创建</span></span><br><span class="line">[[SDWebImageManager sharedManager]<span class="variable">.imageCache</span> clearDisk];</span><br></pre></td></tr></table></figure></p>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -786,7 +855,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-06-04T13:43:57+08:00" content="2015-06-04">
               2015-06-04
             </time>
@@ -807,27 +879,37 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="使用UIScrollView搭建">使用UIScrollView搭建</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"NewFeaturesViewController.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"TabBarViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define kImageCount 4</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NewFeaturesViewController</span>() &lt;<span class="title">UIScrollViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIScrollView</span> *scrollView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIPageControl</span> *pageControl;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NewFeaturesViewController</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载scrollView</span></span><br><span class="line">- (<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_scrollView == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIScrollView</span> *scrollView = [[<span class="built_in">UIScrollView</span> alloc] init];</span><br><span class="line">        _scrollView = scrollView;</span><br><span class="line">        scrollView<span class="variable">.frame</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>;</span><br><span class="line">        <span class="comment">// 取消回弹</span></span><br><span class="line">        scrollView<span class="variable">.bounces</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 允许翻页</span></span><br><span class="line">        scrollView<span class="variable">.pagingEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="comment">// 隐藏水平滚动条</span></span><br><span class="line">        scrollView<span class="variable">.showsHorizontalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 设置滚动范围</span></span><br><span class="line">        scrollView<span class="variable">.contentSize</span> = <span class="built_in">CGSizeMake</span>(kImageCount * <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 设置控制器为代理</span></span><br><span class="line">        scrollView<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">        <span class="comment">// 控制器View添加scrollView</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:scrollView];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _scrollView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载pageControl</span></span><br><span class="line">- (<span class="built_in">UIPageControl</span> *)pageControl</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_pageControl == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIPageControl</span> *pageControl = [[<span class="built_in">UIPageControl</span> alloc] init];</span><br><span class="line">        _pageControl = pageControl;</span><br><span class="line">        <span class="comment">// pageControl小圆点数量</span></span><br><span class="line">        pageControl<span class="variable">.numberOfPages</span> = kImageCount;</span><br><span class="line">        <span class="comment">/* pageControl比较特殊，可以不用设置宽高也能显示，因为小圆点为它的子控件, 但是不设置宽高就不能交互 */</span></span><br><span class="line">        <span class="comment">// 设置pageControl的位置</span></span><br><span class="line">        pageControl<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">        pageControl<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span><span class="variable">.y</span> + <span class="number">250</span>;</span><br><span class="line">        <span class="comment">// 小圆点默认颜色</span></span><br><span class="line">        pageControl<span class="variable">.pageIndicatorTintColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">        <span class="comment">// 小圆点选中颜色</span></span><br><span class="line">        pageControl<span class="variable">.currentPageIndicatorTintColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">        <span class="comment">// 控制器View添加pageControl</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:pageControl];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _pageControl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kImageCount; i++) &#123;</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span>];</span><br><span class="line">        <span class="built_in">NSString</span> *imageName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"new_feature_%d"</span>, i + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:imageName];</span><br><span class="line">        imageView<span class="variable">.image</span> = image;</span><br><span class="line">        <span class="comment">// 设置性特性说明的x值</span></span><br><span class="line">        imageView<span class="variable">.x</span> = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> * i;</span><br><span class="line">        <span class="comment">// 添加新特性说明</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.scrollView</span> addSubview:imageView];</span><br><span class="line">        <span class="comment">// 当滑到最后一页时</span></span><br><span class="line">        <span class="keyword">if</span> (i == kImageCount - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 设置最后一页的内容</span></span><br><span class="line">            [<span class="keyword">self</span> setupLastImageView:imageView];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// pageControl默认选中第一个原点</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageControl</span><span class="variable">.currentPage</span> = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  设置最后一张图片</span><br><span class="line"> *</span><br><span class="line"> *  @param imageView 轮播器最后一张图片</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupLastImageView:(<span class="built_in">UIImageView</span> *)imageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建分享按钮</span></span><br><span class="line">    <span class="built_in">UIButton</span> *buttonShare = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">    [buttonShare setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_share_false"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonShare setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_share_true"</span>] forState:<span class="built_in">UIControlStateSelected</span>];</span><br><span class="line">    [buttonShare setTitle:<span class="string">@"分享给大家"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonShare setTitleColor:[<span class="built_in">UIColor</span> grayColor] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    buttonShare<span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">15</span>];</span><br><span class="line">    <span class="comment">// 设置内边距 EdgeInsets理解为自切</span></span><br><span class="line">    buttonShare<span class="variable">.titleEdgeInsets</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    buttonShare<span class="variable">.imageEdgeInsets</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>);</span><br><span class="line">    buttonShare<span class="variable">.size</span> = <span class="built_in">CGSizeMake</span>(<span class="number">150</span>, <span class="number">30</span>);</span><br><span class="line">    buttonShare<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerX</span>;</span><br><span class="line">    buttonShare<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerY</span> * <span class="number">1.35</span>;</span><br><span class="line">    [buttonShare addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickShare:) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建开启按钮</span></span><br><span class="line">    <span class="built_in">UIButton</span> *buttonOpen = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">    [buttonOpen setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_finish_button"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonOpen setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_finish_button_highlighted"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line">    [buttonOpen setTitle:<span class="string">@"立即体验"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    buttonOpen<span class="variable">.size</span> = buttonOpen<span class="variable">.currentBackgroundImage</span><span class="variable">.size</span>;</span><br><span class="line">    buttonOpen<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerX</span>;</span><br><span class="line">    buttonOpen<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerY</span> * <span class="number">1.5</span>;</span><br><span class="line">    [buttonOpen addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickOpen) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    <span class="comment">// 设置imageView可交互</span></span><br><span class="line">    imageView<span class="variable">.userInteractionEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">    [imageView addSubview:buttonOpen];</span><br><span class="line">    [imageView addSubview:buttonShare];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)clickOpen</span><br><span class="line">&#123;</span><br><span class="line">    TabBarViewController *tabBarVC = [[TabBarViewController alloc] init];</span><br><span class="line">    <span class="comment">// 将跟控制器改为tabBarController，并销毁当前控制器</span></span><br><span class="line">    [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span><span class="variable">.rootViewController</span> = tabBarVC;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)clickShare:(<span class="built_in">UIButton</span> *)button</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 状态取反</span></span><br><span class="line">    button<span class="variable">.selected</span> = !button<span class="variable">.isSelected</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - 代理方法</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当scrollView改变的时候，改变pageControl的currentPage</span></span><br><span class="line">    <span class="keyword">double</span> page = scrollView<span class="variable">.contentOffset</span><span class="variable">.x</span> / scrollView<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// (int)(page + 0.5)四舍五入法 准确定位page的圆点</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageControl</span><span class="variable">.currentPage</span> = (<span class="keyword">int</span>)(page + <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+          
+            <h2 id="使用UIScrollView搭建">使用UIScrollView搭建</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"NewFeaturesViewController.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"TabBarViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define kImageCount 4</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NewFeaturesViewController</span>() &lt;<span class="title">UIScrollViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIScrollView</span> *scrollView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIPageControl</span> *pageControl;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NewFeaturesViewController</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载scrollView</span></span><br><span class="line">- (<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_scrollView == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIScrollView</span> *scrollView = [[<span class="built_in">UIScrollView</span> alloc] init];</span><br><span class="line">        _scrollView = scrollView;</span><br><span class="line">        scrollView<span class="variable">.frame</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>;</span><br><span class="line">        <span class="comment">// 取消回弹</span></span><br><span class="line">        scrollView<span class="variable">.bounces</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 允许翻页</span></span><br><span class="line">        scrollView<span class="variable">.pagingEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="comment">// 隐藏水平滚动条</span></span><br><span class="line">        scrollView<span class="variable">.showsHorizontalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 设置滚动范围</span></span><br><span class="line">        scrollView<span class="variable">.contentSize</span> = <span class="built_in">CGSizeMake</span>(kImageCount * <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 设置控制器为代理</span></span><br><span class="line">        scrollView<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">        <span class="comment">// 控制器View添加scrollView</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:scrollView];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _scrollView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载pageControl</span></span><br><span class="line">- (<span class="built_in">UIPageControl</span> *)pageControl</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_pageControl == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIPageControl</span> *pageControl = [[<span class="built_in">UIPageControl</span> alloc] init];</span><br><span class="line">        _pageControl = pageControl;</span><br><span class="line">        <span class="comment">// pageControl小圆点数量</span></span><br><span class="line">        pageControl<span class="variable">.numberOfPages</span> = kImageCount;</span><br><span class="line">        <span class="comment">/* pageControl比较特殊，可以不用设置宽高也能显示，因为小圆点为它的子控件, 但是不设置宽高就不能交互 */</span></span><br><span class="line">        <span class="comment">// 设置pageControl的位置</span></span><br><span class="line">        pageControl<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">        pageControl<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span><span class="variable">.y</span> + <span class="number">250</span>;</span><br><span class="line">        <span class="comment">// 小圆点默认颜色</span></span><br><span class="line">        pageControl<span class="variable">.pageIndicatorTintColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">        <span class="comment">// 小圆点选中颜色</span></span><br><span class="line">        pageControl<span class="variable">.currentPageIndicatorTintColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">        <span class="comment">// 控制器View添加pageControl</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:pageControl];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _pageControl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kImageCount; i++) &#123;</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span>];</span><br><span class="line">        <span class="built_in">NSString</span> *imageName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"new_feature_%d"</span>, i + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:imageName];</span><br><span class="line">        imageView<span class="variable">.image</span> = image;</span><br><span class="line">        <span class="comment">// 设置性特性说明的x值</span></span><br><span class="line">        imageView<span class="variable">.x</span> = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> * i;</span><br><span class="line">        <span class="comment">// 添加新特性说明</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.scrollView</span> addSubview:imageView];</span><br><span class="line">        <span class="comment">// 当滑到最后一页时</span></span><br><span class="line">        <span class="keyword">if</span> (i == kImageCount - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 设置最后一页的内容</span></span><br><span class="line">            [<span class="keyword">self</span> setupLastImageView:imageView];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// pageControl默认选中第一个原点</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageControl</span><span class="variable">.currentPage</span> = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  设置最后一张图片</span><br><span class="line"> *</span><br><span class="line"> *  @param imageView 轮播器最后一张图片</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupLastImageView:(<span class="built_in">UIImageView</span> *)imageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建分享按钮</span></span><br><span class="line">    <span class="built_in">UIButton</span> *buttonShare = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">    [buttonShare setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_share_false"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonShare setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_share_true"</span>] forState:<span class="built_in">UIControlStateSelected</span>];</span><br><span class="line">    [buttonShare setTitle:<span class="string">@"分享给大家"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonShare setTitleColor:[<span class="built_in">UIColor</span> grayColor] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    buttonShare<span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">15</span>];</span><br><span class="line">    <span class="comment">// 设置内边距 EdgeInsets理解为自切</span></span><br><span class="line">    buttonShare<span class="variable">.titleEdgeInsets</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    buttonShare<span class="variable">.imageEdgeInsets</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>);</span><br><span class="line">    buttonShare<span class="variable">.size</span> = <span class="built_in">CGSizeMake</span>(<span class="number">150</span>, <span class="number">30</span>);</span><br><span class="line">    buttonShare<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerX</span>;</span><br><span class="line">    buttonShare<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerY</span> * <span class="number">1.35</span>;</span><br><span class="line">    [buttonShare addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickShare:) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建开启按钮</span></span><br><span class="line">    <span class="built_in">UIButton</span> *buttonOpen = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">    [buttonOpen setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_finish_button"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonOpen setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_finish_button_highlighted"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line">    [buttonOpen setTitle:<span class="string">@"立即体验"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    buttonOpen<span class="variable">.size</span> = buttonOpen<span class="variable">.currentBackgroundImage</span><span class="variable">.size</span>;</span><br><span class="line">    buttonOpen<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerX</span>;</span><br><span class="line">    buttonOpen<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerY</span> * <span class="number">1.5</span>;</span><br><span class="line">    [buttonOpen addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickOpen) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    <span class="comment">// 设置imageView可交互</span></span><br><span class="line">    imageView<span class="variable">.userInteractionEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">    [imageView addSubview:buttonOpen];</span><br><span class="line">    [imageView addSubview:buttonShare];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)clickOpen</span><br><span class="line">&#123;</span><br><span class="line">    TabBarViewController *tabBarVC = [[TabBarViewController alloc] init];</span><br><span class="line">    <span class="comment">// 将跟控制器改为tabBarController，并销毁当前控制器</span></span><br><span class="line">    [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span><span class="variable">.rootViewController</span> = tabBarVC;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)clickShare:(<span class="built_in">UIButton</span> *)button</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 状态取反</span></span><br><span class="line">    button<span class="variable">.selected</span> = !button<span class="variable">.isSelected</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - 代理方法</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当scrollView改变的时候，改变pageControl的currentPage</span></span><br><span class="line">    <span class="keyword">double</span> page = scrollView<span class="variable">.contentOffset</span><span class="variable">.x</span> / scrollView<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// (int)(page + 0.5)四舍五入法 准确定位page的圆点</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageControl</span><span class="variable">.currentPage</span> = (<span class="keyword">int</span>)(page + <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h2 id="使用UICollectionView搭建">使用UICollectionView搭建</h2><p><strong>第一步:设置控制器的内容</strong><br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"XVNewFeaturesController.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"XVCollectionViewCell.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define kImagesCount 5</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">XVNewFeaturesController</span> () &lt;<span class="title">UICollectionViewDataSource</span>&gt;</span></span><br><span class="line"><span class="comment">// 图片数组</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSArray</span> *images;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">XVNewFeaturesController</span></span></span><br><span class="line"><span class="comment">// 懒加载图片数组</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)images</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_images == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">// 将图片存入数组</span></span><br><span class="line">        <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; kImagesCount; i++) &#123;</span><br><span class="line">            <span class="built_in">NSString</span> *imageName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"newFeatureImage%d"</span>, i];</span><br><span class="line">            <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:imageName];</span><br><span class="line">            [arrayM addObject:image];</span><br><span class="line">        &#125;</span><br><span class="line">        _images = arrayM;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _images;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重写构造方法在创建控制器的同时就设定好布局方式</span></span><br><span class="line">- (instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.设置collectionView的布局 - 布局设置是必须的</span></span><br><span class="line">    <span class="built_in">UICollectionViewFlowLayout</span> *layout = [[<span class="built_in">UICollectionViewFlowLayout</span> alloc] init];</span><br><span class="line">    <span class="comment">// 2.设置布局的最小行间距 - 注意:默认是有间距的,需要手动设置为0</span></span><br><span class="line">    layout<span class="variable">.minimumLineSpacing</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 3.设置cell的大小</span></span><br><span class="line">    layout<span class="variable">.itemSize</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span>;</span><br><span class="line">    <span class="comment">// 4.滚动方向</span></span><br><span class="line">    layout<span class="variable">.scrollDirection</span> = <span class="built_in">UICollectionViewScrollDirectionHorizontal</span>;</span><br><span class="line">    <span class="comment">// 5.完成初始化后调用父类方法</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> initWithCollectionViewLayout:layout];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 初始化CollectionView设置 */</span></span><br><span class="line">    <span class="comment">// collectionView默认的背景色是黑色</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line">    <span class="comment">// 设置分页</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.pagingEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 取消滑块</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.showsHorizontalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">    <span class="comment">// 禁用反弹</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.bounces</span> = <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - UICollectionViewDataSource 数据源方法</span></span><br><span class="line">- (<span class="built_in">NSInteger</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView numberOfItemsInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.images</span><span class="variable">.count</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">UICollectionViewCell</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView cellForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 调用自定义cell</span></span><br><span class="line">    XVCollectionViewCell *cell = [XVCollectionViewCell cellWithCollectionView:collectionView forIndexPath:indexPath];</span><br><span class="line">    cell<span class="variable">.image</span> = <span class="keyword">self</span><span class="variable">.images</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    <span class="comment">// 将当前的index和images总数传到cell中来判断是否是最后一页</span></span><br><span class="line">    [cell getIndexPath:indexPath andImagesCount:<span class="keyword">self</span><span class="variable">.images</span><span class="variable">.count</span>];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>第二步:自定义cell</strong><br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"XVCollectionViewCell.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"XVTabBarController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">XVCollectionViewCell</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageV;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIButton</span> *button;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">XVCollectionViewCell</span></span></span><br><span class="line"><span class="comment">// 实例化进入应用主界面的button</span></span><br><span class="line">- (<span class="built_in">UIButton</span> *)button</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_button == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIButton</span> *button = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">        [button setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"startApp"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        [button sizeToFit];</span><br><span class="line">        button<span class="variable">.centerX</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>;</span><br><span class="line">        button<span class="variable">.centerY</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.9</span>;</span><br><span class="line">        [button addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(enterApp:) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">        [<span class="keyword">self</span> addSubview:button];</span><br><span class="line">        _button = button;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _button;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重写构造方法在初始化cell的时候就创建一个imageView用来显示新特性</span></span><br><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// 创建显示新特新图片的imageView</span></span><br><span class="line">        <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="keyword">self</span><span class="variable">.bounds</span>];</span><br><span class="line">        [<span class="keyword">self</span> addSubview:imageV];</span><br><span class="line">        _imageV = imageV;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重写image的setter给imageV设置图片</span></span><br><span class="line">- (<span class="keyword">void</span>)setImage:(<span class="built_in">UIImage</span> *)image</span><br><span class="line">&#123;</span><br><span class="line">    _image = image;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageV</span><span class="variable">.image</span> = image;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取索引来判断是否为最后一页</span></span><br><span class="line">- (<span class="keyword">void</span>)getIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath andImagesCount:(<span class="built_in">NSInteger</span>)imagesCount</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当滑动到最后一页时</span></span><br><span class="line">    <span class="keyword">if</span> (indexPath<span class="variable">.row</span> == imagesCount - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.button</span><span class="variable">.hidden</span> = <span class="literal">NO</span>; <span class="comment">// 显示button</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.button</span><span class="variable">.hidden</span> = <span class="literal">YES</span>; <span class="comment">// 隐藏button - 防止循环利用bug</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工厂方法快速创建cell</span></span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *ID = <span class="string">@"cell"</span>;</span><br><span class="line">+ (instancetype)cellWithCollectionView:(<span class="built_in">UICollectionView</span> *)collectionView forIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    [collectionView registerClass:<span class="keyword">self</span> forCellWithReuseIdentifier:ID];</span><br><span class="line">    XVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];</span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - 监听方法</span></span><br><span class="line"><span class="comment">// 进入应用</span></span><br><span class="line">- (<span class="keyword">void</span>)enterApp:(<span class="built_in">UIButton</span> *)button</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 变更rootController</span></span><br><span class="line">    XVTabBarController *vc = [[XVTabBarController alloc] init];</span><br><span class="line">    [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span><span class="variable">.rootViewController</span> = vc;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="创建一个UIWindow的分类来控制是否显示新特性">创建一个UIWindow的分类来控制是否显示新特性</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"UIWindow+Extension.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"TabBarViewController.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"NewFeaturesViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIWindow</span> (<span class="title">Extension</span>)</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)switchRootViewController</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.获得用户的偏好设置</span></span><br><span class="line">    <span class="built_in">NSUserDefaults</span> *user = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line">    <span class="built_in">NSString</span> *keyVersion = <span class="string">@"CFBundleVersion"</span>;</span><br><span class="line">    <span class="comment">// 2.获得上一次打开的版本（存在沙盒内）</span></span><br><span class="line">    <span class="built_in">NSString</span> *lastVersion = [user valueForKeyPath:keyVersion];</span><br><span class="line">    <span class="comment">// 3.取出当前的版本号</span></span><br><span class="line">    <span class="built_in">NSDictionary</span> *info = [<span class="built_in">NSBundle</span> mainBundle]<span class="variable">.infoDictionary</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *currentVersion = info[keyVersion];</span><br><span class="line">    <span class="comment">// 4.当前版本号等于存于沙盒的版本号（上次打开时的版本）时则直接进入软件，否则显示新特性</span></span><br><span class="line">    <span class="keyword">if</span> ([currentVersion isEqualToString:lastVersion]) &#123;</span><br><span class="line">        TabBarViewController *tabBar = [[TabBarViewController alloc] init];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.rootViewController</span> = tabBar;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        NewFeaturesViewController *new = [[NewFeaturesViewController alloc] init];</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.rootViewController</span> = new;</span><br><span class="line">        <span class="comment">// 同步版本号</span></span><br><span class="line">        [user setValue:currentVersion forKeyPath:keyVersion];</span><br><span class="line">        [user synchronize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -876,7 +958,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-05-08T11:00:57+08:00" content="2015-05-08">
               2015-05-08
             </time>
@@ -897,21 +982,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <blockquote>
+          
+            <blockquote>
 <p>在iOS7以后苹果添加了一个边缘滑动返回的手势操作,我们通过修改这个手势操作来说明如何利用系统的私有成员属性来达到在项目中的要求.</p>
 </blockquote>
 <ul>
@@ -947,9 +1035,16 @@
 </li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -998,7 +1093,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-04-30T19:52:57+08:00" content="2015-04-30">
               2015-04-30
             </time>
@@ -1019,21 +1117,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="NSFileManager">NSFileManager</h2><ul>
+          
+            <h2 id="NSFileManager">NSFileManager</h2><ul>
 <li><p>创建一个文件管理者对象</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br></pre></td></tr></table></figure>
 </li>
@@ -1058,9 +1159,16 @@
 </li>
 </ul>
 <h3 id="NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息">NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="built_in">NSProcessInfo</span> *)processInfo        <span class="comment">// 返回当前进程的信息</span></span><br><span class="line">- (<span class="built_in">NSArray</span>*)arguments        <span class="comment">// 以NSString对象数字的形式返回当前进程的参数</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)environment        <span class="comment">//  返回变量/值对词典。描述当前的环境变量</span></span><br><span class="line">- (<span class="keyword">int</span>)processIdentity        <span class="comment">// 返回进程标识</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)processName        <span class="comment">// 返回进程名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)globallyUniqueString        <span class="comment">// 每次调用该方法都会返回不同的单值字符串，可以用这个字符串生成单值临时文件名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)hostname        <span class="comment">// 返回主机系统的名称</span></span><br><span class="line">- (<span class="keyword">unsigned</span> <span class="keyword">int</span>)operatingSystem        <span class="comment">// 返回表示操作系统的数字</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemName        <span class="comment">// 返回操作系统名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemVersionString        <span class="comment">// 返回操作系统当前版本</span></span><br><span class="line">- (<span class="keyword">void</span>)setProcessName:(<span class="built_in">NSString</span> *)name        <span class="comment">// 将当前进程名称设置为name</span></span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1078,7 +1186,6 @@
 
 
     
-
   </section>
 
   
@@ -1088,17 +1195,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1117,10 +1222,12 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://r.loli.io/bA3a2e.jpg" alt="XionVV" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="http://r.loli.io/bA3a2e.jpg"
+               alt="XionVV" />
           <p class="site-author-name" itemprop="name">XionVV</p>
+          <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -1129,19 +1236,23 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">1</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -1158,26 +1269,20 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/xionw1991" target="_blank">
+                <a href="https://github.com/xionw1991" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/demonayu" target="_blank">
+                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-globe"></i> twitter
+                    <i class="fa fa-fw fa-weibo"></i>
                   
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> weibo
-                  
+                  Weibo
                 </a>
               </span>
             
@@ -1193,9 +1298,8 @@
           </div>
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
 
       </section>
 
@@ -1205,17 +1309,18 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">XionVV</span>
 </div>
@@ -1227,25 +1332,89 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
+        
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
   
 
   
-    
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
 
   
     
@@ -1263,36 +1432,150 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
 
   
+
+  
+
   
 
 </body>

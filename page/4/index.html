@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -21,18 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -66,10 +99,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +117,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +124,18 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,15 +164,25 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -141,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -151,24 +200,24 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
       
     </ul>
   
@@ -176,21 +225,12 @@
   
     <div class="site-search">
       
-  
-  <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
-
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install', 'b6LmcvqYVXPpognWevjG','2.0.0');
-</script>
-
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
 
 
     </div>
@@ -202,20 +242,10 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-      
-      
-
-      
-    
-
     
       
 
@@ -248,7 +278,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-04-02T11:06:57+08:00" content="2015-04-02">
               2015-04-02
             </time>
@@ -269,21 +302,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="考虑因素">考虑因素</h2><ul>
+          
+            <h2 id="考虑因素">考虑因素</h2><ul>
 <li>单元格的多图下载要考虑到:<ul>
 <li>必须要在子线程进行下载</li>
 <li>防止重复下载</li>
@@ -307,9 +343,16 @@
 </li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -358,7 +401,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-03-14T14:55:57+08:00" content="2015-03-14">
               2015-03-14
             </time>
@@ -379,27 +425,37 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="渐变图层">渐变图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">/* 创建一个imageView控件 */</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]];</span><br><span class="line">    imageV<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    imageV<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageV];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> addGradientLayerToView:imageV];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 添加渐变图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addGradientLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个渐变图层 */</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = view<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 渐变颜色(用(id)强转成OC对象)</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 渐变范围(取值范围是0~1, 差值越大表示渐变范围越大)</span></span><br><span class="line">    gradient<span class="variable">.locations</span> = @[@<span class="number">0</span>, @<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 渐变方向(下面代码表示左上角到右下角的渐变)</span></span><br><span class="line">    gradient<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    gradient<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0.5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 给控件添加渐变图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+            <h2 id="渐变图层">渐变图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">/* 创建一个imageView控件 */</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageV = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>]];</span><br><span class="line">    imageV<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    imageV<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageV];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> addGradientLayerToView:imageV];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 添加渐变图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addGradientLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个渐变图层 */</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = view<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 渐变颜色(用(id)强转成OC对象)</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 渐变范围(取值范围是0~1, 差值越大表示渐变范围越大)</span></span><br><span class="line">    gradient<span class="variable">.locations</span> = @[@<span class="number">0</span>, @<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 渐变方向(下面代码表示左上角到右下角的渐变)</span></span><br><span class="line">    gradient<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    gradient<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0.5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 给控件添加渐变图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="复制图层">复制图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 添加复制图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addReplicatorLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个复制层 */</span></span><br><span class="line">    <span class="built_in">CAReplicatorLayer</span> *replicator = [<span class="built_in">CAReplicatorLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置图层frame</span></span><br><span class="line">    replicator<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="comment">// 设置背景颜色</span></span><br><span class="line">    replicator<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> addSublayer:replicator];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子层1</span></span><br><span class="line">    <span class="built_in">CALayer</span> *sublayer1 = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    sublayer1<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    sublayer1<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    [replicator addSublayer:sublayer1];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子层2</span></span><br><span class="line">    <span class="built_in">CALayer</span> *sublayer2 = [<span class="built_in">CALayer</span> layer];</span><br><span class="line">    sublayer2<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">70</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    sublayer2<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> greenColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    [replicator addSublayer:sublayer2];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 复制层是复制里面的子层,而不是复制层本身</span></span><br><span class="line">    <span class="comment">// 设置要复制图层中子层的个数(数量包括自己本身的)</span></span><br><span class="line">    replicator<span class="variable">.instanceCount</span> = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 子层形变(基于上一次子层的形变)</span></span><br><span class="line">    replicator<span class="variable">.instanceTransform</span> = <span class="built_in">CATransform3DMakeTranslation</span>(<span class="number">100</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="形状图层">形状图层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 添加形状图层 */</span></span><br><span class="line">- (<span class="keyword">void</span>)addShapeLayerToView:(<span class="built_in">UIView</span> *)view</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 绘制一个圆形路径 */</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 创建一个形状图层 */</span></span><br><span class="line">    <span class="built_in">CAShapeLayer</span> *shape = [<span class="built_in">CAShapeLayer</span> layer];</span><br><span class="line">    <span class="comment">// 设置路径(将路径装换成形状图层)</span></span><br><span class="line">    shape<span class="variable">.path</span> = path<span class="variable">.CGPath</span>;</span><br><span class="line">    <span class="comment">// 设置填充色</span></span><br><span class="line">    shape<span class="variable">.fillColor</span> = [<span class="built_in">UIColor</span> redColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置描边色</span></span><br><span class="line">    shape<span class="variable">.strokeColor</span> = [<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>;</span><br><span class="line">    <span class="comment">// 设置线宽</span></span><br><span class="line">    shape<span class="variable">.lineWidth</span> = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// 描边起始点 (取值范围是0~1)</span></span><br><span class="line">    shape<span class="variable">.strokeStart</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 描边结束点 (取值范围是0~1)</span></span><br><span class="line">    shape<span class="variable">.strokeEnd</span> = <span class="number">0.75</span>;</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    [view<span class="variable">.layer</span> addSublayer:shape];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="自定义view时重写父类类方法来修改view的初始层">自定义view时重写父类类方法来修改view的初始层</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回当前View当中layer的类型</span></span><br><span class="line">+ (Class)layerClass</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 将初始层修改为复制层</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">CAReplicatorLayer</span> class];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -448,7 +504,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-02-18T15:45:57+08:00" content="2015-02-18">
               2015-02-18
             </time>
@@ -469,21 +528,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="CALayer">CALayer</h2><ul>
+          
+            <h2 id="CALayer">CALayer</h2><ul>
 <li>CALayer简介<ul>
 <li>CALayer我们又称它叫做层.</li>
 <li>在每个UIView内部都有一个layer这样一个属性.</li>
@@ -592,9 +654,16 @@
 <h3 id="使用UIView动画函数实现转场动画">使用UIView动画函数实现转场动画</h3> <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 单视图 */</span></span><br><span class="line">+ (<span class="keyword">void</span>)transitionWithView:(<span class="built_in">UIView</span> *)view duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options animations:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))animations completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</span><br><span class="line"><span class="comment">// 参数说明：</span></span><br><span class="line"><span class="comment">// duration：动画的持续时间</span></span><br><span class="line"><span class="comment">// view：需要进行转场动画的视图</span></span><br><span class="line"><span class="comment">// options：转场动画的类型</span></span><br><span class="line"><span class="comment">// animations：将改变视图属性的代码放在这个block中</span></span><br><span class="line"><span class="comment">// completion：动画结束后，会自动调用这个block</span></span><br></pre></td></tr></table></figure>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 双视图 */</span></span><br><span class="line">+ (<span class="keyword">void</span>)transitionFromView:(<span class="built_in">UIView</span> *)fromView toView:(<span class="built_in">UIView</span> *)toView duration:(<span class="built_in">NSTimeInterval</span>)duration options:(<span class="built_in">UIViewAnimationOptions</span>)options completion:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span> finished))completion;</span><br><span class="line"><span class="comment">// 参数说明：</span></span><br><span class="line"><span class="comment">// duration：动画的持续时间</span></span><br><span class="line"><span class="comment">// options：转场动画的类型</span></span><br><span class="line"><span class="comment">// animations：将改变视图属性的代码放在这个block中</span></span><br><span class="line"><span class="comment">// completion：动画结束后，会自动调用这个block</span></span><br></pre></td></tr></table></figure>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -643,7 +712,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-01-26T12:24:57+08:00" content="2015-01-26">
               2015-01-26
             </time>
@@ -664,21 +736,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <ul>
+          
+            <ul>
 <li>颜色转图片, 集成到UIImage分类  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)imageWithColor:(<span class="built_in">UIColor</span> *)color</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 描述矩形</span></span><br><span class="line">    <span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">1.0</span>f);</span><br><span class="line">    <span class="comment">// 开启位图上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(rect<span class="variable">.size</span>);</span><br><span class="line">    <span class="comment">// 获取位图上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 使用color演示填充上下文</span></span><br><span class="line">    <span class="built_in">CGContextSetFillColorWithColor</span>(context, color<span class="variable">.CGColor</span>);</span><br><span class="line">    <span class="comment">// 渲染上下文</span></span><br><span class="line">    <span class="built_in">CGContextFillRect</span>(context, rect);</span><br><span class="line">    <span class="comment">// 从上下文中获取图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *theImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 结束上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> theImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -686,9 +761,16 @@
 <li>图片转颜色  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithPatternImage:image];</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -737,7 +819,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-01-25T09:35:57+08:00" content="2015-01-25">
               2015-01-25
             </time>
@@ -758,28 +843,38 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h3 id="长按截屏">长按截屏</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)longPress:(<span class="built_in">UILongPressGestureRecognizer</span> *)longPress</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意这个longPress会调用两次,一次是触发时,一次是结束时, 所以这里需要对状态进行一次判定,避免两次触发</span></span><br><span class="line">    <span class="keyword">if</span> (longPress<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过设置首尾式动画来达到屏幕闪一下的效果</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.2</span> animations:^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">0.6</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">            [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.5</span> animations:^&#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">1</span>;</span><br><span class="line">            &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">                <span class="comment">// 开启一个全屏位图上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>([<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span>, <span class="literal">YES</span>, <span class="number">0.0</span> );</span><br><span class="line">                <span class="comment">// 获取当前上下文</span></span><br><span class="line">                <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">                <span class="comment">// 渲染图层到上下文</span></span><br><span class="line">                [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:ctx];</span><br><span class="line">                <span class="comment">// 将当前上下文中的内容转成图片</span></span><br><span class="line">                <span class="built_in">UIImage</span> *capture = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">                <span class="comment">// 关闭上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">                <span class="comment">// 将图片输出</span></span><br><span class="line">                <span class="built_in">NSData</span> *imgData = <span class="built_in">UIImagePNGRepresentation</span>(capture);</span><br><span class="line">                [imgData writeToFile:<span class="string">@"/Users/Xion/Desktop/image.png"</span> atomically:<span class="literal">YES</span>];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+            <h3 id="长按截屏">长按截屏</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)longPress:(<span class="built_in">UILongPressGestureRecognizer</span> *)longPress</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意这个longPress会调用两次,一次是触发时,一次是结束时, 所以这里需要对状态进行一次判定,避免两次触发</span></span><br><span class="line">    <span class="keyword">if</span> (longPress<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过设置首尾式动画来达到屏幕闪一下的效果</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.2</span> animations:^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">0.6</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">            [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.5</span> animations:^&#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">1</span>;</span><br><span class="line">            &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">                <span class="comment">// 开启一个全屏位图上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>([<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span>, <span class="literal">YES</span>, <span class="number">0.0</span> );</span><br><span class="line">                <span class="comment">// 获取当前上下文</span></span><br><span class="line">                <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">                <span class="comment">// 渲染图层到上下文</span></span><br><span class="line">                [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:ctx];</span><br><span class="line">                <span class="comment">// 将当前上下文中的内容转成图片</span></span><br><span class="line">                <span class="built_in">UIImage</span> *capture = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">                <span class="comment">// 关闭上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">                <span class="comment">// 将图片输出</span></span><br><span class="line">                <span class="built_in">NSData</span> *imgData = <span class="built_in">UIImagePNGRepresentation</span>(capture);</span><br><span class="line">                [imgData writeToFile:<span class="string">@"/Users/Xion/Desktop/image.png"</span> atomically:<span class="literal">YES</span>];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="图片裁剪">图片裁剪</h3><blockquote>
 <p>为UIimage增加一个分类类方法,在实例化图片时就对其进行裁剪</p>
 </blockquote>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="preprocessor">#import <span class="title">"UIImage+ClipImage.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">ClipImage</span>)</span></span><br><span class="line">+ (instancetype)imageNamed:(<span class="built_in">NSString</span> *)name withClipShape:(ClipShape)shape;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="keyword">self</span> imageNamed:name];</span><br><span class="line">    <span class="comment">// 开启一个上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(image<span class="variable">.size</span>, <span class="literal">NO</span>, <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 设置为模具</span></span><br><span class="line">    <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithCircle: &#123; <span class="comment">// 圆</span></span><br><span class="line">            <span class="built_in">CGFloat</span> radius = image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>;</span><br><span class="line">            <span class="built_in">CGPoint</span> center = <span class="built_in">CGPointMake</span>(radius, radius);</span><br><span class="line">            <span class="built_in">UIBezierPath</span> *circlePath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">            <span class="comment">// 设置裁剪区</span></span><br><span class="line">            [circlePath addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithtriangle: &#123; <span class="comment">// 三角形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            <span class="comment">// 关闭路径</span></span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithRhombus: &#123; <span class="comment">// 菱形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 画出裁剪范围</span></span><br><span class="line">    [image drawAtPoint:<span class="built_in">CGPointZero</span>];</span><br><span class="line">    <span class="comment">// 将当前上下文的内容转成图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 关闭上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -828,7 +923,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-01-25T09:31:57+08:00" content="2015-01-25">
               2015-01-25
             </time>
@@ -849,21 +947,24 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-              <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
+          
+            <h2 id="UIGestureRecognizer手势识别">UIGestureRecognizer手势识别</h2><ul>
 <li>UIGestureRecognizer是一个抽象类,定义了所有手势的基本行为,使用它的子类才能处理具体的手势.</li>
 <li>利用UIGestureRecognizer,能轻松识别用户在某个view上面做的一些常见手势.</li>
 <li>手势有以下几种:<ul>
@@ -898,9 +999,16 @@
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">//是否允许接收手指点击</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//是否允许同时支持多个手势 - 默认为NO</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-            
-          </span>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -918,7 +1026,6 @@
 
 
     
-
   </section>
 
   
@@ -928,17 +1035,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -957,10 +1062,12 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://r.loli.io/bA3a2e.jpg" alt="XionVV" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="http://r.loli.io/bA3a2e.jpg"
+               alt="XionVV" />
           <p class="site-author-name" itemprop="name">XionVV</p>
+          <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -969,19 +1076,23 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">1</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -998,26 +1109,20 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/xionw1991" target="_blank">
+                <a href="https://github.com/xionw1991" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/demonayu" target="_blank">
+                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-globe"></i> twitter
+                    <i class="fa fa-fw fa-weibo"></i>
                   
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> weibo
-                  
+                  Weibo
                 </a>
               </span>
             
@@ -1033,9 +1138,8 @@
           </div>
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
 
       </section>
 
@@ -1045,17 +1149,18 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">XionVV</span>
 </div>
@@ -1067,25 +1172,89 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
+        
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
   
 
   
-    
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
 
   
     
@@ -1103,36 +1272,150 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
 
   
+
+  
+
   
 
 </body>
