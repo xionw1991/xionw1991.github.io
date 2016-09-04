@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[处理URL的几种思路]]></title>
+      <title><![CDATA[在iOS10接入https的坑]]></title>
       <url>http://xionv.com/2016/09/04/demonayu/blog/43.%E5%9C%A8iOS10%E4%B8%8B%E6%8E%A5%E5%85%A5https%E7%9A%84%E5%9D%91/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；</p>
@@ -63,7 +63,10 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>在iOS9下仅设置<code>NSAllowsArbitraryLoads</code>有效，如果设置为YES则在审核时需要说明原因，如果为NO，则表示所有的连接必须是符合ATS的要求的，包括网页浏览；如果app内部使用webview访问的页面都是固定的域名，可以通过设置<code>NSExceptionDomains</code>白名单在不禁用ATS的情况下进行访问；</li>
 <li>以下是整理出来的表格：<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
 </ul>
-<p>##解决方案<br>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？<br><br>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，如果是要访问不定的域名则需要在审核中说明。</p>
+<p>##解决方案<br>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？</p>
+<ul>
+<li>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，如果是要访问不定的域名则需要在审核中说明。</li>
+</ul>
 <p>参考：<a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33" target="_blank" rel="external">苹果官方文档</a></p>
 ]]></content>
     </entry>
