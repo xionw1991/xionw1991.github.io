@@ -61,9 +61,9 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 </li>
 <li>在iOS10下同时设置<code>NSAllowsArbitraryLoads</code>和<code>NSAllowsArbitraryLoadsInWebContent</code>，前者会失效，所以在iOS10下使用<code>NSAllowsArbitraryLoadsInWebContent</code>就意味着除了网页浏览，其他所有的连接都必须是https的；</li>
 <li>在iOS9下仅设置<code>NSAllowsArbitraryLoads</code>有效，如果设置为YES则在审核时需要说明原因，如果为NO，则表示所有的连接必须是符合ATS的要求的，包括网页浏览；如果app内部使用webview访问的页面都是固定的域名，可以通过设置<code>NSExceptionDomains</code>白名单在不禁用ATS的情况下进行访问；</li>
-<li>以下是整理出来的表格：<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
+<li>以下是整理出来的表格：<br>  <img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
 </ul>
-<p>##解决方案<br>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？</p>
+<h2 id="解决方案">解决方案</h2><p>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？</p>
 <ul>
 <li>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，如果是要访问不定的域名则需要在审核中说明。</li>
 </ul>

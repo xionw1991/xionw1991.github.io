@@ -101,7 +101,7 @@
 一句话概括：从2017年的元旦起，苹果继续收紧了应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。
 新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到NSURLSession">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg">
-<meta property="og:updated_time" content="2016-09-04T10:12:10.000Z">
+<meta property="og:updated_time" content="2016-09-04T10:26:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在iOS10接入https的坑">
 <meta name="twitter:description" content="从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；
@@ -381,9 +381,9 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 </li>
 <li>在iOS10下同时设置<code>NSAllowsArbitraryLoads</code>和<code>NSAllowsArbitraryLoadsInWebContent</code>，前者会失效，所以在iOS10下使用<code>NSAllowsArbitraryLoadsInWebContent</code>就意味着除了网页浏览，其他所有的连接都必须是https的；</li>
 <li>在iOS9下仅设置<code>NSAllowsArbitraryLoads</code>有效，如果设置为YES则在审核时需要说明原因，如果为NO，则表示所有的连接必须是符合ATS的要求的，包括网页浏览；如果app内部使用webview访问的页面都是固定的域名，可以通过设置<code>NSExceptionDomains</code>白名单在不禁用ATS的情况下进行访问；</li>
-<li>以下是整理出来的表格：<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
+<li>以下是整理出来的表格：<br>  <img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
 </ul>
-<p>##解决方案<br>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？</p>
+<h2 id="解决方案">解决方案</h2><p>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？</p>
 <ul>
 <li>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，如果是要访问不定的域名则需要在审核中说明。</li>
 </ul>
@@ -575,7 +575,7 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新https政策"><span class="nav-number">1.</span> <span class="nav-text">新https政策</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App_Transport_Security"><span class="nav-number">2.</span> <span class="nav-text">App Transport Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ATS设定"><span class="nav-number">3.</span> <span class="nav-text">ATS设定</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新https政策"><span class="nav-number">1.</span> <span class="nav-text">新https政策</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App_Transport_Security"><span class="nav-number">2.</span> <span class="nav-text">App Transport Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ATS设定"><span class="nav-number">3.</span> <span class="nav-text">ATS设定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">4.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
             
           </div>
         </section>
