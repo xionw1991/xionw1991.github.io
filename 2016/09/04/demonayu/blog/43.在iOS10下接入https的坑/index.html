@@ -1,0 +1,859 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS开发笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XionVV Coding" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；
+
+新https政策
+一句话概括：从2017年的元旦起，苹果继续收紧了应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。
+新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到NSURLSession">
+<meta property="og:type" content="article">
+<meta property="og:title" content="处理URL的几种思路">
+<meta property="og:url" content="http://xionv.com/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/index.html">
+<meta property="og:site_name" content="XionVV Coding">
+<meta property="og:description" content="从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；
+
+新https政策
+一句话概括：从2017年的元旦起，苹果继续收紧了应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。
+新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到NSURLSession">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg">
+<meta property="og:updated_time" content="2016-09-04T10:08:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="处理URL的几种思路">
+<meta name="twitter:description" content="从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；
+
+新https政策
+一句话概括：从2017年的元旦起，苹果继续收紧了应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。
+新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到NSURLSession">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 处理URL的几种思路 | XionVV Coding </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">XionVV Coding</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">It`s Breeze, It`s Sunshine.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                处理URL的几种思路
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-04T14:09:57+08:00" content="2016-09-04">
+              2016-09-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；</p>
+</blockquote>
+<h2 id="新https政策">新https政策</h2><ul>
+<li>一句话概括：从2017年的元旦起，苹果继续收紧了应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。</li>
+<li>新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到<code>NSURLSession</code>和<code>UIWebView</code>，所以理论上使用webview访问的网页也必须是https，但这样显然不现实，所以苹果在iOS10添加了新key<code>NSAllowsArbitraryLoadsInWebContent</code>来容许访问未加密的网页。但是这个key在iOS9下并不起作用，这样尴尬了：上传的应用不容许使用<code>NSAllowsArbitraryLoads</code>来绕过ATS，而在应用中又需要访问http网页，怎么办？</li>
+</ul>
+<h2 id="App_Transport_Security">App Transport Security</h2><p>我们先来看看ATS的要求：</p>
+<pre><code>The server certificate must meet <span class="keyword">at</span> least <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> following trust requirements:
+    Issued <span class="keyword">by</span> <span class="operator">a</span> certificate authority (CA) whose root certificate is incorporated <span class="keyword">into</span> <span class="operator">the</span> operating <span class="keyword">system</span>
+    Issued <span class="keyword">by</span> <span class="operator">a</span> trusted root CA <span class="operator">and</span> installed <span class="keyword">by</span> <span class="operator">the</span> user <span class="operator">or</span> <span class="operator">a</span> <span class="keyword">system</span> administrator
+The negotiated Transport Layer Security <span class="built_in">version</span> must be TLS <span class="number">1.2</span>
+The negotiated TLS connection cipher suite must support forward secrecy (FS) <span class="operator">and</span> be <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> following:
+    TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+    TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+    TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+    TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+    TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+    TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+    TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+    TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+    TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+The leaf server certificate must be signed <span class="operator">with</span> <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> following types <span class="operator">of</span> <span class="built_in">keys</span>:
+    Rivest-Shamir-Adleman (RSA) key <span class="operator">with</span> <span class="operator">a</span> <span class="built_in">length</span> <span class="operator">of</span> <span class="keyword">at</span> least <span class="number">2048</span> bits
+    Elliptic-Curve Cryptography (ECC) key <span class="operator">with</span> <span class="operator">a</span> size <span class="operator">of</span> <span class="keyword">at</span> least <span class="number">256</span> bits
+In addition, <span class="operator">the</span> leaf server certificate hashing algorithm must be Secure Hash Algorithm <span class="number">2</span> (SHA-<span class="number">2</span>) <span class="operator">with</span> <span class="operator">a</span> digest <span class="built_in">length</span> <span class="operator">of</span> <span class="keyword">at</span> least <span class="number">256</span> (that is, SHA-<span class="number">256</span> <span class="operator">or</span> greater).
+</code></pre><p>大白话的就是：</p>
+<ul>
+<li>服务器证书必须至少满足以下条件中的一个<ul>
+<li>颁发给服务器证书的证书机构（CA）的根证书必须是内置于操作系统的<a href="https://support.apple.com/zh-cn/HT205205" target="_blank" rel="external">受信任根证书</a>；</li>
+<li>受用户或者系统管理员信任并安装到操作系统上的；</li>
+</ul>
+</li>
+<li>服务器TLS版本至少是1.2版本；</li>
+<li>连接加密方式必须支持下列正向加密的一种；</li>
+<li>证书必须使用SHA256或者更好的哈希算法进行签名，要么是2048位或者更长的RSA密钥，要么就是256位或更长的ECC密钥；</li>
+</ul>
+<p>其实在这一层客户端所做的事情不多，当https服务器满足ATS默认的条件，而且SSL证书是通过权威的CA机构认证过的，客户端直接接入就可以了正常通信了（后台的兄弟们辛苦了）。<br><br>搭建完成后可以使用命令行来测试是否满足ATS要求：<code>nscurl --ats-diagnostics --verbose https://google.com</code>。</p>
+<h2 id="ATS设定">ATS设定</h2><ul>
+<li>NSAllowsArbitraryLoads<ul>
+<li>在Xcode7中这个key值默认为NO，我们将它设置为YES来访问任意接口，但是苹果新规出来后将限制这个key的使用，设置这个key值需要在应用审核的时候说明原因，能不能过还要看审核员的脸色；</li>
+</ul>
+</li>
+<li>NSAllowsArbitraryLoadsInWebContent<ul>
+<li>这是iOS10在ATS中新增加的key，目的是方便使用webview框架的应用在应用内访问http网页，这个key仅在iOS10起作用；</li>
+</ul>
+</li>
+<li>NSExceptionDomains<ul>
+<li>这个key值可以让开发者更加灵活的配置让哪些接口遵不遵守ATS的要求，具体设置方法可以参考：<a href="https://github.com/ChenYilong/iOS9AdaptationTips#how如何适配---弱弱地问下加班要多久" target="_blank" rel="external">NSExceptionDomains</a>；</li>
+</ul>
+</li>
+<li>在iOS10下同时设置<code>NSAllowsArbitraryLoads</code>和<code>NSAllowsArbitraryLoadsInWebContent</code>，前者会失效，所以在iOS10下使用<code>NSAllowsArbitraryLoadsInWebContent</code>就意味着除了网页浏览，其他所有的连接都必须是https的；</li>
+<li>在iOS9下仅设置<code>NSAllowsArbitraryLoads</code>有效，如果设置为YES则在审核时需要说明原因，如果为NO，则表示所有的连接必须是符合ATS的要求的，包括网页浏览；如果app内部使用webview访问的页面都是固定的域名，可以通过设置<code>NSExceptionDomains</code>白名单在不禁用ATS的情况下进行访问；</li>
+<li>以下是整理出来的表格：<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
+</ul>
+<p>##解决方案<br>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？<br><br>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，如果是要访问不定的域名则需要在审核中说明。</p>
+<p>参考：<a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33" target="_blank" rel="external">苹果官方文档</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发笔记/" rel="tag">#iOS开发笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/06/demonayu/blog/42.处理URL拼接的几种方式/" rel="next" title="处理URL的几种思路">
+                <i class="fa fa-chevron-left"></i> 处理URL的几种思路
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/"
+           data-title="处理URL的几种思路" data-url="http://xionv.com/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://r.loli.io/bA3a2e.jpg"
+               alt="XionVV" />
+          <p class="site-author-name" itemprop="name">XionVV</p>
+          <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xionw1991" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新https政策"><span class="nav-number">1.</span> <span class="nav-text">新https政策</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App_Transport_Security"><span class="nav-number">2.</span> <span class="nav-text">App Transport Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ATS设定"><span class="nav-number">3.</span> <span class="nav-text">ATS设定</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XionVV</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xionv"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>
