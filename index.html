@@ -323,7 +323,7 @@
 <p>从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；</p>
 </blockquote>
 <h2 id="新https政策">新https政策</h2><ul>
-<li>一句话概括：从2017年的元旦起，苹果继续收紧了应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。</li>
+<li>一句话概括：从2017年的元旦起，苹果将继续收紧应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。</li>
 <li>新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到<code>NSURLSession</code>和<code>UIWebView</code>，所以理论上使用webview访问的网页也必须是https，但这样显然不现实，所以苹果在iOS10添加了新key<code>NSAllowsArbitraryLoadsInWebContent</code>来容许访问未加密的网页。但是这个key在iOS9下并不起作用，这样尴尬了：上传的应用不容许使用<code>NSAllowsArbitraryLoads</code>来绕过ATS，而在应用中又需要访问http网页，怎么办？</li>
 </ul>
 <h2 id="App_Transport_Security">App Transport Security</h2><p>我们先来看看ATS的要求：</p>
@@ -376,10 +376,7 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>在iOS9下仅设置<code>NSAllowsArbitraryLoads</code>有效，如果设置为YES则在审核时需要说明原因，如果为NO，则表示所有的连接必须是符合ATS的要求的，包括网页浏览；如果app内部使用webview访问的页面都是固定的域名，可以通过设置<code>NSExceptionDomains</code>白名单在不禁用ATS的情况下进行访问；</li>
 <li>以下是整理出来的表格：<br>  <img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
 </ul>
-<h2 id="解决方案">解决方案</h2><p>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？</p>
-<ul>
-<li>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，如果是要访问不定的域名则需要在审核中说明。</li>
-</ul>
+<h2 id="解决方案">解决方案</h2><p>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？<br><br>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，注意如果白名单的网页使用了其他的资源，比如一些图床，则需要将相关的域名也要添加进白名单。目前还不得知苹果对<code>NSExceptionDomains</code>的审核标准是怎样的，猜测如果在上传时说明是webview访问一些第三方的http资源问题应该不大。<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tgw1f7hsq1ggncj30ro076jtw.jpg" alt=""></p>
 <p>参考：<a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33" target="_blank" rel="external">苹果官方文档</a></p>
 
           
