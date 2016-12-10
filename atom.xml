@@ -3,9 +3,9 @@
   <title><![CDATA[XionVV Coding]]></title>
   <subtitle><![CDATA[It`s Breeze, It`s Sunshine.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://xionv.com/"/>
+  <link href="https://xionw1991.github.io/"/>
   <updated>2016-12-07T03:20:16.000Z</updated>
-  <id>http://xionv.com/</id>
+  <id>https://xionw1991.github.io/</id>
   
   <author>
     <name><![CDATA[XionVV]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[通用链接debug]]></title>
-    <link href="http://xionv.com/2016/12/07/demonayu/blog/44.%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5debug/"/>
-    <id>http://xionv.com/2016/12/07/demonayu/blog/44.通用链接debug/</id>
+    <link href="https://xionw1991.github.io/2016/12/07/demonayu/blog/44.%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5debug/"/>
+    <id>https://xionw1991.github.io/2016/12/07/demonayu/blog/44.通用链接debug/</id>
     <published>2016-12-07T03:19:57.000Z</published>
     <updated>2016-12-07T03:20:16.000Z</updated>
     <content type="html"><![CDATA[<p>原文地址：<a href="http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/" target="_blank" rel="external">http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/</a></p>
@@ -26,14 +26,14 @@
     <![CDATA[<p>原文地址：<a href="http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/" targe]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[在iOS10接入https的坑]]></title>
-    <link href="http://xionv.com/2016/09/04/demonayu/blog/43.%E5%9C%A8iOS10%E4%B8%8B%E6%8E%A5%E5%85%A5https%E7%9A%84%E5%9D%91/"/>
-    <id>http://xionv.com/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/</id>
+    <link href="https://xionw1991.github.io/2016/09/04/demonayu/blog/43.%E5%9C%A8iOS10%E4%B8%8B%E6%8E%A5%E5%85%A5https%E7%9A%84%E5%9D%91/"/>
+    <id>https://xionw1991.github.io/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/</id>
     <published>2016-09-04T06:09:57.000Z</published>
     <updated>2016-09-05T02:06:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -104,14 +104,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>一句话概括：从]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[处理URL的几种思路]]></title>
-    <link href="http://xionv.com/2016/08/06/demonayu/blog/42.%E5%A4%84%E7%90%86URL%E6%8B%BC%E6%8E%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
-    <id>http://xionv.com/2016/08/06/demonayu/blog/42.处理URL拼接的几种方式/</id>
+    <link href="https://xionw1991.github.io/2016/08/06/demonayu/blog/42.%E5%A4%84%E7%90%86URL%E6%8B%BC%E6%8E%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>https://xionw1991.github.io/2016/08/06/demonayu/blog/42.处理URL拼接的几种方式/</id>
     <published>2016-08-06T09:51:57.000Z</published>
     <updated>2016-08-06T14:18:26.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -145,14 +145,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <h2 id="直接对_URL_字符串进行修改">直接对 URL 字符串进行修改</h2><p]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Github, Gitcafe和 Coding的Pages服务对比]]></title>
-    <link href="http://xionv.com/2015/12/14/demonayu/blog/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E5%9B%BD%E5%86%85%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E7%BD%91%E7%AB%99/"/>
-    <id>http://xionv.com/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/</id>
+    <link href="https://xionw1991.github.io/2015/12/14/demonayu/blog/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E5%9B%BD%E5%86%85%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E7%BD%91%E7%AB%99/"/>
+    <id>https://xionw1991.github.io/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/</id>
     <published>2015-12-14T04:01:57.000Z</published>
     <updated>2016-08-02T08:19:49.000Z</updated>
     <content type="html"><![CDATA[<ul>
@@ -177,14 +177,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个]]>
     </summary>
     
-      <category term="随笔" scheme="http://xionv.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="https://xionw1991.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[升级Xcode后插件失效的解决办法]]></title>
-    <link href="http://xionv.com/2015/12/10/demonayu/blog/Xcode%E6%8F%92%E4%BB%B6%E5%A4%B1%E6%95%88%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>http://xionv.com/2015/12/10/demonayu/blog/Xcode插件失效后解决办法/</id>
+    <link href="https://xionw1991.github.io/2015/12/10/demonayu/blog/Xcode%E6%8F%92%E4%BB%B6%E5%A4%B1%E6%95%88%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>https://xionw1991.github.io/2015/12/10/demonayu/blog/Xcode插件失效后解决办法/</id>
     <published>2015-12-10T07:21:01.000Z</published>
     <updated>2016-08-02T08:19:49.000Z</updated>
     <content type="html"><![CDATA[<p> 1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:<br>    <code>defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID</code></p>
@@ -194,14 +194,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
     <![CDATA[<p> 1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:<br>    <code>defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID<]]>
     </summary>
     
-      <category term="随笔" scheme="http://xionv.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="https://xionw1991.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[图片折叠小demo]]></title>
-    <link href="http://xionv.com/2015/12/04/demonayu/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/"/>
-    <id>http://xionv.com/2015/12/04/demonayu/blog/41.图片折叠小demo/</id>
+    <link href="https://xionw1991.github.io/2015/12/04/demonayu/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/"/>
+    <id>https://xionw1991.github.io/2015/12/04/demonayu/blog/41.图片折叠小demo/</id>
     <published>2015-12-04T14:40:57.000Z</published>
     <updated>2016-08-07T01:37:12.000Z</updated>
     <content type="html"><![CDATA[<h2 id="利用图层特性实现图片折叠的效果">利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define imageWH 200.0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageTop;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageBottom;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">CAGradientLayer</span> *gradient;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化图片</span></span><br><span class="line">    [<span class="keyword">self</span> setupImageView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 初始化图片 */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupImageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个透明的蒙版作为手势的接受者 */</span></span><br><span class="line">    <span class="built_in">UIView</span> *cover = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    cover<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, imageWH, imageWH);</span><br><span class="line">    cover<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    cover<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">    <span class="comment">// 添加pan手势</span></span><br><span class="line">    <span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br><span class="line">    [cover addGestureRecognizer:pan];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:cover];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 添加图片 - 原图片添加两次,分别显示上下部分 */</span></span><br><span class="line">    <span class="comment">// 上半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageTop = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageTop<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageTop<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的上半部</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为图片的高度</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</span><br><span class="line">    _imageTop = imageTop;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageBottom = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageBottom<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageBottom<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的下半部</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为0</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    _imageBottom = imageBottom;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 给下半部图片添加阴影效果 */</span></span><br><span class="line">    <span class="comment">// 创建一个渐变层用来显示阴影效果</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    _gradient = gradient;</span><br><span class="line">    <span class="comment">// 设置图层的位置</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = imageBottom<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置渐变颜色</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> clearColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 设置不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 给下半部图片添加图层</span></span><br><span class="line">    [imageBottom<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">    </span><br><span class="line">    [cover addSubview:imageBottom];</span><br><span class="line">    [cover addSubview:imageTop];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 监听pan手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获得手指偏移量的Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> offsetY = [pan translationInView:<span class="keyword">self</span><span class="variable">.view</span>]<span class="variable">.y</span>;</span><br><span class="line">    <span class="comment">// 将偏移量转成旋转弧度</span></span><br><span class="line">    <span class="built_in">CGFloat</span> angle = offsetY * M_PI / imageWH;</span><br><span class="line">    <span class="keyword">if</span> (angle &gt; M_PI) &#123;</span><br><span class="line">        angle = M_PI;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置透视效果 - 除数值越大透视效果越不明显(可以理解成眼睛看到物体的距离)</span></span><br><span class="line">    <span class="built_in">CATransform3D</span> transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">    transform<span class="variable">.m34</span> = -<span class="number">1</span> / <span class="number">400.0</span>;</span><br><span class="line">    <span class="comment">// 根据偏移量沿x轴旋转上半部图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DRotate</span>(transform, -angle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 给下半部图片添加阴影效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = offsetY * <span class="number">1</span> / imageWH;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当手指松开的时候将位置返回</span></span><br><span class="line">    <span class="keyword">if</span> (pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置反弹动画</span></span><br><span class="line">        <span class="comment">// Duration:动画的执行时长</span></span><br><span class="line">        <span class="comment">// delay:延时执行时长</span></span><br><span class="line">        <span class="comment">// Damping:弹性系数(越小,弹性越大)</span></span><br><span class="line">        <span class="comment">// SpringVelocity:初始的弹性系数</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">1.25</span> delay:<span class="number">0</span> usingSpringWithDamping:<span class="number">0.1</span> initialSpringVelocity:<span class="number">0</span> options:<span class="number">0</span> animations:^&#123;</span><br><span class="line">            <span class="comment">// 清空transform</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">            <span class="comment">// 还原不透明度</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>]]></content>
@@ -209,14 +209,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
     <![CDATA[<h2 id="利用图层特性实现图片折叠的效果">利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class=]]>
     </summary>
     
-      <category term="iOS代码" scheme="http://xionv.com/tags/iOS%E4%BB%A3%E7%A0%81/"/>
+      <category term="iOS代码" scheme="https://xionw1991.github.io/tags/iOS%E4%BB%A3%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[调用系统相册的两种方法]]></title>
-    <link href="http://xionv.com/2015/10/08/demonayu/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/"/>
-    <id>http://xionv.com/2015/10/08/demonayu/blog/40.调用系统相册方法/</id>
+    <link href="https://xionw1991.github.io/2015/10/08/demonayu/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/"/>
+    <id>https://xionw1991.github.io/2015/10/08/demonayu/blog/40.调用系统相册方法/</id>
     <published>2015-10-08T07:59:57.000Z</published>
     <updated>2016-08-07T03:08:28.000Z</updated>
     <content type="html"><![CDATA[<ul>
@@ -251,14 +251,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="l]]>
     </summary>
     
-      <category term="iOS代码" scheme="http://xionv.com/tags/iOS%E4%BB%A3%E7%A0%81/"/>
+      <category term="iOS代码" scheme="https://xionw1991.github.io/tags/iOS%E4%BB%A3%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[iOS面试题]]></title>
-    <link href="http://xionv.com/2015/10/05/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>http://xionv.com/2015/10/05/demonayu/blog/iOS面试题/</id>
+    <link href="https://xionw1991.github.io/2015/10/05/demonayu/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>https://xionw1991.github.io/2015/10/05/demonayu/blog/iOS面试题/</id>
     <published>2015-10-05T05:01:57.000Z</published>
     <updated>2016-08-02T10:40:25.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -350,14 +350,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
     
     </summary>
     
-      <category term="随笔" scheme="http://xionv.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="https://xionw1991.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[UIAlertView在iOS9中的使用]]></title>
-    <link href="http://xionv.com/2015/09/20/demonayu/blog/39.UIAlertView%E5%9C%A8IOS9%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://xionv.com/2015/09/20/demonayu/blog/39.UIAlertView在IOS9中的使用/</id>
+    <link href="https://xionw1991.github.io/2015/09/20/demonayu/blog/39.UIAlertView%E5%9C%A8IOS9%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://xionw1991.github.io/2015/09/20/demonayu/blog/39.UIAlertView在IOS9中的使用/</id>
     <published>2015-09-20T02:37:57.000Z</published>
     <updated>2016-08-07T03:16:12.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -371,17 +371,17 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <figure class="highlight objc"><table><tr><td ]]>
     </summary>
     
-      <category term="iOS代码" scheme="http://xionv.com/tags/iOS%E4%BB%A3%E7%A0%81/"/>
+      <category term="iOS代码" scheme="https://xionw1991.github.io/tags/iOS%E4%BB%A3%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Runtime黑魔法]]></title>
-    <link href="http://xionv.com/2015/09/18/demonayu/blog/38.Runtime%E9%BB%91%E9%AD%94%E6%B3%95/"/>
-    <id>http://xionv.com/2015/09/18/demonayu/blog/38.Runtime黑魔法/</id>
+    <link href="https://xionw1991.github.io/2015/09/18/demonayu/blog/38.Runtime%E9%BB%91%E9%AD%94%E6%B3%95/"/>
+    <id>https://xionw1991.github.io/2015/09/18/demonayu/blog/38.Runtime黑魔法/</id>
     <published>2015-09-18T14:09:57.000Z</published>
     <updated>2016-08-07T01:40:07.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="Runtime消息机制">Runtime消息机制</h2><p>之前写过一篇短文: <a href="http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/">利用运行时特性获取系统类的私有成员属性</a>.<br><br>通过运行时特性获得私有的成员变量target, 然后为target重新指定手势方法来达到全屏都能接收到滑动返回的事件.</p>
+    <content type="html"><![CDATA[<h2 id="Runtime消息机制">Runtime消息机制</h2><p>之前写过一篇短文: <a href="http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/" target="_blank" rel="external">利用运行时特性获取系统类的私有成员属性</a>.<br><br>通过运行时特性获得私有的成员变量target, 然后为target重新指定手势方法来达到全屏都能接收到滑动返回的事件.</p>
 <ul>
 <li><p>如果要搞清楚为什么能这样做首先得明白OC的运行时机制,看下面代码:</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>
@@ -568,17 +568,17 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 </ul>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="Runtime消息机制">Runtime消息机制</h2><p>之前写过一篇短文: <a href="http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/">利用运行时特性获取系统类的私]]>
+    <![CDATA[<h2 id="Runtime消息机制">Runtime消息机制</h2><p>之前写过一篇短文: <a href="http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/" target="_blank]]>
     </summary>
     
-      <category term="iOS干货" scheme="http://xionv.com/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
+      <category term="iOS干货" scheme="https://xionw1991.github.io/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[RunLoop基础知识]]></title>
-    <link href="http://xionv.com/2015/09/13/demonayu/blog/37.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>http://xionv.com/2015/09/13/demonayu/blog/37.RunLoop基础知识/</id>
+    <link href="https://xionw1991.github.io/2015/09/13/demonayu/blog/37.RunLoop%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>https://xionw1991.github.io/2015/09/13/demonayu/blog/37.RunLoop基础知识/</id>
     <published>2015-09-13T03:06:57.000Z</published>
     <updated>2016-08-07T01:40:00.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是RunLoop">什么是RunLoop</h2><ul>
@@ -720,14 +720,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>保持程序持续运行, 相当于]]>
     </summary>
     
-      <category term="iOS干货" scheme="http://xionv.com/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
+      <category term="iOS干货" scheme="https://xionw1991.github.io/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[封装NavigationController基类]]></title>
-    <link href="http://xionv.com/2015/08/06/demonayu/blog/36.%E5%B0%81%E8%A3%85NavigationController%E5%9F%BA%E7%B1%BB/"/>
-    <id>http://xionv.com/2015/08/06/demonayu/blog/36.封装NavigationController基类/</id>
+    <link href="https://xionw1991.github.io/2015/08/06/demonayu/blog/36.%E5%B0%81%E8%A3%85NavigationController%E5%9F%BA%E7%B1%BB/"/>
+    <id>https://xionw1991.github.io/2015/08/06/demonayu/blog/36.封装NavigationController基类/</id>
     <published>2015-08-06T04:47:57.000Z</published>
     <updated>2016-08-07T03:06:46.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -756,14 +756,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
   <figure class="highlight objc"><tab]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[单例设计模式]]></title>
-    <link href="http://xionv.com/2015/08/03/demonayu/blog/35.Singleton/"/>
-    <id>http://xionv.com/2015/08/03/demonayu/blog/35.Singleton/</id>
+    <link href="https://xionw1991.github.io/2015/08/03/demonayu/blog/35.Singleton/"/>
+    <id>https://xionw1991.github.io/2015/08/03/demonayu/blog/35.Singleton/</id>
     <published>2015-08-03T13:27:57.000Z</published>
     <updated>2016-08-07T01:40:45.000Z</updated>
     <content type="html"><![CDATA[<h1 id="单例模式概念">单例模式概念</h1><ul>
@@ -818,14 +818,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
     
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[UIButton调换文字与图片位置的两种方法]]></title>
-    <link href="http://xionv.com/2015/08/02/demonayu/blog/34.UIButton%E8%B0%83%E6%8D%A2%E6%96%87%E5%AD%97%E4%B8%8E%E5%9B%BE%E7%89%87%E4%BD%8D%E7%BD%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
-    <id>http://xionv.com/2015/08/02/demonayu/blog/34.UIButton调换文字与图片位置的两种方法/</id>
+    <link href="https://xionw1991.github.io/2015/08/02/demonayu/blog/34.UIButton%E8%B0%83%E6%8D%A2%E6%96%87%E5%AD%97%E4%B8%8E%E5%9B%BE%E7%89%87%E4%BD%8D%E7%BD%AE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
+    <id>https://xionw1991.github.io/2015/08/02/demonayu/blog/34.UIButton调换文字与图片位置的两种方法/</id>
     <published>2015-08-02T02:12:57.000Z</published>
     <updated>2016-08-07T03:03:18.000Z</updated>
     <content type="html"><![CDATA[<p>假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置button文字</span></span><br><span class="line">        [<span class="keyword">self</span> setTitle:<span class="string">@"title"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置button图片</span></span><br><span class="line">        [<span class="keyword">self</span> setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">        <span class="comment">// 设置文字大小</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">17</span>];</span><br><span class="line">        <span class="comment">// 设置图片居中</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageView</span><span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeCenter</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -849,14 +849,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
     <![CDATA[<p>假设自定义一个UIButton控件, 然后在button里面初始化了一个title和一个image:<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[GCD的一些总结]]></title>
-    <link href="http://xionv.com/2015/07/21/demonayu/blog/33.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/"/>
-    <id>http://xionv.com/2015/07/21/demonayu/blog/33.GCD的一些总结/</id>
+    <link href="https://xionw1991.github.io/2015/07/21/demonayu/blog/33.GCD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/"/>
+    <id>https://xionw1991.github.io/2015/07/21/demonayu/blog/33.GCD的一些总结/</id>
     <published>2015-07-21T02:09:57.000Z</published>
     <updated>2016-08-07T01:41:11.000Z</updated>
     <content type="html"><![CDATA[<h2 id="队列与任务">队列与任务</h2><ul>
@@ -948,7 +948,7 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 </li>
 <li><p>使用懒加载和同步锁实现单例</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">id</span> musicRadio;</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 添加同步锁防止资源抢夺</span></span><br><span class="line">    <span class="keyword">@synchronized</span>(<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123;</span><br><span class="line">        musicRadio = [<span class="keyword">super</span> allocWithZone:zone];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 工厂方法</span></span><br><span class="line">+ (instancetype)shareMusicRadio</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 防止多次加锁</span></span><br><span class="line">    <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123; </span><br><span class="line">        <span class="keyword">@synchronized</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123; <span class="comment">// 防止多次init</span></span><br><span class="line">                musicRadio = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>参考: <a href="http://xionv.com/2015/11/29/demonayu/blog/Singleton/">单例模式宏</a></p>
+<p>参考: <a href="http://xionv.com/2015/11/29/demonayu/blog/Singleton/" target="_blank" rel="external">单例模式宏</a></p>
 </li>
 </ul>
 <h3 id="dispatch_barrier栅栏函数">dispatch_barrier栅栏函数</h3><ul>
@@ -1002,14 +1002,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>串行: 串行队列,串行是按顺序排队执行任务,不会出现资源抢夺的问题,所以它默认是]]>
     </summary>
     
-      <category term="iOS干货" scheme="http://xionv.com/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
+      <category term="iOS干货" scheme="https://xionw1991.github.io/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[NSURLConnection和NSURLSession]]></title>
-    <link href="http://xionv.com/2015/07/19/demonayu/blog/32.NSURLConnection%E5%92%8CNSURLSession%E6%80%9D%E8%80%83/"/>
-    <id>http://xionv.com/2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/</id>
+    <link href="https://xionw1991.github.io/2015/07/19/demonayu/blog/32.NSURLConnection%E5%92%8CNSURLSession%E6%80%9D%E8%80%83/"/>
+    <id>https://xionw1991.github.io/2015/07/19/demonayu/blog/32.NSURLConnection和NSURLSession思考/</id>
     <published>2015-07-19T14:09:57.000Z</published>
     <updated>2016-08-07T01:41:28.000Z</updated>
     <content type="html"><![CDATA[<h2 id="NSURLConnection">NSURLConnection</h2><h3 id="基本使用">基本使用</h3><ul>
@@ -1158,14 +1158,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <figure class="highl]]>
     </summary>
     
-      <category term="iOS干货" scheme="http://xionv.com/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
+      <category term="iOS干货" scheme="https://xionw1991.github.io/tags/iOS%E5%B9%B2%E8%B4%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[NSCache的介绍]]></title>
-    <link href="http://xionv.com/2015/07/14/demonayu/blog/31.NSCache%E7%9A%84%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://xionv.com/2015/07/14/demonayu/blog/31.NSCache的介绍/</id>
+    <link href="https://xionw1991.github.io/2015/07/14/demonayu/blog/31.NSCache%E7%9A%84%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://xionw1991.github.io/2015/07/14/demonayu/blog/31.NSCache的介绍/</id>
     <published>2015-07-14T03:29:57.000Z</published>
     <updated>2016-08-07T01:41:42.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -1181,14 +1181,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <p><a href="http://www.15yan.com/topic/yi-dong-kai-fa-na-dian-shi]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[新特性界面的两种搭建方法]]></title>
-    <link href="http://xionv.com/2015/06/04/demonayu/blog/30.%E6%96%B0%E7%89%B9%E6%80%A7%E7%95%8C%E9%9D%A2%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%90%AD%E5%BB%BA%E6%96%B9%E6%B3%95/"/>
-    <id>http://xionv.com/2015/06/04/demonayu/blog/30.新特性界面的两种搭建方法/</id>
+    <link href="https://xionw1991.github.io/2015/06/04/demonayu/blog/30.%E6%96%B0%E7%89%B9%E6%80%A7%E7%95%8C%E9%9D%A2%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%90%AD%E5%BB%BA%E6%96%B9%E6%B3%95/"/>
+    <id>https://xionw1991.github.io/2015/06/04/demonayu/blog/30.新特性界面的两种搭建方法/</id>
     <published>2015-06-04T05:43:57.000Z</published>
     <updated>2016-08-07T01:41:54.000Z</updated>
     <content type="html"><![CDATA[<h2 id="使用UIScrollView搭建">使用UIScrollView搭建</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"NewFeaturesViewController.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"TabBarViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define kImageCount 4</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NewFeaturesViewController</span>() &lt;<span class="title">UIScrollViewDelegate</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIScrollView</span> *scrollView;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIPageControl</span> *pageControl;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NewFeaturesViewController</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载scrollView</span></span><br><span class="line">- (<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_scrollView == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIScrollView</span> *scrollView = [[<span class="built_in">UIScrollView</span> alloc] init];</span><br><span class="line">        _scrollView = scrollView;</span><br><span class="line">        scrollView<span class="variable">.frame</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>;</span><br><span class="line">        <span class="comment">// 取消回弹</span></span><br><span class="line">        scrollView<span class="variable">.bounces</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 允许翻页</span></span><br><span class="line">        scrollView<span class="variable">.pagingEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">        <span class="comment">// 隐藏水平滚动条</span></span><br><span class="line">        scrollView<span class="variable">.showsHorizontalScrollIndicator</span> = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 设置滚动范围</span></span><br><span class="line">        scrollView<span class="variable">.contentSize</span> = <span class="built_in">CGSizeMake</span>(kImageCount * <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 设置控制器为代理</span></span><br><span class="line">        scrollView<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">        <span class="comment">// 控制器View添加scrollView</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:scrollView];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _scrollView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载pageControl</span></span><br><span class="line">- (<span class="built_in">UIPageControl</span> *)pageControl</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_pageControl == <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">UIPageControl</span> *pageControl = [[<span class="built_in">UIPageControl</span> alloc] init];</span><br><span class="line">        _pageControl = pageControl;</span><br><span class="line">        <span class="comment">// pageControl小圆点数量</span></span><br><span class="line">        pageControl<span class="variable">.numberOfPages</span> = kImageCount;</span><br><span class="line">        <span class="comment">/* pageControl比较特殊，可以不用设置宽高也能显示，因为小圆点为它的子控件, 但是不设置宽高就不能交互 */</span></span><br><span class="line">        <span class="comment">// 设置pageControl的位置</span></span><br><span class="line">        pageControl<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span><span class="variable">.x</span>;</span><br><span class="line">        pageControl<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span><span class="variable">.y</span> + <span class="number">250</span>;</span><br><span class="line">        <span class="comment">// 小圆点默认颜色</span></span><br><span class="line">        pageControl<span class="variable">.pageIndicatorTintColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">        <span class="comment">// 小圆点选中颜色</span></span><br><span class="line">        pageControl<span class="variable">.currentPageIndicatorTintColor</span> = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">        <span class="comment">// 控制器View添加pageControl</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:pageControl];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _pageControl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kImageCount; i++) &#123;</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span>];</span><br><span class="line">        <span class="built_in">NSString</span> *imageName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"new_feature_%d"</span>, i + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:imageName];</span><br><span class="line">        imageView<span class="variable">.image</span> = image;</span><br><span class="line">        <span class="comment">// 设置性特性说明的x值</span></span><br><span class="line">        imageView<span class="variable">.x</span> = <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> * i;</span><br><span class="line">        <span class="comment">// 添加新特性说明</span></span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.scrollView</span> addSubview:imageView];</span><br><span class="line">        <span class="comment">// 当滑到最后一页时</span></span><br><span class="line">        <span class="keyword">if</span> (i == kImageCount - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 设置最后一页的内容</span></span><br><span class="line">            [<span class="keyword">self</span> setupLastImageView:imageView];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// pageControl默认选中第一个原点</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageControl</span><span class="variable">.currentPage</span> = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  设置最后一张图片</span><br><span class="line"> *</span><br><span class="line"> *  @param imageView 轮播器最后一张图片</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupLastImageView:(<span class="built_in">UIImageView</span> *)imageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建分享按钮</span></span><br><span class="line">    <span class="built_in">UIButton</span> *buttonShare = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">    [buttonShare setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_share_false"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonShare setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_share_true"</span>] forState:<span class="built_in">UIControlStateSelected</span>];</span><br><span class="line">    [buttonShare setTitle:<span class="string">@"分享给大家"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonShare setTitleColor:[<span class="built_in">UIColor</span> grayColor] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    buttonShare<span class="variable">.titleLabel</span><span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">15</span>];</span><br><span class="line">    <span class="comment">// 设置内边距 EdgeInsets理解为自切</span></span><br><span class="line">    buttonShare<span class="variable">.titleEdgeInsets</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    buttonShare<span class="variable">.imageEdgeInsets</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>);</span><br><span class="line">    buttonShare<span class="variable">.size</span> = <span class="built_in">CGSizeMake</span>(<span class="number">150</span>, <span class="number">30</span>);</span><br><span class="line">    buttonShare<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerX</span>;</span><br><span class="line">    buttonShare<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerY</span> * <span class="number">1.35</span>;</span><br><span class="line">    [buttonShare addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickShare:) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建开启按钮</span></span><br><span class="line">    <span class="built_in">UIButton</span> *buttonOpen = [[<span class="built_in">UIButton</span> alloc] init];</span><br><span class="line">    [buttonOpen setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_finish_button"</span>] forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [buttonOpen setBackgroundImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"new_feature_finish_button_highlighted"</span>] forState:<span class="built_in">UIControlStateHighlighted</span>];</span><br><span class="line">    [buttonOpen setTitle:<span class="string">@"立即体验"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    buttonOpen<span class="variable">.size</span> = buttonOpen<span class="variable">.currentBackgroundImage</span><span class="variable">.size</span>;</span><br><span class="line">    buttonOpen<span class="variable">.centerX</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerX</span>;</span><br><span class="line">    buttonOpen<span class="variable">.centerY</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.centerY</span> * <span class="number">1.5</span>;</span><br><span class="line">    [buttonOpen addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(clickOpen) forControlEvents:<span class="built_in">UIControlEventTouchUpInside</span>];</span><br><span class="line">    <span class="comment">// 设置imageView可交互</span></span><br><span class="line">    imageView<span class="variable">.userInteractionEnabled</span> = <span class="literal">YES</span>;</span><br><span class="line">    [imageView addSubview:buttonOpen];</span><br><span class="line">    [imageView addSubview:buttonShare];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)clickOpen</span><br><span class="line">&#123;</span><br><span class="line">    TabBarViewController *tabBarVC = [[TabBarViewController alloc] init];</span><br><span class="line">    <span class="comment">// 将跟控制器改为tabBarController，并销毁当前控制器</span></span><br><span class="line">    [<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.keyWindow</span><span class="variable">.rootViewController</span> = tabBarVC;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)clickShare:(<span class="built_in">UIButton</span> *)button</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 状态取反</span></span><br><span class="line">    button<span class="variable">.selected</span> = !button<span class="variable">.isSelected</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - 代理方法</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当scrollView改变的时候，改变pageControl的currentPage</span></span><br><span class="line">    <span class="keyword">double</span> page = scrollView<span class="variable">.contentOffset</span><span class="variable">.x</span> / scrollView<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>;</span><br><span class="line">    <span class="comment">// (int)(page + 0.5)四舍五入法 准确定位page的圆点</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pageControl</span><span class="variable">.currentPage</span> = (<span class="keyword">int</span>)(page + <span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
@@ -1199,14 +1199,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
     <![CDATA[<h2 id="使用UIScrollView搭建">使用UIScrollView搭建</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span clas]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[利用运行时特性获取系统类的私有成员属性]]></title>
-    <link href="http://xionv.com/2015/05/08/demonayu/blog/29.%E5%88%A9%E7%94%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%89%B9%E6%80%A7%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F/"/>
-    <id>http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/</id>
+    <link href="https://xionw1991.github.io/2015/05/08/demonayu/blog/29.%E5%88%A9%E7%94%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%89%B9%E6%80%A7%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F/"/>
+    <id>https://xionw1991.github.io/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/</id>
     <published>2015-05-08T03:00:57.000Z</published>
     <updated>2016-08-07T01:42:10.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -1253,14 +1253,14 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li><p><code>interactivePopGestureR]]>
     </summary>
     
-      <category term="iOS开发笔记" scheme="http://xionv.com/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="iOS开发笔记" scheme="https://xionw1991.github.io/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[NSFileManager和NSFileHandle的常用方法]]></title>
-    <link href="http://xionv.com/2015/04/30/demonayu/blog/28.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    <id>http://xionv.com/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/</id>
+    <link href="https://xionw1991.github.io/2015/04/30/demonayu/blog/28.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>https://xionw1991.github.io/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/</id>
     <published>2015-04-30T11:52:57.000Z</published>
     <updated>2016-08-07T01:42:51.000Z</updated>
     <content type="html"><![CDATA[<h2 id="NSFileManager">NSFileManager</h2><ul>
@@ -1294,7 +1294,7 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
  <figure class="highlight objc"><table><tr><td class="code"><pre><span ]]>
     </summary>
     
-      <category term="iOS代码" scheme="http://xionv.com/tags/iOS%E4%BB%A3%E7%A0%81/"/>
+      <category term="iOS代码" scheme="https://xionw1991.github.io/tags/iOS%E4%BB%A3%E7%A0%81/"/>
     
   </entry>
   

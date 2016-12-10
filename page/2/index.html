@@ -89,7 +89,7 @@
 <meta name="description" content="XionVV Coding | iOS">
 <meta property="og:type" content="website">
 <meta property="og:title" content="XionVV Coding">
-<meta property="og:url" content="http://xionv.com/page/2/index.html">
+<meta property="og:url" content="https://xionw1991.github.io/page/2/index.html">
 <meta property="og:site_name" content="XionVV Coding">
 <meta property="og:description" content="XionVV Coding | iOS">
 <meta name="twitter:card" content="summary">
@@ -669,7 +669,7 @@
       
         
           
-            <h2 id="Runtime消息机制">Runtime消息机制</h2><p>之前写过一篇短文: <a href="http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/">利用运行时特性获取系统类的私有成员属性</a>.<br><br>通过运行时特性获得私有的成员变量target, 然后为target重新指定手势方法来达到全屏都能接收到滑动返回的事件.</p>
+            <h2 id="Runtime消息机制">Runtime消息机制</h2><p>之前写过一篇短文: <a href="http://xionv.com/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/" target="_blank" rel="external">利用运行时特性获取系统类的私有成员属性</a>.<br><br>通过运行时特性获得私有的成员变量target, 然后为target重新指定手势方法来达到全屏都能接收到滑动返回的事件.</p>
 <ul>
 <li><p>如果要搞清楚为什么能这样做首先得明白OC的运行时机制,看下面代码:</p>
 <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br></pre></td></tr></table></figure>

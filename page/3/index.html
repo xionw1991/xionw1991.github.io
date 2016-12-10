@@ -89,7 +89,7 @@
 <meta name="description" content="XionVV Coding | iOS">
 <meta property="og:type" content="website">
 <meta property="og:title" content="XionVV Coding">
-<meta property="og:url" content="http://xionv.com/page/3/index.html">
+<meta property="og:url" content="https://xionw1991.github.io/page/3/index.html">
 <meta property="og:site_name" content="XionVV Coding">
 <meta property="og:description" content="XionVV Coding | iOS">
 <meta name="twitter:card" content="summary">
@@ -649,7 +649,7 @@
 </li>
 <li><p>使用懒加载和同步锁实现单例</p>
  <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">id</span> musicRadio;</span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 添加同步锁防止资源抢夺</span></span><br><span class="line">    <span class="keyword">@synchronized</span>(<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123;</span><br><span class="line">        musicRadio = [<span class="keyword">super</span> allocWithZone:zone];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 工厂方法</span></span><br><span class="line">+ (instancetype)shareMusicRadio</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 防止多次加锁</span></span><br><span class="line">    <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123; </span><br><span class="line">        <span class="keyword">@synchronized</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (musicRadio == <span class="literal">nil</span>) &#123; <span class="comment">// 防止多次init</span></span><br><span class="line">                musicRadio = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> musicRadio;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>参考: <a href="http://xionv.com/2015/11/29/demonayu/blog/Singleton/">单例模式宏</a></p>
+<p>参考: <a href="http://xionv.com/2015/11/29/demonayu/blog/Singleton/" target="_blank" rel="external">单例模式宏</a></p>
 </li>
 </ul>
 <h3 id="dispatch_barrier栅栏函数">dispatch_barrier栅栏函数</h3><ul>
