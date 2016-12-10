@@ -268,6 +268,141 @@
             
               
                 
+                <a class="post-title-link" href="/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/" itemprop="url">
+                  利用运行时特性获取系统类的私有成员属性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-08T11:00:57+08:00" content="2015-05-08">
+              2015-05-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/08/demonayu/blog/29.利用运行时特性获取系统类的私有成员变量/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>在iOS7以后苹果添加了一个边缘滑动返回的手势操作,我们通过修改这个手势操作来说明如何利用系统的私有成员属性来达到在项目中的要求.</p>
+</blockquote>
+<ul>
+<li><p><code>interactivePopGestureRecognizer</code>这个api功能就是在NavigationController堆栈内的UIViewController可以支持右滑手势,轻轻在屏幕左边一滑,屏幕就会返回.<br>但是, 1.这个功能在自定义返回按钮后会失效; 2.它的作用范围在手机屏幕左侧边缘,如果要求全屏接受这个事件就需要自定义这个功能了.</p>
+</li>
+<li><p>通过打印<code>interactivePopGestureRecognizer</code>得知这个功能是通过<code>UIScreenEdgePanGestureRecognizer</code>这个手势来实现的.如果是手势就一定有<code>target</code>和<code>action</code>这两个成员属性,我们只要拿到<code>target</code>的真实类型.然后通过KVC就能”借用”系统实现方式来达到以上两个要求.</p>
+</li>
+<li><p>利用运行时获取所有的成员变量</p>
+<ol>
+<li><p>导入运行时头文件</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用runtime函数获取获取类中的所有成员属性</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用来接收数组元素个数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outcount = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// UIGestureRecognizer是interactivePopGestureRecognizer的类型</span></span><br><span class="line">Ivar *ivars = class_copyIvarList([<span class="built_in">UIGestureRecognizer</span> class], &amp;outcount);</span><br><span class="line"><span class="comment">// Ivar：成员属性的意思;</span></span><br><span class="line"><span class="comment">// 第一个参数:表示获取哪个类中的成员属性;</span></span><br><span class="line"><span class="comment">// 第二个参数:表示这个类有多少成员属性,传入一个Int变量地址,会自动给这个变量赋值;</span></span><br><span class="line"><span class="comment">// 返回值Ivar*:指的是一个ivar数组,会把所有成员属性放在一个数组中,通过返回的数组就能全部获取到;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有的成员属性名</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历ivars获取目标类中每一个成员属性名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outcount; i++) &#123;</span><br><span class="line">    <span class="comment">// 打印所有的成员属性名</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, @(ivar_getName(ivars[i])));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果: 第一个就是我们要拿到的成员属性.</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">_targets</span><br><span class="line">_delayedTouches</span><br><span class="line">_delayedPresses</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过KVC拿到其关键作用的<code>target</code></p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 拿到打印结果,通过KVC拿到那个target</span></span><br><span class="line"><span class="built_in">NSArray</span> *targets = [<span class="keyword">self</span><span class="variable">.interactivePopGestureRecognizer</span> valueForKeyPath:<span class="string">@"_targets"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, targets);</span><br><span class="line"><span class="keyword">id</span> target = [targets[<span class="number">0</span>] valueForKeyPath:<span class="string">@"target"</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// handleNavigationTransition:这个方法是通过打印结果得知系统内部会调用的方法,不用我们去实现.</span></span><br><span class="line"><span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:target action:<span class="keyword">@selector</span>(handleNavigationTransition:)];</span><br><span class="line">pan<span class="variable">.delegate</span> = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addGestureRecognizer:pan];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在根控制器禁用pan手势</p>
+<figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> - (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.childViewControllers</span><span class="variable">.count</span> &gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>至此我们就已经修改完成了,是不是很暴力很直接!当然我本人是不支持这种方法的:1.它破坏了苹果的封装性.2它仍然有局限性,因为是利用系统的方法,如果有其他自定义要求不便于修改.</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/04/30/demonayu/blog/28.NSFileManager和NSFileHandle的常用方法/" itemprop="url">
                   NSFileManager和NSFileHandle的常用方法
                 </a>
@@ -912,115 +1047,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/" itemprop="url">
-                  长按截屏和图片裁剪
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-25T09:35:57+08:00" content="2015-01-25">
-              2015-01-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/25/demonayu/blog/23.长按截屏和图片裁剪/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="长按截屏">长按截屏</h3><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)longPress:(<span class="built_in">UILongPressGestureRecognizer</span> *)longPress</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意这个longPress会调用两次,一次是触发时,一次是结束时, 所以这里需要对状态进行一次判定,避免两次触发</span></span><br><span class="line">    <span class="keyword">if</span> (longPress<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateBegan</span>) &#123;</span><br><span class="line">        <span class="comment">// 通过设置首尾式动画来达到屏幕闪一下的效果</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.2</span> animations:^&#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">0.6</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">            [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.5</span> animations:^&#123;</span><br><span class="line">                <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.alpha</span> = <span class="number">1</span>;</span><br><span class="line">            &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">                <span class="comment">// 开启一个全屏位图上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>([<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span>, <span class="literal">YES</span>, <span class="number">0.0</span> );</span><br><span class="line">                <span class="comment">// 获取当前上下文</span></span><br><span class="line">                <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">                <span class="comment">// 渲染图层到上下文</span></span><br><span class="line">                [<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.layer</span> renderInContext:ctx];</span><br><span class="line">                <span class="comment">// 将当前上下文中的内容转成图片</span></span><br><span class="line">                <span class="built_in">UIImage</span> *capture = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">                <span class="comment">// 关闭上下文</span></span><br><span class="line">                <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">                <span class="comment">// 将图片输出</span></span><br><span class="line">                <span class="built_in">NSData</span> *imgData = <span class="built_in">UIImagePNGRepresentation</span>(capture);</span><br><span class="line">                [imgData writeToFile:<span class="string">@"/Users/Xion/Desktop/image.png"</span> atomically:<span class="literal">YES</span>];</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="图片裁剪">图片裁剪</h3><blockquote>
-<p>为UIimage增加一个分类类方法,在实例化图片时就对其进行裁剪</p>
-</blockquote>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"> <span class="preprocessor">#import <span class="title">"UIImage+ClipImage.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIImage</span> (<span class="title">ClipImage</span>)</span></span><br><span class="line">+ (instancetype)imageNamed:(<span class="built_in">NSString</span> *)name withClipShape:(ClipShape)shape;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="keyword">self</span> imageNamed:name];</span><br><span class="line">    <span class="comment">// 开启一个上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(image<span class="variable">.size</span>, <span class="literal">NO</span>, <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 设置为模具</span></span><br><span class="line">    <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithCircle: &#123; <span class="comment">// 圆</span></span><br><span class="line">            <span class="built_in">CGFloat</span> radius = image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>;</span><br><span class="line">            <span class="built_in">CGPoint</span> center = <span class="built_in">CGPointMake</span>(radius, radius);</span><br><span class="line">            <span class="built_in">UIBezierPath</span> *circlePath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">            <span class="comment">// 设置裁剪区</span></span><br><span class="line">            [circlePath addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithtriangle: &#123; <span class="comment">// 三角形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            <span class="comment">// 关闭路径</span></span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> ClipShapeWithRhombus: &#123; <span class="comment">// 菱形</span></span><br><span class="line">            <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">            <span class="built_in">CGPoint</span> startP = <span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">            [path moveToPoint:startP];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(image<span class="variable">.size</span><span class="variable">.width</span> * <span class="number">0.5</span>, image<span class="variable">.size</span><span class="variable">.height</span>)];</span><br><span class="line">            [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, image<span class="variable">.size</span><span class="variable">.height</span> * <span class="number">0.5</span>)];</span><br><span class="line">            [path closePath];</span><br><span class="line">            [path addClip];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 画出裁剪范围</span></span><br><span class="line">    [image drawAtPoint:<span class="built_in">CGPointZero</span>];</span><br><span class="line">    <span class="comment">// 将当前上下文的内容转成图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    <span class="comment">// 关闭上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1061,7 +1092,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
