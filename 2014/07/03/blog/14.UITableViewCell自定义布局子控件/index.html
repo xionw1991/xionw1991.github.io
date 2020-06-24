@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xionw1991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.  Frame实现自定义cell布局两个重要的setter方法:  在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值 1234567891011121314151617181920212223242526">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UITableViewCell自定义布局子控件">
+<meta property="og:url" content="https://xionw1991.github.io/2014/07/03/blog/14.UITableViewCell%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80%E5%AD%90%E6%8E%A7%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Xion&#39;s Blog">
+<meta property="og:description" content="TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.  Frame实现自定义cell布局两个重要的setter方法:  在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值 1234567891011121314151617181920212223242526">
+<meta property="og:image" content="http://r5.loli.io/7vAJj2.png">
+<meta property="og:image" content="http://r5.loli.io/3EvQvm.png">
+<meta property="article:published_time" content="2014-07-03T13:31:57.000Z">
+<meta property="article:modified_time" content="2020-06-23T15:21:04.952Z">
+<meta property="article:author" content="Xion">
+<meta property="article:tag" content="iOS开发笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://r5.loli.io/7vAJj2.png">
+
+<link rel="canonical" href="https://xionw1991.github.io/2014/07/03/blog/14.UITableViewCell%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80%E5%AD%90%E6%8E%A7%E4%BB%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>UITableViewCell自定义布局子控件 | Xion's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Xion's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Xion's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Feelings of life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2014/07/03/blog/14.UITableViewCell%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80%E5%AD%90%E6%8E%A7%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UITableViewCell自定义布局子控件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-07-03 21:31:57" itemprop="dateCreated datePublished" datetime="2014-07-03T21:31:57+08:00">2014-07-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>TableView自定义cell的子控件布局有两种实现方式: 第一种是用传统的纯代码Frame设置; 第二种是用storyboard来设置.</p>
+</blockquote>
+<h2 id="Frame实现自定义cell布局"><a href="#Frame实现自定义cell布局" class="headerlink" title="Frame实现自定义cell布局"></a>Frame实现自定义cell布局</h2><p><strong>两个重要的setter方法:</strong></p>
+<ul>
+<li>在cellView重写StatusesFrame的setter方法给中cellView的每个子控件赋值 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setStatusesFrame:(XVStatusesFrame *)statusesFrame</span><br><span class="line">&#123;</span><br><span class="line">    _statusesFrame = statusesFrame;</span><br><span class="line">    XVStatuses *status = statusesFrame.status;</span><br><span class="line">    <span class="comment">// 给子控件赋值</span></span><br><span class="line">    <span class="keyword">self</span>.nameLabel.text = status.name;</span><br><span class="line">    <span class="keyword">self</span>.text_Label.text = status.text;</span><br><span class="line">    <span class="keyword">self</span>.iconView.image = [<span class="built_in">UIImage</span> imageNamed:status.icon];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status.picture) &#123;</span><br><span class="line">        <span class="keyword">self</span>.pictureView.hidden = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span>.pictureView.image = [<span class="built_in">UIImage</span> imageNamed:status.picture];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.pictureView.hidden = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status.isVip) &#123;</span><br><span class="line">        <span class="keyword">self</span>.vipView.hidden = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span>.vipView.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span>.nameLabel.textColor = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.vipView.hidden = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span>.nameLabel.textColor = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置子控件位置</span></span><br><span class="line">    <span class="keyword">self</span>.nameLabel.frame = statusesFrame.nameLabelF;</span><br><span class="line">    <span class="keyword">self</span>.text_Label.frame = statusesFrame.text_LabelF;</span><br><span class="line">    <span class="keyword">self</span>.iconView.frame = statusesFrame.iconViewF;</span><br><span class="line">    <span class="keyword">self</span>.pictureView.frame = statusesFrame.pictureViewF;</span><br><span class="line">    <span class="keyword">self</span>.vipView.frame = statusesFrame.vipViewF;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在StatusesFrame模型中重写Status的setter方法,根据传进来的数据来算出各个子控件的frame,并返回给控制器来设置每个cell的高度 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="comment">// 根据文字来计算UILabel的rect</span></span><br><span class="line">    <span class="built_in">CGSize</span> (^fontSize)(<span class="built_in">NSString</span>*, <span class="built_in">CGFloat</span>, <span class="built_in">CGFloat</span>) = ^(<span class="built_in">NSString</span> *text, <span class="built_in">CGFloat</span> fontSize, <span class="built_in">CGFloat</span> maxWidth) &#123;</span><br><span class="line">        <span class="keyword">return</span> [text boundingRectWithSize:<span class="built_in">CGSizeMake</span>(maxWidth, MAXFLOAT)</span><br><span class="line">                                  options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span></span><br><span class="line">                               attributes:@&#123;<span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:fontSize]&#125;</span><br><span class="line">                                  context:<span class="literal">nil</span>].size;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// icon的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewW = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewH = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> iconViewY = margin;</span><br><span class="line">    <span class="keyword">self</span>.iconViewF = <span class="built_in">CGRectMake</span>(iconViewX, iconViewY, iconViewW, iconViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// name的位置</span></span><br><span class="line">    <span class="built_in">CGSize</span> nameSize = fontSize(status.name, nameFontSize, MAXFLOAT);</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelW = nameSize.width;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelH = nameSize.height;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span>.iconViewF) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> nameLabelY = margin;</span><br><span class="line">    <span class="keyword">self</span>.nameLabelF = <span class="built_in">CGRectMake</span>(nameLabelX, nameLabelY, nameLabelW, nameLabelH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// vip的位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewW = <span class="number">14</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewH = nameLabelH;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewX = <span class="built_in">CGRectGetMaxX</span>(<span class="keyword">self</span>.nameLabelF) + margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> vipViewY = margin;</span><br><span class="line">    <span class="keyword">self</span>.vipViewF = <span class="built_in">CGRectMake</span>(vipViewX, vipViewY, vipViewW, vipViewH);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// text位置</span></span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelW = [<span class="built_in">UIScreen</span> mainScreen].bounds.size.width - <span class="number">2</span> * margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelH = fontSize(status.text, textFontSize, text_LabelW).height;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelX = margin;</span><br><span class="line">    <span class="built_in">CGFloat</span> text_LabelY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.iconViewF) + margin;</span><br><span class="line">    <span class="keyword">self</span>.text_LabelF = <span class="built_in">CGRectMake</span>(text_LabelX, text_LabelY, text_LabelW, text_LabelH);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.status.picture.length) &#123;</span><br><span class="line">        <span class="comment">// picture位置</span></span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieW = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieH = <span class="number">100</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieX = margin;</span><br><span class="line">        <span class="built_in">CGFloat</span> pictureVieY = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.text_LabelF) + margin;</span><br><span class="line">        <span class="keyword">self</span>.pictureViewF = <span class="built_in">CGRectMake</span>(pictureVieX, pictureVieY, pictureVieW, pictureVieH);</span><br><span class="line">        <span class="keyword">self</span>.statusHeight = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.pictureViewF) + margin;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.statusHeight = <span class="built_in">CGRectGetMaxY</span>(<span class="keyword">self</span>.text_LabelF) + margin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在代理方法中返回当前每个cell的高度 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    XVStatusesFrame *frame = <span class="keyword">self</span>.statusFrame[indexPath.row];</span><br><span class="line">    <span class="keyword">return</span> frame.statusHeight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Storyboard实现自定义cell的布局"><a href="#Storyboard实现自定义cell的布局" class="headerlink" title="Storyboard实现自定义cell的布局"></a>Storyboard实现自定义cell的布局</h2><ul>
+<li>首先在使用storyboard布局单元格前先了解一下苹果在iOS8推出的<code>Self Sizing Cells</code>功能.<ul>
+<li><code>Self Sizing Cells</code>是为了解放程序员以往苦逼的计算不等高cell尺寸而推出的新功能, 它可以动态的计算tableView每一行cell的高度.</li>
+<li><code>Self Sizing Cells</code>依赖于<code>Auto Layout</code>.</li>
+</ul>
+</li>
+<li>举一个例子来展示如何使用:<ol>
+<li>在storyboard中拖一个UITableView, 采用系统默认的设置, prototype cell数量设为1.<br><img src="http://r5.loli.io/7vAJj2.png" alt=""></li>
+<li>为cell中的每一个控件摆好位置并设置束缚<br><img src="http://r5.loli.io/3EvQvm.png" alt=""></li>
+<li><strong>设置tableView的<code>rowHeight</code>属性为<code>UITableViewAutomaticDimension</code></strong><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置自动计算高度</span></span><br><span class="line"><span class="keyword">self</span>.tableView.rowHeight = <span class="built_in">UITableViewAutomaticDimension</span>;</span><br></pre></td></tr></table></figure></li>
+<li><strong>设置tableView的<code>estimatedRowHeight</code>估计高度为<code>44</code>(这个值可以根据自己需要修改)</strong><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 估算高度</span></span><br><span class="line"><span class="keyword">self</span>.tableView.estimatedRowHeight = <span class="number">44</span>;</span><br></pre></td></tr></table></figure></li>
+<li>然后给cell中的每一个子控件赋值就能显示出来了, 不用做任何计算.<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setStatus:(XVStatuses *)status</span><br><span class="line">&#123;</span><br><span class="line">    _status = status;</span><br><span class="line">    <span class="keyword">self</span>.nameLabel.text = status.name;</span><br><span class="line">    <span class="keyword">self</span>.text_Label.text = status.text;</span><br><span class="line">    <span class="keyword">self</span>.iconView.image = [<span class="built_in">UIImage</span> imageNamed:status.icon];</span><br><span class="line">    <span class="comment">// 判断是否有图片</span></span><br><span class="line">    <span class="keyword">if</span> (status.picture.length ) &#123;</span><br><span class="line">        <span class="keyword">self</span>.pictureView.hidden = <span class="literal">NO</span>;</span><br><span class="line">        <span class="comment">// 根据控制束缚的值来控制控件的尺寸</span></span><br><span class="line">        <span class="keyword">self</span>.pictureHeight.constant = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">self</span>.pictureBottom.constant = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">self</span>.pictureView.image = [<span class="built_in">UIImage</span> imageNamed:status.picture];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.pictureHeight.constant = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span>.pictureBottom.constant = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">self</span>.pictureView.hidden = <span class="literal">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断是否是vip</span></span><br><span class="line">    <span class="keyword">if</span> (status.vip) &#123;</span><br><span class="line">        <span class="keyword">self</span>.vipView.hidden = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">self</span>.vipView.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"vip"</span>];</span><br><span class="line">        <span class="keyword">self</span>.nameLabel.textColor = [<span class="built_in">UIColor</span> orangeColor];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.vipView.hidden = <span class="literal">YES</span>;</span><br><span class="line">        <span class="keyword">self</span>.nameLabel.textColor = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>注意: cell的高度是通过改变约束的长度来控制的.这里利用约束的优先级特性不能达到要求, 因为即使pictureView隐藏了但它身上的约束仍然生效. 如果要让低优先级的约束生效,必须要移除高优先级的控件或其上面的约束,但是这样在显示下一个cell的时候又需要重新添加约束.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="tag"># iOS开发笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/06/21/blog/13.SQLite%E5%9C%A8iOS%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%8B)/" rel="prev" title="SQLite在iOS中的使用(下)">
+      <i class="fa fa-chevron-left"></i> SQLite在iOS中的使用(下)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/07/26/blog/15.WebView%E4%BB%A3%E7%90%86%E6%96%B9%E6%B3%95%E6%8B%A6%E6%88%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" rel="next" title="WebView代理方法拦截网络请求">
+      WebView代理方法拦截网络请求 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Frame实现自定义cell布局"><span class="nav-number">1.</span> <span class="nav-text">Frame实现自定义cell布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storyboard实现自定义cell的布局"><span class="nav-number">2.</span> <span class="nav-text">Storyboard实现自定义cell的布局</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xion</p>
+  <div class="site-description" itemprop="description">It`s Breeze, It`s Sunshine</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xionw1991" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xionw1991" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xion</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,438 +1,529 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
+<!DOCTYPE html>
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
+<link rel="stylesheet" href="/css/main.css">
 
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xionw1991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="XionVV Coding" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="XionVV Coding | iOS">
+  <meta name="description" content="It&#96;s Breeze, It&#96;s Sunshine">
 <meta property="og:type" content="website">
-<meta property="og:title" content="XionVV Coding">
+<meta property="og:title" content="Xion&#39;s Blog">
 <meta property="og:url" content="https://xionw1991.github.io/index.html">
-<meta property="og:site_name" content="XionVV Coding">
-<meta property="og:description" content="XionVV Coding | iOS">
+<meta property="og:site_name" content="Xion&#39;s Blog">
+<meta property="og:description" content="It&#96;s Breeze, It&#96;s Sunshine">
+<meta property="article:author" content="Xion">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XionVV Coding">
-<meta name="twitter:description" content="XionVV Coding | iOS">
+
+<link rel="canonical" href="https://xionw1991.github.io/">
 
 
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
   };
 </script>
 
-  <title> XionVV Coding </title>
+  <title>Xion's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Xion's Blog" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">XionVV Coding</span>
+      <h1 class="site-title">Xion's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">Feelings of life</p>
   </div>
-  <p class="site-subtitle">It`s Breeze, It`s Sunshine.</p>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="#" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
+  </li>
+        <li class="menu-item menu-item-archives">
 
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
-    </div>
-  
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
 </nav>
 
- </div>
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content index posts-expand">
             
-  <section id="posts" class="posts-expand">
-    
       
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2018/02/22/blog/47.Linux%E7%9B%AE%E5%BD%95%E8%A7%A3%E9%87%8A/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/07/demonayu/blog/44.通用链接debug/" itemprop="url">
-                  通用链接debug
-                </a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/22/blog/47.Linux%E7%9B%AE%E5%BD%95%E8%A7%A3%E9%87%8A/" class="post-title-link" itemprop="url">Linux文件目录解释</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-07T11:19:57+08:00" content="2016-12-07">
-              2016-12-07
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/07/demonayu/blog/44.通用链接debug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/07/demonayu/blog/44.通用链接debug/" itemprop="commentsCount"></span>
-                </a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
               </span>
-            
-          
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-22 16:08:57" itemprop="dateCreated datePublished" datetime="2018-02-22T16:08:57+08:00">2018-02-22</time>
+            </span>
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p>原文地址：<a href="http://www.debianadmin.com/linux-directory-structure-overview.html" target="_blank" rel="noopener">Linux Directory Structure Overview</a></p>
+<h2 id="Linux和Windows的区别"><a href="#Linux和Windows的区别" class="headerlink" title="Linux和Windows的区别"></a>Linux和Windows的区别</h2><p>显著区别之一就是其不同的目录结构，并不仅仅是格式上的不同，而是不同位置上保存的东西区别很大。</p>
+<p>在Windows中，典型的路径可能是这样的<code>D:\Folder\subfolder\file.txt</code>，而在Linux中，路径则是这样的<code>/Folder/subfolder/file.txt</code>。</p>
+<p>斜线倾斜的方向不同，并且，在Linux中，也没有C盘D盘的概念，Linux系统启动之后，<code>根分区</code>就”挂载”在了在了<code>/</code>的位置，并且所有的文件、文件夹、设备以及不同的硬盘光驱之类的，也都挂载在了<code>/</code>。</p>
+<p>虽然可能在下面这个例子中并不明显，但是Linux系统对文件或者文路径的名称中的大小写字符是敏感的。</p>
+<p>比如<code>/Folder/subfolder/file.txt</code>与<code>/folder/subfolder/file.txt</code>并不是同一个文件。</p>
+<h2 id="Linux系统目录说明"><a href="#Linux系统目录说明" class="headerlink" title="Linux系统目录说明"></a>Linux系统目录说明</h2><p>Unix中和Linux的目录结构是一个统一的目录结构，所有的目录和文件最终都统一到”/“根文件系统下。文件系统是无论是不是挂载过来的，最终都分层排列到以”/“为起始的文件系统之下。<br>Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Structure，FHS)”，这标准是由”自由标准组织（Free Standards Group）”进行维护的，然而大多数LINUX发行版都有意或者无意的与这一规范背离。</p>
+<p>“/“ 根路径</p>
+<p>这是Linux系统的”根”目录，也是所有目录结构的最底层。在UNIX以及和它兼容的系统中，”/“是一个单独的目录。</p>
+<p>/boot</p>
+<p>这个目录下包含系统启动文件（boot loader），例如Grub，Lilo或者Kernel，以及initrd，system.map等配置文件。</p>
+<blockquote>
+<p>Initrd ramdisk或者”initrd”是指一个临时文件系统，它在启动阶段被Linux内核调用。initrd主要用于当”根”文件系统被挂载之前，进行准备工作。</p>
+</blockquote>
+<p>/sys</p>
+<p>这个目录下包含内核、固件以及系统相关文件。</p>
+<p>/sbin</p>
+<p>包含系统操作和运作所必需的二进制文件以及管理工具，主要就是可执行文件。类似WINDOWS下的EXE文件。</p>
+<p>/bin</p>
+<p>包含单用户模式下的二进制文件以及工具程序，比如cat，ls，cp这些命令。</p>
+<p>/lib</p>
+<p>包含/sbin和/bin目录下二进制文件运行所需要的库文件。</p>
+<p>/dev</p>
+<p>内含必需的系统文件和驱动器。</p>
+<p>/etc</p>
+<p>内含系统配置文件，其下的目录，比如 /etc/hosts, /etc/resolv.conf, nsswitch.conf, 以及系统缺省设置，网络配置文件等等。以及一些系统和应用程序的配置文件。</p>
+<p>/home</p>
+<p>每一个用户的在这个目录下，都会单独有一个以其用户名命令的目录，在这里保存着用户的个人设置文件，尤其是以 profile结尾的文件。但是也有例外，root用户的数据就不在这个目录中，而是单独在根路径下，保存在单独的/root文件夹下。</p>
+<p>/media</p>
+<p>一个给所有可移动设备比如光驱、USB外接盘、软盘提供的常规挂载点。</p>
+<p>/mnt</p>
+<p>临时文件系统挂载点。比如，你并不想长期挂载某个驱动器，而是只是临时挂载一会U盘烤个MP3之类的，那么应该挂载在这个位置下。</p>
+<p>/opt</p>
+<p>在Linux系统中，这个目录用到的并不多，opt是 可选系统程序包（Optional Software Packages）的简称。这个目录在UNIX系统，如Sun Solaris用途要广泛的多。</p>
+<p>/usr</p>
+<p>用户数据目录，包含了属于用户的实用程序和应用程序。这里有很多重要的，但并非关键的文件系统挂载这个路径下面。在这里，你会重新找到一个 bin、sbin 和 lib目录，其中包含非关键用户和系统二进制文件以及相关的库和共享目录，以及一些库文件。</p>
+<p>/usr/sbin</p>
+<p>包含系统中非必备和并不是特别重要的系统二进制文件以及网络应用工具。</p>
+<p>/usr/bin</p>
+<p>包含用户的非必备和并不是特别重要的二进制文件。</p>
+<p>/usr/lib</p>
+<p>保存着/usr/sbin以及/usr/bin中二进制文件所需要的库文件。</p>
+<p>/usr/share</p>
+<p>“平台无关”的共享数据目录。</p>
+<p>/usr/local</p>
+<p>是/usr下的二级目录，这里主要保存着包含系统二进制文件以及运行库在内的本地系统数据。</p>
+<p>/var</p>
+<p>这个路径下通常保存着包括系统日志、打印机后台文件（spool files）、定时任务（crontab）、邮件、运行进程、进程锁文件等。这个目录尤其需要注意进行日常的检查和维护，因为这个目录下文件的大小可能会增长很快，以致于很快占满硬盘，然后导致系统便会出现各种奇奇怪怪的问题。</p>
+<p>/tmp</p>
+<p>顾名思义，这是一个临时文件夹，专门用来保存临时文件，每次系统重启之后，这个目录下的”临时”文件便会被清空。同样，/var/tmp 也同样保存着临时文件。两者唯一的不同是，后者 /var/tmp目录保存的文件会受到系统保护，系统重启之后这个目录下的文件也不会被清空。</p>
+<p>/proc</p>
+<p>这个目录是驻留在系统内存中的虚拟（psuedo，伪）文件系统，其中保存的都是文本格式的系统内核和进程信息。</p>
+<h2 id="LINUX系统目录结构图"><a href="#LINUX系统目录结构图" class="headerlink" title="LINUX系统目录结构图"></a>LINUX系统目录结构图</h2><p><img src="http://www.wuliaole.com/post/directory_introduction_in_linux_or_raspbian/ldr.png" alt=""></p>
+<blockquote>
+<p>需要注意的是，不同LINUX发行版本的目录结构会有一些差异，这对LINUX新手来说比较纠结，但是大体上，所以LINUX的不同发行版本，都符合上面这幅图片中的路径结构。</p>
+</blockquote>
 
-      
-        
-          
-            <p>原文地址：<a href="http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/" target="_blank" rel="external">http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/</a></p>
-
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
+    
+    
+    
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2018/02/05/blog/46.%E4%BD%BFswift%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%AE%80%E6%B4%81/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/" itemprop="url">
-                  在iOS10接入https的坑
-                </a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/05/blog/46.%E4%BD%BFswift%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%AE%80%E6%B4%81/" class="post-title-link" itemprop="url">使swift代码更简洁</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-04T14:09:57+08:00" content="2016-09-04">
-              2016-09-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/demonayu/blog/43.在iOS10下接入https的坑/" itemprop="commentsCount"></span>
-                </a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
               </span>
-            
-          
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-05 11:19:57" itemprop="dateCreated datePublished" datetime="2018-02-05T11:19:57+08:00">2018-02-05</time>
+            </span>
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <h2 id="swiftLint"><a href="#swiftLint" class="headerlink" title="swiftLint"></a><a href="https://github.com/realm/SwiftLint" target="_blank" rel="noopener">swiftLint</a></h2><p>功能与 eslint、pylint 一致，用来约束编码习惯，统一项目的代码风格，不符合规范的代码行有警告提示。第一次使用需要配置，使用后对编码习惯会有很大的改善。</p>
+<h2 id="swiftformat"><a href="#swiftformat" class="headerlink" title="swiftformat"></a><a href="https://github.com/nicklockwood/SwiftFormat" target="_blank" rel="noopener">swiftformat</a></h2><p>这个就是单纯进行代码格式化，能让代码看起来更整洁，命令行使用，风格可以自定义，不过我觉得直接使用作者写好的模式就可以了。</p>
 
       
-        
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2017/11/03/blog/45.iOS%E4%BD%BF%E7%94%A8%E5%BA%95%E5%B1%82%E7%9A%84socket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
-            <blockquote>
+            <a href="/2017/11/03/blog/45.iOS%E4%BD%BF%E7%94%A8%E5%BA%95%E5%B1%82%E7%9A%84socket/" class="post-title-link" itemprop="url">iOS使用底层socket</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-11-03 11:19:57" itemprop="dateCreated datePublished" datetime="2017-11-03T11:19:57+08:00">2017-11-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2016/12/07/blog/44.%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5debug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/12/07/blog/44.%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5debug/" class="post-title-link" itemprop="url">通用链接debug</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-07 11:19:57" itemprop="dateCreated datePublished" datetime="2016-12-07T11:19:57+08:00">2016-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>原文地址：<a href="http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/" target="_blank" rel="noopener">http://building.usebutton.com/debugging/ios/deep-linking/links/universal-links/2016/03/31/debugging-universal-links/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2016/09/04/blog/43.%E5%9C%A8iOS10%E4%B8%8B%E6%8E%A5%E5%85%A5https%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/09/04/blog/43.%E5%9C%A8iOS10%E4%B8%8B%E6%8E%A5%E5%85%A5https%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">在iOS10接入https的坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-09-04 14:09:57" itemprop="dateCreated datePublished" datetime="2016-09-04T14:09:57+08:00">2016-09-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
 <p>从2017年1月1日开始，苹果将要求所有上传的应用必须使用https接口进行数据访问，这里面有些坑让我们来研究一下；</p>
 </blockquote>
-<h2 id="新https政策">新https政策</h2><ul>
+<h2 id="新https政策"><a href="#新https政策" class="headerlink" title="新https政策"></a>新https政策</h2><ul>
 <li>一句话概括：从2017年的元旦起，苹果将继续收紧应用对http的访问权限，要求开发者统一使用https进行数据访问，iOS8及更早的版本不受影响。</li>
 <li>新规下，作为服务器的API是肯定是要使用https的，访问网页则有点特殊，因为ATS影响到<code>NSURLSession</code>和<code>UIWebView</code>，所以理论上使用webview访问的网页也必须是https，但这样显然不现实，所以苹果在iOS10添加了新key<code>NSAllowsArbitraryLoadsInWebContent</code>来容许访问未加密的网页。但是这个key在iOS9下并不起作用，这样尴尬了：上传的应用不容许使用<code>NSAllowsArbitraryLoads</code>来绕过ATS，而在应用中又需要访问http网页，怎么办？</li>
 </ul>
-<h2 id="App_Transport_Security">App Transport Security</h2><p>我们先来看看ATS的要求：</p>
-<pre><code>The server certificate must meet <span class="keyword">at</span> least <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> following trust requirements:
-    Issued <span class="keyword">by</span> <span class="operator">a</span> certificate authority (CA) whose root certificate is incorporated <span class="keyword">into</span> <span class="operator">the</span> operating <span class="keyword">system</span>
-    Issued <span class="keyword">by</span> <span class="operator">a</span> trusted root CA <span class="operator">and</span> installed <span class="keyword">by</span> <span class="operator">the</span> user <span class="operator">or</span> <span class="operator">a</span> <span class="keyword">system</span> administrator
-The negotiated Transport Layer Security <span class="built_in">version</span> must be TLS <span class="number">1.2</span>
-The negotiated TLS connection cipher suite must support forward secrecy (FS) <span class="operator">and</span> be <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> following:
+<h2 id="App-Transport-Security"><a href="#App-Transport-Security" class="headerlink" title="App Transport Security"></a>App Transport Security</h2><p>我们先来看看ATS的要求：</p>
+<pre><code>The server certificate must meet at least one of the following trust requirements:
+    Issued by a certificate authority (CA) whose root certificate is incorporated into the operating system
+    Issued by a trusted root CA and installed by the user or a system administrator
+The negotiated Transport Layer Security version must be TLS 1.2
+The negotiated TLS connection cipher suite must support forward secrecy (FS) and be one of the following:
     TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
     TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
     TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
@@ -444,14 +535,13 @@ The negotiated TLS connection cipher suite must support forward secrecy (FS) <sp
     TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
     TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
     TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
-The leaf server certificate must be signed <span class="operator">with</span> <span class="constant">one</span> <span class="operator">of</span> <span class="operator">the</span> following types <span class="operator">of</span> <span class="built_in">keys</span>:
-    Rivest-Shamir-Adleman (RSA) key <span class="operator">with</span> <span class="operator">a</span> <span class="built_in">length</span> <span class="operator">of</span> <span class="keyword">at</span> least <span class="number">2048</span> bits
-    Elliptic-Curve Cryptography (ECC) key <span class="operator">with</span> <span class="operator">a</span> size <span class="operator">of</span> <span class="keyword">at</span> least <span class="number">256</span> bits
-In addition, <span class="operator">the</span> leaf server certificate hashing algorithm must be Secure Hash Algorithm <span class="number">2</span> (SHA-<span class="number">2</span>) <span class="operator">with</span> <span class="operator">a</span> digest <span class="built_in">length</span> <span class="operator">of</span> <span class="keyword">at</span> least <span class="number">256</span> (that is, SHA-<span class="number">256</span> <span class="operator">or</span> greater).
-</code></pre><p>大白话的就是：</p>
+The leaf server certificate must be signed with one of the following types of keys:
+    Rivest-Shamir-Adleman (RSA) key with a length of at least 2048 bits
+    Elliptic-Curve Cryptography (ECC) key with a size of at least 256 bits
+In addition, the leaf server certificate hashing algorithm must be Secure Hash Algorithm 2 (SHA-2) with a digest length of at least 256 (that is, SHA-256 or greater).</code></pre><p>大白话的就是：</p>
 <ul>
 <li>服务器证书必须至少满足以下条件中的一个<ul>
-<li>颁发给服务器证书的证书机构（CA）的根证书必须是内置于操作系统的<a href="https://support.apple.com/zh-cn/HT205205" target="_blank" rel="external">受信任根证书</a>；</li>
+<li>颁发给服务器证书的证书机构（CA）的根证书必须是内置于操作系统的<a href="https://support.apple.com/zh-cn/HT205205" target="_blank" rel="noopener">受信任根证书</a>；</li>
 <li>受用户或者系统管理员信任并安装到操作系统上的；</li>
 </ul>
 </li>
@@ -460,7 +550,7 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>证书必须使用SHA256或者更好的哈希算法进行签名，要么是2048位或者更长的RSA密钥，要么就是256位或更长的ECC密钥；</li>
 </ul>
 <p>其实在这一层客户端所做的事情不多，当https服务器满足ATS默认的条件，而且SSL证书是通过权威的CA机构认证过的，客户端直接接入就可以了正常通信了（后台的兄弟们辛苦了）。<br><br>搭建完成后可以使用命令行来测试是否满足ATS要求：<code>nscurl --ats-diagnostics --verbose https://google.com</code>。</p>
-<h2 id="ATS设定">ATS设定</h2><ul>
+<h2 id="ATS设定"><a href="#ATS设定" class="headerlink" title="ATS设定"></a>ATS设定</h2><ul>
 <li>NSAllowsArbitraryLoads<ul>
 <li>在Xcode7中这个key值默认为NO，我们将它设置为YES来访问任意接口，但是苹果新规出来后将限制这个key的使用，设置这个key值需要在应用审核的时候说明原因，能不能过还要看审核员的脸色；</li>
 </ul>
@@ -470,125 +560,80 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 </ul>
 </li>
 <li>NSExceptionDomains<ul>
-<li>这个key值可以让开发者更加灵活的配置让哪些接口遵不遵守ATS的要求，具体设置方法可以参考：<a href="https://github.com/ChenYilong/iOS9AdaptationTips#how如何适配---弱弱地问下加班要多久" target="_blank" rel="external">NSExceptionDomains</a>；</li>
+<li>这个key值可以让开发者更加灵活的配置让哪些接口遵不遵守ATS的要求，具体设置方法可以参考：<a href="https://github.com/ChenYilong/iOS9AdaptationTips#how如何适配---弱弱地问下加班要多久" target="_blank" rel="noopener">NSExceptionDomains</a>；</li>
 </ul>
 </li>
 <li>在iOS10下同时设置<code>NSAllowsArbitraryLoads</code>和<code>NSAllowsArbitraryLoadsInWebContent</code>，前者会失效，所以在iOS10下使用<code>NSAllowsArbitraryLoadsInWebContent</code>就意味着除了网页浏览，其他所有的连接都必须是https的；</li>
 <li>在iOS9下仅设置<code>NSAllowsArbitraryLoads</code>有效，如果设置为YES则在审核时需要说明原因，如果为NO，则表示所有的连接必须是符合ATS的要求的，包括网页浏览；如果app内部使用webview访问的页面都是固定的域名，可以通过设置<code>NSExceptionDomains</code>白名单在不禁用ATS的情况下进行访问；</li>
 <li>以下是整理出来的表格：<br>  <img src="http://ww3.sinaimg.cn/large/0060lm7Tgw1f7hp9c0t2aj314a0q2n5a.jpg" alt=""></li>
 </ul>
-<h2 id="解决方案">解决方案</h2><p>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？<br><br>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，注意如果白名单的网页使用了其他的资源，比如一些图床，则需要将相关的域名也要添加进白名单。目前还不得知苹果对<code>NSExceptionDomains</code>的审核标准，猜测如果在上传应用时说明是webview访问一些第三方的http资源应该会比较容易过审。<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tgw1f7hsq1ggncj30ro076jtw.jpg" alt=""></p>
-<p>参考：<a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33" target="_blank" rel="external">苹果官方文档</a></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>回到第一个问题：怎么在不禁用ATS的情况下使用webview访问http网页？<br><br>答：在iOS10使用<code>NSAllowsArbitraryLoadsInWebContent</code>来对网页内容禁用ATS，在iOS9使用<code>NSExceptionDomains</code>白名单形式让特定的域名绕过ATS规则，注意如果白名单的网页使用了其他的资源，比如一些图床，则需要将相关的域名也要添加进白名单。目前还不得知苹果对<code>NSExceptionDomains</code>的审核标准，猜测如果在上传应用时说明是webview访问一些第三方的http资源应该会比较容易过审。<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tgw1f7hsq1ggncj30ro076jtw.jpg" alt=""></p>
+<p>参考：<a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33" target="_blank" rel="noopener">苹果官方文档</a></p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
+    
+    
+    
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2016/08/06/blog/42.%E5%A4%84%E7%90%86URL%E6%8B%BC%E6%8E%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/06/demonayu/blog/42.处理URL拼接的几种方式/" itemprop="url">
-                  处理URL的几种思路
-                </a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/08/06/blog/42.%E5%A4%84%E7%90%86URL%E6%8B%BC%E6%8E%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">处理URL的几种思路</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-06T17:51:57+08:00" content="2016-08-06">
-              2016-08-06
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/06/demonayu/blog/42.处理URL拼接的几种方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/demonayu/blog/42.处理URL拼接的几种方式/" itemprop="commentsCount"></span>
-                </a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
               </span>
-            
-          
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-06 17:51:57" itemprop="dateCreated datePublished" datetime="2016-08-06T17:51:57+08:00">2016-08-06</time>
+            </span>
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <blockquote>
+          <blockquote>
 <p>在日常开发中，总会碰到需要在客户端对 URL 进行一些处理。这里就列举了三个处理 URL 的方式，灵活度逐渐提高。 </p>
 </blockquote>
-<h2 id="直接对_URL_字符串进行修改">直接对 URL 字符串进行修改</h2><p>第一种是马上能够想到的方法，直接将得到的 URL 转成 string 来进行操作，比如添加参数，直接将参数名和参数值写死成 <code>key=value</code> 的形式拼接到原有的 URL 上，这里有两点要注意：</p>
+<h2 id="直接对-URL-字符串进行修改"><a href="#直接对-URL-字符串进行修改" class="headerlink" title="直接对 URL 字符串进行修改"></a>直接对 URL 字符串进行修改</h2><p>第一种是马上能够想到的方法，直接将得到的 URL 转成 string 来进行操作，比如添加参数，直接将参数名和参数值写死成 <code>key=value</code> 的形式拼接到原有的 URL 上，这里有两点要注意：</p>
 <ol>
-<li><p>注意格式，需要判断原有的 URL 是否已经带了参数，来决定使用哪个分隔符号 <code>?</code> 还是 <code>&amp;</code>；</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断url是否已经有参数 </span></span><br><span class="line"><span class="keyword">if</span> ([newUrlStr isMatchedByRegex:<span class="string">@"[\\s\\S]+?[\?][\\s\\S]+?"</span>]) </span><br><span class="line">&#123;</span><br><span class="line">    newUrlStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@&amp;%@"</span>, newUrlStr, param];</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123;</span><br><span class="line">    newUrlStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@?%@"</span>, newUrlStr, param];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>需要判断带拼接的参数是否已经在 URL 中存在，如果存在则需要忽略掉；</p>
- <figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> ([url rangeOfString:paramName]<span class="variable">.location</span> != <span class="built_in">NSNotFound</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>注意格式，需要判断原有的 URL 是否已经带了参数，来决定使用哪个分隔符号 <code>?</code> 还是 <code>&amp;</code>； <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断url是否已经有参数 </span></span><br><span class="line"><span class="keyword">if</span> ([newUrlStr isMatchedByRegex:<span class="string">@"[\\s\\S]+?[\?][\\s\\S]+?"</span>]) </span><br><span class="line">&#123;</span><br><span class="line">    newUrlStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@&amp;%@"</span>, newUrlStr, param];</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123;</span><br><span class="line">    newUrlStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@?%@"</span>, newUrlStr, param];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>需要判断带拼接的参数是否已经在 URL 中存在，如果存在则需要忽略掉； <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([url rangeOfString:paramName].location != <span class="built_in">NSNotFound</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <p>同样也有两点不方便：</p>
@@ -596,133 +641,82 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 <li>当遇到相同的参数时需要更新参数值就有些麻烦了，要在字符串中找出目标参数所在的范围然后将其替换；</li>
 <li>直接操作字符串容易手抖写错，而且写错不好排查；</li>
 </ol>
-<h2 id="将_URL_解析成_dictionary_进行修改">将 URL 解析成 dictionary 进行修改</h2><p>将 URL 的参数部分提取出来打散拆分成键值对存进字典中，然后把待拼接的参数也以字典的形式与原有的参数进行比对。最后组成一个新的字典，把里面的键值重组排列成参数字符串拼接到 URL 的 path 后面。这种方法需要注意的是，防止字典写空值，和注意拼接格式。<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1.将原始 query 转化为字典保存</span></span><br><span class="line"><span class="built_in">NSMutableDictionary</span> *paramsDict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="built_in">NSArray</span> *paramsString = [url<span class="variable">.query</span> componentsSeparatedByString:<span class="string">@"&amp;"</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> *paramStr <span class="keyword">in</span> paramsString) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *tempArray = [paramStr componentsSeparatedByString:<span class="string">@"="</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *key = tempArray<span class="variable">.firstObject</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *value = tempArray<span class="variable">.lastObject</span>;</span><br><span class="line">    [paramsDict setObject:value forKey:key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.拼接新参数，如果相同参数则更新值，没有相同参数则添加</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> *key <span class="keyword">in</span> newParamsDict<span class="variable">.allKeys</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> value = [newParamsDict objectForKey:key];</span><br><span class="line">    [paramsDict setObject:key forKey:value];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.将参数字典重组为新的 query </span></span><br><span class="line">__block <span class="built_in">NSString</span> *newQuery = <span class="string">@""</span>;</span><br><span class="line">[paramsDict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *param = <span class="string">@""</span>;</span><br><span class="line">    <span class="keyword">if</span> (newQuery<span class="variable">.length</span> == <span class="number">0</span>) <span class="comment">// 第一个参数</span></span><br><span class="line">    &#123;</span><br><span class="line">        param = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"?%@=%@"</span>, [key description], [obj description]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        param = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"&amp;%@=%@"</span>, [key description], [obj description]];</span><br><span class="line">    &#125;</span><br><span class="line">    newQuery = [newQuery stringByAppendingString:param];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<h2 id="将-URL-解析成-dictionary-进行修改"><a href="#将-URL-解析成-dictionary-进行修改" class="headerlink" title="将 URL 解析成 dictionary 进行修改"></a>将 URL 解析成 dictionary 进行修改</h2><p>将 URL 的参数部分提取出来打散拆分成键值对存进字典中，然后把待拼接的参数也以字典的形式与原有的参数进行比对。最后组成一个新的字典，把里面的键值重组排列成参数字符串拼接到 URL 的 path 后面。这种方法需要注意的是，防止字典写空值，和注意拼接格式。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.将原始 query 转化为字典保存</span></span><br><span class="line"><span class="built_in">NSMutableDictionary</span> *paramsDict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line"><span class="built_in">NSArray</span> *paramsString = [url.query componentsSeparatedByString:<span class="string">@"&amp;"</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> *paramStr <span class="keyword">in</span> paramsString) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *tempArray = [paramStr componentsSeparatedByString:<span class="string">@"="</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *key = tempArray.firstObject;</span><br><span class="line">    <span class="built_in">NSString</span> *value = tempArray.lastObject;</span><br><span class="line">    [paramsDict setObject:value forKey:key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.拼接新参数，如果相同参数则更新值，没有相同参数则添加</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> *key <span class="keyword">in</span> newParamsDict.allKeys)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> value = [newParamsDict objectForKey:key];</span><br><span class="line">    [paramsDict setObject:key forKey:value];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.将参数字典重组为新的 query </span></span><br><span class="line">__block <span class="built_in">NSString</span> *newQuery = <span class="string">@""</span>;</span><br><span class="line">[paramsDict enumerateKeysAndObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull key, <span class="keyword">id</span>  _Nonnull obj, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *param = <span class="string">@""</span>;</span><br><span class="line">    <span class="keyword">if</span> (newQuery.length == <span class="number">0</span>) <span class="comment">// 第一个参数</span></span><br><span class="line">    &#123;</span><br><span class="line">        param = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"?%@=%@"</span>, [key description], [obj description]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        param = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"&amp;%@=%@"</span>, [key description], [obj description]];</span><br><span class="line">    &#125;</span><br><span class="line">    newQuery = [newQuery stringByAppendingString:param];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 <p>这种方式比第一种要更加灵活的处理参数的变化，其实系统已经给了我们一种解决方案，简化了上述方式的转化工作，看下一种解决方案。</p>
-<h2 id="使用_NSURLComponents_类来组合参数">使用 NSURLComponents 类来组合参数</h2><p>NSURLComponents 是系统用来分解 URL 的一个类，它可以将原始的 URL 参数部分分解成一个参数数组。 NSURLQueryItem 就是这个数组中存储的对象，这个对象的 name 和 value 属性，对应着每个参数的键和值，我们可以通过遍历这个数组来添加和删除参数，最后将修改过后的参数数组重新赋值给 NSURLComponents 生成新的 URL。<br><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 利用URL初始化</span></span><br><span class="line"><span class="built_in">NSURLComponents</span> *urlComponent = [<span class="built_in">NSURLComponents</span> componentsWithURL:url resolvingAgainstBaseURL:<span class="literal">NO</span>];</span><br><span class="line"><span class="comment">// 新的query数组</span></span><br><span class="line"><span class="built_in">NSMutableArray</span> *newQureyItems = [urlComponent<span class="variable">.queryItems</span> mutableCopy];</span><br><span class="line"><span class="comment">// newParams是待拼接的参数数组</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *itemNew <span class="keyword">in</span> newParams)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 是否存在相同参数的标识位</span></span><br><span class="line">    <span class="built_in">BOOL</span> hasParam = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *itemOld <span class="keyword">in</span> urlComponent<span class="variable">.queryItems</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ([itemOld<span class="variable">.name</span> isEqualToString:itemNew<span class="variable">.name</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果存在相同的参数则更新</span></span><br><span class="line">            [newQureyItems replaceObjectAtIndex:[newQureyItems indexOfObject:itemOld] withObject:itemNew];</span><br><span class="line">            hasParam = <span class="literal">YES</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!hasParam)</span><br><span class="line">    &#123;</span><br><span class="line">        [newQureyItems addObject:itemNew];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取到新的query</span></span><br><span class="line">urlComponent<span class="variable">.queryItems</span> = newQureyItems;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用-NSURLComponents-类来组合参数"><a href="#使用-NSURLComponents-类来组合参数" class="headerlink" title="使用 NSURLComponents 类来组合参数"></a>使用 NSURLComponents 类来组合参数</h2><p>NSURLComponents 是系统用来分解 URL 的一个类，它可以将原始的 URL 参数部分分解成一个参数数组。 NSURLQueryItem 就是这个数组中存储的对象，这个对象的 name 和 value 属性，对应着每个参数的键和值，我们可以通过遍历这个数组来添加和删除参数，最后将修改过后的参数数组重新赋值给 NSURLComponents 生成新的 URL。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用URL初始化</span></span><br><span class="line"><span class="built_in">NSURLComponents</span> *urlComponent = [<span class="built_in">NSURLComponents</span> componentsWithURL:url resolvingAgainstBaseURL:<span class="literal">NO</span>];</span><br><span class="line"><span class="comment">// 新的query数组</span></span><br><span class="line"><span class="built_in">NSMutableArray</span> *newQureyItems = [urlComponent.queryItems mutableCopy];</span><br><span class="line"><span class="comment">// newParams是待拼接的参数数组</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *itemNew <span class="keyword">in</span> newParams)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 是否存在相同参数的标识位</span></span><br><span class="line">    <span class="built_in">BOOL</span> hasParam = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSURLQueryItem</span> *itemOld <span class="keyword">in</span> urlComponent.queryItems)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ([itemOld.name isEqualToString:itemNew.name])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果存在相同的参数则更新</span></span><br><span class="line">            [newQureyItems replaceObjectAtIndex:[newQureyItems indexOfObject:itemOld] withObject:itemNew];</span><br><span class="line">            hasParam = <span class="literal">YES</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!hasParam)</span><br><span class="line">    &#123;</span><br><span class="line">        [newQureyItems addObject:itemNew];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取到新的query</span></span><br><span class="line">urlComponent.queryItems = newQureyItems;</span><br></pre></td></tr></table></figure>
 <p>这种方式最大的好处就是不用我们自己来解析 URL 和拼参了，系统已经做好了这些繁琐的事情，剩下的只需要我们来修改这些值就可以了。</p>
 <hr>
 <p>以上就是三种拼接 URL 参数的方法，在经过性能测试也没有发现很大差距，最大的区别就在与灵活性和易用性。</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
+    
+    
+    
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2015/12/14/blog/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E5%9B%BD%E5%86%85%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E7%BD%91%E7%AB%99/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/" itemprop="url">
-                  Github, Gitcafe和 Coding的Pages服务对比
-                </a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/12/14/blog/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E5%9B%BD%E5%86%85%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">Github, Gitcafe和 Coding的Pages服务对比</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-14T12:01:57+08:00" content="2015-12-14">
-              2015-12-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
+              <span class="post-meta-item-text">Posted on</span>
 
-                
-                
-
-              
+              <time title="Created: 2015-12-14 12:01:57" itemprop="dateCreated datePublished" datetime="2015-12-14T12:01:57+08:00">2015-12-14</time>
             </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/14/demonayu/blog/为什么不用国内的代码托管网站/" itemprop="commentsCount"></span>
-                </a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
-            
-          
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <ul>
-<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="external">Coding 云端演示平台静态网站部署指南</a>.</p>
+          <ul>
+<li><p>GitHub/GitCafe/Coding的Pages服务<br> 因为之前博客放在github上, 有时候网络不稳定访问很慢,并且push的时候要等很久,甚至直接push失败, 借昨天放假休息正好可以认真搞一搞博客的部署.<br> 把线路迁移到国内有几个比较流行的代码托管网站,比如gitcafe和coding. gitcafe可以自定义域名,但最近好像不太稳定,在我部署的当天就宕机了,而且到今天数据还不能更新;coding速度很快,一键部署非常方便(运行环境要选择html),但是这个网站默认不支持自定义域名,当然成为付费用户可以选择香港线路来自定义域名,还有在代码上传后需要手动点击一键部署来更新文档, 也可以参照官方的帮助文档设定自动更新<a href="http://static-site.coding.io" target="_blank" rel="noopener">Coding 云端演示平台静态网站部署指南</a>.</p>
 </li>
 <li><p>说说心得:</p>
 <ul>
@@ -738,259 +732,219 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 </li>
 </ul>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
+    
+    
+    
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2015/12/10/blog/Xcode%E6%8F%92%E4%BB%B6%E5%A4%B1%E6%95%88%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/10/demonayu/blog/Xcode插件失效后解决办法/" itemprop="url">
-                  升级Xcode后插件失效的解决办法
-                </a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/12/10/blog/Xcode%E6%8F%92%E4%BB%B6%E5%A4%B1%E6%95%88%E5%90%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="post-title-link" itemprop="url">升级Xcode后插件失效的解决办法</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T15:21:01+08:00" content="2015-12-10">
-              2015-12-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
+              <span class="post-meta-item-text">Posted on</span>
 
-                
-                
-
-              
+              <time title="Created: 2015-12-10 15:21:01" itemprop="dateCreated datePublished" datetime="2015-12-10T15:21:01+08:00">2015-12-10</time>
             </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/10/demonayu/blog/Xcode插件失效后解决办法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/demonayu/blog/Xcode插件失效后解决办法/" itemprop="commentsCount"></span>
-                </a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
-            
-          
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <p> 1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:<br>    <code>defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID</code></p>
+          <p> 1.打开终端，输入以下代码获取到DVTPlugInCompatibilityUUID:<br>    <code>defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID</code></p>
 <p> 2.然后输入如下命令(最后一项是获取到的DVTPlugInCompatibilityUUID):<br>    <code>find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add F41BD31E-2683-44B8-AE7F-5F09E919790E</code></p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
+    
+    
+    
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2015/12/04/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/04/demonayu/blog/41.图片折叠小demo/" itemprop="url">
-                  图片折叠小demo
-                </a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/12/04/blog/41.%E5%9B%BE%E7%89%87%E6%8A%98%E5%8F%A0%E5%B0%8Fdemo/" class="post-title-link" itemprop="url">图片折叠小demo</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-04T22:40:57+08:00" content="2015-12-04">
-              2015-12-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/04/demonayu/blog/41.图片折叠小demo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/04/demonayu/blog/41.图片折叠小demo/" itemprop="commentsCount"></span>
-                </a>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
               </span>
-            
-          
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-12-04 22:40:57" itemprop="dateCreated datePublished" datetime="2015-12-04T22:40:57+08:00">2015-12-04</time>
+            </span>
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
-          
-            <h2 id="利用图层特性实现图片折叠的效果">利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define imageWH 200.0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageTop;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageBottom;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">CAGradientLayer</span> *gradient;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化图片</span></span><br><span class="line">    [<span class="keyword">self</span> setupImageView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 初始化图片 */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupImageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个透明的蒙版作为手势的接受者 */</span></span><br><span class="line">    <span class="built_in">UIView</span> *cover = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    cover<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, imageWH, imageWH);</span><br><span class="line">    cover<span class="variable">.center</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.center</span>;</span><br><span class="line">    cover<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">    <span class="comment">// 添加pan手势</span></span><br><span class="line">    <span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br><span class="line">    [cover addGestureRecognizer:pan];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:cover];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 添加图片 - 原图片添加两次,分别显示上下部分 */</span></span><br><span class="line">    <span class="comment">// 上半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageTop = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageTop<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageTop<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的上半部</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为图片的高度</span></span><br><span class="line">    imageTop<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</span><br><span class="line">    _imageTop = imageTop;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageBottom = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageBottom<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageBottom<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的下半部</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.contentsRect</span> = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为0</span></span><br><span class="line">    imageBottom<span class="variable">.layer</span><span class="variable">.anchorPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    _imageBottom = imageBottom;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 给下半部图片添加阴影效果 */</span></span><br><span class="line">    <span class="comment">// 创建一个渐变层用来显示阴影效果</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    _gradient = gradient;</span><br><span class="line">    <span class="comment">// 设置图层的位置</span></span><br><span class="line">    gradient<span class="variable">.frame</span> = imageBottom<span class="variable">.bounds</span>;</span><br><span class="line">    <span class="comment">// 设置渐变颜色</span></span><br><span class="line">    gradient<span class="variable">.colors</span> = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> clearColor]<span class="variable">.CGColor</span>, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blackColor]<span class="variable">.CGColor</span>];</span><br><span class="line">    <span class="comment">// 设置不透明度</span></span><br><span class="line">    gradient<span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 给下半部图片添加图层</span></span><br><span class="line">    [imageBottom<span class="variable">.layer</span> addSublayer:gradient];</span><br><span class="line">    </span><br><span class="line">    [cover addSubview:imageBottom];</span><br><span class="line">    [cover addSubview:imageTop];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 监听pan手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获得手指偏移量的Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> offsetY = [pan translationInView:<span class="keyword">self</span><span class="variable">.view</span>]<span class="variable">.y</span>;</span><br><span class="line">    <span class="comment">// 将偏移量转成旋转弧度</span></span><br><span class="line">    <span class="built_in">CGFloat</span> angle = offsetY * M_PI / imageWH;</span><br><span class="line">    <span class="keyword">if</span> (angle &gt; M_PI) &#123;</span><br><span class="line">        angle = M_PI;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置透视效果 - 除数值越大透视效果越不明显(可以理解成眼睛看到物体的距离)</span></span><br><span class="line">    <span class="built_in">CATransform3D</span> transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">    transform<span class="variable">.m34</span> = -<span class="number">1</span> / <span class="number">400.0</span>;</span><br><span class="line">    <span class="comment">// 根据偏移量沿x轴旋转上半部图片</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DRotate</span>(transform, -angle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 给下半部图片添加阴影效果</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = offsetY * <span class="number">1</span> / imageWH;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当手指松开的时候将位置返回</span></span><br><span class="line">    <span class="keyword">if</span> (pan<span class="variable">.state</span> == <span class="built_in">UIGestureRecognizerStateEnded</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置反弹动画</span></span><br><span class="line">        <span class="comment">// Duration:动画的执行时长</span></span><br><span class="line">        <span class="comment">// delay:延时执行时长</span></span><br><span class="line">        <span class="comment">// Damping:弹性系数(越小,弹性越大)</span></span><br><span class="line">        <span class="comment">// SpringVelocity:初始的弹性系数</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">1.25</span> delay:<span class="number">0</span> usingSpringWithDamping:<span class="number">0.1</span> initialSpringVelocity:<span class="number">0</span> options:<span class="number">0</span> animations:^&#123;</span><br><span class="line">            <span class="comment">// 清空transform</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.imageTop</span><span class="variable">.layer</span><span class="variable">.transform</span> = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">            <span class="comment">// 还原不透明度</span></span><br><span class="line">            <span class="keyword">self</span><span class="variable">.gradient</span><span class="variable">.opacity</span> = <span class="number">0</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-          
-        
+          <h2 id="利用图层特性实现图片折叠的效果"><a href="#利用图层特性实现图片折叠的效果" class="headerlink" title="利用图层特性实现图片折叠的效果"></a>利用图层特性实现图片折叠的效果</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> imageWH 200.0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageTop;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">UIImageView</span> *imageBottom;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="built_in">CAGradientLayer</span> *gradient;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span>.view.backgroundColor = [<span class="built_in">UIColor</span> lightGrayColor];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化图片</span></span><br><span class="line">    [<span class="keyword">self</span> setupImageView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 初始化图片 */</span></span><br><span class="line">- (<span class="keyword">void</span>)setupImageView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 创建一个透明的蒙版作为手势的接受者 */</span></span><br><span class="line">    <span class="built_in">UIView</span> *cover = [[<span class="built_in">UIView</span> alloc] init];</span><br><span class="line">    cover.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, imageWH, imageWH);</span><br><span class="line">    cover.center = <span class="keyword">self</span>.view.center;</span><br><span class="line">    cover.backgroundColor = [<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">    <span class="comment">// 添加pan手势</span></span><br><span class="line">    <span class="built_in">UIPanGestureRecognizer</span> *pan = [[<span class="built_in">UIPanGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(pan:)];</span><br><span class="line">    [cover addGestureRecognizer:pan];</span><br><span class="line">    [<span class="keyword">self</span>.view addSubview:cover];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 添加图片 - 原图片添加两次,分别显示上下部分 */</span></span><br><span class="line">    <span class="comment">// 上半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageTop = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageTop.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageTop.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的上半部</span></span><br><span class="line">    imageTop.layer.contentsRect = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为图片的高度</span></span><br><span class="line">    imageTop.layer.anchorPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</span><br><span class="line">    _imageTop = imageTop;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下半部图片</span></span><br><span class="line">    <span class="built_in">UIImageView</span> *imageBottom = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageBottom.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">50</span>, imageWH, imageWH * <span class="number">0.5</span>);</span><br><span class="line">    imageBottom.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"知道错了"</span>];</span><br><span class="line">    <span class="comment">// 修改layer的contentsRect只显示显示图片的下半部</span></span><br><span class="line">    imageBottom.layer.contentsRect = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="comment">// 修改锚点Y值为0</span></span><br><span class="line">    imageBottom.layer.anchorPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</span><br><span class="line">    _imageBottom = imageBottom;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 给下半部图片添加阴影效果 */</span></span><br><span class="line">    <span class="comment">// 创建一个渐变层用来显示阴影效果</span></span><br><span class="line">    <span class="built_in">CAGradientLayer</span> *gradient = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">    _gradient = gradient;</span><br><span class="line">    <span class="comment">// 设置图层的位置</span></span><br><span class="line">    gradient.frame = imageBottom.bounds;</span><br><span class="line">    <span class="comment">// 设置渐变颜色</span></span><br><span class="line">    gradient.colors = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> clearColor].CGColor, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blackColor].CGColor];</span><br><span class="line">    <span class="comment">// 设置不透明度</span></span><br><span class="line">    gradient.opacity = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 给下半部图片添加图层</span></span><br><span class="line">    [imageBottom.layer addSublayer:gradient];</span><br><span class="line">    </span><br><span class="line">    [cover addSubview:imageBottom];</span><br><span class="line">    [cover addSubview:imageTop];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 监听pan手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)pan:(<span class="built_in">UIPanGestureRecognizer</span> *)pan</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获得手指偏移量的Y值</span></span><br><span class="line">    <span class="built_in">CGFloat</span> offsetY = [pan translationInView:<span class="keyword">self</span>.view].y;</span><br><span class="line">    <span class="comment">// 将偏移量转成旋转弧度</span></span><br><span class="line">    <span class="built_in">CGFloat</span> angle = offsetY * M_PI / imageWH;</span><br><span class="line">    <span class="keyword">if</span> (angle &gt; M_PI) &#123;</span><br><span class="line">        angle = M_PI;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置透视效果 - 除数值越大透视效果越不明显(可以理解成眼睛看到物体的距离)</span></span><br><span class="line">    <span class="built_in">CATransform3D</span> transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">    transform.m34 = <span class="number">-1</span> / <span class="number">400.0</span>;</span><br><span class="line">    <span class="comment">// 根据偏移量沿x轴旋转上半部图片</span></span><br><span class="line">    <span class="keyword">self</span>.imageTop.layer.transform = <span class="built_in">CATransform3DRotate</span>(transform, -angle, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 给下半部图片添加阴影效果</span></span><br><span class="line">    <span class="keyword">self</span>.gradient.opacity = offsetY * <span class="number">1</span> / imageWH;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当手指松开的时候将位置返回</span></span><br><span class="line">    <span class="keyword">if</span> (pan.state == <span class="built_in">UIGestureRecognizerStateEnded</span>) &#123;</span><br><span class="line">        <span class="comment">// 设置反弹动画</span></span><br><span class="line">        <span class="comment">// Duration:动画的执行时长</span></span><br><span class="line">        <span class="comment">// delay:延时执行时长</span></span><br><span class="line">        <span class="comment">// Damping:弹性系数(越小,弹性越大)</span></span><br><span class="line">        <span class="comment">// SpringVelocity:初始的弹性系数</span></span><br><span class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">1.25</span> delay:<span class="number">0</span> usingSpringWithDamping:<span class="number">0.1</span> initialSpringVelocity:<span class="number">0</span> options:<span class="number">0</span> animations:^&#123;</span><br><span class="line">            <span class="comment">// 清空transform</span></span><br><span class="line">            <span class="keyword">self</span>.imageTop.layer.transform = <span class="built_in">CATransform3DIdentity</span>;</span><br><span class="line">            <span class="comment">// 还原不透明度</span></span><br><span class="line">            <span class="keyword">self</span>.gradient.opacity = <span class="number">0</span>;</span><br><span class="line">        &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
 
     
-  </section>
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2015/10/08/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/08/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">调用系统相册的两种方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-10-08 15:59:57" itemprop="dateCreated datePublished" datetime="2015-10-08T15:59:57+08:00">2015-10-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>调用系统相册<ol>
+<li>调用系统相册需要先实例化一个照片选择控制器 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建照片选择器</span></span><br><span class="line"><span class="built_in">UIImagePickerController</span> *picker = [[<span class="built_in">UIImagePickerController</span> alloc] init];</span><br><span class="line"><span class="comment">// 2. 设置数据源类型(是相册还是照相机)</span></span><br><span class="line">picker.sourceType = <span class="built_in">UIImagePickerControllerSourceTypeSavedPhotosAlbum</span>;</span><br><span class="line"><span class="comment">// 3. 将调用改控制的对象设置为代理 - 这里必须要实现系统要求的两个协议</span></span><br><span class="line">picker.delegate = <span class="keyword">self</span>;</span><br><span class="line"><span class="comment">// 4. modal出照片选择控制器</span></span><br><span class="line">[<span class="keyword">self</span> presentViewController:picker animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></li>
+<li>调用代理方法拿到照片 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// info这个字典参数是选中照片的一些信息,根据里面的key可以拿到选择的照片</span></span><br><span class="line">- (<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 拿到图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *image = info[<span class="built_in">UIImagePickerControllerOriginalImage</span>];</span><br><span class="line">    <span class="comment">// 将照片选取器隐藏</span></span><br><span class="line">    [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>往相册里存入照片<ol>
+<li>调用写入方法 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将图片保存到用户相册里面</span></span><br><span class="line"><span class="comment">// image: 将要保存的图片</span></span><br><span class="line"><span class="comment">// target: 方法监听者</span></span><br><span class="line"><span class="comment">// SEL: 保存图片完成时调用的方法(系统规定写法,用来监听保存状态)</span></span><br><span class="line"><span class="comment">// contextInfo: 上下文信息</span></span><br><span class="line"><span class="built_in">UIImageWriteToSavedPhotosAlbum</span>(image, <span class="keyword">self</span>, <span class="keyword">@selector</span>(image:didFinishSavingWithError:contextInfo:), <span class="literal">nil</span>);</span><br></pre></td></tr></table></figure></li>
+<li>实现监听方法 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存相册后回调的监听方法</span></span><br><span class="line">- (<span class="keyword">void</span>)image:(<span class="built_in">UIImage</span> *)image didFinishSavingWithError:(<span class="built_in">NSError</span> *)error contextInfo:(<span class="keyword">void</span> *)contextInfo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"保存成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+待续…</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -998,167 +952,147 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
           </div>
           
 
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="http://r.loli.io/bA3a2e.jpg"
-               alt="XionVV" />
-          <p class="site-author-name" itemprop="name">XionVV</p>
-          <p class="site-description motion-element" itemprop="description">XionVV Coding | iOS</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">49</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">5</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/xionw1991" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/1249880294/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-          <div class="cc-license motion-element" itemprop="license">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
-
-        
-        
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2014 - 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">XionVV</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xion</p>
+  <div class="site-description" itemprop="description">It`s Breeze, It`s Sunshine</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xionw1991" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xionw1991" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xion</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1167,212 +1101,21 @@ In addition, <span class="operator">the</span> leaf server certificate hashing a
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"xionv"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-  
+<script src="/js/local-search.js"></script>
 
 
 
 
 
-  
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';                
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
-                            
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
 
-    // handle and trigger popup window;
-    $('.popup-trigger').mousedown(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
 
-    });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
-  
+
 
   
 

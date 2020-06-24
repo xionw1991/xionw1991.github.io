@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xionw1991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="原文地址：Linux Directory Structure Overview Linux和Windows的区别显著区别之一就是其不同的目录结构，并不仅仅是格式上的不同，而是不同位置上保存的东西区别很大。 在Windows中，典型的路径可能是这样的D:\Folder\subfolder\file.txt，而在Linux中，路径则是这样的&#x2F;Folder&#x2F;subfolder&#x2F;file.txt。 斜线倾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件目录解释">
+<meta property="og:url" content="https://xionw1991.github.io/2018/02/22/blog/47.Linux%E7%9B%AE%E5%BD%95%E8%A7%A3%E9%87%8A/index.html">
+<meta property="og:site_name" content="Xion&#39;s Blog">
+<meta property="og:description" content="原文地址：Linux Directory Structure Overview Linux和Windows的区别显著区别之一就是其不同的目录结构，并不仅仅是格式上的不同，而是不同位置上保存的东西区别很大。 在Windows中，典型的路径可能是这样的D:\Folder\subfolder\file.txt，而在Linux中，路径则是这样的&#x2F;Folder&#x2F;subfolder&#x2F;file.txt。 斜线倾">
+<meta property="og:image" content="http://www.wuliaole.com/post/directory_introduction_in_linux_or_raspbian/ldr.png">
+<meta property="article:published_time" content="2018-02-22T08:08:57.000Z">
+<meta property="article:modified_time" content="2020-06-24T02:48:13.535Z">
+<meta property="article:author" content="Xion">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="目录结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.wuliaole.com/post/directory_introduction_in_linux_or_raspbian/ldr.png">
+
+<link rel="canonical" href="https://xionw1991.github.io/2018/02/22/blog/47.Linux%E7%9B%AE%E5%BD%95%E8%A7%A3%E9%87%8A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Linux文件目录解释 | Xion's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Xion's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Xion's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Feelings of life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2018/02/22/blog/47.Linux%E7%9B%AE%E5%BD%95%E8%A7%A3%E9%87%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux文件目录解释
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-22 16:08:57" itemprop="dateCreated datePublished" datetime="2018-02-22T16:08:57+08:00">2018-02-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文地址：<a href="http://www.debianadmin.com/linux-directory-structure-overview.html" target="_blank" rel="noopener">Linux Directory Structure Overview</a></p>
+<h2 id="Linux和Windows的区别"><a href="#Linux和Windows的区别" class="headerlink" title="Linux和Windows的区别"></a>Linux和Windows的区别</h2><p>显著区别之一就是其不同的目录结构，并不仅仅是格式上的不同，而是不同位置上保存的东西区别很大。</p>
+<p>在Windows中，典型的路径可能是这样的<code>D:\Folder\subfolder\file.txt</code>，而在Linux中，路径则是这样的<code>/Folder/subfolder/file.txt</code>。</p>
+<p>斜线倾斜的方向不同，并且，在Linux中，也没有C盘D盘的概念，Linux系统启动之后，<code>根分区</code>就”挂载”在了在了<code>/</code>的位置，并且所有的文件、文件夹、设备以及不同的硬盘光驱之类的，也都挂载在了<code>/</code>。</p>
+<p>虽然可能在下面这个例子中并不明显，但是Linux系统对文件或者文路径的名称中的大小写字符是敏感的。</p>
+<p>比如<code>/Folder/subfolder/file.txt</code>与<code>/folder/subfolder/file.txt</code>并不是同一个文件。</p>
+<h2 id="Linux系统目录说明"><a href="#Linux系统目录说明" class="headerlink" title="Linux系统目录说明"></a>Linux系统目录说明</h2><p>Unix中和Linux的目录结构是一个统一的目录结构，所有的目录和文件最终都统一到”/“根文件系统下。文件系统是无论是不是挂载过来的，最终都分层排列到以”/“为起始的文件系统之下。<br>Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Structure，FHS)”，这标准是由”自由标准组织（Free Standards Group）”进行维护的，然而大多数LINUX发行版都有意或者无意的与这一规范背离。</p>
+<p>“/“ 根路径</p>
+<p>这是Linux系统的”根”目录，也是所有目录结构的最底层。在UNIX以及和它兼容的系统中，”/“是一个单独的目录。</p>
+<p>/boot</p>
+<p>这个目录下包含系统启动文件（boot loader），例如Grub，Lilo或者Kernel，以及initrd，system.map等配置文件。</p>
+<blockquote>
+<p>Initrd ramdisk或者”initrd”是指一个临时文件系统，它在启动阶段被Linux内核调用。initrd主要用于当”根”文件系统被挂载之前，进行准备工作。</p>
+</blockquote>
+<p>/sys</p>
+<p>这个目录下包含内核、固件以及系统相关文件。</p>
+<p>/sbin</p>
+<p>包含系统操作和运作所必需的二进制文件以及管理工具，主要就是可执行文件。类似WINDOWS下的EXE文件。</p>
+<p>/bin</p>
+<p>包含单用户模式下的二进制文件以及工具程序，比如cat，ls，cp这些命令。</p>
+<p>/lib</p>
+<p>包含/sbin和/bin目录下二进制文件运行所需要的库文件。</p>
+<p>/dev</p>
+<p>内含必需的系统文件和驱动器。</p>
+<p>/etc</p>
+<p>内含系统配置文件，其下的目录，比如 /etc/hosts, /etc/resolv.conf, nsswitch.conf, 以及系统缺省设置，网络配置文件等等。以及一些系统和应用程序的配置文件。</p>
+<p>/home</p>
+<p>每一个用户的在这个目录下，都会单独有一个以其用户名命令的目录，在这里保存着用户的个人设置文件，尤其是以 profile结尾的文件。但是也有例外，root用户的数据就不在这个目录中，而是单独在根路径下，保存在单独的/root文件夹下。</p>
+<p>/media</p>
+<p>一个给所有可移动设备比如光驱、USB外接盘、软盘提供的常规挂载点。</p>
+<p>/mnt</p>
+<p>临时文件系统挂载点。比如，你并不想长期挂载某个驱动器，而是只是临时挂载一会U盘烤个MP3之类的，那么应该挂载在这个位置下。</p>
+<p>/opt</p>
+<p>在Linux系统中，这个目录用到的并不多，opt是 可选系统程序包（Optional Software Packages）的简称。这个目录在UNIX系统，如Sun Solaris用途要广泛的多。</p>
+<p>/usr</p>
+<p>用户数据目录，包含了属于用户的实用程序和应用程序。这里有很多重要的，但并非关键的文件系统挂载这个路径下面。在这里，你会重新找到一个 bin、sbin 和 lib目录，其中包含非关键用户和系统二进制文件以及相关的库和共享目录，以及一些库文件。</p>
+<p>/usr/sbin</p>
+<p>包含系统中非必备和并不是特别重要的系统二进制文件以及网络应用工具。</p>
+<p>/usr/bin</p>
+<p>包含用户的非必备和并不是特别重要的二进制文件。</p>
+<p>/usr/lib</p>
+<p>保存着/usr/sbin以及/usr/bin中二进制文件所需要的库文件。</p>
+<p>/usr/share</p>
+<p>“平台无关”的共享数据目录。</p>
+<p>/usr/local</p>
+<p>是/usr下的二级目录，这里主要保存着包含系统二进制文件以及运行库在内的本地系统数据。</p>
+<p>/var</p>
+<p>这个路径下通常保存着包括系统日志、打印机后台文件（spool files）、定时任务（crontab）、邮件、运行进程、进程锁文件等。这个目录尤其需要注意进行日常的检查和维护，因为这个目录下文件的大小可能会增长很快，以致于很快占满硬盘，然后导致系统便会出现各种奇奇怪怪的问题。</p>
+<p>/tmp</p>
+<p>顾名思义，这是一个临时文件夹，专门用来保存临时文件，每次系统重启之后，这个目录下的”临时”文件便会被清空。同样，/var/tmp 也同样保存着临时文件。两者唯一的不同是，后者 /var/tmp目录保存的文件会受到系统保护，系统重启之后这个目录下的文件也不会被清空。</p>
+<p>/proc</p>
+<p>这个目录是驻留在系统内存中的虚拟（psuedo，伪）文件系统，其中保存的都是文本格式的系统内核和进程信息。</p>
+<h2 id="LINUX系统目录结构图"><a href="#LINUX系统目录结构图" class="headerlink" title="LINUX系统目录结构图"></a>LINUX系统目录结构图</h2><p><img src="http://www.wuliaole.com/post/directory_introduction_in_linux_or_raspbian/ldr.png" alt=""></p>
+<blockquote>
+<p>需要注意的是，不同LINUX发行版本的目录结构会有一些差异，这对LINUX新手来说比较纠结，但是大体上，所以LINUX的不同发行版本，都符合上面这幅图片中的路径结构。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/" rel="tag"># 目录结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/05/blog/46.%E4%BD%BFswift%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%AE%80%E6%B4%81/" rel="prev" title="使swift代码更简洁">
+      <i class="fa fa-chevron-left"></i> 使swift代码更简洁
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux和Windows的区别"><span class="nav-number">1.</span> <span class="nav-text">Linux和Windows的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux系统目录说明"><span class="nav-number">2.</span> <span class="nav-text">Linux系统目录说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LINUX系统目录结构图"><span class="nav-number">3.</span> <span class="nav-text">LINUX系统目录结构图</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xion</p>
+  <div class="site-description" itemprop="description">It`s Breeze, It`s Sunshine</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xionw1991" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xionw1991" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xion</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xionw1991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="NSFileManager 创建一个文件管理者对象  1NSFileManager *mgr &#x3D; [NSFileManager defaultManager]; 文件与目录的操作  123456789createFileAtPath:    &#x2F;&#x2F; 创建文件copyItemAtPath:    &#x2F;&#x2F; 复制文件moveItemAtPath:    &#x2F;&#x2F; 移动文件removeItemFileAtPath">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSFileManager和NSFileHandle的常用方法">
+<meta property="og:url" content="https://xionw1991.github.io/2015/04/30/blog/28.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Xion&#39;s Blog">
+<meta property="og:description" content="NSFileManager 创建一个文件管理者对象  1NSFileManager *mgr &#x3D; [NSFileManager defaultManager]; 文件与目录的操作  123456789createFileAtPath:    &#x2F;&#x2F; 创建文件copyItemAtPath:    &#x2F;&#x2F; 复制文件moveItemAtPath:    &#x2F;&#x2F; 移动文件removeItemFileAtPath">
+<meta property="article:published_time" content="2015-04-30T11:52:57.000Z">
+<meta property="article:modified_time" content="2020-06-23T15:21:16.602Z">
+<meta property="article:author" content="Xion">
+<meta property="article:tag" content="iOS代码">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://xionw1991.github.io/2015/04/30/blog/28.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>NSFileManager和NSFileHandle的常用方法 | Xion's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Xion's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Xion's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Feelings of life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2015/04/30/blog/28.NSFileManager%E5%92%8CNSFileHandle%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NSFileManager和NSFileHandle的常用方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-04-30 19:52:57" itemprop="dateCreated datePublished" datetime="2015-04-30T19:52:57+08:00">2015-04-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="NSFileManager"><a href="#NSFileManager" class="headerlink" title="NSFileManager"></a>NSFileManager</h2><ul>
+<li><p>创建一个文件管理者对象</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSFileManager</span> *mgr = [<span class="built_in">NSFileManager</span> defaultManager];</span><br></pre></td></tr></table></figure></li>
+<li><p>文件与目录的操作</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">createFileAtPath:    <span class="comment">// 创建文件</span></span><br><span class="line">copyItemAtPath:    <span class="comment">// 复制文件</span></span><br><span class="line">moveItemAtPath:    <span class="comment">// 移动文件</span></span><br><span class="line">removeItemFileAtPath:    <span class="comment">// 删除文件</span></span><br><span class="line">attributesOfItemAtPath:    <span class="comment">// 获取文件的属性</span></span><br><span class="line">setAttributes:    <span class="comment">// 更改属性</span></span><br><span class="line">currentDirectoryPath:    <span class="comment">// 获取当前的目录</span></span><br><span class="line">changeCurrentDirectoryPath:    <span class="comment">// 更改目录</span></span><br><span class="line">createDirectoryAtPath:    <span class="comment">//  创建目录</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取文件和目录信息</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">contentsAtPath:    <span class="comment">// 获取文件中的信息</span></span><br><span class="line">enumeratorAtPath:    <span class="comment">// 枚举目录</span></span><br><span class="line">contentsOfDirectoryAtPath:    <span class="comment">// 列举目录</span></span><br></pre></td></tr></table></figure></li>
+<li><p>判断文件</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fileExistsAtPath:    <span class="comment">// 判断文件是否存在</span></span><br><span class="line">isReadableFile:    <span class="comment">// 判断是否能进行读取操作</span></span><br><span class="line">isWritableFileAtPath:    <span class="comment">// 判断是否能进行写入操作</span></span><br><span class="line">isDeletableFileAtPath:    <span class="comment">// 判断是否可删除</span></span><br><span class="line">isExecutableFileAtPath:    <span class="comment">// 判断是否可以执行</span></span><br><span class="line">contentsEqualAtPath:    <span class="comment">// 判断是否相等</span></span><br></pre></td></tr></table></figure></li>
+<li><p>目录工具函数</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSUserName</span>()    <span class="comment">// 函数:返回登录名</span></span><br><span class="line"><span class="built_in">NSFullUserName</span>()    <span class="comment">// 函数:返回完整用户名</span></span><br><span class="line"><span class="built_in">NSHomeDirectory</span>()   <span class="comment">// 函数:返回路径</span></span><br><span class="line"><span class="built_in">NSHomeDirectoryForUser</span>()    <span class="comment">// 函数:返回用户的主目录</span></span><br><span class="line"><span class="built_in">NSTemporaryDirectory</span>()  <span class="comment">// 函数:返回临时文件的路径目录</span></span><br><span class="line">[fileList pathsMatchingExtensions:[<span class="built_in">NSArrayarrayWithObject</span>:<span class="string">@"jpg"</span>]];   <span class="comment">// 过滤数组中的文件类型</span></span><br></pre></td></tr></table></figure></li>
+<li><p>常用路径工具方法</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>(NSString *)pathWithComponents:components        // 根据components中元素构造有效路径</p>
+</li>
+<li><p>(NSArray *)pathComponents        // 析构路径,获取路径的各个部分</p>
+</li>
+<li><p>(NSString *)lastPathComponent        // 提取路径的最后一个组成部分</p>
+</li>
+<li><p>(NSString *)pathExtension        // 路径扩展名</p>
+</li>
+<li><p>(NSString *)stringByAppendingPathComponent:path        // 将path添加到现有路径末尾</p>
+</li>
+<li><p>(NSString *)stringByAppendingPathExtension:ext        // 将拓展名添加的路径最后一个组成部分</p>
+</li>
+<li><p>(NSString *)stringByDeletingPathComponent        // 删除路径的最后一个部分</p>
+</li>
+<li><p>(NSString *)stringByDeletingPathExtension        // 删除路径的最后一个部分 的扩展名</p>
+</li>
+<li><p>(NSString *)stringByExpandingTildeInPath        // 将路径中的代字符扩展成用户主目录(<del>)或指定用户主目录(</del>user)</p>
+</li>
+<li><p>(NSString *)stringByResolvingSymlinksInPath        // 尝试解析路径中的符号链接</p>
+</li>
+<li><p>(NSString *)stringByStandardizingPath        // 通过尝试解析~、..、.、和符号链接来标准化路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="NSFileHandle"><a href="#NSFileHandle" class="headerlink" title="NSFileHandle"></a>NSFileHandle</h2><ul>
+<li>文件读取 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">init:    <span class="comment">// 初始化文件读写对象</span></span><br><span class="line">fileHandleForReadingAtPath:    <span class="comment">// 读取时打开文件</span></span><br><span class="line">fileHandleForWritingAtPath:    <span class="comment">// 写入时打开文件</span></span><br><span class="line">fileHandleForUpdatingAtPath:    <span class="comment">// 更新时打开文件</span></span><br><span class="line">writeData:    <span class="comment">// 数据写入文件</span></span><br><span class="line">readDataToEndOfFile:    <span class="comment">// 读取数据</span></span><br><span class="line">readDataOfLength:    <span class="comment">// 读取固定大小的内容</span></span><br><span class="line">offsetInFile:    <span class="comment">// 获取当前偏移量</span></span><br><span class="line">seekToFileOffset:    <span class="comment">// 设置当前的偏移量</span></span><br><span class="line">seekToEndOfFile:    <span class="comment">// 将偏移量定位到文件尾</span></span><br><span class="line">truncateFileAtOffset:    <span class="comment">// 设置字节</span></span><br><span class="line">availableData:    <span class="comment">// 返回可用数据</span></span><br><span class="line">closeFile:    <span class="comment">// 关闭文件</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="NSProcessInfo类-设置或检索正在运行的应用程序的各种类型信息"><a href="#NSProcessInfo类-设置或检索正在运行的应用程序的各种类型信息" class="headerlink" title="NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息"></a>NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSProcessInfo</span> *)processInfo        <span class="comment">// 返回当前进程的信息</span></span><br><span class="line">- (<span class="built_in">NSArray</span>*)arguments        <span class="comment">// 以NSString对象数字的形式返回当前进程的参数</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)environment        <span class="comment">//  返回变量/值对词典。描述当前的环境变量</span></span><br><span class="line">- (<span class="keyword">int</span>)processIdentity        <span class="comment">// 返回进程标识</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)processName        <span class="comment">// 返回进程名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)globallyUniqueString        <span class="comment">// 每次调用该方法都会返回不同的单值字符串，可以用这个字符串生成单值临时文件名</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)hostname        <span class="comment">// 返回主机系统的名称</span></span><br><span class="line">- (<span class="keyword">unsigned</span> <span class="keyword">int</span>)operatingSystem        <span class="comment">// 返回表示操作系统的数字</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemName        <span class="comment">// 返回操作系统名称</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)operatingSystemVersionString        <span class="comment">// 返回操作系统当前版本</span></span><br><span class="line">- (<span class="keyword">void</span>)setProcessName:(<span class="built_in">NSString</span> *)name        <span class="comment">// 将当前进程名称设置为name</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS%E4%BB%A3%E7%A0%81/" rel="tag"># iOS代码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/04/02/blog/27.TableVIew%E5%8D%95%E5%85%83%E6%A0%BC%E5%A4%9A%E5%9B%BE%E4%B8%8B%E8%BD%BD/" rel="prev" title="TableVIew单元格多图下载">
+      <i class="fa fa-chevron-left"></i> TableVIew单元格多图下载
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/05/08/blog/29.%E5%88%A9%E7%94%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%89%B9%E6%80%A7%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F/" rel="next" title="利用运行时特性获取系统类的私有成员属性">
+      利用运行时特性获取系统类的私有成员属性 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSFileManager"><span class="nav-number">1.</span> <span class="nav-text">NSFileManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSFileHandle"><span class="nav-number">2.</span> <span class="nav-text">NSFileHandle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSProcessInfo类-设置或检索正在运行的应用程序的各种类型信息"><span class="nav-number">2.1.</span> <span class="nav-text">NSProcessInfo类:设置或检索正在运行的应用程序的各种类型信息</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xion</p>
+  <div class="site-description" itemprop="description">It`s Breeze, It`s Sunshine</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xionw1991" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xionw1991" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xion</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

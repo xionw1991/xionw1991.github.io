@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xionw1991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这是从简书上拷贝下来题目,没事自己做做.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS面试题">
+<meta property="og:url" content="https://xionw1991.github.io/2015/10/05/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Xion&#39;s Blog">
+<meta property="og:description" content="这是从简书上拷贝下来题目,没事自己做做.">
+<meta property="article:published_time" content="2015-10-05T05:01:57.000Z">
+<meta property="article:modified_time" content="2016-08-02T10:40:25.000Z">
+<meta property="article:author" content="Xion">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://xionw1991.github.io/2015/10/05/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>iOS面试题 | Xion's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Xion's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Xion's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Feelings of life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2015/10/05/blog/iOS%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iOS面试题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-10-05 13:01:57" itemprop="dateCreated datePublished" datetime="2015-10-05T13:01:57+08:00">2015-10-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>这是从简书上拷贝下来题目,没事自己做做.</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="初级"><a href="#初级" class="headerlink" title="初级"></a>初级</h2><ul>
+<li><strong>关于单方面技术</strong><ul>
+<li>ARC / MRC 简单叙述一下<br><code>ARC和MRC的意思分别是自动引用计数和手动引用计数，它是iOS中内存管理的一种机制。当一个对象被创建和引用时那么它的引用计数器就会+1，当没有这个对象的引用计数为0时这个对象就会被销毁。MRC中有3个关键字来控制引用计数分别是retain/release/autorelease，retain表示计数器+1，release和autorelease表示计数器-1。ARC与MRC对内存管理的原理是一样的，只是具体实现不一样，ARC它是一种编译器特性，在ARC环境下我们不用手动编写retain和release，编译器会自动在适当的地方插入这些方法。ARC它是通过判断有没有强引用来判断对象是否该销毁，它也有3个关键字来控制对象的生命，strong/weak/assign，strong表示强引用，只要有一个强引用引用者该对象，那么这个对象就不会被销毁。</code></li>
+<li>封装过什么控件, 简单叙述一下<br><code>封装过一些HUD和自定义tabbar， hud就是自定义一个UIView，然后重写view的drewRect: 方法使用cg和ca框架来画出需要的图形。自定义一个tabbar来替换系统自带的tabbar，还有就是自己写一个tabbarViewcontroller来实现完全的自定义。</code></li>
+<li>属性readwrite，readonly，assign，retain，copy，nonatomic各是什么作用<br><code>以上关键字是用来修饰成员属性的，readwrite表示该成员属性可读可写，意味着编译器会默认生成带下划线的成员变量名和与之对应的setter和getter方法；readonly则表示只读，意味着只会生成带下划线的成员变量和对应的getter方法；assign一般用来修饰基本数据类型；retain一般在MRC环境下使用，它修饰的成员属性在被调用的时候，引用计数器会+1；copy一般用来修饰集合类型，因为集合类型分为可变和不可变类型，如果直接使用retain或strong修饰的话，外界就有可能会改这个集合中的值，导致数据污染，通常做法就是当外界使用这个集合的时候都会进行一次拷贝操作，以保证原始数据的完整性；nonatomic表示非原子性，表示非线程安全的，当有多个线程同时访问和修改一个成员变量时，会出现抢夺资源的情况，导致访问成员变量值出错，而atomic就是给这个成员变量配一把锁，当有一个线程访问这个成员变量时就会得到这把锁，其他线程就不能访问，只有这个线程把这个锁释放后其他线程才能访问，保证数据的安全性。</code></li>
+<li>Get Set方法<br><code>get 和 set 方法是为了保证对象的封装性而存在的。一般在程序设计时，如果把一个成员变量暴露在外供外界随意调用是一件很危险的事情。所以这时需要对成员变量进行一次封装，让这个成员变量只能在类的内部调用，对外则提供一些特定的接口让外界访问，这用就能有效的过滤外界对成员变量的行为，保证数据的安全性。</code></li>
+<li>id 是什么<br><code>id可以理解为一个万能指针，它能指向任意一个对象。它是oc多态特征的表现，1.只有当程序运行的时候对象的真实类型才能被确定；2.可以用父类指针指向子类。</code></li>
+<li>代理, Block, 循环引用<br><code>代理实际上是一种设计模式，一个类有一些方法需要外界来实现的时候就可以使用代理模式，比如tableView的数据源，tableView的代理方法。它的存在主要是为了让类之间解耦，以达到模块化的目的；block其实就是一段代码块，用来保存一段代码，然后让这段代码在合适的时候进行调用。block的本质其实就是一个指向结构体的指针，block保存的代码块则最终会被转成一个函数，然后block指向的结构体会生成一个指向该函数的指针型成员变量，当block被调用的时候实际上就是调用的这段函数；循环引用的意思就是，当两个对象互相强引用着对方时，谁也不能被销毁。代理模式和block都会产生循环引用的问题，所以当一个类声明一个代理属性的时候，需要将那个类修饰为弱引用来防止出现循环引用。在block中也是，当block的调用者在block的回调函数中被引用时就会产生循环引用，解决办法就是，新定义一个弱引用的变量来指向block调用者，在block的回调函数中使用这个弱引用来指代这个调用者。</code></li>
+<li>通知的使用<br><code>通知的流程就是当一个事件产生时拿到通知中心单例对象，通过这个单例对象post一个事件，这个事件中包含这个通知的标识，通知发送者和一个字典类型的参数，接下来如果有对象要接收这个通知则先需要add一个监听者来监听这个通知的发送在做一些响应操作，最后当通知的监听对象被销毁的时候记得使用remove来移除监听。通知的使用场景一般是，结构层次很深，或互不相干的两个对象需要进行一个事件监听和数据处理。</code></li>
+</ul>
+</li>
+<li><strong>关于项目方面</strong><ul>
+<li>参与过什么项目, 负责什么</li>
+<li>项目中你参与的模块遇到过什么大的问题, 怎么解决的, 详细叙述</li>
+<li>Git/SVN<br><code>一个是集中式源代码管理工具，一个分布式源代码管理工具，这个没什么好说的。</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="中级"><a href="#中级" class="headerlink" title="中级"></a>中级</h2><ul>
+<li><strong>在基础技术问题的基础上</strong><ul>
+<li>本地通知和远程通知<br><br><code>感觉没什么好说的，本地通知，用来提示本地信息。远程通知是当客户端不在活跃状态时由服务器发送消息给苹果的APNS服务器，然后再根据deviceToken推送给各个设备</code></li>
+<li>简单讲述SDWebImage实现原理<br><br><code>直接上代码</code><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)downloadImageWithUrlStr:(<span class="built_in">NSString</span> *)urlStr placeholder:(<span class="built_in">NSString</span> *)placeholder completeHandle:(<span class="keyword">void</span> (^)(<span class="built_in">UIImage</span> *image))block</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1&gt; 先从内存缓存中取</span></span><br><span class="line">    <span class="comment">// 根据url取出图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *memoryImage = <span class="keyword">self</span>.images[urlStr];</span><br><span class="line">    <span class="keyword">if</span> (memoryImage) &#123; <span class="comment">// 当内存中有图片时</span></span><br><span class="line">        block(memoryImage);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当内存中没有图片时</span></span><br><span class="line">        <span class="comment">// 2&gt; 再从沙盒中取 - 每一张图片都是一个文件 文件名为url名</span></span><br><span class="line">        <span class="built_in">UIImage</span> *diskImage = [<span class="built_in">UIImage</span> imageWithContentsOfFile:cachePath(urlStr)];</span><br><span class="line">        <span class="keyword">if</span> (diskImage) &#123; <span class="comment">// 沙盒中有图片时</span></span><br><span class="line">            block(diskImage);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当沙盒中没有对应的图片时</span></span><br><span class="line">            <span class="comment">// 设置占位图片</span></span><br><span class="line">            block([<span class="built_in">UIImage</span> imageNamed:placeholder]);</span><br><span class="line">            <span class="comment">// 3&gt; 从网络上下载</span></span><br><span class="line">            <span class="comment">/* 为了保证一张图片只下载一次,需要判断当前url是否有下载任务,如果没有才需要创建下载任务 */</span></span><br><span class="line">            <span class="comment">/* 如何才能判断当前的url是否有下载任务呢?利用字典一对一绑定来判断 */</span></span><br><span class="line">            <span class="comment">// 取出字典中url对应的下载任务</span></span><br><span class="line">            <span class="built_in">NSBlockOperation</span> *operation = <span class="keyword">self</span>.operations[urlStr];</span><br><span class="line">            <span class="comment">// 如果当前url有下载任务 - 就不创建任务</span></span><br><span class="line">            <span class="keyword">if</span> (!operation) &#123;</span><br><span class="line">                __<span class="keyword">weak</span> <span class="keyword">typeof</span> (<span class="keyword">self</span>) weakself = <span class="keyword">self</span>;</span><br><span class="line">                <span class="comment">// 创建异步任务 - 将下载图片的操作放入到子线程中 - 解决异步下载的问题</span></span><br><span class="line">                operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">                    <span class="comment">// 将字符串转成url</span></span><br><span class="line">                    <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">                    <span class="comment">// 从url获取数据</span></span><br><span class="line">                    <span class="built_in">NSData</span> *imageData = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">                    <span class="comment">// 将二进制数据转成图片</span></span><br><span class="line">                    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:imageData];</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 返回主线程刷新数据</span></span><br><span class="line">                    [[<span class="built_in">NSOperationQueue</span> mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line">                        <span class="comment">// 如果下载成功将图片存入字典 - 字典不能存空</span></span><br><span class="line">                        <span class="keyword">if</span> (image) &#123;</span><br><span class="line"></span><br><span class="line">                            block(image);</span><br><span class="line">                            <span class="comment">// 1)将下载好的图片添加进图片字典中 url为key</span></span><br><span class="line">                            [weakself.images setObject:image forKey:urlStr];</span><br><span class="line">                            <span class="comment">// 2)将image写入沙盒</span></span><br><span class="line">                            <span class="comment">// 将图片转成二进制数据</span></span><br><span class="line">                            <span class="built_in">NSData</span> *data = <span class="built_in">UIImagePNGRepresentation</span>(image);</span><br><span class="line">                            <span class="comment">// 写入沙盒</span></span><br><span class="line">                            [data writeToFile:cachePath(urlStr) atomically:<span class="literal">YES</span>];</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// 下载完毕后将任务从字典中移除 - 如果下载失败将任务移除后还有机会下载,如果不移除,这个key就会一直存在永远也不能再次下载了</span></span><br><span class="line">                        <span class="comment">// 在主线程中移除是为了保证下载操作已经执行完毕</span></span><br><span class="line">                        [<span class="keyword">self</span>.operations removeObjectForKey:urlStr];</span><br><span class="line">                    &#125;];</span><br><span class="line">                &#125;];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将任务添加到队列 - 如果当前队列有相同任务则不添加</span></span><br><span class="line">            <span class="keyword">if</span> (![<span class="keyword">self</span>.queue.operations containsObject:operation]) &#123;</span><br><span class="line">                [<span class="keyword">self</span>.queue addOperation:operation];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将下载任务写入到字典里(解决重复下载问题)</span></span><br><span class="line">            [<span class="keyword">self</span>.operations setObject:operation forKey:urlStr];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>数据库语句<br><br><code>列举几个常用的数据库语句：</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创表</span><br><span class="line">CREATE TABLE IF NOT EXISTS t_cmpt (id INTEGER PRIMARY KEY, name TEXT, price REAL)</span><br><span class="line">&#x2F;&#x2F; 插入数据</span><br><span class="line">INSERT INTO t_cmpt (name, price) VALUES (abc, 998)</span><br><span class="line">&#x2F;&#x2F; 删除数据</span><br><span class="line">DELETE FROM t_cmpt</span><br><span class="line">&#x2F;&#x2F; 查询数据</span><br><span class="line">SELECT * FROM t_cmpt</span><br></pre></td></tr></table></figure></li>
+<li>CoreData常用使用<br><br><code>一般用sqlite，没用过CoreData</code></li>
+<li>优化UITableView的方式, 方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- 对于复杂的视图，使用纯代码来实现布局（storyboard对资源的消耗要大于纯代码）</span><br><span class="line">- 使用SDWebImage来异步加载图片, 管理下载队列, 缓存数据</span><br><span class="line">- 使用估算高度,来防止tableView一显示就计算所有cell的高度(延迟调用heightForRow)</span><br><span class="line">- 在不等高cell中,使用字典来保存已经计算高度的cell,在下次滑动到这个cell的时候优先调用字典里的cellHeight, 最好的办法是在数据返回的时候就根据数据来计算出cell的高度并缓存起来</span><br><span class="line">- 调用scrollView的代理方法,在滑动tableView的时候就停止所有的网络请求(比如图片下载)</span><br><span class="line">- 在cell已经离开显示区域后从内存中清除cell,特别是带大量图片的复杂的cell, 防止内存占用过多导致程序崩溃</span><br><span class="line">- 在cell中使用高清大图时尽量使用fileFormPath来加载图片而不是使用imageName: 前者是一次性显示,当从可显示区域移除后就会自动从内存中销毁, 而后者只有内存警告的时候才会被回收</span><br><span class="line">- 在对象销毁的时候将所有的代理清空</span><br><span class="line">- 尽量让所有的view不透明(opaque), 因为透明会额外消耗性能</span><br><span class="line">- 尽量不要动态给cell添加子控件(意思就是不要在cellForRow中添加子控件)</span><br><span class="line">- 不需要交互的内容不使用系统封装好的控件来显示，而是调用独立功能的API来在图层上绘制，比如cell中的图片只需要显示，而不需要交互，则可以考虑自定义图层来绘制出这个图片，还有文字使用更底层的CoreText来绘制文字而不是使用label</span><br><span class="line">- 根据滑动的位置异步按需加载内容(比如提前加载当前显示cell附近cell的内容)</span><br><span class="line">- 使用第三方框架的tableView(异步渲染UI)，比如AsyncDisplayKit框架</span><br></pre></td></tr></table></figure></li>
+<li>深浅拷贝<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">浅复制（浅拷贝，指针拷贝，shallow copy）</span><br><span class="line">- 源对象和副本对象是同一个对象</span><br><span class="line">- 源对象（副本对象）引用计数器+1,相当于做一次retain操作</span><br><span class="line">- 本质是：没有产生新的对象</span><br><span class="line">- 原对象引用计数器+1</span><br><span class="line">- 必须对原对象进行释放</span><br><span class="line">深复制（深拷贝，内容拷贝，deep copy）</span><br><span class="line">- 源对象和副本对象是不同的两个对象</span><br><span class="line">- 源对象引用计数器不变,副本对象计数器为1（因为是新产生的）</span><br><span class="line">- 本质是：产生了新的对象</span><br><span class="line">- 必须释放新对象</span><br></pre></td></tr></table></figure></li>
+<li>运行时你知道多少（是什么？有哪些用处？）<br><br><code>运行时是一套纯c语言的函数库，它是支撑整个OC动态特性的幕后工作者，在OC环境下所编写的代码在编译的时候都会先转换成纯c的运行时代码然后在再编译成二进制的机器语言。使用运行时可以办到一些OC办不到的事情，比如获取类中的私有成员变量，动态添加方法，动态添加成员属性，动态添加一个类（KVO），Method Swizzle，实现消息转发等。</code></li>
+<li>封装过什么<br><code>封装过一些工具类，视图类，模型缓存类等</code></li>
+</ul>
+</li>
+<li><strong>关于项目方面</strong><ul>
+<li>熟练的使用Git</li>
+<li>如果让你设计一个缓存模块, 你会怎么设计,需要考虑到什么<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">每次获取数据优先从内存中获取，如果没有再查找本地数据库和文件，如果没有则发送网络请求，从服务区加载数据，然后将获得的数据进行本地缓存。</span><br><span class="line">数据库缓存方面注意点：</span><br><span class="line">1.首先考虑到的是线程安全，因为在iOS中sqlite不支持多线程并发访问，会引起数据库锁定，所以在访问数据库的时候都是以同步串行的方式进行访问的；</span><br><span class="line">2.添加文件校验，将文件名和文件数据进行关联，防止文件多次下载；</span><br><span class="line">3.防止文件名冲突，比如像SDWebImage对下载下来的文件名进行MD5加密，防止文件被覆盖；</span><br></pre></td></tr></table></figure></li>
+<li>说说MVC MVVM MVP<br><code>MVP是MVC的衍生版，真正做到了模型与视图的隔离，每次视图需要获取数据必须要通过Presenter，当然这又产生一个问题，就是Presenter的体积会越来越庞大，不便于后期的维护。MVVM则更像MVC的改良版，它将控制器中对数据的处理全部抽到了一个视图模型中，减小了控制器的体积，同时也办到了视图与模型的隔离。</code></li>
+<li>做过最失败的项目是什么, 为什么</li>
+<li>你觉得怎么划分模块会好一点<br><code>我觉得按功能划分最好啦~</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h2><ul>
+<li><strong>基于前两个</strong><ul>
+<li>多线程详细说一下, 怎么封装一个适合自己项目的线程池,怎么处理会好一点。</li>
+<li>多线程CoreData, 这个基本所有的面试都会提到一下吧</li>
+<li>使用过什么开源的动画库, 这就是随便问问 比如pop, canvas等</li>
+<li>有自己的开源项目么？</li>
+<li>有全面的对网络库进行二次开发封装么, 怎么干的。</li>
+<li>讲一下运行时调换系统方法swizzle的原理</li>
+<li>自己尝试着模拟系统Block的实现</li>
+<li>怎么理解界面模板, 有做过相关开发么</li>
+<li>IM的东西随便问问，如果公司需要</li>
+<li>内存优化怎么搞一下<br><br><code>见tableView的优化思路</code></li>
+<li>自己写个tableView玩玩？</li>
+</ul>
+</li>
+<li><strong>项目方面</strong><ul>
+<li>参与过什么项目, 做过什么大型的项目, 负责哪些模块</li>
+<li>框架的设计有没有参与, 如果有的话, 参与了框架中哪一部分的工作, 怎么考虑你这部分未来的可扩展性的。</li>
+<li>在项目中严格按照产品,UIUE的思维去做,还是会把自己的想法提出来。</li>
+<li>怎么为一个项目写一套完整的网络库, 缓存库, 界面库。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/09/20/blog/39.UIAlertView%E5%9C%A8IOS9%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="UIAlertView在iOS9中的使用">
+      <i class="fa fa-chevron-left"></i> UIAlertView在iOS9中的使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/10/08/blog/40.%E8%B0%83%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%86%8C%E6%96%B9%E6%B3%95/" rel="next" title="调用系统相册的两种方法">
+      调用系统相册的两种方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初级"><span class="nav-number">1.</span> <span class="nav-text">初级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中级"><span class="nav-number">2.</span> <span class="nav-text">中级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xion</p>
+  <div class="site-description" itemprop="description">It`s Breeze, It`s Sunshine</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xionw1991" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xionw1991" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xion</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

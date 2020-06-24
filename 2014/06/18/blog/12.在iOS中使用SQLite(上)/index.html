@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xionw1991.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. 什么是SQLite SQLite是一款轻型的嵌入式数据库, 它属于关系数据库 它的处理速度非常快,它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了.  如何使用SQLite 在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.如图:  新建一个模型类, 并导入头文件 1#import &lt;sqlite3.h&gt; 在实现方法中定义一个全局的静态变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLite在iOS中的使用(上)">
+<meta property="og:url" content="https://xionw1991.github.io/2014/06/18/blog/12.%E5%9C%A8iOS%E4%B8%AD%E4%BD%BF%E7%94%A8SQLite(%E4%B8%8A)/index.html">
+<meta property="og:site_name" content="Xion&#39;s Blog">
+<meta property="og:description" content="1. 什么是SQLite SQLite是一款轻型的嵌入式数据库, 它属于关系数据库 它的处理速度非常快,它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了.  如何使用SQLite 在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.如图:  新建一个模型类, 并导入头文件 1#import &lt;sqlite3.h&gt; 在实现方法中定义一个全局的静态变">
+<meta property="og:image" content="http://r6.loli.io/j2mIvy.png">
+<meta property="article:published_time" content="2014-06-18T11:08:57.000Z">
+<meta property="article:modified_time" content="2020-06-23T15:21:03.219Z">
+<meta property="article:author" content="Xion">
+<meta property="article:tag" content="iOS开发笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://r6.loli.io/j2mIvy.png">
+
+<link rel="canonical" href="https://xionw1991.github.io/2014/06/18/blog/12.%E5%9C%A8iOS%E4%B8%AD%E4%BD%BF%E7%94%A8SQLite(%E4%B8%8A)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>SQLite在iOS中的使用(上) | Xion's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Xion's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Xion's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Feelings of life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xionw1991.github.io/2014/06/18/blog/12.%E5%9C%A8iOS%E4%B8%AD%E4%BD%BF%E7%94%A8SQLite(%E4%B8%8A)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xion">
+      <meta itemprop="description" content="It`s Breeze, It`s Sunshine">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xion's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQLite在iOS中的使用(上)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-18 19:08:57" itemprop="dateCreated datePublished" datetime="2014-06-18T19:08:57+08:00">2014-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-什么是SQLite"><a href="#1-什么是SQLite" class="headerlink" title="1. 什么是SQLite"></a>1. 什么是SQLite</h1><ul>
+<li>SQLite是一款轻型的嵌入式数据库, 它属于关系数据库</li>
+<li>它的处理速度非常快,它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了.</li>
+</ul>
+<h2 id="如何使用SQLite"><a href="#如何使用SQLite" class="headerlink" title="如何使用SQLite"></a>如何使用SQLite</h2><ol>
+<li><p>在iOS中要使用SQLite,必须先导入libsqlite3.dylib库.<br>如图:<br><img src="http://r6.loli.io/j2mIvy.png" alt=""></p>
+</li>
+<li><p>新建一个模型类, 并导入头文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;sqlite3.h&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li><p>在实现方法中定义一个全局的静态变量</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 定义一个sqlite3类型的结构体指针(数据库对象)</span></span><br><span class="line"><span class="keyword">static</span> sqlite3 *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>链接数据库, 创建表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首次调用这个类的时候链接数据库</span></span><br><span class="line">+ (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1&gt; 获取沙盒路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject stringByAppendingPathComponent:<span class="string">@"computer.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 2&gt; 根据路径打开数据库(相当于执行connection),传入数据库对象的地址,如果打开成功创建表.</span></span><br><span class="line">    <span class="keyword">int</span> result = sqlite3_open(path.UTF8String, &amp;_db); </span><br><span class="line">    <span class="keyword">if</span> (result != SQLITE_OK) &#123; <span class="comment">// 打开数据库失败</span></span><br><span class="line">        <span class="comment">// 关闭数据库</span></span><br><span class="line">        sqlite3_close(_db);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"打开数据库失败"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 打开数据库成功</span></span><br><span class="line">        <span class="keyword">char</span> *err; <span class="comment">// 创表失败的错误信息</span></span><br><span class="line">        <span class="comment">// 定义sql语句</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *sql = <span class="string">"CREATE TABLE IF NOT EXISTS t_computer (ID INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>; </span><br><span class="line">        <span class="comment">// 3&gt; 执行sql语句,在数据库(_db)中建表</span></span><br><span class="line">        <span class="keyword">if</span> (sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;err) != SQLITE_OK) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表失败---%s"</span>, err); <span class="comment">// 打印错误信息</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"创表成功"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>定义类方法来快速实现数据库的增\删\改\查</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 增 - 传一个名字和价格增加一条记录</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertDataWithName:(<span class="built_in">NSString</span> *)name price:(<span class="keyword">float</span>)price</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 定义sql语句</span></span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"INSERT INTO t_computer (name, price) VALUES ('%@', '%f');"</span>, name, price];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str.UTF8String;</span><br><span class="line">    <span class="comment">// 执行sql语句</span></span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删 - 传入名字删除对应名字的记录</span></span><br><span class="line">+ (<span class="keyword">void</span>)deletedDataWithName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"DELETE FROM t_computer WHERE name = '%@';"</span>, name];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str.UTF8String;</span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改 - 修改对应名字的价格</span></span><br><span class="line">+ (<span class="keyword">void</span>)updatePrice:(<span class="keyword">float</span>)price forName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *str = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"UPDATE t_computer SET price = '%f' WHERE name = '%@';"</span>, price, name];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = str.UTF8String;</span><br><span class="line">    sqlite3_exec(_db, sql, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查 - 取出数据库中所有的数据并将每一个字段转成模型的属性值存入数组返回出去</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)computers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建一个可变数组来接收模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrayM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 定义sql语句</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *sql = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"SELECT * FROM t_computer;"</span>].UTF8String;</span><br><span class="line">    <span class="comment">// 用来接收数据库查询的所有内容</span></span><br><span class="line">    sqlite3_stmt *stmt = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">// 如果查询到数据</span></span><br><span class="line">    <span class="keyword">if</span> (sqlite3_prepare_v2(_db, sql, <span class="number">-1</span>, &amp;stmt, <span class="literal">nil</span>) == SQLITE_OK) &#123;</span><br><span class="line">        <span class="comment">// 传入所有查询结果(stmt),逐步检索每一条记录,一直往下查找,直到SQLITE_ROW为null</span></span><br><span class="line">        <span class="keyword">while</span> (sqlite3_step(stmt) == SQLITE_ROW) &#123;</span><br><span class="line">            XVComputers *computer = [[XVComputers alloc] init];</span><br><span class="line">            <span class="comment">// 取出查找的值并赋给模型</span></span><br><span class="line">            computer.name = [<span class="built_in">NSString</span> stringWithUTF8String:(<span class="keyword">char</span> *)sqlite3_column_text(stmt, <span class="number">1</span>)];</span><br><span class="line">            computer.price = sqlite3_column_double(stmt, <span class="number">2</span>);</span><br><span class="line">            <span class="comment">// 将赋值后的对象放进数组</span></span><br><span class="line">            [arrayM addObject:computer];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrayM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="2-FMDB"><a href="#2-FMDB" class="headerlink" title="2. FMDB"></a>2. FMDB</h1><ul>
+<li>什么是FMDB<ul>
+<li>FMDB是iOS平台的SQLite数据库框架</li>
+<li>FMDB以OC的方式封装了SQLite的C语言API</li>
+</ul>
+</li>
+<li>FMDB的优点<ul>
+<li>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码</li>
+<li>对比苹果自带的Core Data框架，更加轻量级和灵活</li>
+<li>提供了多线程安全的数据库操作方法，有效地防止数据混乱</li>
+</ul>
+</li>
+<li>项目地址: <a href="https://github.com/ccgus/fmdb" target="_blank" rel="noopener">FMDB</a></li>
+</ul>
+<h2 id="如何使用FMDB"><a href="#如何使用FMDB" class="headerlink" title="如何使用FMDB"></a>如何使用FMDB</h2><ol>
+<li><p>在Xcode中导入libsqlite3.dylib动态链接库</p>
+</li>
+<li><p>新建一个模型类导入框架的头文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"FMDB.h"</span></span></span><br></pre></td></tr></table></figure></li>
+<li><p>在实现方法中定义一个全局的静态变量</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span></span></span><br><span class="line"><span class="comment">// 创建一个FMDatabase对象</span></span><br><span class="line"><span class="keyword">static</span> FMDatabase *_db;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>链接数据库,建表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> + (<span class="keyword">void</span>)initialize</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 文件路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject stringByAppendingPathComponent:<span class="string">@"cmpt.sqlite"</span>];</span><br><span class="line">    <span class="comment">// 链接数据库</span></span><br><span class="line">    _db = [FMDatabase databaseWithPath:path];</span><br><span class="line">    <span class="comment">// 打开数据库</span></span><br><span class="line">    [_db open];</span><br><span class="line">    <span class="comment">// 建表</span></span><br><span class="line">    [_db executeUpdate:<span class="string">@"CREATE TABLE IF NOT EXISTS t_cmpt (id INTEGER PRIMARY KEY, name TEXT, price REAL);"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现增\删\改\查  </p>
+<ul>
+<li><em>框架中的增删改都是用的 executeUpdate 方法</em></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)insertName:(<span class="built_in">NSString</span> *)name price:(<span class="keyword">float</span>)price</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注意在这个框架中sql语句中的字符串占位符不需要加单引号</span></span><br><span class="line">    [_db executeUpdateWithFormat:<span class="string">@"INSERT INTO t_cmpt (name, price) VALUES (%@, %f)"</span>, name, price];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 删除数据</span></span><br><span class="line">+ (<span class="keyword">void</span>)deleteAll</span><br><span class="line">&#123;</span><br><span class="line">    [_db executeUpdateWithFormat:<span class="string">@"DELETE FROM t_cmpt"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>查询使用的是 executeQuery 方法</em></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询数据并返回模型数组</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)computers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 返回一个查询到的结果集</span></span><br><span class="line">    FMResultSet *set = [_db executeQuery:<span class="string">@"SELECT * FROM t_cmpt;"</span>];</span><br><span class="line">    <span class="comment">// 创建一个可变数组来存放模型</span></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *arrM = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="comment">// 在集中往下查询每一条记录</span></span><br><span class="line">    <span class="keyword">while</span> ([set next]) &#123;</span><br><span class="line">        XVComputers *computer = [[XVComputers alloc] init];</span><br><span class="line">        computer.name = [set stringForColumn:<span class="string">@"name"</span>];</span><br><span class="line">        computer.price = [set stringForColumn:<span class="string">@"price"</span>].floatValue;</span><br><span class="line">        [arrM addObject:computer];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="FMDatabaseQueue"><a href="#FMDatabaseQueue" class="headerlink" title="FMDatabaseQueue"></a>FMDatabaseQueue</h3><ul>
+<li><p>FMDatabase这个类是线程不安全的，如果在多个线程中同时使用一个FMDatabase实例，会造成数据混乱等问题.</p>
+</li>
+<li><p>为了保证线程安全，FMDB提供方便快捷的FMDatabaseQueue类.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个FMDatabaseQueue队列</span></span><br><span class="line"><span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject stringByAppendingPathComponent:<span class="string">@"cmpt.sqlite"</span>];</span><br><span class="line">FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];</span><br><span class="line"><span class="comment">// 执行队列</span></span><br><span class="line">[queue inDatabase:^(FMDatabase *db) &#123;</span><br><span class="line">    <span class="comment">// 写数据</span></span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"惠普"</span>];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"戴尔"</span>];</span><br><span class="line">    [db executeUpdate:<span class="string">@"INSERT INTO t_cpmt (name) VALUES (?)"</span>, <span class="string">@"华硕"</span>];</span><br><span class="line">    <span class="comment">// 取数据</span></span><br><span class="line">    FMResultSet *set = [db executeQuery:<span class="string">@"select * from t_cpmt"</span>];</span><br><span class="line">    <span class="keyword">while</span> ([set next]) &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" rel="tag"># iOS开发笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/04/16/blog/11.%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E5%AF%B9%E8%B1%A1frame%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7/" rel="prev" title="直接修改对象frame结构体中的成员属性">
+      <i class="fa fa-chevron-left"></i> 直接修改对象frame结构体中的成员属性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/06/21/blog/13.SQLite%E5%9C%A8iOS%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%8B)/" rel="next" title="SQLite在iOS中的使用(下)">
+      SQLite在iOS中的使用(下) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-什么是SQLite"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是SQLite</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用SQLite"><span class="nav-number">1.1.</span> <span class="nav-text">如何使用SQLite</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-FMDB"><span class="nav-number">2.</span> <span class="nav-text">2. FMDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用FMDB"><span class="nav-number">2.1.</span> <span class="nav-text">如何使用FMDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FMDatabaseQueue"><span class="nav-number">2.1.1.</span> <span class="nav-text">FMDatabaseQueue</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xion</p>
+  <div class="site-description" itemprop="description">It`s Breeze, It`s Sunshine</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xionw1991" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xionw1991" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xion</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
